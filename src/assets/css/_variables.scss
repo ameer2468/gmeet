@@ -1,0 +1,43 @@
+$bg: #2A2D47;
+$text: #BFC1E0;
+$pink: #ff4080;
+$input: #343858;
+
+
+@mixin largeTitle {
+  font-size: 7rem;
+  font-weight: bold;
+}
+
+@mixin mediumTitle {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+@mixin smallTitle {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+@mixin content {
+  font-size: 1.7rem;
+  color: $text;
+  line-height: 3rem;
+}
+
+@mixin button {
+  width: 100%;
+  max-width: 14.5rem;
+  height: 5rem;
+  border: 0;
+  font-size: 1.5rem;
+  border-radius: 1rem;
+  font-weight: bold;
+  color: white;
+  font-family: Avalon, 'sans-serif';
+  transition: all 0.3s;
+  &:hover {
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+}

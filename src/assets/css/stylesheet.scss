@@ -1,0 +1,27 @@
+@import 'variables';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+a {
+  text-decoration: none;
+  color: $text;
+}
+
+body {
+  font-family: Sofia pro, 'sans-serif';
+  font-weight: 100;
+  color: $text;
+  font-size: 1.3rem;
+  background: $bg;
+}
+
+@import 'pages/landing';
+@import 'global';

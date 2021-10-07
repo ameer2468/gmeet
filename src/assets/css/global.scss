@@ -1,0 +1,265 @@
+.btn {
+  @include button;
+  &--pink {
+    background: $pink;
+    &:hover {
+      background: darken($pink, 8%)
+    }
+  }
+  &--purple {
+    background: #4a5dc7;
+    &:hover {
+      background: darken(#4a5dc7, 8%)
+    }
+  }
+  &--transparent {
+    background: transparent;
+    border: 1px solid white;
+    &:hover {
+      background: white;
+      color: black;
+    }
+  }
+}
+
+.error {
+  color: #ff7f7f;
+  font-size: 1.7rem;
+  margin: 0.5rem 0 1rem 0;
+}
+
+.marginRight {
+  margin-right: 2rem;
+}
+
+.back {
+  height: auto;
+  padding: 0 0 3rem 5rem;
+  .icon {
+    font-size: 2rem;
+    display: inline-block;
+    color: white;
+    position: relative;
+    right: 0;
+    transition: all 0.3s;
+  }
+  p {
+    display: inline-block;
+    margin-left: 1.5rem;
+    font-size: 1.6rem;
+    transition: all 0.3s;
+  }
+  &:hover {
+    transition: all 0.3s;
+    p {
+      color: white;
+      cursor: pointer;
+    }
+    .icon {
+     right: 1rem;
+    }
+  }
+}
+
+nav {
+  width: 100%;
+  max-width: 152rem;
+  padding: 0 2rem 4rem 2rem;
+  margin: 5rem auto;
+  height: 8vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  .line {
+    width: calc(100% - 2%);
+    height: 1px;
+    opacity: 0.25;
+    background-color: $text;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    bottom: 0;
+  }
+  button {
+    margin-left: 2rem;
+  }
+  a {
+    text-decoration: none;
+    color: $text;
+    display: inline-block;
+  }
+  ul {
+    display: inline-block;
+    width: 100%;
+    li {
+      display: inline-block;
+      padding: 0 2rem;
+    }
+    a {
+      transition: all 0.3s;
+      font-size: 1.6rem;
+      color: white;
+      &:hover {
+        opacity: 0.5;
+        transition: all 0.3s;
+      }
+    }
+  }
+  .side {
+    flex: 0 0 50%;
+  }
+  .side:nth-child(2) {
+    text-align: right;
+  }
+h1 {
+  @include smallTitle;
+  color: white;
+  font-size: 3.5rem;
+  display: inline-block;
+  margin-right: 2rem;
+}
+}
+
+.LoginWrap {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .welcome {
+    text-align: left;
+    margin: 2rem 0 0 5rem;
+    h1 {
+      font-size: 3rem;
+      color: white;
+    }
+    h1:nth-child(2) {
+      font-weight: 300;
+    }
+  }
+  .links {
+    margin: 1rem 0 1rem 0;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    p {
+      transition: all 0.3s;
+      &:hover {
+        cursor: pointer;
+        color: white;
+        transition: all 0.3s;
+      }
+    }
+  }
+  .side:nth-child(1) {
+    background: darken($bg, 1.75%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    h3 {
+      font-size: 3rem;
+      color: white;
+      font-weight: 300;
+      margin-bottom: 4rem;
+    }
+    img {
+      width: 100%;
+      max-width: 40rem;
+    }
+  }
+  .side:nth-child(2) {
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+  }
+  .side {
+    flex: 0 0 50%;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    margin: 3rem auto;
+    width: 80%;
+    button {
+      width: 100%;
+      max-width: 50rem;
+      padding: 2rem;
+      border: 0;
+      margin: 2rem auto 0 auto;
+      border-radius: 0.5rem;
+      background: #4a5dc7;
+      color: white;
+      font-weight: bold;
+      font-family: Sofia pro, 'sans-serif';
+      font-size: 1.5rem;
+      transition: all 0.3s;
+      &:hover {
+        background: darken(#4a5dc7, 10%);
+        transition: all 0.3s;
+        cursor: pointer;
+      }
+    }
+    input {
+      border: 1px solid lighten($input, 10%);
+      background: $input;
+      width: 100%;
+      font-family: Sofia pro, 'sans-serif';
+      max-width: 50rem;
+      margin: 0 auto 1rem auto;
+      border-radius: 0.5rem;
+      transition: all 0.3s;
+      font-weight: 200;
+      padding: 1.6rem;
+      color: white;
+      &::placeholder {
+        color: white;
+        opacity: 0.5;
+      }
+      &:focus {
+        outline: 0;
+        caret-color: white;
+        border: 1px solid $text;
+        transition: all 0.3s;
+      }
+    }
+  }
+  .loginBox {
+    background: #303450;
+    width: 100%;
+    max-width: 120rem;
+    display: flex;
+    justify-content: space-between;
+    height: 75rem;
+    border-radius: 0.5rem;
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 7rem;
+    }
+  }
+
+  .registerBox {
+    background: #303450;
+    width: 100%;
+    max-width: 120rem;
+    display: flex;
+    justify-content: space-between;
+    height: 75rem;
+    border-radius: 0.5rem;
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 7rem;
+      border-radius: 0.5rem;
+      max-width: 50rem;
+    }
+  }
+}

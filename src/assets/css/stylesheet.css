@@ -1,0 +1,354 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+a {
+  text-decoration: none;
+  color: #BFC1E0;
+}
+
+body {
+  font-family: Sofia pro, "sans-serif";
+  font-weight: 100;
+  color: #BFC1E0;
+  font-size: 1.3rem;
+  background: #2A2D47;
+}
+
+.header {
+  width: calc(100% - 2%);
+  height: 50vh;
+}
+.header .container {
+  width: 100%;
+  height: 100%;
+  max-width: 130rem;
+  margin: 7.5% auto;
+}
+.header .container h1 {
+  font-size: 7rem;
+  font-weight: bold;
+  color: white;
+  width: 100%;
+  max-width: 80rem;
+  margin: 0 auto;
+  text-align: center;
+}
+.header .container .buttons {
+  text-align: center;
+  margin-top: 5rem;
+}
+.header .container p {
+  font-size: 1.7rem;
+  color: #BFC1E0;
+  line-height: 3rem;
+  text-align: center;
+  width: 100%;
+  max-width: 80rem;
+  margin: 2rem auto 0 auto;
+}
+.header .container .cards {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 8rem;
+}
+.header .container .cards .card {
+  flex: 0 0 30%;
+  text-align: center;
+  padding: 4rem;
+  background: rgba(131, 135, 172, 0.2);
+  backdrop-filter: blur(130px);
+  border-radius: 16px;
+}
+.header .container .cards .card h2 {
+  color: white;
+  font-size: 2.3rem;
+}
+
+.btn {
+  width: 100%;
+  max-width: 14.5rem;
+  height: 5rem;
+  border: 0;
+  font-size: 1.5rem;
+  border-radius: 1rem;
+  font-weight: bold;
+  color: white;
+  font-family: Avalon, "sans-serif";
+  transition: all 0.3s;
+}
+.btn:hover {
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.btn--pink {
+  background: #ff4080;
+}
+.btn--pink:hover {
+  background: #ff1765;
+}
+.btn--purple {
+  background: #4a5dc7;
+}
+.btn--purple:hover {
+  background: #3749b1;
+}
+.btn--transparent {
+  background: transparent;
+  border: 1px solid white;
+}
+.btn--transparent:hover {
+  background: white;
+  color: black;
+}
+
+.error {
+  color: #ff7f7f;
+  font-size: 1.7rem;
+  margin: 0.5rem 0 1rem 0;
+}
+
+.marginRight {
+  margin-right: 2rem;
+}
+
+.back {
+  height: auto;
+  padding: 0 0 3rem 5rem;
+}
+.back .icon {
+  font-size: 2rem;
+  display: inline-block;
+  color: white;
+  position: relative;
+  right: 0;
+  transition: all 0.3s;
+}
+.back p {
+  display: inline-block;
+  margin-left: 1.5rem;
+  font-size: 1.6rem;
+  transition: all 0.3s;
+}
+.back:hover {
+  transition: all 0.3s;
+}
+.back:hover p {
+  color: white;
+  cursor: pointer;
+}
+.back:hover .icon {
+  right: 1rem;
+}
+
+nav {
+  width: 100%;
+  max-width: 152rem;
+  padding: 0 2rem 4rem 2rem;
+  margin: 5rem auto;
+  height: 8vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+nav .line {
+  width: calc(100% - 2%);
+  height: 1px;
+  opacity: 0.25;
+  background-color: #BFC1E0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  bottom: 0;
+}
+nav button {
+  margin-left: 2rem;
+}
+nav a {
+  text-decoration: none;
+  color: #BFC1E0;
+  display: inline-block;
+}
+nav ul {
+  display: inline-block;
+  width: 100%;
+}
+nav ul li {
+  display: inline-block;
+  padding: 0 2rem;
+}
+nav ul a {
+  transition: all 0.3s;
+  font-size: 1.6rem;
+  color: white;
+}
+nav ul a:hover {
+  opacity: 0.5;
+  transition: all 0.3s;
+}
+nav .side {
+  flex: 0 0 50%;
+}
+nav .side:nth-child(2) {
+  text-align: right;
+}
+nav h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+  font-size: 3.5rem;
+  display: inline-block;
+  margin-right: 2rem;
+}
+
+.LoginWrap {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.LoginWrap .welcome {
+  text-align: left;
+  margin: 2rem 0 0 5rem;
+}
+.LoginWrap .welcome h1 {
+  font-size: 3rem;
+  color: white;
+}
+.LoginWrap .welcome h1:nth-child(2) {
+  font-weight: 300;
+}
+.LoginWrap .links {
+  margin: 1rem 0 1rem 0;
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+.LoginWrap .links p {
+  transition: all 0.3s;
+}
+.LoginWrap .links p:hover {
+  cursor: pointer;
+  color: white;
+  transition: all 0.3s;
+}
+.LoginWrap .side:nth-child(1) {
+  background: #272941;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.LoginWrap .side:nth-child(1) h3 {
+  font-size: 3rem;
+  color: white;
+  font-weight: 300;
+  margin-bottom: 4rem;
+}
+.LoginWrap .side:nth-child(1) img {
+  width: 100%;
+  max-width: 40rem;
+}
+.LoginWrap .side:nth-child(2) {
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+.LoginWrap .side {
+  flex: 0 0 50%;
+}
+.LoginWrap form {
+  display: flex;
+  flex-direction: column;
+  margin: 3rem auto;
+  width: 80%;
+}
+.LoginWrap form button {
+  width: 100%;
+  max-width: 50rem;
+  padding: 2rem;
+  border: 0;
+  margin: 2rem auto 0 auto;
+  border-radius: 0.5rem;
+  background: #4a5dc7;
+  color: white;
+  font-weight: bold;
+  font-family: Sofia pro, "sans-serif";
+  font-size: 1.5rem;
+  transition: all 0.3s;
+}
+.LoginWrap form button:hover {
+  background: #3446aa;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.LoginWrap form input {
+  border: 1px solid #474c78;
+  background: #343858;
+  width: 100%;
+  font-family: Sofia pro, "sans-serif";
+  max-width: 50rem;
+  margin: 0 auto 1rem auto;
+  border-radius: 0.5rem;
+  transition: all 0.3s;
+  font-weight: 200;
+  padding: 1.6rem;
+  color: white;
+}
+.LoginWrap form input::placeholder {
+  color: white;
+  opacity: 0.5;
+}
+.LoginWrap form input:focus {
+  outline: 0;
+  caret-color: white;
+  border: 1px solid #BFC1E0;
+  transition: all 0.3s;
+}
+.LoginWrap .loginBox {
+  background: #303450;
+  width: 100%;
+  max-width: 120rem;
+  display: flex;
+  justify-content: space-between;
+  height: 75rem;
+  border-radius: 0.5rem;
+}
+.LoginWrap .loginBox button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 7rem;
+}
+.LoginWrap .registerBox {
+  background: #303450;
+  width: 100%;
+  max-width: 120rem;
+  display: flex;
+  justify-content: space-between;
+  height: 75rem;
+  border-radius: 0.5rem;
+}
+.LoginWrap .registerBox button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 7rem;
+  border-radius: 0.5rem;
+  max-width: 50rem;
+}
+
+/*# sourceMappingURL=stylesheet.css.map */
