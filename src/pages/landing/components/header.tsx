@@ -6,7 +6,7 @@ import {userReducer} from "../../../redux/user/userSlice";
 
 const Header = () => {
     const userRedux = useAppSelector(userReducer)
-    const {LoggedIn} = userRedux.userStore;
+    const {LoggedIn} = userRedux;
 
     const bgStyle = {
         backgroundImage: `url(${bg})`,

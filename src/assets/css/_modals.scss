@@ -1,0 +1,54 @@
+.modalWrap {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(42, 45, 71, 0.54);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s;
+  .modal {
+    width: 100%;
+    max-width: 60rem;
+    position: relative;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    top: 0;
+    margin: auto;
+    background: rgba($navbg, 0.6);
+    backdrop-filter: blur(10px);
+    padding: 3rem;
+    border-radius: 0.5rem;
+    h1 {
+      color: white;
+    }
+    input {
+      margin-bottom: 1.5rem;
+      background: darken($navbg, 3%);
+    }
+    .close {
+      position: absolute;
+      right: -1rem;
+      top: -1.8rem;
+      background: $navbg;
+      width: 5rem;
+      height: 5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 5rem;
+      transition: all 0.3s;
+      border: 1px solid transparent;
+      .closeIcon {
+        font-size: 1.6rem;
+      }
+      &:hover {
+        transition: all 0.3s;
+        border: 1px solid $border;
+        cursor: pointer;
+      }
+    }
+  }
+}

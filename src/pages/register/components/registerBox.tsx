@@ -13,7 +13,14 @@ const RegisterBox = () => {
 
     const registerHook = useRegister();
     const userRedux = useAppSelector(userReducer)
-    const {Loading} = userRedux.userStore;
+    const {Loading} = userRedux;
+    const {inputValues} = registerHook;
+    const emailLength = inputValues.email.length;
+    const userLength = inputValues.username.length;
+    const passLength = inputValues.password.length;
+    const confirmPassLength = inputValues.confirmpass.length;
+    const codeLength = inputValues.code.length;
+    const checkRegisterForm = emailLength === 0 || userLength === 0 || passLength === 0 || confirmPassLength === 0;
 
     const variants = {
         active: {
@@ -55,17 +62,17 @@ const RegisterBox = () => {
                         <input required onChange={inputHandler} name='email' value={registerHook.inputValues.email} placeholder='Email' type="email"/>
                         <input required onChange={inputHandler} name='username' value={registerHook.inputValues.username} placeholder='Username' type="text"/>
                         <input required onChange={inputHandler} name='password' value={registerHook.inputValues.password} placeholder='Password' type="password"/>
-                        <input required  onChange={inputHandler} name='confirmpass' value={registerHook.inputValues.confirmpass}  placeholder='Confirm password' type="password"/>
+                        <input required onChange={inputHandler} name='confirmpass' value={registerHook.inputValues.confirmpass}  placeholder='Confirm password' type="password"/>
                         {registerHook.error.length === 0 ? '' :  <p className='error'>{registerHook.error}</p>}
                         <div className="links">
                             <p>Forgot password?</p>
-                            <Link to={'/login'}><p>Have an account? Login now</p></Link>
+                            <Link to={'/login'}><p className='bold'>Have an account? Login now</p></Link>
                         </div>
-                        <button>{Loading ? <LoadingSpinner/> : 'Confirm'}</button>
+                        <button className={checkRegisterForm ? 'disabledButton' : ''} disabled={checkRegisterForm}>{Loading ? <LoadingSpinner height={35} width={35}/> : 'Confirm'}</button>
                     </form> : registerHook.step === 1 ?
                         <form onSubmit={registerHook.confirmSignUp}>
                             <input value={registerHook.inputValues.code} name={'code'} onChange={inputHandler} placeholder='Verification code' type="text"/>
-                            <button>{Loading ? <LoadingSpinner/> : 'Confirm'}</button>
+                            <button className={codeLength === 0 ? 'disabledButton' : ''} disabled={registerHook.inputValues.code.length === 0}>{Loading ? <LoadingSpinner height={35} width={35}/> : 'Confirm'}</button>
                             {registerHook.error.length === 0 ? '' : <p className='error'>{registerHook.step}</p>}
                         </form>
                         : registerHook.step === 2 &&

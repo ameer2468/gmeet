@@ -39,6 +39,6 @@ export const userSlice = createSlice({
 export const { userDetails, status, loading } = userSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
-export const userReducer = (state: RootState) => state;
+export const userReducer = (state: RootState) => state.userStore;
 
 export default userSlice.reducer

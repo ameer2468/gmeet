@@ -1,10 +1,13 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit'
 import {userSlice} from "./user/userSlice";
+import {modalSlice} from "./modals/modalSlice";
 import storage from "redux-persist/lib/storage";
 import { persistReducer } from 'redux-persist'
 
 const reducers = combineReducers({
-    userStore: userSlice.reducer
+    userStore: userSlice.reducer,
+    modalStore: modalSlice.reducer
+
 })
 
 const persistConfig = {

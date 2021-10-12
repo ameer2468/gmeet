@@ -5,16 +5,20 @@ import Login from "./pages/login/login";
 import Register from "./pages/register/register";
 import Amplify from "aws-amplify";
 import awsconfig from './aws-exports';
-import {useAppSelector} from "./redux/hooks";
+import {useAppDispatch, useAppSelector} from "./redux/hooks";
 import {userReducer} from "./redux/user/userSlice";
+import Home from "./pages/home/home";
+import {modalReducer} from "./redux/modals/modalSlice";
+import ModalManager from "./components/ModalManager";
 
 Amplify.configure(awsconfig)
 
 const App = () => {
 
     const userRedux = useAppSelector(userReducer)
-    const {LoggedIn} = userRedux.userStore;
     const location = useLocation();
+    const modals = useAppSelector(modalReducer)
+    const dispatch = useAppDispatch();
 
     const GlobalRoutes = [
         {path: '/', component: Landing},
@@ -22,9 +26,10 @@ const App = () => {
         {path: '/register', component: Register}
     ]
     const AuthRoutes = [
-        {path: '/', component: Landing}
+        {path: '/', component: Landing},
+        {path: '/home', component: Home}
     ]
-    const RouteHandler = LoggedIn ? AuthRoutes : GlobalRoutes;
+    const RouteHandler = userRedux.LoggedIn ? AuthRoutes : GlobalRoutes;
 
    const CheckRoute = RouteHandler.find((value) => {
        return value.path === location.pathname;
@@ -34,11 +39,14 @@ const App = () => {
    }
 
     return (
-            <Switch>
-                {RouteHandler.map(({path, component}: any) => {
-                    return <Route key={path} exact path={path} component={component}/>
-                })}
-            </Switch>
+        <>
+            <ModalManager/>
+          <Switch>
+            {RouteHandler.map(({path, component}: any) => {
+                return <Route key={path} exact path={path} component={component}/>;
+            })}
+          </Switch>
+        </>
     );
 };
 

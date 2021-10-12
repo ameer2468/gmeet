@@ -8,6 +8,31 @@ html {
   font-size: 62.5%;
 }
 
+textarea, input {
+  font-family: Sofia pro, "sans-serif";
+}
+
+textarea {
+  padding: 2rem;
+  resize: none;
+  width: 100%;
+  border: 1px solid #5A6091;
+  color: #BFC1E0;
+  padding: 2rem 2rem;
+  font-size: 1.5rem;
+  border-radius: 0.5rem;
+  background-color: #313553;
+  transition: all 0.3s;
+}
+textarea:focus {
+  outline: 0;
+  border: 1px solid #5A6EF6;
+  transition: all 0.3s;
+}
+textarea::placeholder {
+  color: #BFC1E0;
+}
+
 a {
   text-decoration: none;
   color: #BFC1E0;
@@ -17,8 +42,9 @@ body {
   font-family: Sofia pro, "sans-serif";
   font-weight: 100;
   color: #BFC1E0;
+  overflow-x: hidden;
   font-size: 1.3rem;
-  background: #2A2D47;
+  background: #2a2d47;
 }
 
 .header {
@@ -27,9 +53,9 @@ body {
 }
 .header .container {
   width: 100%;
-  height: 100%;
+  height: auto;
   max-width: 130rem;
-  margin: 7.5% auto;
+  margin: 15rem auto;
 }
 .header .container h1 {
   font-size: 7rem;
@@ -72,13 +98,147 @@ body {
   font-size: 2.3rem;
 }
 
+.HomeContent {
+  width: 100vw;
+  height: auto;
+  background: transparent linear-gradient(139deg, #5A6EF6 0%, #2A2D47 40%) 0% 0% no-repeat padding-box;
+}
+.HomeContent .homeContainer {
+  padding-top: 20rem;
+  padding-bottom: 5rem;
+  width: 100%;
+  max-width: 150rem;
+  margin: 0 auto;
+}
+.HomeContent .homeContainer .search {
+  width: 100%;
+}
+.HomeContent .homeContainer .search h1 {
+  color: white;
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+.HomeContent .homeContainer .projectsContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
+  width: 100%;
+  margin-top: 5rem;
+}
+.HomeContent .homeContainer .projectCard {
+  background: #313553;
+  flex: 0 0 24%;
+  border-radius: 0.5rem;
+  transition: all 0.3s;
+  padding: 3rem;
+}
+.HomeContent .homeContainer .projectCard .members {
+  margin: 2rem auto 0 auto;
+  text-align: center;
+  width: 100%;
+}
+.HomeContent .homeContainer .projectCard .members .avatar:not(:first-child) {
+  margin-left: -75px;
+  -webkit-mask: radial-gradient(circle 25px at 5px 50%, transparent 99%, #fff 100%);
+  mask: radial-gradient(circle 55px at 5px 50%, transparent 99%, #fff 100%);
+}
+.HomeContent .homeContainer .projectCard .members .avatar img {
+  width: 100%;
+  max-width: 5rem;
+  display: block;
+}
+.HomeContent .homeContainer .projectCard .members .avatar {
+  display: inline-block;
+  border-radius: 5rem;
+  overflow: hidden;
+  width: 100px;
+}
+.HomeContent .homeContainer .projectCard p {
+  margin: 2rem 0 3rem 0;
+  font-size: 1.55rem;
+  line-height: 2.5rem;
+}
+.HomeContent .homeContainer .projectCard .buttons {
+  display: flex;
+  justify-content: center;
+}
+.HomeContent .homeContainer .projectCard .buttons button {
+  margin: 0 1rem;
+}
+.HomeContent .homeContainer .projectCard h2 {
+  color: white;
+  text-align: center;
+  font-size: 2rem;
+}
+.HomeContent .homeContainer .projectCard:hover {
+  transform: translateY(-1rem);
+  transition: all 0.3s;
+  box-shadow: 0 30px 20px -20px rgba(0, 0, 0, 0.15);
+}
+
+.modalWrap {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(42, 45, 71, 0.54);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s;
+}
+.modalWrap .modal {
+  width: 100%;
+  max-width: 60rem;
+  position: relative;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  text-align: center;
+  top: 0;
+  margin: auto;
+  background: rgba(49, 53, 83, 0.6);
+  backdrop-filter: blur(10px);
+  padding: 3rem;
+  border-radius: 0.5rem;
+}
+.modalWrap .modal h1 {
+  color: white;
+}
+.modalWrap .modal input {
+  margin-bottom: 1.5rem;
+  background: #2b2f49;
+}
+.modalWrap .modal .close {
+  position: absolute;
+  right: -1rem;
+  top: -1.8rem;
+  background: #313553;
+  width: 5rem;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5rem;
+  transition: all 0.3s;
+  border: 1px solid transparent;
+}
+.modalWrap .modal .close .closeIcon {
+  font-size: 1.6rem;
+}
+.modalWrap .modal .close:hover {
+  transition: all 0.3s;
+  border: 1px solid #5A6091;
+  cursor: pointer;
+}
+
 .btn {
   width: 100%;
   max-width: 14.5rem;
   height: 5rem;
   border: 0;
-  font-size: 1.5rem;
-  border-radius: 1rem;
+  font-size: 1.4rem;
+  border-radius: 0.5rem;
   font-weight: bold;
   color: white;
   font-family: Avalon, "sans-serif";
@@ -93,6 +253,20 @@ body {
 }
 .btn--pink:hover {
   background: #ff1765;
+}
+.btn--green {
+  background: #4ad58b;
+  color: #313553;
+}
+.btn--green:hover {
+  background: #2ec876;
+}
+.btn--purepurple {
+  background: #6d5dff;
+  color: white;
+}
+.btn--purepurple:hover {
+  background: #4834ff;
 }
 .btn--purple {
   background: #4a5dc7;
@@ -109,6 +283,84 @@ body {
   color: black;
 }
 
+.flex {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modalHide {
+  opacity: 0 !important;
+  transition: all 0.3s !important;
+  display: none !important;
+}
+
+.modalShow {
+  opacity: 1 !important;
+  display: flex !important;
+  transition: all 0.3s !important;
+}
+
+.hideDropdown {
+  display: none;
+}
+
+.generalForm {
+  margin: 3rem 0;
+}
+
+.input {
+  width: 100%;
+  height: 5.5rem;
+  border: 1px solid #5A6091;
+  color: #BFC1E0;
+  padding: 0 2rem;
+  font-size: 1.5rem;
+  border-radius: 0.5rem;
+  background-color: #313553;
+  transition: all 0.3s;
+}
+.input:focus {
+  outline: 0;
+  border: 1px solid #5A6EF6;
+  transition: all 0.3s;
+}
+.input::placeholder {
+  color: #BFC1E0;
+}
+
+.textarea {
+  width: 100%;
+  border: 1px solid #5A6091;
+  color: #BFC1E0;
+  padding: 2rem 2rem;
+  font-size: 1.5rem;
+  border-radius: 0.5rem;
+  background-color: #313553;
+  transition: all 0.3s;
+  background: #2b2f49;
+}
+.textarea:focus {
+  outline: 0;
+  border: 1px solid #5A6EF6;
+  transition: all 0.3s;
+}
+.textarea::placeholder {
+  color: #BFC1E0;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.disabledButton {
+  opacity: 0.5;
+}
+.disabledButton:hover {
+  pointer-events: none !important;
+}
+
 .error {
   color: #ff7f7f;
   font-size: 1.7rem;
@@ -117,6 +369,99 @@ body {
 
 .marginRight {
   margin-right: 2rem;
+}
+
+.authnav {
+  height: 10rem;
+  width: 100vw;
+  z-index: 10;
+  right: 0;
+  left: 0;
+  margin: auto;
+  background: rgba(49, 53, 83, 0.5);
+  backdrop-filter: blur(10px);
+  position: fixed;
+  border-bottom: 1px solid #5A6091;
+}
+.authnav .container {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  max-width: 150rem;
+  margin: 0 auto;
+  justify-content: space-between;
+}
+.authnav .container .side {
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+.authnav .container .side .profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  width: 100%;
+  border-radius: 0.5rem;
+  margin-left: 4rem;
+  background: #2a2d47;
+  transition: all 0.3s;
+  position: relative;
+}
+.authnav .container .side .profile:hover {
+  background: #24273d;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.authnav .container .side .profile .dropdown {
+  position: absolute;
+  top: 6.5rem;
+  width: 100%;
+  height: auto;
+  display: flex;
+  border-radius: 0.5rem;
+  z-index: 10;
+  padding: 1.5rem;
+  justify-content: center;
+  background: #24273d;
+}
+.authnav .container .side .profile .dropdown .icon {
+  font-size: 1.4rem;
+  margin-left: 0;
+}
+.authnav .container .side .profile .dropdown li {
+  list-style: none;
+  margin: 0.5rem 0;
+  font-size: 1.6rem;
+  transition: all 0.3s;
+}
+.authnav .container .side .profile .dropdown li:hover {
+  color: white;
+  transition: all 0.3s;
+}
+.authnav .container .side .profile p {
+  font-size: 1.7rem;
+  color: white;
+  font-weight: bold;
+}
+.authnav .container .side .profile .userImage {
+  width: 4rem;
+  top: 0;
+}
+.authnav .container .side .icon {
+  font-size: 2.5rem;
+  transition: all 0.3s;
+  margin: 0 1rem 0 4rem;
+}
+.authnav .container .side .icon:hover {
+  transition: all 0.3s;
+  opacity: 0.5;
+  cursor: pointer;
+}
+.authnav h1 {
+  color: white;
+  font-size: 2.5rem;
 }
 
 .back {
@@ -148,7 +493,21 @@ body {
   right: 1rem;
 }
 
-nav {
+.navUser {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  align-items: center;
+}
+
+.userImage {
+  border-radius: 5rem;
+  position: relative;
+  top: 1.5rem;
+  margin-right: 1rem;
+}
+
+.homeNav {
   width: 100%;
   max-width: 152rem;
   padding: 0 2rem 4rem 2rem;
@@ -160,7 +519,7 @@ nav {
   align-items: center;
   position: relative;
 }
-nav .line {
+.homeNav .line {
   width: calc(100% - 2%);
   height: 1px;
   opacity: 0.25;
@@ -171,38 +530,38 @@ nav .line {
   margin: auto;
   bottom: 0;
 }
-nav button {
+.homeNav button {
   margin-left: 2rem;
 }
-nav a {
+.homeNav a {
   text-decoration: none;
   color: #BFC1E0;
   display: inline-block;
 }
-nav ul {
+.homeNav ul {
   display: inline-block;
   width: 100%;
 }
-nav ul li {
+.homeNav ul li {
   display: inline-block;
   padding: 0 2rem;
 }
-nav ul a {
+.homeNav ul a {
   transition: all 0.3s;
   font-size: 1.6rem;
   color: white;
 }
-nav ul a:hover {
+.homeNav ul a:hover {
   opacity: 0.5;
   transition: all 0.3s;
 }
-nav .side {
+.homeNav .side {
   flex: 0 0 50%;
 }
-nav .side:nth-child(2) {
+.homeNav .side:nth-child(2) {
   text-align: right;
 }
-nav h1 {
+.homeNav h1 {
   font-size: 2rem;
   font-weight: bold;
   color: white;

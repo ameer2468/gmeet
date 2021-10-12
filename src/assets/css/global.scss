@@ -6,6 +6,20 @@
       background: darken($pink, 8%)
     }
   }
+  &--green {
+    background: $green;
+    color: $navbg;
+    &:hover {
+      background: darken($green, 8%)
+    }
+  }
+  &--purepurple {
+    background: $purepurple;
+    color: white;
+    &:hover {
+      background: darken($purepurple, 8%)
+    }
+  }
   &--purple {
     background: #4a5dc7;
     &:hover {
@@ -22,6 +36,53 @@
   }
 }
 
+.flex {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modalHide {
+  opacity: 0!important;
+  transition: all 0.3s!important;
+  display: none!important;
+}
+
+.modalShow {
+  opacity: 1!important;
+  display: flex!important;
+  transition: all 0.3s!important;
+}
+
+.hideDropdown {
+  display: none;
+}
+
+.generalForm {
+  margin: 3rem 0;
+}
+
+.input {
+  @include Input;
+}
+
+.textarea {
+  @include Textarea;
+  background: darken($navbg, 3%);
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.disabledButton {
+  opacity: 0.5;
+  &:hover {
+    pointer-events: none!important;
+  }
+}
+
 .error {
   color: #ff7f7f;
   font-size: 1.7rem;
@@ -30,6 +91,99 @@
 
 .marginRight {
   margin-right: 2rem;
+}
+
+.authnav {
+  height: 10rem;
+  width: 100vw;
+  z-index: 10;
+  right: 0;
+  left: 0;
+  margin: auto;
+  background: rgba($navbg, 0.5);
+  backdrop-filter: blur(10px);
+  position: fixed;
+  border-bottom: 1px solid $border;
+  .container {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    max-width: 150rem;
+    margin: 0 auto;
+    justify-content: space-between;
+    .side {
+      display: flex;
+      height: 100%;
+      align-items: center;
+      .profile {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem 2rem;
+        width: 100%;
+        border-radius: 0.5rem;
+        margin-left: 4rem;
+        background: $bg;
+        transition: all 0.3s;
+        position: relative;
+        &:hover {
+          background: darken($bg, 3%);
+          cursor: pointer;
+          transition: all 0.3s;
+        }
+        .dropdown {
+          position: absolute;
+          top: 6.5rem;
+          width: 100%;
+          height: auto;
+          display: flex;
+          border-radius: 0.5rem;
+          z-index: 10;
+          padding: 1.5rem;
+          justify-content: center;
+          background: darken($bg, 3%);
+          .icon {
+            font-size: 1.4rem;
+            margin-left: 0;
+          }
+          li {
+            list-style: none;
+            margin: 0.5rem 0;
+            font-size: 1.6rem;
+            transition: all 0.3s;
+            &:hover {
+              color: white;
+              transition: all 0.3s;
+            }
+          }
+        }
+        p {
+          font-size: 1.7rem;
+          color: white;
+          font-weight: bold;
+        }
+        .userImage {
+          width: 4rem;
+          top: 0;
+        }
+      }
+      .icon {
+        font-size: 2.5rem;
+        transition: all 0.3s;
+        margin: 0 1rem 0 4rem;
+        &:hover {
+          transition: all 0.3s;
+          opacity: 0.5;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  h1 {
+    color: white;
+    font-size: 2.5rem;
+  }
 }
 
 .back {
@@ -61,7 +215,21 @@
   }
 }
 
-nav {
+.navUser {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  align-items: center;
+}
+
+.userImage {
+  border-radius: 5rem;
+  position: relative;
+  top: 1.5rem;
+  margin-right: 1rem;
+}
+
+.homeNav {
   width: 100%;
   max-width: 152rem;
   padding: 0 2rem 4rem 2rem;

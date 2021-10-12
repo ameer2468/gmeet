@@ -16,8 +16,11 @@ const LoginBox = () => {
     const inputHandler = (e: ChangeEvent<HTMLInputElement>) => {
         loginHook.setInputValues({...loginHook.inputValues, [e.target.name]: e.target.value})
     }
+    const {inputValues} = loginHook;
+    const passwordLength = inputValues.password.length;
+    const errorLength = Object.entries(loginHook.error).length;
     const userRedux = useAppSelector(userReducer)
-    const {Loading} = userRedux.userStore;
+    const {Loading} = userRedux;
 
     const variants = {
         active: {
@@ -54,12 +57,12 @@ const LoginBox = () => {
                         <form onSubmit={loginHook.loginHandler}>
                             <input name='username' onChange={inputHandler} value={loginHook.inputValues.username} placeholder='username' type="text"/>
                             <input name='password' onChange={inputHandler} value={loginHook.inputValues.password} placeholder='password' type="password"/>
-                            {loginHook.error.length === 0 ? '' : <p className='error'>{loginHook.error}</p>}
+                            {errorLength === 0 ? '' : <p className='error'>{loginHook.error.toString()}</p>}
                             <div className="links">
                                 <p>Forgot password?</p>
-                                <Link to={'/register'}><p>No account? register now</p></Link>
+                                <Link to={'/register'}><p className='bold'>No account? register now</p></Link>
                             </div>
-                            <button>{Loading ? <LoadingSpinner/> : 'Login'}</button>
+                            <button className={passwordLength === 0 ? 'disabledButton' : ''} disabled={passwordLength === 0}>{Loading ? <LoadingSpinner height={35} width={35}/> : 'Login'}</button>
                         </form>
                     </motion.div>
                 </div>

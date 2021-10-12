@@ -1,13 +1,18 @@
 import React from 'react';
 import Loader from "react-loader-spinner";
 
-const LoadingSpinner = () => {
+interface props {
+    height: number;
+    width: number;
+}
+
+const LoadingSpinner = (props: props) => {
     return (
         <Loader
             type="Oval"
             color="#FFFFFF"
-            height={35}
-            width={35}
+            height={props.height}
+            width={props.width}
         />
     );
 };

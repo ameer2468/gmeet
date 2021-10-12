@@ -30,21 +30,36 @@ export function useLogin() {
                 })
                 Auth.currentUserInfo().then((data) => {
                     dispatch(userDetails(data))
-                    dispatch(status(true))
-                    dispatch(loading(false))
                 })
-                history.push('/')
-            })
-                .catch((err) => {
+                dispatch(status(true))
+                dispatch(loading(false))
+                history.push('/home')
+            }).catch((err) => {
+                if (err.code === 'UserNotFoundException') {
+                    setError('Incorrect username or password')
+                } else {
                     setError(err)
+                }
                     dispatch(loading(false))
                 })
         }
+
+    const logoutHandler = () => {
+        dispatch(loading(true))
+        Auth.signOut().then(() => {
+            dispatch(userDetails({
+                username: ''
+            }))
+            dispatch(loading(false));
+            dispatch(status(false));
+        })
+    }
 
         return {
             loginHandler,
             inputValues,
             setInputValues,
+            logoutHandler,
             error
         }
 }

@@ -10,6 +10,16 @@ html {
   font-size: 62.5%;
 }
 
+textarea, input {
+  font-family: Sofia pro, 'sans-serif';
+}
+
+textarea {
+  padding: 2rem;
+  resize: none;
+  @include Textarea;
+}
+
 a {
   text-decoration: none;
   color: $text;
@@ -19,9 +29,12 @@ body {
   font-family: Sofia pro, 'sans-serif';
   font-weight: 100;
   color: $text;
+  overflow-x: hidden;
   font-size: 1.3rem;
   background: $bg;
 }
 
 @import 'pages/landing';
+@import 'pages/home';
+@import 'modals';
 @import 'global';
