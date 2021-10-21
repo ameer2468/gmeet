@@ -4,6 +4,7 @@ export interface Register {
     confirmpass: string;
     email: string
     code: string;
+    profession: string;
 }
 
 export interface Login {

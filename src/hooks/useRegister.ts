@@ -12,7 +12,8 @@ export function useRegister() {
         password: '',
         email: '',
         code: '',
-        confirmpass: ''
+        confirmpass: '',
+        profession: ''
     })
     const [error, setError] = useState('')
     const [step, setStep] = useState<number>(0);
@@ -23,7 +24,7 @@ export function useRegister() {
         try {
             await dispatch(loading(true))
             await Auth.confirmSignUp(inputValues.username, inputValues.code);
-            await setInputValues({email: "", password: "", username: "", code: "", confirmpass: ""})
+            await setInputValues({email: "", password: "", username: "", code: "", confirmpass: "", profession: ""})
             await setStep(prevState => prevState + 1);
             await dispatch(loading(false))
         } catch (error) {
@@ -42,7 +43,8 @@ export function useRegister() {
                 username: inputValues.username,
                 password: inputValues.password,
                 attributes: {
-                    email: inputValues.email
+                    email: inputValues.email,
+                    'custom:profession': inputValues.profession
                 }
             })
                 .then(() => {

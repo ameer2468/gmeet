@@ -8,6 +8,7 @@ import { useDetectClickOutside } from 'react-detect-click-outside';
 import {useLogin} from "../hooks/useLogin";
 import { motion } from 'framer-motion';
 import {regularVariants} from "../helpers/framer";
+import {NavLink} from "react-router-dom";
 
 const Authnav = () => {
 
@@ -23,7 +24,14 @@ const Authnav = () => {
     return (
         <nav className="authnav">
             <div className="container">
-                <h1>Project</h1>
+                <div className="side">
+                    <h1>Project</h1>
+                    <nav>
+                        <ul>
+                            <li><NavLink to={'/home'}>Home</NavLink></li>
+                        </ul>
+                    </nav>
+                </div>
                 <div className="side">
                     <div className="notification">
                         <FontAwesomeIcon className='icon' icon={faBell}/>
@@ -36,8 +44,10 @@ const Authnav = () => {
                                             className={'dropdown'}>
                             <ul>
                                 <li>
-                                    <FontAwesomeIcon className='icon' icon={faUser}/>
-                                    Profile
+                                    <NavLink to={`/profile/${username}`}>
+                                        <FontAwesomeIcon className='icon' icon={faUser}/>
+                                        Profile
+                                    </NavLink>
                                 </li>
                                 <li>
                                     <FontAwesomeIcon className='icon' icon={faCog}/>

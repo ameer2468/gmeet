@@ -6,6 +6,7 @@ interface props {
     value?: string;
     onChange?: () => void;
     height: string;
+    name: string;
 }
 
 const TextArea = (props: props) => {
@@ -14,6 +15,7 @@ const TextArea = (props: props) => {
             placeholder={props.placeholder}
             className='textarea'
             value={props.value}
+            name={props.name}
             onChange={props.onChange}
             style={{maxWidth: props.maxWidth, height: props.height}}
             />

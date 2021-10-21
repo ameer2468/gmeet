@@ -1,13 +1,13 @@
 import React from 'react';
-import {useAppDispatch} from "../../../redux/hooks";
 import {ActiveModal} from "../../../redux/modals/modalSlice";
+import {useAppDispatch} from "../../../redux/hooks";
 
 interface props {
     data: any;
 }
 
-const Project = ({data}: props) => {
-
+const ProjectCard = ({data}: props) => {
+    
     const dispatch = useAppDispatch();
 
     return (
@@ -33,4 +33,4 @@ const Project = ({data}: props) => {
     );
 };
 
-export default Project;
+export default ProjectCard;

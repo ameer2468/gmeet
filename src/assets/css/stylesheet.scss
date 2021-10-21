@@ -25,6 +25,11 @@ a {
   color: $text;
 }
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+body::-webkit-scrollbar {
+  display: none;
+}
+
 body {
   font-family: Sofia pro, 'sans-serif';
   font-weight: 100;
@@ -32,9 +37,12 @@ body {
   overflow-x: hidden;
   font-size: 1.3rem;
   background: $bg;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 @import 'pages/landing';
 @import 'pages/home';
+@import 'pages/profile';
 @import 'modals';
 @import 'global';

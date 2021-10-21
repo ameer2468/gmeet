@@ -24,7 +24,11 @@ const Header = () => {
             <div className="container">
                 <h1>Connect & Meet other designers & developers</h1>
                 <p>A community built for designers to communicate with other designers. Gmeet aims to connect you with like-minded people so you can collaborate on projects and perhaps even build your own team! all through our platform to make meeting other designers easier and more productice.</p>
-                {LoggedIn ? '' :
+                {LoggedIn ?
+                    <div className="buttons">
+                        <Link to={'/home'}><button className='btn btn--green marginRight'>Projects home</button></Link>
+                    </div>
+                    :
                     <div className="buttons">
                         <Link to={'/register'}><button className='btn btn--purple marginRight'>Register</button></Link>
                         <Link to={'/login'}><button className='btn btn--transparent'>Login</button></Link>

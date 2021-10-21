@@ -1,0 +1,35 @@
+{
+  "paths": [
+    {
+      "name": "/items",
+      "lambdaFunction": "gmeetest",
+      "privacy": {
+        "open": true
+      },
+      "policyResourceName": "/items"
+    }
+  ],
+  "resourceName": "gmeet",
+  "apiName": "gmeet",
+  "functionArns": [
+    {
+      "lambdaFunction": "gmeetest"
+    }
+  ],
+  "privacy": {
+    "auth": 0,
+    "unauth": 0,
+    "authRoleName": "amplify-gmeet-dev-162827-authRole",
+    "unAuthRoleName": "amplify-gmeet-dev-162827-unauthRole"
+  },
+  "dependsOn": [
+    {
+      "category": "function",
+      "resourceName": "gmeetest",
+      "attributes": [
+        "Name",
+        "Arn"
+      ]
+    }
+  ]
+}
