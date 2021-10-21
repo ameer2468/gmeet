@@ -1,6 +1,5 @@
 import React from 'react';
 import {useAppDispatch} from "../../../redux/hooks";
-import {ModalStatus} from "../../../redux/modals/modalSlice";
 import {ActiveModal} from "../../../redux/modals/modalSlice";
 
 interface props {
@@ -28,7 +27,6 @@ const Project = ({data}: props) => {
                 <button className='btn btn--purepurple'>Project Details</button>
                 <button onClick={() => {
                     dispatch(ActiveModal('JOIN'))
-                    dispatch(ModalStatus(true))
                 }} className='btn btn--transparent'>Request To Join</button>
             </div>
         </div>

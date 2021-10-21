@@ -104,6 +104,22 @@
   backdrop-filter: blur(10px);
   position: fixed;
   border-bottom: 1px solid $border;
+  nav {
+    margin-left: 3rem;
+    ul {
+      a {
+        font-size: 1.5rem;
+        transition: all 0.3s;
+        &:hover {
+          opacity: 0.5;
+          transition: all 0.3s;
+        }
+      }
+      li {
+        list-style: none;
+      }
+    }
+  }
   .container {
     display: flex;
     align-items: center;

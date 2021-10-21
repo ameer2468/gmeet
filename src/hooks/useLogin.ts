@@ -46,6 +46,7 @@ export function useLogin() {
 
     const logoutHandler = () => {
         dispatch(loading(true))
+        localStorage.removeItem('persist:root')
         Auth.signOut().then(() => {
             dispatch(userDetails({
                 username: ''

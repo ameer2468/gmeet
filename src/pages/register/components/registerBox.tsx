@@ -61,6 +61,7 @@ const RegisterBox = () => {
                     {registerHook.step === 0 ? <form onSubmit={registerHook.registerHandler}>
                         <input required onChange={inputHandler} name='email' value={registerHook.inputValues.email} placeholder='Email' type="email"/>
                         <input required onChange={inputHandler} name='username' value={registerHook.inputValues.username} placeholder='Username' type="text"/>
+                        <input required onChange={inputHandler} name='profession' value={registerHook.inputValues.profession}  placeholder='Profession e.g. Software Engineer' type="text"/>
                         <input required onChange={inputHandler} name='password' value={registerHook.inputValues.password} placeholder='Password' type="password"/>
                         <input required onChange={inputHandler} name='confirmpass' value={registerHook.inputValues.confirmpass}  placeholder='Confirm password' type="password"/>
                         {registerHook.error.length === 0 ? '' :  <p className='error'>{registerHook.error}</p>}

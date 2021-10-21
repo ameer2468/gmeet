@@ -1,44 +1,43 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type {RootState} from "../store";
+import {project} from "./types";
 
 // Define a type for the slice state
-interface UserState {
-    userInfo: {
-        username: ''
+interface ProjectState {
+    projects: []
+    projectForm: {
+        name: string;
+        description: string;
+        members: string;
     }
-    LoggedIn: boolean
-    Loading: boolean;
 }
 
 // Define the initial state using that type
-const initialState: UserState = {
-    userInfo: {
-        username: '',
-    },
-    LoggedIn: false,
-    Loading: false
+const initialState: ProjectState = {
+    projects: [],
+    projectForm: {
+        name: '',
+        description: '',
+        members: ''
+    }
 }
 
-export const userSlice = createSlice({
-    name: 'user',
-    // `createSlice` will infer the state type from the `initialState` argument
+export const projectSlice = createSlice({
+    name: 'project',
     initialState,
     reducers: {
-        userDetails: (state, action: PayloadAction<any>) => {
-           state.userInfo = action.payload;
+        addProject: (state: any, action: PayloadAction<project>) => {
+           state.projects.push(action.payload)
         },
-        status: (state, action: PayloadAction<boolean>) => {
-            state.LoggedIn = action.payload;
-        },
-        loading: (state, action: PayloadAction<boolean>) => {
-            state.Loading = action.payload;
+        projectValues: (state, action: PayloadAction<any>) => {
+            state.projectForm = action.payload;
         }
     },
 })
 
-export const { userDetails, status, loading } = userSlice.actions
+export const { addProject, projectValues } = projectSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
-export const userReducer = (state: RootState) => state.userStore;
+export const projectReducer = (state: RootState) => state.projectStore;
 
-export default userSlice.reducer
+export default projectSlice.reducer

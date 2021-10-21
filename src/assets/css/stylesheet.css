@@ -38,6 +38,11 @@ a {
   color: #BFC1E0;
 }
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+body::-webkit-scrollbar {
+  display: none;
+}
+
 body {
   font-family: Sofia pro, "sans-serif";
   font-weight: 100;
@@ -45,6 +50,10 @@ body {
   overflow-x: hidden;
   font-size: 1.3rem;
   background: #2a2d47;
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 .header {
@@ -101,6 +110,7 @@ body {
 .HomeContent {
   width: 100vw;
   height: auto;
+  min-height: 100vh;
   background: transparent linear-gradient(139deg, #5A6EF6 0%, #2A2D47 40%) 0% 0% no-repeat padding-box;
 }
 .HomeContent .homeContainer {
@@ -175,6 +185,186 @@ body {
   transform: translateY(-1rem);
   transition: all 0.3s;
   box-shadow: 0 30px 20px -20px rgba(0, 0, 0, 0.15);
+}
+
+.profileContent {
+  width: 100vw;
+  height: 100vh;
+  background: transparent linear-gradient(139deg, #5A6EF6 0%, #2A2D47 40%) 0% 0% no-repeat padding-box;
+}
+.profileContent .profileContainer {
+  padding-top: 20rem;
+  padding-bottom: 5rem;
+  width: 100%;
+  max-width: 150rem;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.profileContent .profileContainer .card {
+  background: #313553;
+  padding: 2rem;
+  height: 20rem;
+  display: flex;
+  margin-bottom: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+}
+.profileContent .profileContainer .listings .container {
+  width: 100%;
+  max-width: 130rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1rem;
+  height: auto;
+  padding: 2rem;
+}
+.profileContent .profileContainer .listings h1 {
+  color: white;
+  font-size: 3rem;
+  text-align: left;
+  width: 100%;
+  margin-bottom: 2rem;
+  grid-column: 1/span 3;
+}
+.profileContent .profileContainer .listings .projectCard {
+  background: #2d314d;
+  width: 100%;
+  border-radius: 0.5rem;
+  transition: all 0.3s;
+  padding: 3rem;
+}
+.profileContent .profileContainer .listings .projectCard .members {
+  margin: 2rem auto 0 auto;
+  text-align: center;
+  width: 100%;
+}
+.profileContent .profileContainer .listings .projectCard .members .avatar:not(:first-child) {
+  margin-left: -75px;
+  -webkit-mask: radial-gradient(circle 25px at 5px 50%, transparent 99%, #fff 100%);
+  mask: radial-gradient(circle 55px at 5px 50%, transparent 99%, #fff 100%);
+}
+.profileContent .profileContainer .listings .projectCard .members .avatar img {
+  width: 100%;
+  max-width: 5rem;
+  display: block;
+}
+.profileContent .profileContainer .listings .projectCard .members .avatar {
+  display: inline-block;
+  border-radius: 5rem;
+  overflow: hidden;
+  width: 100px;
+}
+.profileContent .profileContainer .listings .projectCard p {
+  margin: 2rem 0 3rem 0;
+  font-size: 1.55rem;
+  line-height: 2.5rem;
+}
+.profileContent .profileContainer .listings .projectCard .buttons {
+  display: flex;
+  justify-content: center;
+}
+.profileContent .profileContainer .listings .projectCard .buttons button {
+  margin: 0 1rem;
+}
+.profileContent .profileContainer .listings .projectCard h2 {
+  color: white;
+  text-align: center;
+  font-size: 2rem;
+}
+.profileContent .profileContainer .listings .projectCard:hover {
+  transform: translateY(-1rem);
+  transition: all 0.3s;
+  box-shadow: 0 30px 20px -20px rgba(0, 0, 0, 0.15);
+}
+.profileContent .profileContainer .feedback .info {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}
+.profileContent .profileContainer .feedback .info .box {
+  text-align: center;
+}
+.profileContent .profileContainer .feedback .info .box .icon {
+  display: block;
+  font-size: 4rem;
+  width: 100%;
+  color: white;
+  margin-bottom: 1rem;
+}
+.profileContent .profileContainer .feedback .info .box h1 {
+  display: inline-block;
+  font-weight: normal;
+  font-size: 3rem;
+  margin-right: 0.6rem;
+}
+.profileContent .profileContainer .feedback .info .box h2 {
+  display: inline-block;
+  font-size: 2.5rem;
+}
+.profileContent .profileContainer .user {
+  background: #313553;
+  display: flex;
+  align-items: center;
+  padding: 3rem 2rem !important;
+  justify-content: center;
+  border-radius: 0.5rem;
+}
+.profileContent .profileContainer .user button {
+  margin: 0 0 2rem 0;
+}
+.profileContent .profileContainer .user .wrap {
+  width: 100%;
+  max-width: 50%;
+  text-align: center;
+}
+.profileContent .profileContainer .user .wrap img {
+  top: 1.5rem;
+  display: inline-block;
+  width: 100%;
+  margin-right: 0;
+  max-width: 10rem;
+  margin-bottom: 3rem;
+}
+.profileContent .profileContainer .user .wrap .titles {
+  text-align: center;
+}
+.profileContent .profileContainer .user .info {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-evenly;
+  height: auto;
+}
+.profileContent .profileContainer .user .website {
+  margin: 2.5rem auto 0 auto;
+  padding: 1rem;
+  background: #2c304b;
+  border-radius: 0.5rem;
+  width: 100%;
+  max-width: 22rem;
+  text-align: center;
+}
+.profileContent .profileContainer .user .website a {
+  color: white;
+  font-size: 1.5rem;
+  text-decoration: none;
+  margin-left: 1rem;
+}
+.profileContent .profileContainer .user .website .icon {
+  font-size: 1.5rem;
+  color: white;
+}
+.profileContent .profileContainer .user h2 {
+  font-weight: normal;
+  opacity: 0.7;
+  font-size: 1.7rem;
+}
+.profileContent .profileContainer .user h1, .profileContent .profileContainer .user h2 {
+  color: white;
 }
 
 .modalWrap {
@@ -382,6 +572,20 @@ body {
   backdrop-filter: blur(10px);
   position: fixed;
   border-bottom: 1px solid #5A6091;
+}
+.authnav nav {
+  margin-left: 3rem;
+}
+.authnav nav ul a {
+  font-size: 1.5rem;
+  transition: all 0.3s;
+}
+.authnav nav ul a:hover {
+  opacity: 0.5;
+  transition: all 0.3s;
+}
+.authnav nav ul li {
+  list-style: none;
 }
 .authnav .container {
   display: flex;

@@ -1,6 +1,7 @@
 .HomeContent {
   width: 100vw;
   height: auto;
+  min-height: 100vh;
   background: transparent linear-gradient(139deg, $activeBorder 0%, #2A2D47 40%) 0% 0% no-repeat padding-box;
   .homeContainer {
     padding-top: 20rem;

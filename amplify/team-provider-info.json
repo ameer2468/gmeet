@@ -14,6 +14,12 @@
     "categories": {
       "auth": {
         "gmeet0cd1a109": {}
+      },
+      "function": {
+        "gmeetest": {
+          "deploymentBucketName": "amplify-gmeet-dev-162827-deployment",
+          "s3Key": "amplify-builds/gmeetest-762f394e6b71615a4945-build.zip"
+        }
       }
     }
   }
