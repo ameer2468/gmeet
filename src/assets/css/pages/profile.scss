@@ -157,8 +157,10 @@
           background: darken($cardbg, 2.5);
           border-radius: 0.5rem;
           width: 100%;
+          border: 1px solid transparent;
           max-width: 22rem;
           text-align: center;
+          transition: all 0.3s;
           a {
             color: white;
             font-size: 1.5rem;
@@ -168,6 +170,11 @@
           .icon {
             font-size: 1.5rem;
             color: white;
+            margin-right: 1rem;
+          }
+          &:hover {
+            border: 1px solid $activeBorder;
+            transition: all 0.3s;
           }
         }
         h2 {

@@ -12,9 +12,10 @@ interface props {
     buttonText: string;
     children: React.ReactNode;
     submit: () => void;
+    close?: () => void;
 }
 
-const Modal = ({children,buttonText, title, submit}: props) => {
+const Modal = ({children,buttonText, title, submit, close}: props) => {
 
     const modals = useAppSelector(modalReducer)
     const {activeModal} = modals;
@@ -27,7 +28,12 @@ const Modal = ({children,buttonText, title, submit}: props) => {
         return (
             <div className={`modalWrap ${activeModal.length > 1 ? 'modalShow' : 'modalHide'}`}>
                 <motion.div variants={regularVariants} initial={"hidden"} animate="active" className={`modal`}>
-                    <div onClick={() => closeHandler()} className="close">
+                    <div onClick={() => {
+                        closeHandler()
+                        if (close) {
+                            close()
+                        }
+                    }} className="close">
                         <FontAwesomeIcon icon={faTimes} className={'closeIcon'}/>
                     </div>
                     <h1>{title}</h1>
