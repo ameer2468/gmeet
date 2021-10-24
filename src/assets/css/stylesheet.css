@@ -345,8 +345,10 @@ body {
   background: #2c304b;
   border-radius: 0.5rem;
   width: 100%;
+  border: 1px solid transparent;
   max-width: 22rem;
   text-align: center;
+  transition: all 0.3s;
 }
 .profileContent .profileContainer .user .website a {
   color: white;
@@ -357,6 +359,11 @@ body {
 .profileContent .profileContainer .user .website .icon {
   font-size: 1.5rem;
   color: white;
+  margin-right: 1rem;
+}
+.profileContent .profileContainer .user .website:hover {
+  border: 1px solid #5A6EF6;
+  transition: all 0.3s;
 }
 .profileContent .profileContainer .user h2 {
   font-weight: normal;

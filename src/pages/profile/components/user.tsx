@@ -21,10 +21,12 @@ const User = ({data}: props) => {
                                     {data.userInfo.attributes['custom:profession'] === undefined ? '' : data.userInfo.attributes['custom:profession']}
                                 </h2>
                             </div>
-                            <div className="website">
+                            <a rel='noreferrer' target={'_blank'} href="http://www.aashhab.design">
+                                <div className="website">
                                 <FontAwesomeIcon className='icon' icon={faGlobe}/>
-                                <a rel='noreferrer' target={'_blank'} href="http://www.aashhab.design">www.aashhab.design</a>
-                            </div>
+                              www.aashhab.design
+                                 </div>
+                            </a>
                             <button style={{marginTop: '2rem'}} className='btn btn--green'>
                                 <FontAwesomeIcon style={{marginRight: '0.5rem'}} icon={faEdit}/>
                                 Edit Profile

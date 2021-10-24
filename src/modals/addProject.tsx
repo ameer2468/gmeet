@@ -11,9 +11,8 @@ const AddProject = () => {
     const projectHook = useProject();
     const {projectForm} = projectHook.projects;
 
-
     return (
-        <Modal submit={() => console.log()} title={'Add Project'} buttonText={'Submit'}>
+        <Modal close={() => projectHook.closeModal()} submit={() => console.log()} title={'Add Project'} buttonText={'Submit'}>
             <form className='generalForm'>
                 <Input value={projectForm.name} useHook={projectHook} name={'name'} maxWidth={'100%'} placeholder={'Project name'}/>
                 <Input value={projectForm.members} useHook={projectHook} name={'members'} maxWidth={'100%'} placeholder={'Project members e.g. Jack,Chris,Alisha'}/>

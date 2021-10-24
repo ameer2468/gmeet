@@ -12,8 +12,15 @@ export const useProject = () => {
             {...projects.projectForm, [key]: value}))
     }
 
+    function closeModal() {
+        return dispatch(projectValues(
+            {}
+        ))
+    }
+
     return {
         onChange,
-        projects
+        projects,
+        closeModal
     }
 }
