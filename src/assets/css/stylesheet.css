@@ -438,7 +438,7 @@ body {
   border-radius: 0.5rem;
   font-weight: bold;
   color: white;
-  font-family: Avalon, "sans-serif";
+  font-family: Sofia pro, "sans-serif";
   transition: all 0.3s;
 }
 .btn:hover {
@@ -919,6 +919,12 @@ body {
   height: 7rem;
   border-radius: 0.5rem;
   max-width: 50rem;
+}
+
+@media all and (max-width: 1440px) {
+  html {
+    font-size: 55%;
+  }
 }
 
 /*# sourceMappingURL=stylesheet.css.map */
