@@ -6,7 +6,6 @@ export const useProject = () => {
     const projects = useAppSelector(projectReducer);
     const dispatch = useAppDispatch();
 
-
     function onChange(key: string, value: string) {
         return dispatch(projectValues(
             {...projects.projectForm, [key]: value}))
