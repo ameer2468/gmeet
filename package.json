@@ -5,6 +5,7 @@
   "dependencies": {
     "@aws-amplify/ui-components": "^1.8.1",
     "@aws-amplify/ui-react": "^1.2.18",
+    "@emotion/react": "^11.5.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@fortawesome/react-fontawesome": "^0.1.15",
@@ -33,8 +34,10 @@
     "react-redux": "^7.2.5",
     "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
+    "react-spinners": "^0.11.0",
     "redux-persist": "^6.0.0",
     "typescript": "^4.4.3",
+    "uuid": "^8.3.2",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
@@ -64,6 +67,7 @@
   "devDependencies": {
     "@types/react-portal": "^4.0.4",
     "@types/react-router-dom": "^5.3.0",
+    "@types/uuid": "^8.3.1",
     "jest": "^27.3.1"
   }
 }

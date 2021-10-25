@@ -4,7 +4,8 @@ export interface projectMember {
 }
 
 export interface project {
+    id: string;
     projectName: string;
     projectDescription: string;
-    projectMembers: string;
+    projectOwner: string;
 }

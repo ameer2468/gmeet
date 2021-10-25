@@ -6,6 +6,7 @@ import {modalReducer} from "../redux/modals/modalSlice";
 import {ActiveModal} from "../redux/modals/modalSlice";
 import {motion} from "framer-motion";
 import {regularVariants} from "../helpers/framer";
+import BeatLoader from "react-spinners/BeatLoader";
 
 interface props {
     title: string;
@@ -13,9 +14,10 @@ interface props {
     children: React.ReactNode;
     submit: () => void;
     close?: () => void;
+    loading?: boolean;
 }
 
-const Modal = ({children,buttonText, title, submit, close}: props) => {
+const Modal = ({children,buttonText, title, submit, close, loading}: props) => {
 
     const modals = useAppSelector(modalReducer)
     const {activeModal} = modals;
@@ -38,7 +40,11 @@ const Modal = ({children,buttonText, title, submit, close}: props) => {
                     </div>
                     <h1>{title}</h1>
                     {children}
-                    <button onClick={submit} className='btn btn--purple'>{buttonText}</button>
+                    <button onClick={submit} className='btn btn--purple'>{
+                        loading ?
+                            <BeatLoader size={8} margin={1} color={'white'} />
+                            : 'Submit'
+                    }</button>
                 </motion.div>
             </div>
         )
