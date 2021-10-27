@@ -5,7 +5,7 @@
     width: 100%;
     height: auto;
     max-width: 130rem;
-    margin: 15rem auto;
+    margin: 5% auto 0 auto;
     h1 {
       @include largeTitle;
       color: white;
@@ -13,10 +13,6 @@
       max-width: 80rem;
       margin: 0 auto;
       text-align: center;
-    }
-    .buttons {
-      text-align: center;
-      margin-top: 5rem;
     }
     p {
       @include content;

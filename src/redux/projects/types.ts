@@ -5,7 +5,12 @@ export interface projectMember {
 
 export interface project {
     id: string;
-    projectName: string;
-    projectDescription: string;
-    projectOwner: string;
+    name: string;
+    description: string;
+    owner: string;
+}
+
+export interface projectCreate {
+    name: string;
+    description: string;
 }

@@ -22,7 +22,7 @@ export const data = createAsyncThunk('project/data', async () => {
 
 // Define a type for the slice state
 interface ProjectState {
-    projects: [],
+    projects: project[],
     loading: boolean;
     error: boolean;
     projectForm: {

@@ -15,6 +15,11 @@ $purepurple: #6d5dff;
   font-weight: bold;
 }
 
+@mixin mediumBigTitle {
+  font-size: 5rem;
+  font-weight: bold;
+}
+
 @mixin mediumTitle {
   font-size: 3rem;
   font-weight: bold;

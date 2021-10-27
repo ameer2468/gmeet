@@ -131,6 +131,7 @@
     .side {
       display: flex;
       height: 100%;
+      width: auto;
       align-items: center;
       .profile {
         display: flex;
@@ -256,6 +257,9 @@
   justify-content: space-between;
   align-items: center;
   position: relative;
+  button {
+    width: 14rem;
+  }
   .line {
     width: calc(100% - 2%);
     height: 1px;

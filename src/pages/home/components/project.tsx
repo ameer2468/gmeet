@@ -13,15 +13,6 @@ const Project = ({data}: props) => {
     return (
         <div className='projectCard'>
             <h2>{data.name}</h2>
-            {/*<div className="members">*/}
-            {/*    {data.members.map((value: any, index: number) => {*/}
-            {/*        return (*/}
-            {/*            <div key={index.toString()} className="avatar">*/}
-            {/*                <img src={value.image} alt="member"/>*/}
-            {/*            </div>*/}
-            {/*        )*/}
-            {/*    })}*/}
-            {/*</div>*/}
             <p>{data.description}</p>
             <div className="buttons">
                 <button className='btn btn--purepurple'>Project Details</button>

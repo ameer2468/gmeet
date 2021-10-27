@@ -64,7 +64,7 @@ body {
   width: 100%;
   height: auto;
   max-width: 130rem;
-  margin: 15rem auto;
+  margin: 5% auto 0 auto;
 }
 .header .container h1 {
   font-size: 7rem;
@@ -74,10 +74,6 @@ body {
   max-width: 80rem;
   margin: 0 auto;
   text-align: center;
-}
-.header .container .buttons {
-  text-align: center;
-  margin-top: 5rem;
 }
 .header .container p {
   font-size: 1.7rem;
@@ -606,6 +602,7 @@ body {
 .authnav .container .side {
   display: flex;
   height: 100%;
+  width: auto;
   align-items: center;
 }
 .authnav .container .side .profile {
@@ -729,6 +726,9 @@ body {
   justify-content: space-between;
   align-items: center;
   position: relative;
+}
+.homeNav button {
+  width: 14rem;
 }
 .homeNav .line {
   width: calc(100% - 2%);
@@ -924,6 +924,10 @@ body {
 @media all and (max-width: 1440px) {
   html {
     font-size: 55%;
+  }
+
+  .header .container h1 {
+    font-size: 6rem;
   }
 }
 

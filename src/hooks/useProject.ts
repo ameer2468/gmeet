@@ -4,7 +4,8 @@ import axios from "axios";
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {v4 as uuidv4} from "uuid";
 import {useUser} from "./useUser";
-import {ActiveModal, modalReducer} from "../redux/modals/modalSlice";
+import {ActiveModal} from "../redux/modals/modalSlice";
+import {addProject} from '../redux/projects/projectSlice'
 
 export const useProject = () => {
 
@@ -15,8 +16,6 @@ export const useProject = () => {
 
     const {projectForm} = projects;
     const dispatch = useAppDispatch();
-    const modals = useAppSelector(modalReducer)
-    const {activeModal} = modals;
 
     function onChange(key: string, value: string) {
         return dispatch(projectValues(
@@ -30,9 +29,17 @@ export const useProject = () => {
                 name: projectForm.name,
                 description: projectForm.description,
                 owner: userInfo.username
-            }).then(() => {
+            }).then((res) => {
+                const newProj = {
+                    id: res.data.id,
+                    name: res.data.name,
+                    description: res.data.description,
+                    owner: res.data.owner
+                }
                 dispatch(projectLoading(false))
                 dispatch(ActiveModal(''))
+                dispatch(addProject(newProj))
+                dispatch(projectValues({}))
             }).catch((err) => {
                 dispatch(projectLoading(false))
                 console.log(err)

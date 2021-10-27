@@ -16,9 +16,6 @@ const Home = () => {
         dispatch(data());
     }, [dispatch])
 
-    console.log(projects)
-
-
     return (
         <div className='HomeContent'>
             <div className="homeContainer">
@@ -34,8 +31,8 @@ const Home = () => {
                     </button>
                 </div>
                 <div className="projectsContainer">
-                    {projects.map((value, index) => {
-                        return <Project key={index.toString()} data={value}/>
+                    {projects.map((value) => {
+                        return <Project key={value.id} data={value}/>
                     })}
                 </div>
             </div>
