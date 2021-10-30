@@ -16,6 +16,8 @@ const Home = () => {
         dispatch(data());
     }, [dispatch])
 
+    console.log(projects)
+
     return (
         <div className='HomeContent'>
             <div className="homeContainer">
