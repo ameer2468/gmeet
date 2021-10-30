@@ -460,12 +460,14 @@ body {
 }
 .btn--purepurple:hover {
   background: #4834ff;
+  opacity: 1;
 }
 .btn--purple {
   background: #4a5dc7;
 }
 .btn--purple:hover {
   background: #3749b1;
+  opacity: 1;
 }
 .btn--transparent {
   background: transparent;
@@ -744,11 +746,6 @@ body {
 .homeNav button {
   margin-left: 2rem;
 }
-.homeNav a {
-  text-decoration: none;
-  color: #BFC1E0;
-  display: inline-block;
-}
 .homeNav ul {
   display: inline-block;
   width: 100%;
@@ -757,12 +754,12 @@ body {
   display: inline-block;
   padding: 0 2rem;
 }
-.homeNav ul a {
+.homeNav ul .navLink {
   transition: all 0.3s;
   font-size: 1.6rem;
   color: white;
 }
-.homeNav ul a:hover {
+.homeNav ul .navLink:hover {
   opacity: 0.5;
   transition: all 0.3s;
 }

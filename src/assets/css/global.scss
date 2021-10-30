@@ -17,13 +17,15 @@
     background: $purepurple;
     color: white;
     &:hover {
-      background: darken($purepurple, 8%)
+      background: darken($purepurple, 8%);
+      opacity: 1;
     }
   }
   &--purple {
     background: #4a5dc7;
     &:hover {
-      background: darken(#4a5dc7, 8%)
+      background: darken(#4a5dc7, 8%);
+      opacity: 1;
     }
   }
   &--transparent {
@@ -274,11 +276,6 @@
   button {
     margin-left: 2rem;
   }
-  a {
-    text-decoration: none;
-    color: $text;
-    display: inline-block;
-  }
   ul {
     display: inline-block;
     width: 100%;
@@ -286,7 +283,7 @@
       display: inline-block;
       padding: 0 2rem;
     }
-    a {
+    .navLink {
       transition: all 0.3s;
       font-size: 1.6rem;
       color: white;

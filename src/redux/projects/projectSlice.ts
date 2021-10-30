@@ -13,7 +13,7 @@ export const data = createAsyncThunk('project/data', async () => {
         }
     })
         .then((res) => {
-            return res.data;
+            return res.data.rows;
         });
     return response;
 })
