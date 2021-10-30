@@ -15,9 +15,9 @@ const Navbar = () => {
             </div>
          <div className="side">
              <ul>
-                 <li><NavLink to={'/'}>About</NavLink></li>
-                 <li><NavLink to={'/'}>Our Story</NavLink></li>
-                 <li><NavLink to={'/'}>Why</NavLink></li>
+                 <li><NavLink className='navLink' to={'/'}>About</NavLink></li>
+                 <li><NavLink className='navLink' to={'/'}>Our Story</NavLink></li>
+                 <li><NavLink className='navLink' to={'/'}>Why</NavLink></li>
                  {LoggedIn ?
                          <Link to={'/home'}><button className='btn btn--green marginRight'>Projects home</button></Link>
                      :

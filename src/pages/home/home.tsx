@@ -1,22 +1,15 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import Search from "./components/search";
 import Project from "./components/project";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {ActiveModal} from "../../redux/modals/modalSlice";
 import {projectReducer} from "../../redux/projects/projectSlice";
-import {data} from "../../redux/projects/projectSlice";
 
 const Home = () => {
 
     const dispatch = useAppDispatch();
     const projectStore = useAppSelector(projectReducer)
     const {projects} = projectStore;
-
-    useEffect(() => {
-        dispatch(data());
-    }, [dispatch])
-
-    console.log(projects)
 
     return (
         <div className='HomeContent'>
@@ -33,9 +26,9 @@ const Home = () => {
                     </button>
                 </div>
                 <div className="projectsContainer">
-                    {projects.map((value) => {
-                        return <Project key={value.id} data={value}/>
-                    })}
+                    {projectStore.loading ? '' :  projects.map((value) => {
+                            return <Project key={value.id} data={value}/>
+                        })}
                 </div>
             </div>
         </div>
