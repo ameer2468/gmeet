@@ -1,9 +1,10 @@
 import React from 'react';
 import Search from "./components/search";
-import Project from "./components/project";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {ActiveModal} from "../../redux/modals/modalSlice";
 import {projectReducer} from "../../redux/projects/projectSlice";
+import LoadingSpinner from "../../components/global/LoadingSpinner";
+import Project from "./components/project";
 
 const Home = () => {
 
@@ -25,11 +26,15 @@ const Home = () => {
                         + Add Project
                     </button>
                 </div>
-                <div className="projectsContainer">
-                    {projectStore.loading ? '' :  projects.map((value) => {
-                            return <Project key={value.id} data={value}/>
-                        })}
-                </div>
+                    <div className="projectsContainer">
+                        {projectStore.loading ? <div className="center">
+                                <LoadingSpinner height={60} width={60}/>
+                            </div> :
+                            projectStore.loading ? '' :  projects.map((value) => {
+                                return <Project remove={false} key={value.id} data={value}/>
+                            })
+                        }
+                    </div>
             </div>
         </div>
     );
