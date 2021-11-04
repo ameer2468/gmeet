@@ -21,7 +21,7 @@ textarea {
   padding: 2rem 2rem;
   font-size: 1.5rem;
   border-radius: 0.5rem;
-  background-color: #12131f;
+  background-color: rgba(22, 23, 37, 0.5);
   transition: all 0.3s;
 }
 textarea:focus {
@@ -108,11 +108,10 @@ body {
   height: auto;
   min-height: 100vh;
   background: #275957;
-  background: linear-gradient(162deg, #275957 -40%, #121424 58%);
+  background: linear-gradient(162deg, #275957 -40%, #121424 78%);
 }
 .HomeContent .homeContainer {
-  padding-top: 20rem;
-  padding-bottom: 5rem;
+  padding: 15rem 0 0 0;
   width: 100%;
   max-width: 150rem;
   margin: 0 auto;
@@ -187,11 +186,10 @@ body {
   width: 100vw;
   height: 100vh;
   background: #275957;
-  background: linear-gradient(162deg, #275957 -40%, #121424 58%);
+  background: linear-gradient(162deg, #275957 -40%, #121424 78%);
 }
 .profileContent .profileContainer {
-  padding-top: 20rem;
-  padding-bottom: 5rem;
+  padding: 15rem 0 0 0;
   width: 100%;
   max-width: 150rem;
   margin: 0 auto;
@@ -213,23 +211,30 @@ body {
   width: 100%;
   max-width: 130rem;
   margin: 0 auto;
+  position: relative;
+  padding: 2rem;
+  height: 60rem;
+  overflow: hidden;
+}
+.profileContent .profileContainer .listings .projectsContainer {
+  width: 100%;
   display: grid;
+  padding: 3rem;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 3rem;
-  height: auto;
-  padding: 2rem;
 }
 .profileContent .profileContainer .listings h1 {
   color: white;
   font-size: 3rem;
   text-align: left;
   width: 100%;
-  margin-bottom: 2rem;
-  grid-column: 1/span 3;
+  height: 5rem;
+  padding: 0 3rem;
 }
 .profileContent .profileContainer .listings .projectCard {
   background: rgba(24, 25, 41, 0.4);
   width: 100%;
+  height: auto;
   border-radius: 0.5rem;
   transition: all 0.3s;
   padding: 3rem;
@@ -238,10 +243,10 @@ body {
 .profileContent .profileContainer .listings .projectCard .delete {
   position: absolute;
   right: -1.5rem;
-  top: -1.5rem;
+  top: -1rem;
   width: 5rem;
   height: 5rem;
-  background: #181929;
+  background: #191b2c;
   border-radius: 4rem;
   display: flex;
   justify-content: center;
@@ -418,6 +423,24 @@ body {
 .modalWrap .modal h1 {
   color: white;
 }
+.modalWrap .modal .textarea {
+  width: 100%;
+  border: 1px solid transparent;
+  color: #c1c1c1;
+  padding: 2rem 2rem;
+  font-size: 1.5rem;
+  border-radius: 0.5rem;
+  background-color: rgba(22, 23, 37, 0.5);
+  transition: all 0.3s;
+}
+.modalWrap .modal .textarea:focus {
+  outline: 0;
+  border: 1px solid #4ad58b;
+  transition: all 0.3s;
+}
+.modalWrap .modal .textarea::placeholder {
+  color: #c1c1c1;
+}
 .modalWrap .modal input {
   margin-bottom: 1.5rem;
   width: 100%;
@@ -427,7 +450,7 @@ body {
   padding: 0 2rem;
   font-size: 1.5rem;
   border-radius: 0.5rem;
-  background-color: #12131f;
+  background-color: rgba(22, 23, 37, 0.5);
   transition: all 0.3s;
 }
 .modalWrap .modal input:focus {
@@ -441,8 +464,8 @@ body {
 .modalWrap .modal .close {
   position: absolute;
   right: -1rem;
-  top: -1.8rem;
-  background: #161621;
+  top: -1rem;
+  background: #191b2c;
   width: 5rem;
   height: 5rem;
   display: flex;
@@ -596,7 +619,7 @@ body {
   padding: 2rem 2rem;
   font-size: 1.5rem;
   border-radius: 0.5rem;
-  background-color: #12131f;
+  background-color: rgba(22, 23, 37, 0.5);
   transition: all 0.3s;
   background: #12131f;
 }

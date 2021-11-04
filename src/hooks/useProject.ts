@@ -4,15 +4,16 @@ import {
     projectReducer,
     createProjectLoading,
     addProject,
-    selectedProject, getProjects, deleteLoading
+    selectedProject, deleteLoading, userProjects, removeProject
 } from "../redux/projects/projectSlice";
-import {createProject, deleteProject} from "../redux/projects/thunks";
+import {createProject, deleteProject, getProject, getProjects} from "../redux/projects/services";
 import {useUser} from "./useUser";
 import {ActiveModal} from "../redux/modals/modalSlice";
 import {project} from "../redux/projects/types";
 import {v4 as uuidv4} from "uuid";
 import { toast } from 'react-toastify';
-
+import {projectLoading} from "../redux/projects/projectSlice";
+import {FormEvent} from "react";
 
 
 export const useProject = () => {
@@ -46,14 +47,28 @@ export const useProject = () => {
         dispatch(selectedProject(projectInfo))
     }
 
+    async function getUserProjects(user: string) {
+        dispatch(projectLoading(true));
+        return await dispatch(getProject(user)).then((res: any) => {
+            const {data} = res.payload;
+            dispatch(userProjects(data.rows))
+            dispatch(projectLoading(false));
+        })
+    }
+
+    async function getSearchProjects(search: string) {
+            dispatch(getProjects(search));
+    }
+
 
     async function deleteProjectHandler() {
         dispatch(deleteLoading(true))
          return await dispatch(deleteProject(projects.selectedProject.id))
              .then(() => {
+                 dispatch(removeProject(projects.selectedProject.id))
                  dispatch(deleteLoading(false))
-                 dispatch(getProjects());
                  dispatch(ActiveModal(''))
+                 dispatch(getProjects(''))
              })
              .catch((err) => {
                  dispatch(deleteLoading(false))
@@ -93,7 +108,9 @@ export const useProject = () => {
         projects,
         closeModal,
         toggleDelete,
+        getUserProjects,
         deleteProjectHandler,
+        getSearchProjects,
         createProjectHandler,
     }
 }

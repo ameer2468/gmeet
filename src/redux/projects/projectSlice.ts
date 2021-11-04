@@ -1,28 +1,13 @@
-import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type {RootState} from "../store";
 import {project} from "./types";
-
-import axios from "axios";
-
-
-export const getProjects = createAsyncThunk('project/data', async () => {
-    const response = axios.get(`${process.env.REACT_APP_API_URL}/projects`, {
-        headers: {
-            'x-api-key': process.env.REACT_APP_API_KEY,
-            'Content-Type': 'application/json'
-        }
-    })
-        .then((res) => {
-            return res.data.rows;
-        });
-    return response;
-})
-
+import {getProjects} from "./services";
 
 
 // Define a type for the slice state
 interface ProjectState {
     projects: project[],
+    userProjects: project[],
     loading: boolean;
     createLoading: boolean;
     error: boolean;
@@ -31,12 +16,14 @@ interface ProjectState {
     projectForm: {
         name: string;
         description: string;
+        searchterm: string;
     }
 }
 
 // Define the initial state using that type
 const initialState: ProjectState = {
     projects: [],
+    userProjects: [],
     loading: false,
     createLoading: false,
     deleteLoading: false,
@@ -50,6 +37,7 @@ const initialState: ProjectState = {
     projectForm: {
         name: '',
         description: '',
+        searchterm: ''
     }
 }
 
@@ -60,6 +48,9 @@ export const projectSlice = createSlice({
         projectValues: (state, action: PayloadAction<any>) => {
             state.projectForm = action.payload;
         },
+        userProjects: (state, action: PayloadAction<project[]>) => {
+          state.userProjects = action.payload;
+        },
         selectedProject: (state, action: PayloadAction<project>) => {
             state.selectedProject = action.payload;
         },
@@ -67,7 +58,7 @@ export const projectSlice = createSlice({
             state.projects.push(action.payload)
         },
         removeProject: (state, action: PayloadAction<string>) => {
-            state.projects.filter((value) => value.id !== action.payload)
+            state.userProjects = state.userProjects.filter((value) => value.id !== action.payload)
         },
         projectLoading: (state, action: PayloadAction<boolean>) => {
             state.loading = action.payload;
@@ -100,6 +91,7 @@ export const {
     addProject,
     projectValues,
     removeProject,
+    userProjects,
     selectedProject,
     projectLoading,
     deleteLoading,

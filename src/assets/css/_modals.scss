@@ -24,15 +24,18 @@
     h1 {
       color: white;
     }
+    .textarea {
+      @include Textarea;
+    }
     input {
       margin-bottom: 1.5rem;
-      @include Input;
+      @include LighterInput;
     }
     .close {
       position: absolute;
       right: -1rem;
-      top: -1.8rem;
-      background: #161621;
+      top: -1rem;
+      background: lighten($input, 4);
       width: 5rem;
       height: 5rem;
       display: flex;

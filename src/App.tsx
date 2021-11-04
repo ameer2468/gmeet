@@ -12,19 +12,23 @@ import ModalManager from "./components/ModalManager";
 import Profile from "./pages/profile/profile";
 import Authnav from "./components/authnav";
 import { ToastContainer } from 'react-toastify';
-import {getProjects} from "./redux/projects/projectSlice";
+import {useProject} from "./hooks/useProject";
+import { useDebounce } from 'use-debounce';
 
 Amplify.configure(awsconfig)
 
 const App = () => {
 
-    const dispatch = useAppDispatch();
+    const projectHook = useProject();
+    const {projectForm} = projectHook.projects;
+    const [value] = useDebounce(projectForm.searchterm, 1000);
+
 
     /*Requests to Load App*/
 
     useEffect(() => {
-        dispatch(getProjects());
-    }, [dispatch])
+       projectHook.getSearchProjects(value);
+    }, [value])
 
     const userRedux = useAppSelector(userReducer)
     const {username} = userRedux.userInfo;

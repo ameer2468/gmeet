@@ -9,17 +9,21 @@ import {useLogin} from "../hooks/useLogin";
 import { motion } from 'framer-motion';
 import {regularVariants} from "../helpers/framer";
 import {NavLink} from "react-router-dom";
+import {useProject} from "../hooks/useProject";
 
 const Authnav = () => {
 
     const userRedux = useAppSelector(userReducer)
     const {username} = userRedux.userInfo;
     const [open, setOpen] = useState(false);
+    const projectHook = useProject();
     const loginHook = useLogin();
     const closeDrop = () => {
         setOpen(false);
     }
     const ref = useDetectClickOutside({ onTriggered: closeDrop});
+
+
 
     return (
         <nav className="authnav">
@@ -44,7 +48,12 @@ const Authnav = () => {
                                             className={'dropdown'}>
                             <ul>
                                 <li>
-                                    <NavLink to={`/profile/${username}`}>
+                                    <NavLink
+                                        to={`/profile/${username}`}
+                                        onClick={() => {
+                                          projectHook.getUserProjects(userRedux.userInfo.username)
+                                        }}
+                                    >
                                         <FontAwesomeIcon className='icon' icon={faUser}/>
                                         Profile
                                     </NavLink>
