@@ -1,10 +1,10 @@
 .profileContent {
   width: 100vw;
   height: 100vh;
-  background: transparent linear-gradient(139deg, $activeBorder 0%, #2A2D47 40%) 0% 0% no-repeat padding-box;
+  background: rgb(39,89,87);
+  background: linear-gradient(162deg, rgba(39,89,87,1) -40%, rgba(18,20,36,1) 78%);
   .profileContainer {
-    padding-top: 20rem;
-    padding-bottom: 5rem;
+    padding: 15rem 0 0 0;
     width: 100%;
     max-width: 150rem;
     margin: 0 auto;
@@ -12,7 +12,7 @@
     flex-wrap: wrap;
     justify-content: space-between;
     .card {
-      background: $cardbg;
+      background: rgba($cardbg, 0.3);
       padding: 2rem;
       height: 20rem;
       display: flex;
@@ -26,26 +26,53 @@
         width: 100%;
         max-width: 130rem;
         margin: 0 auto;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-gap: 1rem;
-        height: auto;
+        position: relative;
         padding: 2rem;
+        height: 60rem;
+        overflow: hidden;
+      }
+      .projectsContainer {
+        width: 100%;
+        display: grid;
+        padding: 3rem;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 3rem;
       }
       h1 {
         color: white;
         font-size: 3rem;
         text-align: left;
         width: 100%;
-        margin-bottom: 2rem;
-        grid-column: 1 / span 3;
+        height: 5rem;
+        padding: 0 3rem;
       }
       .projectCard {
-        background: darken($cardbg, 2%);
+        background: lighten(rgba($cardbg, 0.4), 3);
         width: 100%;
+        height: auto;
         border-radius: 0.5rem;
         transition: all 0.3s;
         padding: 3rem;
+        position: relative;
+        .delete {
+          position: absolute;
+          right: -1.5rem;
+          top: -1rem;
+          width: 5rem;
+          height: 5rem;
+          background: lighten($input, 4);
+          border-radius: 4rem;
+          display: flex;
+          justify-content: center;
+          border: 1px solid transparent;
+          align-items: center;
+          transition: all 0.3s;
+          &:hover {
+            border: 1px solid $green;
+            transition: all 0.3s;
+            cursor: pointer;
+          }
+        }
         .members {
           margin: 2rem auto 0 auto;
           text-align: center;
@@ -74,10 +101,7 @@
         }
         .buttons {
           display: flex;
-          justify-content: center;
-          button {
-            margin: 0 1rem;
-          }
+          justify-content: space-between;
         }
         h2 {
           color: white;
@@ -119,7 +143,7 @@
       }
     }
       .user {
-        background: $cardbg;
+        @include Card;
         display: flex;
         align-items: center;
         padding: 3rem 2rem!important;
@@ -154,11 +178,12 @@
         .website {
           margin: 2.5rem auto 0 auto;
           padding: 1rem;
-          background: darken($cardbg, 2.5);
+          background: lighten(rgba($cardbg, 0.3), 10);
           border-radius: 0.5rem;
           width: 100%;
           border: 1px solid transparent;
-          max-width: 22rem;
+          max-width: 23rem;
+          font-size: 1.7rem;
           text-align: center;
           transition: all 0.3s;
           a {
@@ -173,7 +198,7 @@
             margin-right: 1rem;
           }
           &:hover {
-            border: 1px solid $activeBorder;
+            border: 1px solid $green;
             transition: all 0.3s;
           }
         }

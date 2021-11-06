@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {FormEvent, useState} from "react";
 import * as type from "../pages/register/types";
 import {Auth} from "aws-amplify";
 import {useAppDispatch} from "../redux/hooks";
@@ -19,7 +19,7 @@ export function useRegister() {
     const [step, setStep] = useState<number>(0);
     const dispatch = useAppDispatch();
 
-    async function confirmSignUp(e: any) {
+    async function confirmSignUp(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
         try {
             await dispatch(loading(true))
@@ -33,7 +33,7 @@ export function useRegister() {
         }
     }
 
-    async function registerHandler(e: any) {
+    async function registerHandler(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
         if (inputValues.confirmpass !== inputValues.password) {
             return setError('Password does not match confirm password')

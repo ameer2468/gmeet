@@ -11,19 +11,24 @@ import Home from "./pages/home/home";
 import ModalManager from "./components/ModalManager";
 import Profile from "./pages/profile/profile";
 import Authnav from "./components/authnav";
-import {data} from "./redux/projects/projectSlice";
+import { ToastContainer } from 'react-toastify';
+import {useProject} from "./hooks/useProject";
+import { useDebounce } from 'use-debounce';
 
 Amplify.configure(awsconfig)
 
 const App = () => {
 
-    const dispatch = useAppDispatch();
+    const projectHook = useProject();
+    const {projectForm} = projectHook.projects;
+    const [value] = useDebounce(projectForm.searchterm, 1000);
+
 
     /*Requests to Load App*/
 
     useEffect(() => {
-        dispatch(data());
-    }, [dispatch])
+       projectHook.getSearchProjects(value);
+    }, [value])
 
     const userRedux = useAppSelector(userReducer)
     const {username} = userRedux.userInfo;
@@ -54,6 +59,7 @@ const App = () => {
 
     return (
         <>
+            <ToastContainer/>
           <ModalManager/>
             {location.pathname === '/' ? '' : RouteHandler === AuthRoutes && <Authnav/>}
           <Switch>

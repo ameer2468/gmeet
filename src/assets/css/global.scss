@@ -13,9 +13,17 @@
       background: darken($green, 8%)
     }
   }
+  &--gray {
+    background: $gray;
+    color: white;
+    &:hover {
+      background: lighten($gray, 9%);
+      opacity: 1;
+    }
+  }
   &--purepurple {
     background: $purepurple;
-    color: white;
+    color: $navbg;
     &:hover {
       background: darken($purepurple, 8%);
       opacity: 1;
@@ -45,6 +53,27 @@
   align-items: center;
 }
 
+.center {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  top: 40%;
+  text-align: center;
+}
+
+.centerNoTop {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  text-align: center;
+}
+
+
 .modalHide {
   opacity: 0!important;
   transition: all 0.3s!important;
@@ -71,7 +100,7 @@
 
 .textarea {
   @include Textarea;
-  background: darken($navbg, 3%);
+  background: $input;
 }
 
 .bold {
@@ -101,16 +130,15 @@
   z-index: 10;
   right: 0;
   left: 0;
+  padding: 3rem 0;
   margin: auto;
-  background: rgba($navbg, 0.5);
   backdrop-filter: blur(10px);
   position: fixed;
-  border-bottom: 1px solid $border;
   nav {
     margin-left: 3rem;
     ul {
       a {
-        font-size: 1.5rem;
+        font-size: 1.7rem;
         transition: all 0.3s;
         &:hover {
           opacity: 0.5;
@@ -143,11 +171,11 @@
         width: 100%;
         border-radius: 0.5rem;
         margin-left: 4rem;
-        background: $bg;
+        background: rgba($bg, 0.4);
         transition: all 0.3s;
         position: relative;
         &:hover {
-          background: darken($bg, 3%);
+          background: darken($bg, 0.2);
           cursor: pointer;
           transition: all 0.3s;
         }
@@ -161,7 +189,7 @@
           z-index: 10;
           padding: 1.5rem;
           justify-content: center;
-          background: darken($bg, 3%);
+          background: darken($bg, 0.1);
           .icon {
             font-size: 1.4rem;
             margin-left: 0;
@@ -265,7 +293,7 @@
   .line {
     width: calc(100% - 2%);
     height: 1px;
-    opacity: 0.25;
+    opacity: 0.1;
     background-color: $text;
     position: absolute;
     left: 0;
@@ -340,7 +368,7 @@ h1 {
     }
   }
   .side:nth-child(1) {
-    background: darken($bg, 1.75%);
+    background: #1a1d2d;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -362,6 +390,7 @@ h1 {
     flex-direction: column;
     justify-content: center;
     height: 100%;
+    background: #1d2031;
   }
   .side {
     flex: 0 0 50%;
@@ -391,8 +420,8 @@ h1 {
       }
     }
     input {
-      border: 1px solid lighten($input, 10%);
-      background: $input;
+      border: 1px solid lighten($input, 20);
+      background: lighten($input, 10);
       width: 100%;
       font-family: Sofia pro, 'sans-serif';
       max-width: 50rem;

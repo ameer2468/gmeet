@@ -24,7 +24,7 @@ const ProjectCard = ({data}: props) => {
             </div>
             <p>{data.description}</p>
             <div className="buttons">
-                <button className='btn btn--purepurple'>Project Details</button>
+                <button className='btn btn--gray'>Project Details</button>
                 <button onClick={() => {
                     dispatch(ActiveModal('JOIN'))
                 }} className='btn btn--transparent'>Request To Join</button>

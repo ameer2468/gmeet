@@ -13,11 +13,10 @@ interface props {
     buttonText: string;
     children: React.ReactNode;
     submit: () => void;
-    close?: () => void;
     loading?: boolean;
 }
 
-const Modal = ({children,buttonText, title, submit, close, loading}: props) => {
+const Modal = ({children,buttonText, title, submit, loading}: props) => {
 
     const modals = useAppSelector(modalReducer)
     const {activeModal} = modals;
@@ -32,18 +31,15 @@ const Modal = ({children,buttonText, title, submit, close, loading}: props) => {
                 <motion.div variants={regularVariants} initial={"hidden"} animate="active" className={`modal`}>
                     <div onClick={() => {
                         closeHandler()
-                        if (close) {
-                            close()
-                        }
                     }} className="close">
                         <FontAwesomeIcon icon={faTimes} className={'closeIcon'}/>
                     </div>
                     <h1>{title}</h1>
                     {children}
-                    <button onClick={submit} className='btn btn--purple'>{
+                    <button onClick={submit} className='btn btn--green'>{
                         loading ?
-                            <BeatLoader size={8} margin={1} color={'white'} />
-                            : 'Submit'
+                            <BeatLoader size={8} margin={1} color={'#2a2c3d'} />
+                            : buttonText
                     }</button>
                 </motion.div>
             </div>

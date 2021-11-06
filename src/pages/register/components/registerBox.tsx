@@ -59,11 +59,11 @@ const RegisterBox = () => {
                        <h1>{registerHook.step === 0 ? 'welcome to registeration!' : registerHook.step === 1 ? 'Enter verification code' : registerHook.step === 2 && 'Registeration successful'}</h1>
                    </div>
                     {registerHook.step === 0 ? <form onSubmit={registerHook.registerHandler}>
-                        <input required onChange={inputHandler} name='email' value={registerHook.inputValues.email} placeholder='Email' type="email"/>
-                        <input required onChange={inputHandler} name='username' value={registerHook.inputValues.username} placeholder='Username' type="text"/>
-                        <input required onChange={inputHandler} name='profession' value={registerHook.inputValues.profession}  placeholder='Profession e.g. Software Engineer' type="text"/>
-                        <input required onChange={inputHandler} name='password' value={registerHook.inputValues.password} placeholder='Password' type="password"/>
-                        <input required onChange={inputHandler} name='confirmpass' value={registerHook.inputValues.confirmpass}  placeholder='Confirm password' type="password"/>
+                        <input autoComplete={'none'} required onChange={inputHandler} name='email' value={registerHook.inputValues.email} placeholder='Email' type="email"/>
+                        <input autoComplete={'none'} required onChange={inputHandler} name='username' value={registerHook.inputValues.username} placeholder='Username' type="text"/>
+                        <input autoComplete={'none'} required onChange={inputHandler} name='profession' value={registerHook.inputValues.profession}  placeholder='Profession e.g. Software Engineer' type="text"/>
+                        <input autoComplete={'none'} required onChange={inputHandler} name='password' value={registerHook.inputValues.password} placeholder='Password' type="password"/>
+                        <input autoComplete={'none'} required onChange={inputHandler} name='confirmpass' value={registerHook.inputValues.confirmpass}  placeholder='Confirm password' type="password"/>
                         {registerHook.error.length === 0 ? '' :  <p className='error'>{registerHook.error}</p>}
                         <div className="links">
                             <p>Forgot password?</p>
@@ -72,7 +72,7 @@ const RegisterBox = () => {
                         <button className={checkRegisterForm ? 'disabledButton' : ''} disabled={checkRegisterForm}>{Loading ? <LoadingSpinner height={35} width={35}/> : 'Confirm'}</button>
                     </form> : registerHook.step === 1 ?
                         <form onSubmit={registerHook.confirmSignUp}>
-                            <input value={registerHook.inputValues.code} name={'code'} onChange={inputHandler} placeholder='Verification code' type="text"/>
+                            <input autoComplete={'off'} value={registerHook.inputValues.code} name={'code'} onChange={inputHandler} placeholder='Verification code' type="text"/>
                             <button className={codeLength === 0 ? 'disabledButton' : ''} disabled={registerHook.inputValues.code.length === 0}>{Loading ? <LoadingSpinner height={35} width={35}/> : 'Confirm'}</button>
                             {registerHook.error.length === 0 ? '' : <p className='error'>{registerHook.step}</p>}
                         </form>

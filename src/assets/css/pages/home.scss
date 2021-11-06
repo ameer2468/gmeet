@@ -2,10 +2,10 @@
   width: 100vw;
   height: auto;
   min-height: 100vh;
-  background: transparent linear-gradient(139deg, $activeBorder 0%, #2A2D47 40%) 0% 0% no-repeat padding-box;
+  background: rgb(39,89,87);
+  background: linear-gradient(162deg, rgba(39,89,87,1) -40%, rgba(18,20,36,1) 78%);
   .homeContainer {
-    padding-top: 20rem;
-    padding-bottom: 5rem;
+    padding: 15rem 0 0 0;
     width: 100%;
     max-width: 150rem;
     margin: 0 auto;
@@ -16,6 +16,9 @@
         @include mediumTitle;
         margin-bottom: 2rem;
       }
+      input {
+        background: rgba($input, 0.3);
+      }
     }
     .projectsContainer {
       display: grid;
@@ -25,8 +28,7 @@
       margin-top: 5rem;
     }
     .projectCard {
-      background: $cardbg;
-      flex: 0 0 24%;
+      background: rgba($cardbg, 0.2);
       border-radius: 0.5rem;
       transition: all 0.3s;
       padding: 3rem;
@@ -58,10 +60,8 @@
       }
       .buttons {
         display: flex;
-        justify-content: center;
-        button {
-          margin: 0 1rem;
-        }
+        justify-content: space-between;
+
       }
       h2 {
         color: white;
