@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type {RootState} from "../store";
-import {project} from "./types";
+import {project, projectRequest} from "./types";
 import {getProjects} from "./services";
 
 
@@ -8,15 +8,19 @@ import {getProjects} from "./services";
 interface ProjectState {
     projects: project[],
     userProjects: project[],
+    projectRequests: projectRequest[]
     loading: boolean;
     createLoading: boolean;
     error: boolean;
     selectedProject: project;
     deleteLoading: boolean;
+    joinLoading: boolean;
     projectForm: {
         name: string;
         description: string;
         searchterm: string;
+        speciality: string;
+        why: string;
     }
 }
 
@@ -24,11 +28,13 @@ interface ProjectState {
 const initialState: ProjectState = {
     projects: [],
     userProjects: [],
+    projectRequests: [],
     loading: false,
     createLoading: false,
+    joinLoading: false,
     deleteLoading: false,
     selectedProject: {
-        id: '',
+        project_id: '',
         name: '',
         owner: '',
         description: ''
@@ -37,7 +43,9 @@ const initialState: ProjectState = {
     projectForm: {
         name: '',
         description: '',
-        searchterm: ''
+        searchterm: '',
+        speciality: '',
+        why: ''
     }
 }
 
@@ -47,6 +55,9 @@ export const projectSlice = createSlice({
     reducers: {
         projectValues: (state, action: PayloadAction<any>) => {
             state.projectForm = action.payload;
+        },
+        projectRequests: (state, action: PayloadAction<projectRequest[]>) => {
+            state.projectRequests = action.payload;
         },
         userProjects: (state, action: PayloadAction<project[]>) => {
           state.userProjects = action.payload;
@@ -58,13 +69,16 @@ export const projectSlice = createSlice({
             state.projects.push(action.payload)
         },
         removeProject: (state, action: PayloadAction<string>) => {
-            state.userProjects = state.userProjects.filter((value) => value.id !== action.payload)
+            state.userProjects = state.userProjects.filter((value) => value.project_id !== action.payload)
         },
         projectLoading: (state, action: PayloadAction<boolean>) => {
             state.loading = action.payload;
         },
         deleteLoading: (state, action: PayloadAction<boolean>) => {
             state.deleteLoading = action.payload;
+        },
+        joinLoading: (state, action: PayloadAction<boolean>) => {
+            state.joinLoading = action.payload;
         },
         createProjectLoading: (state, action: PayloadAction<boolean>) => {
             state.createLoading = action.payload;
@@ -91,10 +105,12 @@ export const {
     addProject,
     projectValues,
     removeProject,
+    projectRequests,
     userProjects,
     selectedProject,
     projectLoading,
     deleteLoading,
+    joinLoading,
     createProjectLoading,
 }
     = projectSlice.actions

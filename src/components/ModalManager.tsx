@@ -5,6 +5,7 @@ import Join from "../modals/join";
 import AddProject from "../modals/addProject";
 import Confirm from "../modals/confirm";
 import {useProject} from "../hooks/useProject";
+import Requests from "../modals/requests";
 
 const ModalManager = () => {
 
@@ -14,6 +15,8 @@ const ModalManager = () => {
     switch(modals.activeModal) {
         case 'JOIN':
             return <Join/>
+        case 'REQUESTS':
+            return <Requests/>
         case 'ADD_PROJECT':
             return <AddProject/>
         case 'DELETE_PROJECT':

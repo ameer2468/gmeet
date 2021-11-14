@@ -12,7 +12,6 @@ const Projects = () => {
     const {loading} = projectStore;
     const {userProjects} = projectStore;
 
-
     return (
         <Card height={'auto'} customClass='listings' flex={'0 0 100%'}>
             <div className="container">
@@ -54,7 +53,7 @@ const Projects = () => {
                             >
                                 <div className="projectsContainer">
                                     {userProjects.map((value) => {
-                                        return <Project remove={true} key={value.id} data={value}/>
+                                        return <Project noRequest={true} remove={true} key={value.project_id} data={value}/>
                                     })}
                                 </div>
                             </Scrollbars>

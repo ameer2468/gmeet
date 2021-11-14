@@ -1,18 +1,34 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Search from "./components/search";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {ActiveModal} from "../../redux/modals/modalSlice";
-import {projectLoading, projectReducer} from "../../redux/projects/projectSlice";
+import {projectReducer} from "../../redux/projects/projectSlice";
 import LoadingSpinner from "../../components/global/LoadingSpinner";
 import Project from "./components/project";
+import {useProject} from "../../hooks/useProject";
+import {useDebounce} from "use-debounce";
+import {getProjects} from "../../redux/projects/services";
 
 const Home = () => {
 
     const dispatch = useAppDispatch();
     const projectStore = useAppSelector(projectReducer)
     const {projects} = projectStore;
+    const projectHook = useProject();
+    const {projectForm} = projectHook.projects;
+    const [value] = useDebounce(projectForm.searchterm, 1000);
 
-    console.log(projectStore)
+    /*Requests to Load App*/
+
+    useEffect(() => {
+        const getProjectsData = async () => {
+           if (value.length > 0 || value.length === 0) {
+               await dispatch(getProjects(value))
+            }
+        }
+            getProjectsData();
+    }, [value, dispatch])
+
 
     return (
         <div className='HomeContent'>
@@ -33,7 +49,7 @@ const Home = () => {
                                 <LoadingSpinner height={60} width={60}/>
                             </div> :
                            projects.map((value) => {
-                                return <Project remove={false} key={value.id} data={value}/>
+                                return <Project remove={false} key={value.project_id} data={value}/>
                             })
                         }
                     </div>

@@ -3,17 +3,24 @@ import {
     projectValues,
     projectReducer,
     createProjectLoading,
+    projectRequests,
     addProject,
-    selectedProject, deleteLoading, userProjects, removeProject
+    selectedProject, deleteLoading, userProjects, removeProject, joinLoading
 } from "../redux/projects/projectSlice";
-import {createProject, deleteProject, getProject, getProjects} from "../redux/projects/services";
+import {
+    createProject,
+    deleteProject,
+    getProject,
+    getProjects,
+    getRequests,
+    joinProjectRequest
+} from "../redux/projects/services";
 import {useUser} from "./useUser";
 import {ActiveModal} from "../redux/modals/modalSlice";
 import {project} from "../redux/projects/types";
 import {v4 as uuidv4} from "uuid";
 import { toast } from 'react-toastify';
 import {projectLoading} from "../redux/projects/projectSlice";
-import {FormEvent} from "react";
 
 
 export const useProject = () => {
@@ -31,9 +38,10 @@ export const useProject = () => {
     const userHook = useUser();
     const {userInfo} = userHook;
 
+
     function onChange(key: string, value: string) {
-        return dispatch(projectValues(
-            {...projects.projectForm, [key]: value}))
+            return dispatch(projectValues(
+                {...projects.projectForm, [key]: value}))
     }
 
     function closeModal() {
@@ -47,9 +55,16 @@ export const useProject = () => {
         dispatch(selectedProject(projectInfo))
     }
 
-    async function getUserProjects(user: string) {
+    function toggleJoin(projectInfo: project) {
+        console.log(projectInfo)
+        dispatch(ActiveModal('JOIN'));
+        dispatch(projectValues({...projectForm, why: '', speciality: ''}))
+        dispatch(selectedProject(projectInfo))
+    }
+
+  function getUserProjects(user: string) {
         dispatch(projectLoading(true));
-        return await dispatch(getProject(user)).then((res: any) => {
+        return dispatch(getProject(user)).then((res: any) => {
             const {data} = res.payload;
             dispatch(userProjects(data.rows))
             dispatch(projectLoading(false));
@@ -57,41 +72,73 @@ export const useProject = () => {
     }
 
     async function getSearchProjects(search: string) {
-            dispatch(getProjects(search));
+            await dispatch(getProjects(search))
+    }
+
+    function getProjectRequests() {
+        return dispatch(getRequests(projects.selectedProject.project_id)).then((res) => {
+            const {data} = res.payload;
+            dispatch(projectRequests(data))
+        })
+    }
+
+    function toggleRequests(modal: string) {
+        dispatch(ActiveModal(modal))
+        getProjectRequests();
     }
 
 
-    async function deleteProjectHandler() {
+    function deleteProjectHandler() {
         dispatch(deleteLoading(true))
-         return await dispatch(deleteProject(projects.selectedProject.id))
+         return dispatch(deleteProject(projects.selectedProject.project_id))
              .then(() => {
-                 dispatch(removeProject(projects.selectedProject.id))
+                 dispatch(removeProject(projects.selectedProject.project_id))
                  dispatch(deleteLoading(false))
                  dispatch(ActiveModal(''))
                  dispatch(getProjects(''))
              })
-             .catch((err) => {
+             .catch(() => {
                  dispatch(deleteLoading(false))
              })
     }
 
 
-    async function createProjectHandler() {
+ function joinProject() {
+        if (projectForm.speciality.length === 0 || projectForm.why.length === 0) {
+            return notify('Speciality and a reason to join are required')
+        }
+        dispatch(joinLoading(true))
+        const data = {
+            project_id: projects.selectedProject.project_id,
+            user: userInfo.username,
+            why: projectForm.why,
+            speciality: projectForm.speciality
+        }
+        return dispatch(joinProjectRequest(data)).then(() => {
+            dispatch(joinLoading(false))
+            dispatch(ActiveModal(''))
+        })
+            .catch(() => {
+                dispatch(joinLoading(false));
+            })
+    }
 
+
+    function createProjectHandler() {
         if (projectForm.name.length === 0 || projectForm.name.length === 0) {
             return notify('A project name and description is required');
         }
       dispatch(createProjectLoading(true))
         const data = {
-          id: uuidv4(),
+          project_id: uuidv4(),
           name: projectForm.name,
           description: projectForm.description,
           owner: userInfo.username
         }
-      return await dispatch(createProject(data)).then((res: any) => {
+      return dispatch(createProject(data)).then((res: any) => {
           const {data} = res.payload;
           const newProj = {
-              id: data.id,
+              project_id: data.project_id,
               name: data.name,
               description: data.description,
               owner: data.owner
@@ -99,16 +146,22 @@ export const useProject = () => {
           dispatch(addProject(newProj))
           dispatch(createProjectLoading(false))
           dispatch(ActiveModal(''))
-          dispatch(projectValues({name: '', description: ''}))
+          dispatch(projectValues({name: '', description: '', searchterm: ''}))
       })
     }
 
     return {
         onChange,
+        notify,
         projects,
+        projectForm,
+        toggleJoin,
+        joinProject,
         closeModal,
         toggleDelete,
+        toggleRequests,
         getUserProjects,
+        getProjectRequests,
         deleteProjectHandler,
         getSearchProjects,
         createProjectHandler,

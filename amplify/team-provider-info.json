@@ -10,11 +10,6 @@
       "StackName": "amplify-gmeet-dev-122205",
       "StackId": "arn:aws:cloudformation:us-east-1:782301667637:stack/amplify-gmeet-dev-122205/31f1c710-3af5-11ec-9d6b-0e272584f303",
       "AmplifyAppId": "d17cm8t2izfe7g"
-    },
-    "categories": {
-      "auth": {
-        "gmeetd35da65a": {}
-      }
     }
   }
 }

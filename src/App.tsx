@@ -13,26 +13,30 @@ import Profile from "./pages/profile/profile";
 import Authnav from "./components/authnav";
 import { ToastContainer } from 'react-toastify';
 import {useProject} from "./hooks/useProject";
-import { useDebounce } from 'use-debounce';
+import {projectValues} from "./redux/projects/projectSlice";
+
 
 Amplify.configure(awsconfig)
 
 const App = () => {
 
-    const projectHook = useProject();
-    const {projectForm} = projectHook.projects;
-    const [value] = useDebounce(projectForm.searchterm, 1000);
-
-
-    /*Requests to Load App*/
-
-    useEffect(() => {
-       projectHook.getSearchProjects(value);
-    }, [value])
-
     const userRedux = useAppSelector(userReducer)
     const {username} = userRedux.userInfo;
     const location = useLocation();
+    const dispatch = useAppDispatch();
+    const projectHook = useProject();
+    const {projectForm} = projectHook.projects;
+    const {searchterm} = projectForm;
+
+    /*Reset search */
+
+    useEffect(() => {
+        if (!location.pathname.startsWith('/home')) {
+            if (searchterm.length > 0) {
+                dispatch(projectValues({description: '', name: '', searchterm: ''}))
+            }
+        }
+    }, [dispatch, searchterm, location.pathname])
 
     const GlobalRoutes = [
         {path: '/', component: Landing},

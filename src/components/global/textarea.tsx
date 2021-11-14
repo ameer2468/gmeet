@@ -18,10 +18,13 @@ const TextArea = (props: props) => {
     return (
         <textarea
             placeholder={props.placeholder}
+            maxLength={100}
             className='textarea'
             value={props.value}
             name={props.name}
-            onChange={(e: ChangeEvent<HTMLTextAreaElement>) => onChange(props.name, e.target.value)}
+            onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
+                onChange(props.name, e.target.value)
+            }}
             style={{maxWidth: props.maxWidth, height: props.height}}
             />
     );

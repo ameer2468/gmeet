@@ -1,19 +1,20 @@
 import React from 'react';
-import {useAppDispatch} from "../../../redux/hooks";
-import {ActiveModal} from "../../../redux/modals/modalSlice";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import {useProject} from "../../../hooks/useProject";
+import {selectedProject} from "../../../redux/projects/projectSlice";
+import {useAppDispatch} from "../../../redux/hooks";
 
 interface props {
     data: any;
     remove?: boolean;
+    noRequest?: boolean;
 }
 
-const Project = ({data, remove}: props) => {
+const Project = ({data, remove, noRequest}: props) => {
 
-    const dispatch = useAppDispatch();
     const projectHook = useProject();
+    const dispatch = useAppDispatch();
 
     return (
         <div className='projectCard'>
@@ -31,9 +32,20 @@ const Project = ({data, remove}: props) => {
             <p>{data.description}</p>
             <div className="buttons">
                 <button className='btn btn--gray'>Project Details</button>
-                <button onClick={() => {
-                    dispatch(ActiveModal('JOIN'))
-                }} className='btn btn--transparent'>Request To Join</button>
+                {noRequest ?
+                    <button
+                        onClick={() => {
+                            projectHook.toggleRequests('REQUESTS')
+                            dispatch(selectedProject(data))
+                        }
+                        }
+                        className='btn btn--transparent'>
+                        Join requests
+                    </button>
+                    :
+                    <button onClick={() => {
+                    projectHook.toggleJoin(data)
+                }} className='btn btn--transparent'>Request To Join</button>}
             </div>
         </div>
     );

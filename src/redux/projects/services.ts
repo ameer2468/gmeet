@@ -1,6 +1,7 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
 import {project} from "./types";
+import {v4 as uuidv4} from "uuid";
 
 const URL = process.env.REACT_APP_API_URL;
 
@@ -10,7 +11,22 @@ export const deleteProject = createAsyncThunk('projects/deleteproject', async (i
             'x-api-key': process.env.REACT_APP_API_KEY,
         },
         data: {
-            id: id
+            project_id: id
+        },
+    })
+})
+
+export const joinProjectRequest =
+    createAsyncThunk('project/joinproject', async (data: any) => {
+    return await axios.post(`${URL}/project`, {
+        project_id: data.project_id,
+        user: data.user,
+        why: data.why,
+        speciality: data.speciality,
+        id: uuidv4()
+    },{
+        headers: {
+            'x-api-key': process.env.REACT_APP_API_KEY,
         },
     })
 })
@@ -28,6 +44,18 @@ export const getProjects = createAsyncThunk('project/data', async (searchTerm?: 
 
 })
 
+export const getRequests = createAsyncThunk('requests', async (id: string) => {
+    return await axios.get(`${process.env.REACT_APP_API_URL}/requests?project_id=${id}`, {
+        headers: {
+            'x-api-key': process.env.REACT_APP_API_KEY,
+            'Content-Type': 'application/json'
+        }
+    })
+        .then((res) => {
+            return res.data.rows;
+        });
+
+})
 
 export const getProject = createAsyncThunk('projects/getproject', async (user: string) => {
     return await axios.get(`${URL}/project/?user=${user}`, {
@@ -39,10 +67,10 @@ export const getProject = createAsyncThunk('projects/getproject', async (user: s
 
 export const createProject = createAsyncThunk('projects/createproject', async (data: project) => {
     return await axios.post(`${URL}/projects`, {
-        id: data.id,
+        project_id: data.project_id,
         name: data.name,
         description: data.description,
-        owner: data.owner
+        owner: data.owner,
     },{
         headers: {
             'x-api-key': process.env.REACT_APP_API_KEY,

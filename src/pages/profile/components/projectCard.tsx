@@ -1,14 +1,12 @@
 import React from 'react';
-import {ActiveModal} from "../../../redux/modals/modalSlice";
-import {useAppDispatch} from "../../../redux/hooks";
 
 interface props {
     data: any;
+    noRequest?: boolean;
 }
 
 const ProjectCard = ({data}: props) => {
-    
-    const dispatch = useAppDispatch();
+
 
     return (
         <div className='projectCard'>
@@ -25,9 +23,6 @@ const ProjectCard = ({data}: props) => {
             <p>{data.description}</p>
             <div className="buttons">
                 <button className='btn btn--gray'>Project Details</button>
-                <button onClick={() => {
-                    dispatch(ActiveModal('JOIN'))
-                }} className='btn btn--transparent'>Request To Join</button>
             </div>
         </div>
     );

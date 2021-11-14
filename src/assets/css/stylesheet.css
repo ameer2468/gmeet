@@ -184,7 +184,7 @@ body {
 
 .profileContent {
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   background: #275957;
   background: linear-gradient(162deg, #275957 -40%, #121424 78%);
 }
@@ -389,6 +389,7 @@ body {
 .profileContent .profileContainer .user h2 {
   font-weight: normal;
   opacity: 0.7;
+  margin-top: 0.7rem;
   font-size: 1.7rem;
 }
 .profileContent .profileContainer .user h1, .profileContent .profileContainer .user h2 {
@@ -404,6 +405,12 @@ body {
   display: flex;
   align-items: center;
   transition: all 0.3s;
+}
+.modalWrap .limit {
+  position: absolute;
+  bottom: 26%;
+  opacity: 0.5;
+  left: 7%;
 }
 .modalWrap .modal {
   width: 100%;
