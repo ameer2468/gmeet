@@ -1,16 +1,39 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Card from "./card";
-import {useAppSelector} from "../../../redux/hooks";
-import {projectReducer} from "../../../redux/projects/projectSlice";
+import {useAppDispatch, useAppSelector} from "../../../redux/hooks";
+import {projectLoading, projectReducer, projectRequests, requestsLoading} from "../../../redux/projects/projectSlice";
 import LoadingSpinner from "../../../components/global/LoadingSpinner";
 import Project from "../../home/components/project";
 import { Scrollbars } from 'react-custom-scrollbars';
+import {userReducer} from "../../../redux/user/userSlice";
+import {getProject, getRequests} from "../../../redux/projects/services";
 
 const Projects = () => {
 
     const projectStore = useAppSelector(projectReducer)
     const {loading} = projectStore;
+    const userInfo = useAppSelector(userReducer)
     const {userProjects} = projectStore;
+    const {username} = userInfo.userInfo;
+    const dispatch = useAppDispatch();
+
+
+    useEffect(() => {
+        function getData() {
+            if (loading) {
+                dispatch(getProject(username)).then(() => {
+                    dispatch(projectLoading(false))
+                })
+                dispatch(requestsLoading(true))
+                dispatch(getRequests()).then((res) => {
+                    const {payload} = res;
+                    dispatch(requestsLoading(false))
+                    dispatch(projectRequests(payload))
+                })
+            }
+        }
+        getData();
+    }, [dispatch, loading, username])
 
     return (
         <Card height={'auto'} customClass='listings' flex={'0 0 100%'}>

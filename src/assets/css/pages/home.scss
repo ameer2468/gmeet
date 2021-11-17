@@ -1,5 +1,6 @@
 .HomeContent {
   width: 100vw;
+  padding: 0 2rem;
   height: auto;
   min-height: 100vh;
   background: rgb(39,89,87);
@@ -61,7 +62,6 @@
       .buttons {
         display: flex;
         justify-content: space-between;
-
       }
       h2 {
         color: white;

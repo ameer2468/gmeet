@@ -8,6 +8,8 @@ export interface project {
     name: string;
     description: string;
     owner: string;
+    id?: string;
+    requests?: projectRequest[]
 }
 
 export interface selectedProject {
@@ -15,6 +17,7 @@ export interface selectedProject {
     name: string;
     description: string;
     owner: string;
+    requests?: projectRequest[]
 }
 
 export interface projectRequest {

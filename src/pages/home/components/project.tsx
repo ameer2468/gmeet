@@ -4,6 +4,7 @@ import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import {useProject} from "../../../hooks/useProject";
 import {selectedProject} from "../../../redux/projects/projectSlice";
 import {useAppDispatch} from "../../../redux/hooks";
+import {useUser} from "../../../hooks/useUser";
 
 interface props {
     data: any;
@@ -13,8 +14,10 @@ interface props {
 
 const Project = ({data, remove, noRequest}: props) => {
 
+
     const projectHook = useProject();
     const dispatch = useAppDispatch();
+    const userHook = useUser();
 
     return (
         <div className='projectCard'>
@@ -43,9 +46,12 @@ const Project = ({data, remove, noRequest}: props) => {
                         Join requests
                     </button>
                     :
-                    <button onClick={() => {
-                    projectHook.toggleJoin(data)
-                }} className='btn btn--transparent'>Request To Join</button>}
+                    userHook.user.userInfo.username === data.name ?
+                        <button onClick={() => {
+                            projectHook.toggleJoin(data)
+                        }} className='btn btn--transparent'>Request To Join</button>
+                        : ''
+                }
             </div>
         </div>
     );

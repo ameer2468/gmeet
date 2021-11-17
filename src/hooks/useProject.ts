@@ -3,16 +3,14 @@ import {
     projectValues,
     projectReducer,
     createProjectLoading,
-    projectRequests,
     addProject,
-    selectedProject, deleteLoading, userProjects, removeProject, joinLoading
+    selectedProject, deleteLoading, userProjects, removeProject, joinLoading, projectArr
 } from "../redux/projects/projectSlice";
 import {
     createProject,
     deleteProject,
     getProject,
     getProjects,
-    getRequests,
     joinProjectRequest
 } from "../redux/projects/services";
 import {useUser} from "./useUser";
@@ -56,7 +54,6 @@ export const useProject = () => {
     }
 
     function toggleJoin(projectInfo: project) {
-        console.log(projectInfo)
         dispatch(ActiveModal('JOIN'));
         dispatch(projectValues({...projectForm, why: '', speciality: ''}))
         dispatch(selectedProject(projectInfo))
@@ -75,16 +72,8 @@ export const useProject = () => {
             await dispatch(getProjects(search))
     }
 
-    function getProjectRequests() {
-        return dispatch(getRequests(projects.selectedProject.project_id)).then((res) => {
-            const {data} = res.payload;
-            dispatch(projectRequests(data))
-        })
-    }
-
     function toggleRequests(modal: string) {
         dispatch(ActiveModal(modal))
-        getProjectRequests();
     }
 
 
@@ -117,6 +106,10 @@ export const useProject = () => {
         return dispatch(joinProjectRequest(data)).then(() => {
             dispatch(joinLoading(false))
             dispatch(ActiveModal(''))
+            const updatedArr = projects.projects.map((value) => {
+                return value.project_id === data.project_id ? {...value, requests: [...value.requests as [], data]} : value
+            })
+            dispatch(projectArr(updatedArr))
         })
             .catch(() => {
                 dispatch(joinLoading(false));
@@ -141,7 +134,8 @@ export const useProject = () => {
               project_id: data.project_id,
               name: data.name,
               description: data.description,
-              owner: data.owner
+              owner: data.owner,
+              requests: []
           }
           dispatch(addProject(newProj))
           dispatch(createProjectLoading(false))
@@ -161,7 +155,6 @@ export const useProject = () => {
         toggleDelete,
         toggleRequests,
         getUserProjects,
-        getProjectRequests,
         deleteProjectHandler,
         getSearchProjects,
         createProjectHandler,

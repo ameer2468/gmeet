@@ -44,8 +44,8 @@ export const getProjects = createAsyncThunk('project/data', async (searchTerm?: 
 
 })
 
-export const getRequests = createAsyncThunk('requests', async (id: string) => {
-    return await axios.get(`${process.env.REACT_APP_API_URL}/requests?project_id=${id}`, {
+export const getRequests = createAsyncThunk('requests', async () => {
+    return await axios.get(`${process.env.REACT_APP_API_URL}/requests`, {
         headers: {
             'x-api-key': process.env.REACT_APP_API_KEY,
             'Content-Type': 'application/json'

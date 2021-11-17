@@ -11,6 +11,7 @@ interface ProjectState {
     projectRequests: projectRequest[]
     loading: boolean;
     createLoading: boolean;
+    requestsLoading: boolean;
     error: boolean;
     selectedProject: project;
     deleteLoading: boolean;
@@ -31,6 +32,7 @@ const initialState: ProjectState = {
     projectRequests: [],
     loading: false,
     createLoading: false,
+    requestsLoading: false,
     joinLoading: false,
     deleteLoading: false,
     selectedProject: {
@@ -56,6 +58,9 @@ export const projectSlice = createSlice({
         projectValues: (state, action: PayloadAction<any>) => {
             state.projectForm = action.payload;
         },
+        projectArr: (state, action: PayloadAction<any[]>) => {
+          state.projects = action.payload;
+        },
         projectRequests: (state, action: PayloadAction<projectRequest[]>) => {
             state.projectRequests = action.payload;
         },
@@ -73,6 +78,9 @@ export const projectSlice = createSlice({
         },
         projectLoading: (state, action: PayloadAction<boolean>) => {
             state.loading = action.payload;
+        },
+        requestsLoading: (state, action: PayloadAction<boolean>) => {
+            state.requestsLoading = action.payload;
         },
         deleteLoading: (state, action: PayloadAction<boolean>) => {
             state.deleteLoading = action.payload;
@@ -107,8 +115,10 @@ export const {
     removeProject,
     projectRequests,
     userProjects,
+    projectArr,
     selectedProject,
     projectLoading,
+    requestsLoading,
     deleteLoading,
     joinLoading,
     createProjectLoading,

@@ -21,7 +21,7 @@ const Join = () => {
                buttonText={'Submit'}>
             <form className='generalForm'>
                 <Input useHook={projectHook} name={'speciality'} maxWidth={'100%'} placeholder={'What\'s your Speciality?'}/>
-                <TextArea useHook={projectHook} name={'why'} maxWidth={'100%'} placeholder={'Why do you want to join?'} height={'20rem'}/>
+                <TextArea useHook={projectHook} name={'why'} maxWidth={'100%'} placeholder={'Why do you want to join?'} height={'12rem'}/>
                 <p className="limit">{`${100 - textLength} characters remaining`}</p>
             </form>
         </Modal>
