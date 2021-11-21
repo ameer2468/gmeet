@@ -1,3 +1,9 @@
+.justifyCenter {
+  display: flex;
+  justify-items: center!important;
+}
+
+
 .btn {
   @include button;
   &--pink {

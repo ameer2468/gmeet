@@ -31,6 +31,18 @@ export const joinProjectRequest =
     })
 })
 
+export const getProjectDetails = createAsyncThunk('projectDetails/data', async() => {
+    return await axios.get(`${process.env.REACT_APP_API_URL}/projectdetails`, {
+        headers: {
+            'x-api-key': process.env.REACT_APP_API_KEY,
+            'Content-Type': 'application/json'
+        }
+    })
+        .then((res) => {
+        return res.data.rows
+    })
+})
+
 export const getProjects = createAsyncThunk('project/data', async (searchTerm?: string) => {
             return await axios.get(`${process.env.REACT_APP_API_URL}/projects?searchterm=${searchTerm}`, {
                 headers: {

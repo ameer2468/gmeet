@@ -116,6 +116,10 @@ export const useProject = () => {
             })
     }
 
+    function projectDetails() {
+
+    }
+
 
     function createProjectHandler() {
         if (projectForm.name.length === 0 || projectForm.name.length === 0) {

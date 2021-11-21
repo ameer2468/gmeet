@@ -10,14 +10,25 @@ interface props {
     data: any;
     remove?: boolean;
     noRequest?: boolean;
+    profile?: boolean;
 }
 
-const Project = ({data, remove, noRequest}: props) => {
+const Project = ({data, remove, noRequest, profile}: props) => {
 
 
     const projectHook = useProject();
     const dispatch = useAppDispatch();
     const userHook = useUser();
+
+    const buttonsWrap = {
+        justifyContent: `${userHook.user.userInfo.username === data.name ? 'spaceBetween' : 'center'}`,
+        display: 'flex'
+    }
+    const profileButtonsWrap = {
+        justifyContent: 'space-between',
+        display: 'flex'
+    }
+
 
     return (
         <div className='projectCard'>
@@ -33,7 +44,8 @@ const Project = ({data, remove, noRequest}: props) => {
             }
             <h2>{data.name}</h2>
             <p>{data.description}</p>
-            <div className="buttons">
+
+            <div style={profile ? profileButtonsWrap : buttonsWrap}>
                 <button className='btn btn--gray'>Project Details</button>
                 {noRequest ?
                     <button

@@ -76,7 +76,7 @@ const Projects = () => {
                             >
                                 <div className="projectsContainer">
                                     {userProjects.map((value) => {
-                                        return <Project noRequest={true} remove={true} key={value.project_id} data={value}/>
+                                        return <Project profile={true} noRequest={true} remove={true} key={value.project_id} data={value}/>
                                     })}
                                 </div>
                             </Scrollbars>
