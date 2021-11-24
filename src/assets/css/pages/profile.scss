@@ -55,6 +55,9 @@
         transition: all 0.3s;
         padding: 3rem;
         position: relative;
+        a {
+          width: 14.5rem;
+        }
         .delete {
           position: absolute;
           right: -1.5rem;

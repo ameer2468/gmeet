@@ -61,3 +61,81 @@
     }
   }
 }
+
+/*Requests Modal*/
+
+.modal-requests {
+  max-width: 80rem!important;
+  .no-requests {
+    text-align: center;
+    font-size: 1.6rem;
+    width: 100%;
+  }
+  .role-icon {
+    margin-right: 1rem;
+  }
+  .buttons {
+    margin: 4rem 0 1.5rem 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+      .btn {
+        height: 3rem;
+        width: 8rem;
+        color: white;
+        font-weight: bold;
+        &--purple {
+          background: #368fff;
+          color: $cardbg;
+          &:hover {
+           opacity: 0.7;
+          }
+        }
+        &--red {
+          background: $pink;
+          color: $cardbg;
+          &:hover {
+          opacity: 0.7;
+          }
+        }
+      }
+  }
+  h2 {
+    margin-top: 1rem;
+  }
+  p {
+    font-size: 1.5rem;
+  }
+  .speciality {
+    font-size: 1.4rem;
+    background: $purple;
+    width: 100%;
+    max-width: 17rem;
+    text-overflow: ellipsis;
+    border: 0.3rem solid $cardbg;
+    overflow: hidden;
+    white-space: nowrap;
+    font-weight: bold;
+    color: white;
+    position: absolute;
+    top: -2rem;
+    left: 0;
+    right: 0;
+    padding: 0.5rem 2rem;
+    border-radius: 1rem;
+    margin: 0.5rem auto 1.5rem auto;
+  }
+ .generalForm {
+   display: flex;
+   flex-wrap: wrap;
+   flex-direction: row;
+   justify-content: space-between;
+ }
+  .request {
+    flex: 0 0 47%;
+    background: $cardbg;
+    padding: 2rem 1.5rem;
+    position: relative;
+    border-radius: 1rem;
+  }
+}

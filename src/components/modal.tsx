@@ -14,9 +14,10 @@ interface props {
     children: React.ReactNode;
     submit: () => void;
     loading?: boolean;
+    className?: string;
 }
 
-const Modal = ({children,buttonText, title, submit, loading}: props) => {
+const Modal = ({children,buttonText, title, submit, loading, className}: props) => {
 
     const modals = useAppSelector(modalReducer)
     const {activeModal} = modals;
@@ -28,7 +29,7 @@ const Modal = ({children,buttonText, title, submit, loading}: props) => {
 
         return (
             <div className={`modalWrap ${activeModal.length > 1 ? 'modalShow' : 'modalHide'}`}>
-                <motion.div variants={regularVariants} initial={"hidden"} animate="active" className={`modal`}>
+                <motion.div variants={regularVariants} initial={"hidden"} animate="active" className={`modal ${className}`}>
                     <div onClick={() => {
                         closeHandler()
                     }} className="close">

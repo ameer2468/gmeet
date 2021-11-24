@@ -7,6 +7,7 @@ import {
     selectedProject, deleteLoading, userProjects, removeProject, joinLoading, projectArr
 } from "../redux/projects/projectSlice";
 import {
+    acceptRequests,
     createProject,
     deleteProject,
     getProject,
@@ -19,6 +20,7 @@ import {project} from "../redux/projects/types";
 import {v4 as uuidv4} from "uuid";
 import { toast } from 'react-toastify';
 import {projectLoading} from "../redux/projects/projectSlice";
+import {acceptRequest, IcreateProject, requests} from "../redux/types";
 
 
 export const useProject = () => {
@@ -74,6 +76,17 @@ export const useProject = () => {
 
     function toggleRequests(modal: string) {
         dispatch(ActiveModal(modal))
+    }
+
+    function acceptHandler(data: acceptRequest) {
+        const membersArr = projects.projects.filter((value) => {
+            return value.project_id === data.project_id;
+        })
+        const addMember = [...membersArr, data.members].toString();
+        return dispatch(acceptRequests(data = {
+            project_id: projects.selectedProject.project_id,
+            members:addMember
+        }))
     }
 
 
@@ -132,8 +145,8 @@ export const useProject = () => {
           description: projectForm.description,
           owner: userInfo.username
         }
-      return dispatch(createProject(data)).then((res: any) => {
-          const {data} = res.payload;
+      return dispatch(createProject(data)).then((res) => {
+          const {data} = res.payload as IcreateProject;
           const newProj = {
               project_id: data.project_id,
               name: data.name,

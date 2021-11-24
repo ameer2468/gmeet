@@ -5,6 +5,7 @@ import {useProject} from "../../../hooks/useProject";
 import {selectedProject} from "../../../redux/projects/projectSlice";
 import {useAppDispatch} from "../../../redux/hooks";
 import {useUser} from "../../../hooks/useUser";
+import {Link} from "react-router-dom";
 
 interface props {
     data: any;
@@ -46,7 +47,9 @@ const Project = ({data, remove, noRequest, profile}: props) => {
             <p>{data.description}</p>
 
             <div style={profile ? profileButtonsWrap : buttonsWrap}>
-                <button className='btn btn--gray'>Project Details</button>
+                <Link to={`/project/${data.project_id}`}>
+                    <button className='btn btn--gray'>Project Details</button>
+                </Link>
                 {noRequest ?
                     <button
                         onClick={() => {

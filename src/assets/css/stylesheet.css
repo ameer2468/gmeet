@@ -142,6 +142,9 @@ body {
   transition: all 0.3s;
   padding: 3rem;
 }
+.HomeContent .homeContainer .projectCard a {
+  width: 14.5rem;
+}
 .HomeContent .homeContainer .projectCard .members {
   margin: 2rem auto 0 auto;
   text-align: center;
@@ -241,6 +244,9 @@ body {
   transition: all 0.3s;
   padding: 3rem;
   position: relative;
+}
+.profileContent .profileContainer .listings .projectCard a {
+  width: 14.5rem;
 }
 .profileContent .profileContainer .listings .projectCard .delete {
   position: absolute;
@@ -492,6 +498,83 @@ body {
   transition: all 0.3s;
   border: 1px solid #4ad58b;
   cursor: pointer;
+}
+
+/*Requests Modal*/
+.modal-requests {
+  max-width: 80rem !important;
+}
+.modal-requests .no-requests {
+  text-align: center;
+  font-size: 1.6rem;
+  width: 100%;
+}
+.modal-requests .role-icon {
+  margin-right: 1rem;
+}
+.modal-requests .buttons {
+  margin: 4rem 0 1.5rem 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+.modal-requests .buttons .btn {
+  height: 3rem;
+  width: 8rem;
+  color: white;
+  font-weight: bold;
+}
+.modal-requests .buttons .btn--purple {
+  background: #368fff;
+  color: #12131f;
+}
+.modal-requests .buttons .btn--purple:hover {
+  opacity: 0.7;
+}
+.modal-requests .buttons .btn--red {
+  background: #ff4080;
+  color: #12131f;
+}
+.modal-requests .buttons .btn--red:hover {
+  opacity: 0.7;
+}
+.modal-requests h2 {
+  margin-top: 1rem;
+}
+.modal-requests p {
+  font-size: 1.5rem;
+}
+.modal-requests .speciality {
+  font-size: 1.4rem;
+  background: #4a36ff;
+  width: 100%;
+  max-width: 17rem;
+  text-overflow: ellipsis;
+  border: 0.3rem solid #12131f;
+  overflow: hidden;
+  white-space: nowrap;
+  font-weight: bold;
+  color: white;
+  position: absolute;
+  top: -2rem;
+  left: 0;
+  right: 0;
+  padding: 0.5rem 2rem;
+  border-radius: 1rem;
+  margin: 0.5rem auto 1.5rem auto;
+}
+.modal-requests .generalForm {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.modal-requests .request {
+  flex: 0 0 47%;
+  background: #12131f;
+  padding: 2rem 1.5rem;
+  position: relative;
+  border-radius: 1rem;
 }
 
 .justifyCenter {

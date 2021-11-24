@@ -14,6 +14,7 @@ import Authnav from "./components/authnav";
 import { ToastContainer } from 'react-toastify';
 import {useProject} from "./hooks/useProject";
 import {projectValues} from "./redux/projects/projectSlice";
+import ProjectDetails from "./pages/projectdetails/projectDetails";
 
 
 Amplify.configure(awsconfig)
@@ -46,6 +47,7 @@ const App = () => {
     const AuthRoutes = [
         {path: '/', component: Landing},
         {path: '/home', component: Home},
+        {path: '/project/:id', component: ProjectDetails},
         {path: '/profile/:username', component: Profile}
     ]
     const RouteHandler = userRedux.LoggedIn ? AuthRoutes : GlobalRoutes;
@@ -53,10 +55,13 @@ const App = () => {
    const CheckRoute = RouteHandler.find((value) => {
        if (location.pathname.startsWith('/profile') && username.length > 0) {
            return location.pathname;
+       } if (location.pathname.startsWith('/project') && username.length > 0) {
+           return location.pathname;
        } else {
            return value.path === location.pathname;
        }
    })
+
    if (CheckRoute === undefined) {
       return <Redirect to={'/'}/>
    }

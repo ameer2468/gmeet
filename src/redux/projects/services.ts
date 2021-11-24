@@ -2,6 +2,7 @@ import {createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
 import {project} from "./types";
 import {v4 as uuidv4} from "uuid";
+import {acceptRequest} from "../types";
 
 const URL = process.env.REACT_APP_API_URL;
 
@@ -28,6 +29,18 @@ export const joinProjectRequest =
         headers: {
             'x-api-key': process.env.REACT_APP_API_KEY,
         },
+    })
+})
+
+export const acceptRequests = createAsyncThunk('requests/accept', async (data: acceptRequest) => {
+    return await axios.post(`${URL}/requests`, {
+        project_id: data.project_id,
+        members: data.member,
+    }, {
+        headers: {
+            'x-api-key': process.env.REACT_APP_API_KEY,
+            'Content-Type': 'application/json'
+        }
     })
 })
 
