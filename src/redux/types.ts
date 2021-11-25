@@ -1,4 +1,5 @@
 export interface acceptRequest {
+    id: string;
     project_id: string;
     members: string;
 }
@@ -17,6 +18,7 @@ export interface IcreateProject {
         name: string;
         description: string;
         owner: string;
+        members: string[]
         requests: requests[]
     }
 }

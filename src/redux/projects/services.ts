@@ -35,7 +35,8 @@ export const joinProjectRequest =
 export const acceptRequests = createAsyncThunk('requests/accept', async (data: acceptRequest) => {
     return await axios.post(`${URL}/requests`, {
         project_id: data.project_id,
-        members: data.member,
+        members: data.members,
+        id: data.id
     }, {
         headers: {
             'x-api-key': process.env.REACT_APP_API_KEY,
@@ -96,6 +97,7 @@ export const createProject = createAsyncThunk('projects/createproject', async (d
         name: data.name,
         description: data.description,
         owner: data.owner,
+        members: data.members.toString()
     },{
         headers: {
             'x-api-key': process.env.REACT_APP_API_KEY,

@@ -50,7 +50,7 @@ const Home = () => {
                                 <LoadingSpinner height={60} width={60}/>
                             </div> :
                            projects.map((value) => {
-                                return <Project remove={false} key={value.project_id} data={value}/>
+                                return <Project remove={false} profile={false} key={value.project_id} data={value}/>
                             })
                         }
                     </div>

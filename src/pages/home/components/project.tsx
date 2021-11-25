@@ -20,11 +20,13 @@ const Project = ({data, remove, noRequest, profile}: props) => {
     const projectHook = useProject();
     const dispatch = useAppDispatch();
     const userHook = useUser();
+    const {username} = userHook.user.userInfo;
 
     const buttonsWrap = {
-        justifyContent: `${userHook.user.userInfo.username === data.name ? 'spaceBetween' : 'center'}`,
+        justifyContent: `${username !== data.owner ? 'center' : 'center'}`,
         display: 'flex'
     }
+
     const profileButtonsWrap = {
         justifyContent: 'space-between',
         display: 'flex'
@@ -61,7 +63,7 @@ const Project = ({data, remove, noRequest, profile}: props) => {
                         Join requests
                     </button>
                     :
-                    userHook.user.userInfo.username === data.name ?
+                    userHook.user.userInfo.username !== data.owner ?
                         <button onClick={() => {
                             projectHook.toggleJoin(data)
                         }} className='btn btn--transparent'>Request To Join</button>

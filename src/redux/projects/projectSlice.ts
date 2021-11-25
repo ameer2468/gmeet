@@ -39,7 +39,8 @@ const initialState: ProjectState = {
         project_id: '',
         name: '',
         owner: '',
-        description: ''
+        description: '',
+        members: ['']
     },
     error: false,
     projectForm: {

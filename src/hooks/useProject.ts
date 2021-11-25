@@ -4,7 +4,14 @@ import {
     projectReducer,
     createProjectLoading,
     addProject,
-    selectedProject, deleteLoading, userProjects, removeProject, joinLoading, projectArr
+    selectedProject,
+    deleteLoading,
+    userProjects,
+    removeProject,
+    joinLoading,
+    projectArr,
+    requestsLoading,
+    projectRequests
 } from "../redux/projects/projectSlice";
 import {
     acceptRequests,
@@ -79,14 +86,25 @@ export const useProject = () => {
     }
 
     function acceptHandler(data: acceptRequest) {
-        const membersArr = projects.projects.filter((value) => {
+        dispatch(requestsLoading(true));
+        const pullProject = projects.projects.filter((value) => {
             return value.project_id === data.project_id;
         })
-        const addMember = [...membersArr, data.members].toString();
+        const membersArr = pullProject[0].members;
+        const addMember = [membersArr,data.members].toString()
         return dispatch(acceptRequests(data = {
+            id: data.id,
             project_id: projects.selectedProject.project_id,
-            members:addMember
-        }))
+            members: addMember
+        })).then(() => {
+            notify(`${data.members} is now part of your project!`)
+            dispatch(requestsLoading(false));
+            dispatch(projectRequests(projects.projectRequests.filter((value: any) => {
+                return value.project_id !== data.project_id
+            })))
+        }).catch((err) => {
+            notify(err)
+        })
     }
 
 
@@ -143,13 +161,16 @@ export const useProject = () => {
           project_id: uuidv4(),
           name: projectForm.name,
           description: projectForm.description,
-          owner: userInfo.username
+          owner: userInfo.username,
+          members: [userInfo.username]
         }
       return dispatch(createProject(data)).then((res) => {
           const {data} = res.payload as IcreateProject;
+          console.log(data)
           const newProj = {
               project_id: data.project_id,
               name: data.name,
+              members: data.members,
               description: data.description,
               owner: data.owner,
               requests: []
@@ -174,6 +195,7 @@ export const useProject = () => {
         getUserProjects,
         deleteProjectHandler,
         getSearchProjects,
+        acceptHandler,
         createProjectHandler,
     }
 }
