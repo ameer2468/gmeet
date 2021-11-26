@@ -17,6 +17,18 @@ export const deleteProject = createAsyncThunk('projects/deleteproject', async (i
     })
 })
 
+
+export const rejectJoinRequest = createAsyncThunk('projects/rejectrequest', async(id: string) => {
+    return await axios.delete(`${URL}/requests`, {
+        headers: {
+            'x-api-key': process.env.REACT_APP_API_KEY,
+        },
+        data: {
+            id: id
+        }
+    })
+})
+
 export const joinProjectRequest =
     createAsyncThunk('project/joinproject', async (data: any) => {
     return await axios.post(`${URL}/project`, {
@@ -24,7 +36,7 @@ export const joinProjectRequest =
         user: data.user,
         why: data.why,
         speciality: data.speciality,
-        id: uuidv4()
+        id: data.id
     },{
         headers: {
             'x-api-key': process.env.REACT_APP_API_KEY,
@@ -58,7 +70,7 @@ export const getProjectDetails = createAsyncThunk('projectDetails/data', async()
 })
 
 export const getProjects = createAsyncThunk('project/data', async (searchTerm?: string) => {
-            return await axios.get(`${process.env.REACT_APP_API_URL}/projects?searchterm=${searchTerm}`, {
+            return await axios.get(`${process.env.REACT_APP_API_URL}/projects?searchterm=${searchTerm ? searchTerm : ''}`, {
                 headers: {
                     'x-api-key': process.env.REACT_APP_API_KEY,
                     'Content-Type': 'application/json'

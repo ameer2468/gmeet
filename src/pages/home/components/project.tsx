@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import {useProject} from "../../../hooks/useProject";
@@ -21,6 +21,25 @@ const Project = ({data, remove, noRequest, profile}: props) => {
     const dispatch = useAppDispatch();
     const userHook = useUser();
     const {username} = userHook.user.userInfo;
+    const [checkJoined, setCheckJoined] = useState<boolean>(false);
+    const {requestsLoading} = projectHook.projects;
+
+    const getRequests = () => {
+       return projectHook.projects.projectRequests.filter((value) => {
+            if (value.user === username) {
+                return setCheckJoined(true)
+            } else {
+                return setCheckJoined(false)
+            }
+        })
+    }
+    useEffect(() => {
+        if (requestsLoading) {
+            getRequests()
+        } else {
+            getRequests();
+        }
+    }, [projectHook.projects.projectRequests, requestsLoading])
 
     const buttonsWrap = {
         justifyContent: `${username !== data.owner ? 'center' : 'center'}`,
@@ -31,7 +50,6 @@ const Project = ({data, remove, noRequest, profile}: props) => {
         justifyContent: 'space-between',
         display: 'flex'
     }
-
 
     return (
         <div className='projectCard'>
@@ -67,6 +85,10 @@ const Project = ({data, remove, noRequest, profile}: props) => {
                         <button onClick={() => {
                             projectHook.toggleJoin(data)
                         }} className='btn btn--transparent'>Request To Join</button>
+                        && checkJoined ? '' :
+                            <button onClick={() => {
+                                projectHook.toggleJoin(data)
+                            }} className='btn btn--transparent'>Request To Join</button>
                         : ''
                 }
             </div>

@@ -18,8 +18,8 @@ import {
     createProject,
     deleteProject,
     getProject,
-    getProjects,
-    joinProjectRequest
+    getProjects, getRequests,
+    joinProjectRequest, rejectJoinRequest
 } from "../redux/projects/services";
 import {useUser} from "./useUser";
 import {ActiveModal} from "../redux/modals/modalSlice";
@@ -27,7 +27,8 @@ import {project} from "../redux/projects/types";
 import {v4 as uuidv4} from "uuid";
 import { toast } from 'react-toastify';
 import {projectLoading} from "../redux/projects/projectSlice";
-import {acceptRequest, IcreateProject, requests} from "../redux/types";
+import {acceptRequest, IcreateProject} from "../redux/types";
+import {deleteProjectThunk, getProjectsThunk, getRequestsThunk, joinProjectsThunk} from "../redux/projects/thunks";
 
 
 export const useProject = () => {
@@ -85,6 +86,18 @@ export const useProject = () => {
         dispatch(ActiveModal(modal))
     }
 
+    function rejectHandler(id: string) {
+        dispatch(requestsLoading(true));
+        return dispatch(rejectJoinRequest(id)).then(() => {
+            dispatch(projectRequests(projects.projectRequests.filter((value) => {
+                return value.id !== id;
+            })))
+            dispatch(requestsLoading(false))
+        }).catch(() => {
+            notify('an error has occurred');
+        })
+    }
+
     function acceptHandler(data: acceptRequest) {
         dispatch(requestsLoading(true));
         const pullProject = projects.projects.filter((value) => {
@@ -97,7 +110,7 @@ export const useProject = () => {
             project_id: projects.selectedProject.project_id,
             members: addMember
         })).then(() => {
-            notify(`${data.members} is now part of your project!`)
+            notify('Member successfully added to project!')
             dispatch(requestsLoading(false));
             dispatch(projectRequests(projects.projectRequests.filter((value: any) => {
                 return value.project_id !== data.project_id
@@ -110,16 +123,7 @@ export const useProject = () => {
 
     function deleteProjectHandler() {
         dispatch(deleteLoading(true))
-         return dispatch(deleteProject(projects.selectedProject.project_id))
-             .then(() => {
-                 dispatch(removeProject(projects.selectedProject.project_id))
-                 dispatch(deleteLoading(false))
-                 dispatch(ActiveModal(''))
-                 dispatch(getProjects(''))
-             })
-             .catch(() => {
-                 dispatch(deleteLoading(false))
-             })
+        dispatch(deleteProjectThunk(projects.selectedProject.project_id))
     }
 
 
@@ -128,29 +132,17 @@ export const useProject = () => {
             return notify('Speciality and a reason to join are required')
         }
         dispatch(joinLoading(true))
+        dispatch(projectLoading(true))
+        dispatch(requestsLoading(true))
         const data = {
             project_id: projects.selectedProject.project_id,
             user: userInfo.username,
             why: projectForm.why,
-            speciality: projectForm.speciality
+            speciality: projectForm.speciality,
+            id: uuidv4()
         }
-        return dispatch(joinProjectRequest(data)).then(() => {
-            dispatch(joinLoading(false))
-            dispatch(ActiveModal(''))
-            const updatedArr = projects.projects.map((value) => {
-                return value.project_id === data.project_id ? {...value, requests: [...value.requests as [], data]} : value
-            })
-            dispatch(projectArr(updatedArr))
-        })
-            .catch(() => {
-                dispatch(joinLoading(false));
-            })
+        return joinProjectsThunk(data, projects.projects, notify)
     }
-
-    function projectDetails() {
-
-    }
-
 
     function createProjectHandler() {
         if (projectForm.name.length === 0 || projectForm.name.length === 0) {
@@ -166,7 +158,6 @@ export const useProject = () => {
         }
       return dispatch(createProject(data)).then((res) => {
           const {data} = res.payload as IcreateProject;
-          console.log(data)
           const newProj = {
               project_id: data.project_id,
               name: data.name,
@@ -190,6 +181,7 @@ export const useProject = () => {
         toggleJoin,
         joinProject,
         closeModal,
+        rejectHandler,
         toggleDelete,
         toggleRequests,
         getUserProjects,

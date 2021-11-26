@@ -38,7 +38,10 @@ const Requests = () => {
                                                 {id: value.id, project_id: value.project_id, members: value.user}
                                             )
                                         }} className='btn btn--purple'>Accept</button>
-                                        <button className='btn btn--red'>Decline</button>
+                                        <button onClick={(e) => {
+                                            e.preventDefault();
+                                            projectHook.rejectHandler(value.id)
+                                        }} className='btn btn--red'>Decline</button>
                                     </div>
                                 </div>
                         )})
