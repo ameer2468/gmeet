@@ -1,5 +1,5 @@
 import {deleteProject, getProjects, getRequests, joinProjectRequest} from "./services";
-import {deleteLoading, joinLoading, projectArr, projectRequests, removeProject, requestsLoading} from "./projectSlice";
+import {deleteLoading, joinLoading, projectRequests, removeProject, requestsLoading} from "./projectSlice";
 import {Action, ThunkDispatch} from "@reduxjs/toolkit";
 import {ActiveModal} from "../modals/modalSlice";
 import {project, projectRequest} from "./types";
