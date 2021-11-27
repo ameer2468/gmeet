@@ -27,10 +27,6 @@ export function joinProjectsThunk(data: projectRequest, projects: project[], not
             dispatch(joinLoading(false))
             dispatch(ActiveModal(''))
             dispatch(getRequestsThunk());
-            dispatch(projectArr(projects.map((value) => {
-                return value.project_id === data.project_id ?
-                    {...value, requests: !value.requests ? data : [...value.requests as [], data]} : value
-            })))
             notify('Request has been submitted')
          })
     }
