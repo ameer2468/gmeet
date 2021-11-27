@@ -4,6 +4,14 @@ export interface acceptRequest {
     members: string;
 }
 
+export interface post extends posts {}
+
+export interface posts {
+    post_id: string;
+    post: string;
+    user: string;
+}
+
 export interface requests {
     project_id: string;
     user: string;

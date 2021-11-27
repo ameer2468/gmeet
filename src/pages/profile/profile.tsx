@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import User from "./components/user";
-import Feedback from "./components/feedback";
+import Posts from "./components/feedback";
 import Projects from "./components/projects";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {userReducer} from "../../redux/user/userSlice";
@@ -28,7 +28,7 @@ const Profile = () => {
         <div className="profileContent">
             <div className="profileContainer">
                 <User data={userInfo}/>
-                <Feedback/>
+                <Posts/>
                 <Projects/>
             </div>
         </div>

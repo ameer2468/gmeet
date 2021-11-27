@@ -8,7 +8,9 @@ interface props {
         onChange: (key: string, value: string) => void;
     }
     height: string;
+    className?: string;
     name: string;
+    maxLength?: number;
 }
 
 const TextArea = (props: props) => {
@@ -18,8 +20,8 @@ const TextArea = (props: props) => {
     return (
         <textarea
             placeholder={props.placeholder}
-            maxLength={100}
-            className='textarea'
+            maxLength={!props.maxLength ? 100 : 200}
+            className={props.className ? props.className : 'textarea'}
             value={props.value}
             name={props.name}
             onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {

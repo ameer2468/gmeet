@@ -22,20 +22,13 @@ import {useUser} from "./useUser";
 import {ActiveModal} from "../redux/modals/modalSlice";
 import {project} from "../redux/projects/types";
 import {v4 as uuidv4} from "uuid";
-import { toast } from 'react-toastify';
+import {notify} from "../helpers/notify";
 import {projectLoading} from "../redux/projects/projectSlice";
 import {acceptRequest, IcreateProject} from "../redux/types";
 import {deleteProjectThunk, getProjectsThunk, joinProjectsThunk} from "../redux/projects/thunks";
 
 
 export const useProject = () => {
-
-    const notify = (text: string) => toast(text, {
-        theme: 'dark',
-        progressStyle: {
-            backgroundColor: '#4ad58b'
-        }
-    });
 
     const projects = useAppSelector(projectReducer);
     const {projectForm} = projects;

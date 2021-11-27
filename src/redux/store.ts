@@ -4,11 +4,13 @@ import {modalSlice} from "./modals/modalSlice";
 import {projectSlice} from "./projects/projectSlice";
 import storage from "redux-persist/lib/storage";
 import { persistReducer } from 'redux-persist'
+import {postsSlice} from "./posts/postsSlice";
 
 const reducers = combineReducers({
     userStore: userSlice.reducer,
     modalStore: modalSlice.reducer,
-    projectStore: projectSlice.reducer
+    projectStore: projectSlice.reducer,
+    postsStore: postsSlice.reducer
 })
 
 const persistConfig = {

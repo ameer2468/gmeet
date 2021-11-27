@@ -7,7 +7,7 @@ import {RootState} from "../store";
 
 
 export function deleteProjectThunk(project_id: string) {
-    return (dispatch: ThunkDispatch<void, RootState, Action>) => {
+    return (dispatch: ThunkDispatch<RootState, any, Action>) => {
         dispatch(deleteProject(project_id))
             .then(() => {
                 dispatch(removeProject(project_id))
@@ -22,7 +22,7 @@ export function deleteProjectThunk(project_id: string) {
 }
 
 export function joinProjectsThunk(data: projectRequest, projects: project[], notify: (text: string) => void) {
-    return (dispatch: ThunkDispatch<void, RootState, Action>) => {
+    return (dispatch: ThunkDispatch<RootState, any, Action>) => {
         dispatch(joinProjectRequest(data)).then( async() => {
             dispatch(joinLoading(false))
             dispatch(ActiveModal(''))
@@ -34,13 +34,13 @@ export function joinProjectsThunk(data: projectRequest, projects: project[], not
 
 
 export function getProjectsThunk(value?: string) {
-    return (dispatch: ThunkDispatch<void, RootState, Action>) => {
+    return (dispatch: ThunkDispatch<RootState, any, Action>) => {
         dispatch(getProjects(value ? value : ''))
     }
 }
 
 export function getRequestsThunk() {
-    return (dispatch: ThunkDispatch<void, RootState, Action>) => {
+    return (dispatch: ThunkDispatch<RootState, any, Action>) => {
         dispatch(getRequests()).then((res: { payload: any; }) => {
             const {payload} = res;
             dispatch(projectRequests(payload))
