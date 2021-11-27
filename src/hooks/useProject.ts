@@ -91,6 +91,7 @@ export const useProject = () => {
                 return value.id !== id;
             })))
             dispatch(requestsLoading(false))
+            notify('User rejected successfully')
         }).catch(() => {
             notify('an error has occurred');
         })

@@ -4,8 +4,9 @@ import Feedback from "./components/feedback";
 import Projects from "./components/projects";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {userReducer} from "../../redux/user/userSlice";
-import {getProject, getRequests} from "../../redux/projects/services";
-import {projectLoading, projectRequests, requestsLoading} from "../../redux/projects/projectSlice";
+import {getProject} from "../../redux/projects/services";
+import {projectLoading, requestsLoading} from "../../redux/projects/projectSlice";
+import {getRequestsThunk} from "../../redux/projects/thunks";
 const Profile = () => {
 
     const userInfo = useAppSelector(userReducer)
@@ -18,11 +19,7 @@ const Profile = () => {
                     dispatch(projectLoading(false))
                 })
                 dispatch(requestsLoading(true))
-                dispatch(getRequests()).then((res) => {
-                    const {payload} = res;
-                    dispatch(requestsLoading(false))
-                    dispatch(projectRequests(payload))
-                })
+                dispatch(getRequestsThunk());
         }
         getData();
     }, [dispatch, username])
