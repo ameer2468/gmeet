@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import {useProject} from "../../../hooks/useProject";
@@ -24,22 +24,24 @@ const Project = ({data, remove, noRequest, profile}: props) => {
     const [checkJoined, setCheckJoined] = useState<boolean>(false);
     const {requestsLoading} = projectHook.projects;
 
-    const getRequests = () => {
-       return projectHook.projects.projectRequests.filter((value) => {
-            if (value.user === username) {
-                return setCheckJoined(true)
-            } else {
-                return setCheckJoined(false)
-            }
-        })
-    }
+    const getRequests = useCallback(() => {
+            return projectHook.projects.projectRequests.filter((value) => {
+                if (value.user === username) {
+                    return setCheckJoined(true)
+                } else {
+                    return setCheckJoined(false)
+                }
+            })
+    }, [projectHook.projects.projectRequests, username])
+
     useEffect(() => {
         if (requestsLoading) {
             getRequests()
         } else {
             getRequests();
         }
-    }, [projectHook.projects.projectRequests, requestsLoading])
+    }, [requestsLoading, getRequests])
+
 
     const buttonsWrap = {
         justifyContent: `${username !== data.owner ? 'center' : 'center'}`,

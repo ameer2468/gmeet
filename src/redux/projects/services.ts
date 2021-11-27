@@ -1,7 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
 import {project} from "./types";
-import {v4 as uuidv4} from "uuid";
 import {acceptRequest} from "../types";
 
 const URL = process.env.REACT_APP_API_URL;

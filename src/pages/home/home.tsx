@@ -2,12 +2,11 @@ import React, {useEffect} from 'react';
 import Search from "./components/search";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {ActiveModal} from "../../redux/modals/modalSlice";
-import {projectReducer, projectRequests, requestsLoading} from "../../redux/projects/projectSlice";
+import {projectReducer} from "../../redux/projects/projectSlice";
 import LoadingSpinner from "../../components/global/LoadingSpinner";
 import Project from "./components/project";
 import {useProject} from "../../hooks/useProject";
 import {useDebounce} from "use-debounce";
-import {getProjects, getRequests} from "../../redux/projects/services";
 import {getProjectsThunk, getRequestsThunk} from "../../redux/projects/thunks";
 
 const Home = () => {
@@ -30,6 +29,7 @@ const Home = () => {
         }
             getProjectsData();
     }, [value, dispatch])
+
 
     return (
         <div className='HomeContent'>

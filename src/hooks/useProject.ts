@@ -7,19 +7,16 @@ import {
     selectedProject,
     deleteLoading,
     userProjects,
-    removeProject,
     joinLoading,
-    projectArr,
     requestsLoading,
     projectRequests
 } from "../redux/projects/projectSlice";
 import {
     acceptRequests,
     createProject,
-    deleteProject,
     getProject,
-    getProjects, getRequests,
-    joinProjectRequest, rejectJoinRequest
+    getProjects,
+    rejectJoinRequest
 } from "../redux/projects/services";
 import {useUser} from "./useUser";
 import {ActiveModal} from "../redux/modals/modalSlice";
@@ -28,7 +25,7 @@ import {v4 as uuidv4} from "uuid";
 import { toast } from 'react-toastify';
 import {projectLoading} from "../redux/projects/projectSlice";
 import {acceptRequest, IcreateProject} from "../redux/types";
-import {deleteProjectThunk, getProjectsThunk, getRequestsThunk, joinProjectsThunk} from "../redux/projects/thunks";
+import {deleteProjectThunk, getProjectsThunk, joinProjectsThunk} from "../redux/projects/thunks";
 
 
 export const useProject = () => {
@@ -67,6 +64,7 @@ export const useProject = () => {
         dispatch(ActiveModal('JOIN'));
         dispatch(projectValues({...projectForm, why: '', speciality: ''}))
         dispatch(selectedProject(projectInfo))
+        dispatch(joinLoading(false))
     }
 
   function getUserProjects(user: string) {
@@ -127,7 +125,7 @@ export const useProject = () => {
     }
 
 
- function joinProject() {
+function joinProject() {
         if (projectForm.speciality.length === 0 || projectForm.why.length === 0) {
             return notify('Speciality and a reason to join are required')
         }
@@ -141,7 +139,8 @@ export const useProject = () => {
             speciality: projectForm.speciality,
             id: uuidv4()
         }
-        return joinProjectsThunk(data, projects.projects, notify)
+        dispatch(joinProjectsThunk(data, projects.projects, notify))
+        dispatch(getProjectsThunk());
     }
 
     function createProjectHandler() {

@@ -1,6 +1,6 @@
 import {deleteProject, getProjects, getRequests, joinProjectRequest} from "./services";
 import {deleteLoading, joinLoading, projectArr, projectRequests, removeProject, requestsLoading} from "./projectSlice";
-import {Action, ThunkDispatch, CombinedState} from "@reduxjs/toolkit";
+import {Action, ThunkDispatch} from "@reduxjs/toolkit";
 import {ActiveModal} from "../modals/modalSlice";
 import {project, projectRequest} from "./types";
 import {RootState} from "../store";
@@ -23,22 +23,18 @@ export function deleteProjectThunk(project_id: string) {
 
 export function joinProjectsThunk(data: projectRequest, projects: project[], notify: (text: string) => void) {
     return (dispatch: ThunkDispatch<void, RootState, Action>) => {
-        dispatch(joinProjectRequest(data)).then( () => {
+        dispatch(joinProjectRequest(data)).then( async() => {
             dispatch(joinLoading(false))
             dispatch(ActiveModal(''))
             dispatch(getRequestsThunk());
-            dispatch(getProjectsThunk());
             dispatch(projectArr(projects.map((value) => {
                 return value.project_id === data.project_id ?
-                    {...value, requests: [...value.requests as [], data]} : value
+                    {...value, requests: !value.requests ? data : [...value.requests as [], data]} : value
             })))
+            notify('Request has been submitted')
          })
-            .catch(() => {
-                notify('An error has occurred')
-            })
     }
 }
-
 
 
 export function getProjectsThunk(value?: string) {
