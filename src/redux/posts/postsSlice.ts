@@ -38,7 +38,10 @@ export const postsSlice = createSlice({
         postValues: (state, action: PayloadAction<any>) => {
            state.postForm = action.payload;
         },
-        postsArr: (state, action: PayloadAction<post>) => {
+        postsArr: (state, action:PayloadAction<[]>) => {
+          state.posts = action.payload;
+        },
+        addPosts: (state, action: PayloadAction<post>) => {
           state.posts.push(action.payload);
         },
         deletePost: (state, action: PayloadAction<string>) => {
@@ -53,6 +56,7 @@ export const {
     postValues,
     postsArr,
     deletePost,
+    addPosts,
     postsLoadingHandler,
     addPostHandler } = postsSlice.actions
 

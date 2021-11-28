@@ -57,7 +57,7 @@ body {
 }
 
 .header {
-  width: 98%;
+  width: calc(100% - 2%);
   height: 50vh;
 }
 .header .container {
@@ -999,7 +999,7 @@ body {
   width: 14rem;
 }
 .homeNav .line {
-  width: 98%;
+  width: calc(100% - 2%);
   height: 1px;
   opacity: 0.1;
   background-color: #c1c1c1;
