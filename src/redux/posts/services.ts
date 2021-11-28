@@ -10,6 +10,7 @@ export const addPostService = createAsyncThunk('posts/addpost', async(data: post
         {
         post: data.post,
         post_id: data.post_id,
+        date: data.date,
         user: data.user
     }, {
         headers: {

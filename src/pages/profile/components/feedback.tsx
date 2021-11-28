@@ -7,6 +7,7 @@ import {faComments} from "@fortawesome/free-solid-svg-icons";
 import { Scrollbars } from 'react-custom-scrollbars';
 import Post from "./post";
 import LoadingSpinner from "../../../components/global/LoadingSpinner";
+import BeatLoader from "react-spinners/BeatLoader";
 
 const Posts = () => {
 
@@ -29,9 +30,11 @@ const Posts = () => {
                />
                 <button
                     disabled={postLength === 0} onClick={() => postHook.submitPost()}
-                    className={`btn btn--green ${postLength === 0 && 'disabledButton'}`}>
-                    <FontAwesomeIcon className='commentIcon' icon={faComments}/>
-                    Post
+                    className={`btn btn--green ${postsLoading ? 'btn btn--green' : postLength === 0 && 'disabledButton'}`}>
+                    {postsLoading ?
+                        <BeatLoader size={8} margin={1} color={'#2a2c3d'} /> :
+                       <p> <FontAwesomeIcon className='commentIcon' icon={faComments}/>Post</p>
+                    }
                 </button>
                 {posts.length === 0 ?
                     <h2 className='noPosts'>

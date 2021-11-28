@@ -7,12 +7,16 @@ import {notify} from "../../helpers/notify";
 
 export function addPostThunk(data: post) {
     return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
-       await dispatch(addPostService(data)).catch(() => {
+        dispatch(postsLoadingHandler(true))
+       await dispatch(addPostService(data)).then(() => {
+           dispatch(postsLoadingHandler(false))
+       }).catch(() => {
            return notify('An error has occurred')
        })
        dispatch(addPosts({
            post: data.post,
            post_id: data.post_id,
+           date: data.date,
            user: data.user
        }))
     }

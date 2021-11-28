@@ -3,6 +3,7 @@ import {deletePost, postsReducer, postValues} from "../redux/posts/postsSlice";
 import {userReducer} from "../redux/user/userSlice";
 import {v4 as uuidv4} from "uuid";
 import {addPostThunk} from "../redux/posts/thunks";
+import moment from "moment";
 
 
 export const usePosts = () => {
@@ -21,6 +22,7 @@ export const usePosts = () => {
         dispatch(addPostThunk({
             post: postsStore.postForm.post,
             post_id: uuidv4(),
+            date: moment().format('MMMM Do YYYY, h:mm:ss a'),
             user: username
         }))
         dispatch(postValues({
