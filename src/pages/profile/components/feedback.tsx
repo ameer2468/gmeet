@@ -3,15 +3,14 @@ import Card from "./card";
 import {usePosts} from "../../../hooks/usePosts";
 import TextArea from "../../../components/global/textarea";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faComments, faTrash} from "@fortawesome/free-solid-svg-icons";
-import {useUser} from "../../../hooks/useUser";
+import {faComments} from "@fortawesome/free-solid-svg-icons";
 import { Scrollbars } from 'react-custom-scrollbars';
+import Post from "./post";
 
 const Posts = () => {
 
     const postHook = usePosts();
     const {posts, postForm} = postHook.postsStore;
-    const userHook = useUser();
     const postLength = postForm.post.length;
 
     return (
@@ -28,8 +27,8 @@ const Posts = () => {
                maxWidth={'90rem'}
                />
                 <button
-                    style={{backgroundColor: postLength === 0 ? 'gray' : ''}}
-                    disabled={postLength === 0} onClick={() => postHook.submitPost()} className='btn btn--green'>
+                    disabled={postLength === 0} onClick={() => postHook.submitPost()}
+                    className={`btn btn--green ${postLength === 0 && 'disabledButton'}`}>
                     <FontAwesomeIcon className='commentIcon' icon={faComments}/>
                     Post
                 </button>
@@ -39,22 +38,12 @@ const Posts = () => {
                     </h2>
                     :
                    <Scrollbars
-                    style={{height: 200}}
+                    style={{height: 210}}
                    >
                        <div className="posts">
                            {posts.map((value) => {
                                return (
-                                   <div className={'post'}>
-                                       <p className='poster'>{userHook.userInfo.username}</p>
-                                       <p className='postText'>{value.post}</p>
-                                       <div className="actions">
-                                           <div onClick={() => {
-                                               postHook.deletePostHandler(value.post_id)
-                                           }} className="delete">
-                                               <FontAwesomeIcon icon={faTrash}/>
-                                           </div>
-                                       </div>
-                                   </div>
+                               <Post data={value}/>
                                )
                            })}
                        </div>

@@ -1,0 +1,38 @@
+import React from 'react';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faTrash} from "@fortawesome/free-solid-svg-icons";
+import {useUser} from "../../../hooks/useUser";
+import {usePosts} from "../../../hooks/usePosts";
+import moment from 'moment';
+
+interface props {
+    data: {
+        post: string;
+        post_id: string;
+    }
+}
+
+const Post = ({data}: props) => {
+
+    const userHook = useUser();
+    const postHook = usePosts();
+
+    return (
+        <div className={'post'}>
+            <div className="postInfo">
+                <p className='poster'>{userHook.userInfo.username}</p>
+                <p className='date'>{moment().format('MMMM Do YYYY, h:mm:ss a')}</p>
+            </div>
+            <p className='postText'>{data.post}</p>
+            <div className="actions">
+                <div onClick={() => {
+                    postHook.deletePostHandler(data.post_id)
+                }} className="delete">
+                    <FontAwesomeIcon icon={faTrash}/>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default Post;

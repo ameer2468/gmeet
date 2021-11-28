@@ -14,7 +14,7 @@ const Projects = () => {
 
 
     return (
-        <Card height={'auto'} customClass='listings' flex={'0 0 100%'}>
+        <Card height={'60rem'} customClass='listings' flex={'0 0 100%'}>
             <div className="container">
                 <h1>Project Listings</h1>
                 {
@@ -22,7 +22,7 @@ const Projects = () => {
                     <div style={{
                         position: 'absolute',
                         left: 0,
-                        top: '50%',
+                        top: '40%',
                         right: 0,
                         bottom: 0,
                         margin: 'auto',
@@ -38,7 +38,7 @@ const Projects = () => {
                                     color: 'white',
                                     position: 'absolute',
                                     left: 0,
-                                    top: '50%',
+                                    top: '40%',
                                     right: 0,
                                     bottom: 0,
                                     margin: 'auto',
@@ -51,6 +51,7 @@ const Projects = () => {
                                 :
                             <Scrollbars
                                 width={'100%'}
+                                style={{height: 500}}
                             >
                                 <div className="projectsContainer">
                                     {userProjects.map((value) => {

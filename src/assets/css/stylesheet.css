@@ -216,8 +216,17 @@ body {
   position: relative;
 }
 .profileContent .profileContainer .profilePosts .posts {
-  margin-top: 2rem;
-  padding: 0 2rem 0 1rem;
+  margin-top: 3rem;
+  padding: 2rem 2rem 2rem 1rem;
+}
+.profileContent .profileContainer .profilePosts .postInfo {
+  display: flex;
+  justify-content: space-between;
+}
+.profileContent .profileContainer .profilePosts .postInfo .date {
+  font-size: 1.4rem;
+  opacity: 0.6;
+  margin-right: 1.5rem;
 }
 .profileContent .profileContainer .profilePosts .post {
   font-size: 1.7rem;
@@ -263,7 +272,7 @@ body {
   left: 0;
   right: 0;
   font-weight: normal;
-  top: 25rem;
+  top: 65%;
   font-size: 2.2rem;
   opacity: 0.2;
 }
@@ -294,7 +303,7 @@ body {
 .profileContent .profileContainer .listings .projectsContainer {
   width: 100%;
   display: grid;
-  padding: 3rem;
+  padding: 2rem 3rem;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 3rem;
 }
@@ -314,6 +323,9 @@ body {
   transition: all 0.3s;
   padding: 3rem;
   position: relative;
+}
+.profileContent .profileContainer .listings .projectCard .btn {
+  max-width: 20rem;
 }
 .profileContent .profileContainer .listings .projectCard a {
   width: 14.5rem;
@@ -653,12 +665,18 @@ body {
   justify-items: center !important;
 }
 
+.disabledButton {
+  cursor: not-allowed !important;
+  background: gray !important;
+  opacity: 0.7;
+}
+
 .btn {
   width: 100%;
   max-width: 13.5rem;
   height: 5rem;
   border: 0;
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   border-radius: 0.5rem;
   font-weight: bold;
   color: white;
@@ -803,13 +821,6 @@ body {
 
 .bold {
   font-weight: bold;
-}
-
-.disabledButton {
-  opacity: 0.5;
-}
-.disabledButton:hover {
-  pointer-events: none !important;
 }
 
 .error {

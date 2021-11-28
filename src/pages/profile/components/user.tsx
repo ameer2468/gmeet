@@ -11,7 +11,7 @@ interface props {
 const User = ({data}: props) => {
 
     return (
-                <Card height={'auto'} flex={'0 0 40%'} customClass={'user'}>
+                <Card height={'50rem'} flex={'0 0 40%'} customClass={'user'}>
                     <div className="info">
                         <div className="wrap">
                             <PhotoPlaceholder className='userImage' width={100} height={100} />
