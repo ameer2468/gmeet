@@ -5,6 +5,8 @@ import {projectSlice} from "./projects/projectSlice";
 import storage from "redux-persist/lib/storage";
 import { persistReducer } from 'redux-persist'
 import {postsSlice} from "./posts/postsSlice";
+import {ThunkDispatch, Action} from "@reduxjs/toolkit";
+import {useDispatch} from "react-redux";
 
 const reducers = combineReducers({
     userStore: userSlice.reducer,
@@ -29,6 +31,8 @@ const store = configureStore({
 })
 
 export type AppDispatch = typeof store.dispatch
+export type ThunkAppDispatch = ThunkDispatch<RootState, void, Action>
+export const useAppThunkDispatch = () => useDispatch<ThunkAppDispatch>();
 export type RootState = ReturnType<typeof store.getState>
 
 export default store

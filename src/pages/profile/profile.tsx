@@ -7,6 +7,7 @@ import {userReducer} from "../../redux/user/userSlice";
 import {getProject} from "../../redux/projects/services";
 import {projectLoading, requestsLoading} from "../../redux/projects/projectSlice";
 import {getRequestsThunk} from "../../redux/projects/thunks";
+import {getPostsThunk} from "../../redux/posts/thunks";
 const Profile = () => {
 
     const userInfo = useAppSelector(userReducer)
@@ -20,6 +21,7 @@ const Profile = () => {
                 })
                 dispatch(requestsLoading(true))
                 dispatch(getRequestsThunk());
+                dispatch(getPostsThunk(username));
         }
         getData();
     }, [dispatch, username])

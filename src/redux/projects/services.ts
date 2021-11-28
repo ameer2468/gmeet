@@ -1,6 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
-import {project} from "./types";
+import {project, projectRequest} from "./types";
 import {acceptRequest} from "../types";
 
 const URL = process.env.REACT_APP_API_URL;
@@ -29,7 +29,7 @@ export const rejectJoinRequest = createAsyncThunk('projects/rejectrequest', asyn
 })
 
 export const joinProjectRequest =
-    createAsyncThunk('project/joinproject', async (data: any) => {
+    createAsyncThunk('project/joinproject', async (data: projectRequest) => {
     return await axios.post(`${URL}/project`, {
         project_id: data.project_id,
         user: data.user,

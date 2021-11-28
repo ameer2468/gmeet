@@ -9,6 +9,8 @@ interface PostsState {
         comment: string;
     },
     posts: posts[]
+    postsLoading: boolean;
+    addPostLoading: boolean;
 }
 
 // Define the initial state using that type
@@ -17,6 +19,8 @@ const initialState: PostsState = {
        post: '',
        comment: ''
    },
+    postsLoading: false,
+    addPostLoading: false,
    posts: []
 }
 
@@ -25,6 +29,12 @@ export const postsSlice = createSlice({
     // `createSlice` will infer the state type from the `initialState` argument
     initialState,
     reducers: {
+        addPostHandler: (state, action: PayloadAction<boolean>) => {
+        state.addPostLoading = action.payload;
+        },
+        postsLoadingHandler: (state, action: PayloadAction<boolean>) => {
+          state.postsLoading = action.payload;
+        },
         postValues: (state, action: PayloadAction<any>) => {
            state.postForm = action.payload;
         },
@@ -39,7 +49,12 @@ export const postsSlice = createSlice({
     },
 })
 
-export const { postValues, postsArr, deletePost } = postsSlice.actions
+export const {
+    postValues,
+    postsArr,
+    deletePost,
+    postsLoadingHandler,
+    addPostHandler } = postsSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 export const postsReducer = (state: RootState) => state.postsStore;

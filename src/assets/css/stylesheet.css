@@ -57,7 +57,7 @@ body {
 }
 
 .header {
-  width: calc(100% - 2%);
+  width: 98%;
   height: 50vh;
 }
 .header .container {
@@ -325,7 +325,7 @@ body {
   position: relative;
 }
 .profileContent .profileContainer .listings .projectCard .btn {
-  max-width: 20rem;
+  max-width: 15rem;
 }
 .profileContent .profileContainer .listings .projectCard a {
   width: 14.5rem;
@@ -999,7 +999,7 @@ body {
   width: 14rem;
 }
 .homeNav .line {
-  width: calc(100% - 2%);
+  width: 98%;
   height: 1px;
   opacity: 0.1;
   background-color: #c1c1c1;
