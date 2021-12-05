@@ -20,6 +20,17 @@ export const addPostService = createAsyncThunk('posts/addpost', async(data: post
     })
 })
 
+export const deletePostService = createAsyncThunk('posts/delete', async(id: string) => {
+    return await axios.delete(`${API_URL}/posts`, {
+        headers: {
+            'x-api-key': process.env.REACT_APP_API_KEY,
+        },
+        data: {
+            post_id: id
+        }
+    })
+})
+
 export const getPostsService = createAsyncThunk('posts/getposts', async (user: string) => {
     return await axios.get(`${API_URL}/posts/?user=${user}`, {
         headers: {
