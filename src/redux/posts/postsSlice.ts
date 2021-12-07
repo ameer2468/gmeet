@@ -10,6 +10,7 @@ interface PostsState {
     },
     posts: posts[]
     postsLoading: boolean;
+    selectedPost: keyof posts;
     addPostLoading: boolean;
 }
 
@@ -21,6 +22,12 @@ const initialState: PostsState = {
    },
     postsLoading: false,
     addPostLoading: false,
+    selectedPost: {
+        post_id: '',
+        post: string;
+        date: string;
+        user: string;
+    },
    posts: []
 }
 
@@ -41,6 +48,9 @@ export const postsSlice = createSlice({
         postsArr: (state, action:PayloadAction<[]>) => {
           state.posts = action.payload;
         },
+        selectPost: (state, action:PayloadAction<any>) => {
+            state.selectedPost = action.payload;
+        },
         addPosts: (state, action: PayloadAction<post>) => {
           state.posts.push(action.payload);
         },
@@ -57,6 +67,7 @@ export const {
     postsArr,
     deletePost,
     addPosts,
+    selectPost,
     postsLoadingHandler,
     addPostHandler } = postsSlice.actions
 

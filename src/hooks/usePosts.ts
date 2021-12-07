@@ -30,8 +30,8 @@ export const usePosts = () => {
         }))
     }
 
-    function deletePostHandler(id: string) {
-        dispatch(deletePostThunk(id))
+    function deletePostHandler() {
+        dispatch(deletePostThunk(postsStore.selectedPost.post_id))
     }
 
     return {

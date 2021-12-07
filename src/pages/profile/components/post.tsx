@@ -3,6 +3,9 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import {useUser} from "../../../hooks/useUser";
 import {usePosts} from "../../../hooks/usePosts";
+import {ActiveModal} from "../../../redux/modals/modalSlice";
+import {useAppDispatch} from "../../../redux/hooks";
+import {selectPost} from "../../../redux/posts/postsSlice";
 
 
 interface props {
@@ -17,6 +20,7 @@ const Post = ({data}: props) => {
 
     const userHook = useUser();
     const postHook = usePosts();
+    const dispatch = useAppDispatch();
 
     return (
         <div className={'post'}>
@@ -27,7 +31,8 @@ const Post = ({data}: props) => {
             <p className='postText'>{data.post}</p>
             <div className="actions">
                 <div onClick={() => {
-                    postHook.deletePostHandler(data.post_id)
+                    dispatch(selectPost(data))
+                    dispatch(ActiveModal('DELETE_POST'))
                 }} className="delete">
                     <FontAwesomeIcon icon={faTrash}/>
                 </div>
