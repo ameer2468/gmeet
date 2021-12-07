@@ -1,9 +1,10 @@
 import {useAppDispatch, useAppSelector} from "../redux/hooks";
-import {postsReducer, postValues} from "../redux/posts/postsSlice";
+import {deletePostLoading, postsReducer, postValues} from "../redux/posts/postsSlice";
 import {userReducer} from "../redux/user/userSlice";
 import {v4 as uuidv4} from "uuid";
-import {addPostThunk, deletePostThunk} from "../redux/posts/thunks";
+import {addCommentThunk, addPostThunk, deletePostThunk} from "../redux/posts/thunks";
 import moment from "moment";
+import {ActiveModal} from "../redux/modals/modalSlice";
 
 
 export const usePosts = () => {
@@ -13,9 +14,20 @@ export const usePosts = () => {
     const userStore = useAppSelector(userReducer);
     const {username} = userStore.userInfo;
 
+
     function onChange(key: string, value: string) {
         return dispatch(postValues(
             {...postsStore.postForm, [key]: value}))
+    }
+
+    function submitComment() {
+        dispatch(addCommentThunk({
+            id: uuidv4(),
+            post_id: uuidv4(),
+            date: moment().format('MMMM Do YYYY, h:mm:ss a'),
+            user: username,
+            comment: postsStore.postForm.comment
+        }))
     }
 
     function submitPost() {
@@ -31,7 +43,11 @@ export const usePosts = () => {
     }
 
     function deletePostHandler() {
-        dispatch(deletePostThunk(postsStore.selectedPost.post_id))
+        dispatch(deletePostLoading(true));
+        dispatch(deletePostThunk(postsStore.selectedPost.post_id)).then(() => {
+            dispatch(deletePostLoading(false));
+            dispatch(ActiveModal(''));
+        })
     }
 
     return {

@@ -13,6 +13,15 @@ export interface posts {
     user: string;
 }
 
+
+export interface comment {
+    post_id: string;
+    id: string;
+    comment: string;
+    date: string;
+    user: string;
+}
+
 export interface requests {
     project_id: string;
     user: string;

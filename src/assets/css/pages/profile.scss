@@ -27,6 +27,18 @@
         margin-top: 3rem;
         padding: 2rem 2rem 2rem 1rem;
       }
+      .comments {
+        margin-top: 2rem;
+      }
+      .commentInfo {
+        display: flex;
+        justify-content: space-between;
+        .date {
+          font-size: 1.4rem;
+          opacity: 0.6;
+          margin-right: 1.5rem;
+        }
+      }
       .postInfo {
         display: flex;
         justify-content: space-between;
@@ -43,6 +55,12 @@
         border-radius: 0.5rem;
         position: relative;
         margin-bottom: 2rem;
+        .leaveComment {
+          margin: 0.5rem 0 2rem 0;
+         input {
+           background: transparent;
+         }
+        }
         .postText {
           margin-top: 0.5rem;
         }

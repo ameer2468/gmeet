@@ -1,8 +1,8 @@
 import {RootState} from "../store";
 import {Action, ThunkDispatch} from "@reduxjs/toolkit";
-import {addPostService, deletePostService, getPostsService} from "./services";
-import {post} from "../types";
-import {postsArr, addPosts, postsLoadingHandler, deletePost} from "./postsSlice";
+import {addCommentService, addPostService, deletePostService, getPostsService} from "./services";
+import {comment, post} from "../types";
+import {postsArr, addPosts, postsLoadingHandler, deletePost, addComment, commentPostLoading} from "./postsSlice";
 import {notify} from "../../helpers/notify";
 
 export function addPostThunk(data: post) {
@@ -21,6 +21,24 @@ export function addPostThunk(data: post) {
        }))
     }
 }
+
+export function addCommentThunk(data: comment)  {
+    return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
+        dispatch(commentPostLoading(true))
+        await dispatch(addCommentService(data)).then(() => {
+            dispatch(commentPostLoading(false))
+        }).catch(() => {
+            return notify('An error has occurred')
+        })
+        dispatch(addComment({
+            id: data.id,
+            post_id: data.post_id,
+            date: data.date,
+            user: data.user,
+            comment: data.comment,
+        }))
+    }
+ }
 
 export function deletePostThunk(id: string) {
     return async (dispatch: ThunkDispatch<RootState, any, Action>) => {

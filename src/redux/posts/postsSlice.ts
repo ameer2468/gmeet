@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type {RootState} from "../store";
-import {post, posts} from "../types";
+import {post, posts, comment} from "../types";
 
 // Define a type for the slice state
 interface PostsState {
@@ -10,23 +10,29 @@ interface PostsState {
     },
     posts: posts[]
     postsLoading: boolean;
-    selectedPost: keyof posts;
+    selectedPost: posts;
     addPostLoading: boolean;
+    deletePostLoading: boolean;
+    commentLoading: boolean;
+    comments: comment[]
 }
 
 // Define the initial state using that type
 const initialState: PostsState = {
+   deletePostLoading: false,
+    postsLoading: false,
+    addPostLoading: false,
+    commentLoading: false,
+   comments: [],
    postForm: {
        post: '',
        comment: ''
    },
-    postsLoading: false,
-    addPostLoading: false,
     selectedPost: {
         post_id: '',
-        post: string;
-        date: string;
-        user: string;
+        post: '',
+        date: '',
+        user: ''
     },
    posts: []
 }
@@ -44,6 +50,18 @@ export const postsSlice = createSlice({
         },
         postValues: (state, action: PayloadAction<any>) => {
            state.postForm = action.payload;
+        },
+        commentsArr: (state, action:PayloadAction<[]>) => {
+            state.comments = action.payload;
+        },
+        addComment: (state, action: PayloadAction<comment>) => {
+          state.comments.push(action.payload);
+        },
+        deletePostLoading: (state, action: PayloadAction<boolean>) => {
+            state.deletePostLoading = action.payload;
+        },
+        commentPostLoading: (state, action: PayloadAction<boolean>) => {
+            state.commentLoading = action.payload;
         },
         postsArr: (state, action:PayloadAction<[]>) => {
           state.posts = action.payload;
@@ -66,7 +84,11 @@ export const {
     postValues,
     postsArr,
     deletePost,
+    addComment,
+    commentPostLoading,
+    commentsArr,
     addPosts,
+    deletePostLoading,
     selectPost,
     postsLoadingHandler,
     addPostHandler } = postsSlice.actions

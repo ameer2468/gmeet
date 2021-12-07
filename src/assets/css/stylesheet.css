@@ -219,6 +219,18 @@ body {
   margin-top: 3rem;
   padding: 2rem 2rem 2rem 1rem;
 }
+.profileContent .profileContainer .profilePosts .comments {
+  margin-top: 2rem;
+}
+.profileContent .profileContainer .profilePosts .commentInfo {
+  display: flex;
+  justify-content: space-between;
+}
+.profileContent .profileContainer .profilePosts .commentInfo .date {
+  font-size: 1.4rem;
+  opacity: 0.6;
+  margin-right: 1.5rem;
+}
 .profileContent .profileContainer .profilePosts .postInfo {
   display: flex;
   justify-content: space-between;
@@ -235,6 +247,12 @@ body {
   border-radius: 0.5rem;
   position: relative;
   margin-bottom: 2rem;
+}
+.profileContent .profileContainer .profilePosts .post .leaveComment {
+  margin: 0.5rem 0 2rem 0;
+}
+.profileContent .profileContainer .profilePosts .post .leaveComment input {
+  background: transparent;
 }
 .profileContent .profileContainer .profilePosts .post .postText {
   margin-top: 0.5rem;

@@ -159,6 +159,7 @@ function joinProject() {
               owner: data.owner,
               requests: []
           }
+          notify(`Project ${data.name} added successfully`);
           dispatch(addProject(newProj))
           dispatch(createProjectLoading(false))
           dispatch(ActiveModal(''))
