@@ -46,15 +46,15 @@ const Post = ({data}: props) => {
                     <FontAwesomeIcon icon={faTrash}/>
                 </div>
             </div>
-            <div className="comments">
-                <div className="comment">
-                    <div className="commentInfo">
-                        <p className='poster'>{'Test'}</p>
-                        <p className='date'>{data.date}</p>
-                    </div>
-                    <p>Wow that is awesome</p>
-                </div>
-            </div>
+            {/*<div className="comments">*/}
+            {/*    <div className="comment">*/}
+            {/*        <div className="commentInfo">*/}
+            {/*            <p className='poster'>{'Test'}</p>*/}
+            {/*            <p className='date'>{data.date}</p>*/}
+            {/*        </div>*/}
+            {/*        <p>Wow that is awesome</p>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
         </div>
     );
 };
