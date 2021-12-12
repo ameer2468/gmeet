@@ -32,7 +32,8 @@ const initialState: PostsState = {
         post_id: '',
         post: '',
         date: '',
-        user: ''
+        user: '',
+        comments: []
     },
    posts: []
 }
@@ -63,7 +64,7 @@ export const postsSlice = createSlice({
         commentPostLoading: (state, action: PayloadAction<boolean>) => {
             state.commentLoading = action.payload;
         },
-        postsArr: (state, action:PayloadAction<[]>) => {
+        postsArr: (state, action:PayloadAction<any>) => {
           state.posts = action.payload;
         },
         selectPost: (state, action:PayloadAction<any>) => {

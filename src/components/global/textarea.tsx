@@ -4,6 +4,7 @@ interface props {
     maxWidth: string;
     placeholder: string;
     value?: string;
+    submit?: () => void;
     useHook:  {
         onChange: (key: string, value: string) => void;
     }
@@ -23,6 +24,7 @@ const TextArea = (props: props) => {
             maxLength={!props.maxLength ? 100 : 200}
             className={props.className ? props.className : 'textarea'}
             value={props.value}
+            onSubmit={props.submit}
             name={props.name}
             onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
                 onChange(props.name, e.target.value)

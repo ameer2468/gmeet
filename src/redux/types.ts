@@ -11,6 +11,7 @@ export interface posts {
     post: string;
     date: string;
     user: string;
+    comments: comment[]
 }
 
 
@@ -19,7 +20,7 @@ export interface comment {
     id: string;
     comment: string;
     date: string;
-    user: string;
+    posted_by: string;
 }
 
 export interface requests {

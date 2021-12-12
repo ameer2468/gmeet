@@ -57,7 +57,7 @@ body {
 }
 
 .header {
-  width: 98%;
+  width: calc(100% - 2%);
   height: 50vh;
 }
 .header .container {
@@ -210,13 +210,19 @@ body {
 .profileContent .profileContainer .commentIcon {
   margin-right: 0.5rem;
 }
+.profileContent .profileContainer .createPost {
+  display: flex;
+  justify-content: space-between;
+}
+.profileContent .profileContainer .createPost button {
+  margin-top: 0;
+}
 .profileContent .profileContainer .profilePosts {
   width: 100%;
   padding: 2rem;
   position: relative;
 }
 .profileContent .profileContainer .profilePosts .posts {
-  margin-top: 3rem;
   padding: 2rem 2rem 2rem 1rem;
 }
 .profileContent .profileContainer .profilePosts .comments {
@@ -250,6 +256,11 @@ body {
 }
 .profileContent .profileContainer .profilePosts .post .leaveComment {
   margin: 0.5rem 0 2rem 0;
+  display: flex;
+  justify-content: space-between;
+}
+.profileContent .profileContainer .profilePosts .post .leaveComment button {
+  margin-top: 0;
 }
 .profileContent .profileContainer .profilePosts .post .leaveComment input {
   background: transparent;
@@ -1017,7 +1028,7 @@ body {
   width: 14rem;
 }
 .homeNav .line {
-  width: 98%;
+  width: calc(100% - 2%);
   height: 1px;
   opacity: 0.1;
   background-color: #c1c1c1;

@@ -7,7 +7,7 @@ import {userReducer} from "../../redux/user/userSlice";
 import {getProject} from "../../redux/projects/services";
 import {projectLoading, requestsLoading} from "../../redux/projects/projectSlice";
 import {getRequestsThunk} from "../../redux/projects/thunks";
-import {getPostsThunk} from "../../redux/posts/thunks";
+import {getCommentsThunk, getPostsThunk} from "../../redux/posts/thunks";
 const Profile = () => {
 
     const userInfo = useAppSelector(userReducer)
@@ -15,13 +15,14 @@ const Profile = () => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        function getData() {
+        async function getData() {
                 dispatch(getProject(username)).then(() => {
                     dispatch(projectLoading(false))
                 })
                 dispatch(requestsLoading(true))
                 dispatch(getRequestsThunk());
-                dispatch(getPostsThunk(username));
+                await dispatch(getPostsThunk(username));
+                dispatch(getCommentsThunk(username));
         }
         getData();
     }, [dispatch, username])

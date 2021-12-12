@@ -20,13 +20,16 @@ export const usePosts = () => {
             {...postsStore.postForm, [key]: value}))
     }
 
-    function submitComment() {
+    function submitComment(post_id: string) {
         dispatch(addCommentThunk({
             id: uuidv4(),
-            post_id: uuidv4(),
+            post_id: post_id,
+            posted_by: username,
             date: moment().format('MMMM Do YYYY, h:mm:ss a'),
-            user: username,
             comment: postsStore.postForm.comment
+        }))
+       dispatch(postValues({
+            ...postsStore.postForm, comment: ''
         }))
     }
 
@@ -35,7 +38,8 @@ export const usePosts = () => {
             post: postsStore.postForm.post,
             post_id: uuidv4(),
             date: moment().format('MMMM Do YYYY, h:mm:ss a'),
-            user: username
+            user: username,
+            comments: []
         }))
         dispatch(postValues({
             ...postsStore.postForm, post: ''
@@ -54,6 +58,7 @@ export const usePosts = () => {
         onChange,
         postsStore,
         submitPost,
+        submitComment,
         deletePostHandler
     }
 }

@@ -15,25 +15,33 @@ export const addPostService = createAsyncThunk('posts/addpost', async(data: post
     }, {
         headers: {
             'x-api-key': process.env.REACT_APP_API_KEY,
-            'Content-Type': 'application/json'
         }
+    }).catch((err) =>{
+        throw new Error(err)
     })
 })
 
 export const addCommentService = createAsyncThunk('comments/addcomment', async(data: comment) =>  {
-    return await axios.post(`${API_URL}/posts`,
+    return await axios.post(`${API_URL}/comments`,
         {
             id: data.id,
             post_id: data.post_id,
             comment: data.comment,
             date: data.date,
-            user: data.user
+            posted_by: data.posted_by
         }, {
             headers: {
                 'x-api-key': process.env.REACT_APP_API_KEY,
-                'Content-Type': 'application/json'
             }
         })
+})
+
+export const getCommentsService = createAsyncThunk('posts/getcomments', async (user: string) => {
+    return await axios.get(`${API_URL}/comments/?user=${user}`, {
+        headers: {
+            'x-api-key': process.env.REACT_APP_API_KEY,
+        }
+    })
 })
 
 export const deletePostService = createAsyncThunk('posts/delete', async(id: string) => {

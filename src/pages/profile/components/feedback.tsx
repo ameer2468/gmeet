@@ -12,37 +12,39 @@ import BeatLoader from "react-spinners/BeatLoader";
 const Posts = () => {
 
     const postHook = usePosts();
-    const {posts, postForm, postsLoading} = postHook.postsStore;
+    const {posts, postForm, postsLoading, commentLoading} = postHook.postsStore;
     const postLength = postForm.post.length;
 
     return (
         <Card height={'auto'} customClass='feedback' flex={'0 0 59%'}>
             <div className="profilePosts">
                 <h1>Profile Posts</h1>
-               <TextArea
-               useHook={postHook}
-               height={'10rem'}
-               name={'post'}
-               value={postForm.post}
-               maxLength={200}
-               placeholder='Write a post...'
-               maxWidth={'90rem'}
-               />
-                <button
-                    disabled={postLength === 0} onClick={() => postHook.submitPost()}
-                    className={`btn btn--green ${postsLoading ? 'btn btn--green' : postLength === 0 && 'disabledButton'}`}>
-                    {postsLoading ?
-                        <BeatLoader size={8} margin={1} color={'#2a2c3d'} /> :
-                       <p> <FontAwesomeIcon className='commentIcon' icon={faComments}/>Post</p>
-                    }
-                </button>
+             <div className="createPost">
+                 <TextArea
+                     useHook={postHook}
+                     height={'7rem'}
+                     name={'post'}
+                     value={postForm.post}
+                     maxLength={200}
+                     placeholder='Write a post...'
+                     maxWidth={'62rem'}
+                 />
+                 <button
+                     disabled={postLength === 0} onClick={() => postHook.submitPost()}
+                     className={`btn btn--green ${postsLoading ? 'btn btn--green' : postLength === 0 && 'disabledButton'}`}>
+                     {postsLoading ?
+                         <BeatLoader size={8} margin={1} color={'#2a2c3d'} /> :
+                         <p> <FontAwesomeIcon className='commentIcon' icon={faComments}/>Post</p>
+                     }
+                 </button>
+             </div>
                 {posts.length === 0 ?
                     <h2 className='noPosts'>
                         No posts
                     </h2>
                     :
                    <Scrollbars
-                    style={{height: 210}}
+                    style={{height: 280, marginTop: '2rem'}}
                    >
                        {postsLoading ?
                            <div style={{
@@ -63,6 +65,7 @@ const Posts = () => {
                                        <Post key={value.post_id} data={value}/>
                                    )
                                })}
+                               {commentLoading &&  <LoadingSpinner height={60} width={60}/>}
                            </div>
                        }
                    </Scrollbars>
