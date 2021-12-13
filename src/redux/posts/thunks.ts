@@ -10,6 +10,7 @@ import {
     commentPostLoading,
 } from "./postsSlice";
 import {notify} from "../../helpers/notify";
+import {projectsArr} from "../../fakedata";
 
 export function addPostThunk(data: post) {
     return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
@@ -50,12 +51,21 @@ export function getCommentsThunk(user: string) {
 
 export function addCommentThunk(data: comment)  {
     return async (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
-        const {userStore} = getState();
-        const {username} = userStore.userInfo;
-        dispatch(commentPostLoading(true))
+        const {postsStore} = getState();
+        const originalPosts = postsStore.posts;
         await dispatch(addCommentService(data)).then(() => {
-            dispatch(commentPostLoading(false))
-            dispatch(getCommentsThunk(username))
+            const newComment = {
+                post_id: data.post_id,
+                id: data.id,
+                comment: data.comment,
+                date: data.date,
+                posted_by: data.posted_by
+            }
+            const updateArr = originalPosts.map((value) => {
+                return value.post_id === data.post_id ?
+                    {...value, comments: [...value.comments, newComment ]} : value;
+            })
+            dispatch(postsArr(updateArr))
         }).catch((err) => {
             return notify(err.message)
         })

@@ -65,7 +65,6 @@ const Posts = () => {
                                        <Post key={value.post_id} data={value}/>
                                    )
                                })}
-                               {commentLoading &&  <LoadingSpinner height={60} width={60}/>}
                            </div>
                        }
                    </Scrollbars>

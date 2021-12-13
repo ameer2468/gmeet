@@ -8,10 +8,12 @@ import {getProject} from "../../redux/projects/services";
 import {projectLoading, requestsLoading} from "../../redux/projects/projectSlice";
 import {getRequestsThunk} from "../../redux/projects/thunks";
 import {getCommentsThunk, getPostsThunk} from "../../redux/posts/thunks";
+import {useParams} from "react-router-dom";
 const Profile = () => {
 
+    const params: {username: string} = useParams();
+    const {username} = params;
     const userInfo = useAppSelector(userReducer)
-    const {username} = userInfo.userInfo;
     const dispatch = useAppDispatch();
 
     useEffect(() => {
