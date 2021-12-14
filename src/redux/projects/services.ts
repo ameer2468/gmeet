@@ -101,6 +101,14 @@ export const getProject = createAsyncThunk('projects/getproject', async (user: s
         }
     })
 })
+export const getUserProjects = createAsyncThunk('projects/getproject', async (user: string) => {
+    return await axios.get(`${URL}/user/projects/?owner=${user}`, {
+        headers: {
+            'x-api-key': process.env.REACT_APP_API_KEY,
+        }
+    })
+})
+
 
 export const createProject = createAsyncThunk('projects/createproject', async (data: project) => {
     return await axios.post(`${URL}/projects`, {

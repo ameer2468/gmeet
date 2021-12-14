@@ -1,5 +1,12 @@
-import {deleteProject, getProjects, getRequests, joinProjectRequest} from "./services";
-import {deleteLoading, joinLoading, projectRequests, removeProject, requestsLoading} from "./projectSlice";
+import {deleteProject, getProjects, getRequests, getUserProjects, joinProjectRequest} from "./services";
+import {
+    deleteLoading,
+    joinLoading, projectLoading,
+    projectRequests,
+    removeProject,
+    requestsLoading,
+    userProjects
+} from "./projectSlice";
 import {Action, ThunkDispatch} from "@reduxjs/toolkit";
 import {ActiveModal} from "../modals/modalSlice";
 import {project, projectRequest} from "./types";
@@ -29,6 +36,17 @@ export function joinProjectsThunk(data: projectRequest, projects: project[], not
             dispatch(getRequestsThunk());
             notify('Request has been submitted')
          })
+    }
+}
+
+export function getUserProjectsThunk(username: string) {
+    return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
+        dispatch(projectLoading(true))
+        await dispatch(getUserProjects(username)).then((res: any) => {
+            const {payload} = res;
+            dispatch(userProjects(payload.data.rows))
+            dispatch(projectLoading(false))
+        })
     }
 }
 

@@ -10,8 +10,9 @@ const Projects = () => {
 
     const projectStore = useAppSelector(projectReducer)
     const {loading} = projectStore;
-    const {userProjects} = projectStore;
+    const userProjects = projectStore.userProjects;
 
+    console.log(loading)
 
     return (
         <Card height={'60rem'} customClass='listings' flex={'0 0 100%'}>
@@ -31,7 +32,7 @@ const Projects = () => {
                         <LoadingSpinner height={60} width={60}/>
                     </div>
                         :
-                        userProjects.length === 0 ?
+                       userProjects.length === 0 ?
                                 <h2 style={{
                                     opacity: '0.2',
                                     fontWeight: 'normal',

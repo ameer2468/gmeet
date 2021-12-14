@@ -1,5 +1,5 @@
 import {useAppDispatch, useAppSelector} from "../redux/hooks";
-import {deletePostLoading, postsReducer, postValues} from "../redux/posts/postsSlice";
+import {commentPostLoading, deletePostLoading, postsReducer, postValues} from "../redux/posts/postsSlice";
 import {userReducer} from "../redux/user/userSlice";
 import {v4 as uuidv4} from "uuid";
 import {addCommentThunk, addPostThunk, deletePostThunk} from "../redux/posts/thunks";
@@ -21,13 +21,16 @@ export const usePosts = () => {
     }
 
     function submitComment(post_id: string) {
+        dispatch(commentPostLoading(true))
         dispatch(addCommentThunk({
             id: uuidv4(),
             post_id: post_id,
             posted_by: username,
             date: moment().format('MMMM Do YYYY, h:mm:ss a'),
             comment: postsStore.postForm.comment
-        }))
+        })).then(() => {
+            dispatch(commentPostLoading(false))
+        })
        dispatch(postValues({
             ...postsStore.postForm, comment: ''
         }))
