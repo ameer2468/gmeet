@@ -3,10 +3,10 @@ import Landing from "./pages/landing/landing";
 import {Switch, Route, useLocation, Redirect} from 'react-router-dom';
 import Login from "./pages/login/login";
 import Register from "./pages/register/register";
-import Amplify from "aws-amplify";
+import Amplify, {Auth} from "aws-amplify";
 import awsconfig from './aws-exports';
 import {useAppDispatch, useAppSelector} from "./redux/hooks";
-import {userReducer} from "./redux/user/userSlice";
+import {authedUser, userReducer} from "./redux/user/userSlice";
 import Home from "./pages/home/home";
 import ModalManager from "./components/ModalManager";
 import Profile from "./pages/profile/profile";
@@ -16,10 +16,10 @@ import {useProject} from "./hooks/useProject";
 import {projectValues} from "./redux/projects/projectSlice";
 import ProjectDetails from "./pages/projectdetails/projectDetails";
 
-
 Amplify.configure(awsconfig)
 
 const App = () => {
+
 
     const userRedux = useAppSelector(userReducer)
     const {username} = userRedux.userInfo;
@@ -29,15 +29,21 @@ const App = () => {
     const {projectForm} = projectHook.projects;
     const {searchterm} = projectForm;
 
+
     /*Reset search */
 
     useEffect(() => {
+        if (username) {
+            Auth.currentUserInfo().then((data) => {
+                return dispatch(authedUser(data))
+            });
+        }
         if (!location.pathname.startsWith('/home')) {
             if (searchterm.length > 0) {
                 dispatch(projectValues({description: '', name: '', searchterm: ''}))
             }
         }
-    }, [dispatch, searchterm, location.pathname])
+    }, [dispatch, searchterm, location.pathname, username])
 
     const GlobalRoutes = [
         {path: '/', component: Landing},

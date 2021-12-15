@@ -57,7 +57,7 @@ body {
 }
 
 .header {
-  width: 98%;
+  width: calc(100% - 2%);
   height: 50vh;
 }
 .header .container {
@@ -225,17 +225,43 @@ body {
 .profileContent .profileContainer .profilePosts .posts {
   padding: 2rem 2rem 2rem 1rem;
 }
+.profileContent .profileContainer .profilePosts .comment {
+  width: 100%;
+}
 .profileContent .profileContainer .profilePosts .comments {
   margin-top: 2rem;
+  width: 100%;
+}
+.profileContent .profileContainer .profilePosts .comments .commentText {
+  margin-top: 0.5rem;
+  word-wrap: break-word;
 }
 .profileContent .profileContainer .profilePosts .commentInfo {
   display: flex;
   justify-content: space-between;
+  width: 100%;
+}
+.profileContent .profileContainer .profilePosts .commentInfo .side {
+  display: flex;
+  align-items: center;
 }
 .profileContent .profileContainer .profilePosts .commentInfo .date {
   font-size: 1.4rem;
   opacity: 0.6;
   margin-right: 1.5rem;
+}
+.profileContent .profileContainer .profilePosts .commentInfo .comment-menu {
+  display: inline-block;
+  position: relative;
+  transition: all 0.3s;
+}
+.profileContent .profileContainer .profilePosts .commentInfo .comment-menu:hover {
+  cursor: pointer;
+  opacity: 0.7;
+  transition: all 0.3s;
+}
+.profileContent .profileContainer .profilePosts .commentInfo .comment-menu .icon {
+  font-size: 2.3rem;
 }
 .profileContent .profileContainer .profilePosts .postInfo {
   display: flex;
@@ -700,6 +726,33 @@ body {
   opacity: 0.7;
 }
 
+.showMenu {
+  display: flex !important;
+  opacity: 1 !important;
+  transition: all 0.3s !important;
+}
+
+.ActionsMenu {
+  position: absolute;
+  background: #171a28;
+  right: 0;
+  transition: all 0.3s;
+  top: -4rem;
+  opacity: 0;
+  height: auto;
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
+}
+.ActionsMenu p {
+  font-size: 1.3rem;
+  transition: all 0.3s;
+}
+.ActionsMenu p:hover {
+  opacity: 0.8;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
 .btn {
   width: 100%;
   max-width: 13.5rem;
@@ -1028,7 +1081,7 @@ body {
   width: 14rem;
 }
 .homeNav .line {
-  width: 98%;
+  width: calc(100% - 2%);
   height: 1px;
   opacity: 0.1;
   background-color: #c1c1c1;

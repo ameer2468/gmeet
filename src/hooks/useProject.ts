@@ -26,6 +26,7 @@ import {notify} from "../helpers/notify";
 import {projectLoading} from "../redux/projects/projectSlice";
 import {acceptRequest, IcreateProject} from "../redux/types";
 import {deleteProjectThunk, getProjectsThunk, joinProjectsThunk} from "../redux/projects/thunks";
+import {deleteCommentThunk} from "../redux/posts/thunks";
 
 
 export const useProject = () => {
@@ -88,6 +89,10 @@ export const useProject = () => {
         }).catch(() => {
             notify('an error has occurred');
         })
+    }
+
+    function deleteCommentHandler(id: string, username: string ) {
+        dispatch(deleteCommentThunk(id, username))
     }
 
     function acceptHandler(data: acceptRequest) {
@@ -179,6 +184,7 @@ function joinProject() {
         toggleDelete,
         toggleRequests,
         getUserProjects,
+        deleteCommentHandler,
         deleteProjectHandler,
         getSearchProjects,
         acceptHandler,

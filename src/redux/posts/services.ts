@@ -44,6 +44,17 @@ export const getCommentsService = createAsyncThunk('posts/getcomments', async (u
     })
 })
 
+export const deleteCommentService = createAsyncThunk('posts/deletecomment', async(id: string) => {
+    return await axios.delete(`${API_URL}/comments`, {
+        headers: {
+            'x-api-key': process.env.REACT_APP_API_KEY,
+        },
+        data: {
+            post_id: id
+        }
+    })
+})
+
 export const deletePostService = createAsyncThunk('posts/delete', async(id: string) => {
     return await axios.delete(`${API_URL}/posts`, {
         headers: {

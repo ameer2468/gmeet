@@ -27,6 +27,12 @@ const ModalManager = () => {
                 submit={() => postHook.deletePostHandler()}
                 title={'Delete Post'}
             />
+        case 'DELETE_COMMENT':
+            return <Confirm
+                message={'Are you sure you want to delete this comment?'}
+                submit={() => projectHook.deleteProjectHandler()}
+                title={'Delete Project'}
+            />
         case 'DELETE_PROJECT':
             return <Confirm
                 message={'Are you sure you want to delete this project?'}

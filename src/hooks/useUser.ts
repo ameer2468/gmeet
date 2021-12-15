@@ -7,9 +7,10 @@ export function useUser() {
     const user = useAppSelector(userReducer)
     const {userInfo, authUser} = user;
 
+
     return {
         user,
         userInfo,
-        authUser
+        authUser,
     }
 }

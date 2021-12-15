@@ -63,9 +63,9 @@ const Post = ({data}: props) => {
                 </div>
             </div>
             {data.comments === undefined  ? <div style={{marginTop: '2rem'}}><LoadingSpinner height={60} width={60}/></div> :
-                data.comments.map((value: comment) => {
+                data.comments.map((value: comment, index: number) => {
                         return (
-                           <Comment key={value.id} data={value}/>
+                           <Comment index={index} key={value.id} data={value}/>
                         )
                     })
             }

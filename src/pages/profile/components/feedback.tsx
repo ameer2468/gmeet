@@ -12,7 +12,7 @@ import BeatLoader from "react-spinners/BeatLoader";
 const Posts = () => {
 
     const postHook = usePosts();
-    const {posts, postForm, postsLoading, commentLoading} = postHook.postsStore;
+    const {posts, postForm, postsLoading, addPostLoading} = postHook.postsStore;
     const postLength = postForm.post.length;
 
     return (
@@ -32,7 +32,7 @@ const Posts = () => {
                  <button
                      disabled={postLength === 0} onClick={() => postHook.submitPost()}
                      className={`btn btn--green ${postsLoading ? 'btn btn--green' : postLength === 0 && 'disabledButton'}`}>
-                     {postsLoading ?
+                     {postsLoading || addPostLoading ?
                          <BeatLoader size={8} margin={1} color={'#2a2c3d'} /> :
                          <p> <FontAwesomeIcon className='commentIcon' icon={faComments}/>Post</p>
                      }

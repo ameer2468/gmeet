@@ -77,7 +77,7 @@ export const postsSlice = createSlice({
             state.posts = state.posts.filter((value) => {
                 return value.post_id !== action.payload;
             })
-        }
+        },
     },
 })
 

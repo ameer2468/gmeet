@@ -12,8 +12,6 @@ const Projects = () => {
     const {loading} = projectStore;
     const userProjects = projectStore.userProjects;
 
-    console.log(loading)
-
     return (
         <Card height={'60rem'} customClass='listings' flex={'0 0 100%'}>
             <div className="container">
