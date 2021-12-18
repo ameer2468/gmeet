@@ -4,17 +4,23 @@ import type {RootState} from "../store";
 // Define a type for the slice state
 interface UserState {
     userInfo: {
-        username: ''
+        id: string;
+        username: string;
+        profession: string;
+        website: string;
     }
-    authUser: any,
-    LoggedIn: boolean
+    authUser: any;
+    LoggedIn: boolean;
     Loading: boolean;
 }
 
 // Define the initial state using that type
 const initialState: UserState = {
     userInfo: {
+        id: '',
         username: '',
+        profession: '',
+        website: ''
     },
     authUser: {},
     LoggedIn: false,

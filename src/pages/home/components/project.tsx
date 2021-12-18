@@ -5,7 +5,7 @@ import {useProject} from "../../../hooks/useProject";
 import {selectedProject} from "../../../redux/projects/projectSlice";
 import {useAppDispatch} from "../../../redux/hooks";
 import {useUser} from "../../../hooks/useUser";
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 
 interface props {
     data: any;
@@ -21,9 +21,12 @@ const Project = ({data, remove, noRequest, profile}: props) => {
     const {projectRequests} = projectHook.projects;
     const dispatch = useAppDispatch();
     const userHook = useUser();
-    const {username} = userHook.user.userInfo;
+    const {username} = userHook.authUser;
+    const userparams: {username: string} = useParams();
     const {loading} = projectHook.projects;
     const [checkJoined, setCheckJoined] = useState<any>([]);
+    const checkUser = userparams.username === username;
+
 
     useEffect(() => {
         const check = projectRequests.filter((value) => {
@@ -32,47 +35,40 @@ const Project = ({data, remove, noRequest, profile}: props) => {
         setCheckJoined(check)
     }, [loading, data.project_id, projectRequests, username])
 
-    const buttonsWrap = {
-        justifyContent: `${username !== data.owner ? 'center' : 'center'}`,
-        display: 'flex'
-    }
-
-    const profileButtonsWrap = {
-        justifyContent: 'space-between',
-        display: 'flex'
-    }
 
     return (
        <>
            {loading ? '' :
                <div className='projectCard'>
                    {!remove ? '' :
-                       <div
-                           className="delete"
-                           onClick={() => {
-                               projectHook.toggleDelete(data)
-                           }}
-                       >
-                           <FontAwesomeIcon className='icon' icon={faTrash}/>
-                       </div>
+                       !checkUser ? '' :
+                           <div
+                               className="delete"
+                               onClick={() => {
+                                   projectHook.toggleDelete(data)
+                               }}
+                           >
+                               <FontAwesomeIcon className='icon' icon={faTrash}/>
+                           </div>
                    }
                    <h2>{data.name}</h2>
                    <p>{data.description}</p>
 
-                   <div style={profile ? profileButtonsWrap : buttonsWrap}>
+                   <div className={'buttons'}>
                        <Link to={`/project/${data.project_id}`}>
                            <button className='btn btn--gray'>Project Details</button>
                        </Link>
                        {noRequest ?
-                           <button
-                               onClick={() => {
-                                   projectHook.toggleRequests('REQUESTS')
-                                   dispatch(selectedProject(data))
-                               }
-                               }
-                               className='btn btn--transparent'>
-                               Join requests
-                           </button>
+                           !checkUser ? '' :
+                               <button
+                                   onClick={() => {
+                                       projectHook.toggleRequests('REQUESTS')
+                                       dispatch(selectedProject(data))
+                                   }
+                                   }
+                                   className='btn btn--transparent'>
+                                   Join requests
+                               </button>
                            :
                            userHook.user.userInfo.username !== data.owner && checkJoined.length === 0  ?
                                <button onClick={() => {

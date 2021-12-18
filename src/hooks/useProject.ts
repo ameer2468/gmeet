@@ -101,11 +101,11 @@ export const useProject = () => {
             return value.project_id === data.project_id;
         })
         const membersArr = pullProject[0].members;
-        const addMember = [membersArr,data.members].toString()
+        const newMembers = [membersArr,data.members].toString()
         return dispatch(acceptRequests(data = {
             id: data.id,
             project_id: projects.selectedProject.project_id,
-            members: addMember
+            members: newMembers
         })).then(() => {
             notify('Member successfully added to project!')
             dispatch(requestsLoading(false));

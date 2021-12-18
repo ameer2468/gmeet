@@ -22,7 +22,7 @@ const App = () => {
 
 
     const userRedux = useAppSelector(userReducer)
-    const {username} = userRedux.userInfo;
+    const {username} = userRedux.authUser;
     const location = useLocation();
     const dispatch = useAppDispatch();
     const projectHook = useProject();

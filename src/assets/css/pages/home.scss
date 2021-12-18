@@ -33,6 +33,7 @@
       border-radius: 0.5rem;
       transition: all 0.3s;
       padding: 3rem;
+      text-align: center;
       a {
         width: 14.5rem;
       }
@@ -63,8 +64,9 @@
         line-height: 2.5rem;
       }
       .buttons {
-        display: flex;
-        justify-content: space-between;
+          button {
+            margin: 0 0.5rem;
+          }
       }
       h2 {
         color: white;

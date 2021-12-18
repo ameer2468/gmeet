@@ -3,6 +3,7 @@ import * as type from "../pages/register/types";
 import {Auth} from "aws-amplify";
 import {useAppDispatch} from "../redux/hooks";
 import {loading} from "../redux/user/userSlice";
+import {createUserThunk} from "../redux/user/thunk";
 
 
 export function useRegister() {
@@ -47,14 +48,24 @@ export function useRegister() {
                     'custom:profession': inputValues.profession
                 }
             })
-                .then(() => {
+                .then((res) => {
                     setStep(prevState => prevState + 1);
                     setError('')
                     dispatch(loading(false))
+                    dispatch(createUserThunk({
+                        id: res.userSub,
+                        username: inputValues.username.toLowerCase(),
+                        profession: inputValues.profession,
+                        website: ''
+                    }))
                 })
                 .catch(err => {
-                    setError(err)
-                    dispatch(loading(false))
+                    if (err.code === 'UsernameExistsException'){
+                        setError('The username entered is taken')
+                    } else {
+                        setError(err.message)
+                        dispatch(loading(false))
+                    }
                 })
         }
     }

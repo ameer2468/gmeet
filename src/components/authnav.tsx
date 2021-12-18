@@ -13,7 +13,7 @@ import {NavLink} from "react-router-dom";
 const Authnav = () => {
 
     const userRedux = useAppSelector(userReducer)
-    const {username} = userRedux.userInfo;
+    const {authUser} = userRedux;
     const [open, setOpen] = useState(false);
     const loginHook = useLogin();
     const closeDrop = () => {
@@ -40,14 +40,14 @@ const Authnav = () => {
                     </div>
                     <div ref={ref} onClick={() => setOpen(!open)} className="profile">
                         <PhotoPlaceholder className='userImage' width={40} height={40} />
-                        <p>{username}</p>
+                        <p>{!authUser.username ? '' : authUser.username}</p>
                         {open ? <motion.div initial={'hidden'} animate={'active'}
                                             variants={regularVariants}
                                             className={'dropdown'}>
                             <ul>
                                 <li>
                                     <NavLink
-                                        to={`/profile/${username}`}
+                                        to={`/profile/${authUser.username}`}
                                     >
                                         <FontAwesomeIcon className='icon' icon={faUser}/>
                                         Profile

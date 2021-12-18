@@ -57,7 +57,7 @@ body {
 }
 
 .header {
-  width: calc(100% - 2%);
+  width: 98%;
   height: 50vh;
 }
 .header .container {
@@ -142,6 +142,7 @@ body {
   border-radius: 0.5rem;
   transition: all 0.3s;
   padding: 3rem;
+  text-align: center;
 }
 .HomeContent .homeContainer .projectCard a {
   width: 14.5rem;
@@ -172,9 +173,8 @@ body {
   font-size: 1.55rem;
   line-height: 2.5rem;
 }
-.HomeContent .homeContainer .projectCard .buttons {
-  display: flex;
-  justify-content: space-between;
+.HomeContent .homeContainer .projectCard .buttons button {
+  margin: 0 0.5rem;
 }
 .HomeContent .homeContainer .projectCard h2 {
   color: white;
@@ -380,7 +380,7 @@ body {
   position: relative;
 }
 .profileContent .profileContainer .listings .projectCard .btn {
-  max-width: 15rem;
+  max-width: 13rem;
 }
 .profileContent .profileContainer .listings .projectCard a {
   width: 14.5rem;
@@ -1081,7 +1081,7 @@ body {
   width: 14rem;
 }
 .homeNav .line {
-  width: calc(100% - 2%);
+  width: 98%;
   height: 1px;
   opacity: 0.1;
   background-color: #c1c1c1;

@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {Auth} from "aws-amplify";
-import {loading, status, userDetails} from "../redux/user/userSlice";
+import {authedUser, loading, status} from "../redux/user/userSlice";
 import {Login} from "../pages/register/types";
 import {useAppDispatch} from "../redux/hooks";
 import {useHistory} from "react-router-dom";
@@ -29,7 +29,7 @@ export function useLogin() {
                     password: ''
                 })
                 Auth.currentUserInfo().then((data) => {
-                    dispatch(userDetails(data))
+                    dispatch(authedUser(data))
                 })
                 dispatch(status(true))
                 dispatch(loading(false))
@@ -48,11 +48,12 @@ export function useLogin() {
         dispatch(loading(true))
         localStorage.removeItem('persist:root')
         Auth.signOut().then(() => {
-            dispatch(userDetails({
+            dispatch(authedUser({
                 username: ''
             }))
             dispatch(loading(false));
             dispatch(status(false));
+            history.push('/')
         })
     }
 

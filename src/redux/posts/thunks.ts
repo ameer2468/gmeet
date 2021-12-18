@@ -12,7 +12,6 @@ import {comment, post} from "../types";
 import {
     postsArr,
     addPosts,
-    postsLoadingHandler,
     deletePost, addPostHandler
 } from "./postsSlice";
 import {notify} from "../../helpers/notify";
@@ -98,7 +97,6 @@ export function deletePostThunk(id: string) {
 export function getPostsThunk(user: string) {
 return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
     await dispatch(getPostsService(user)).then((res: any) => {
-        dispatch(postsLoadingHandler(false))
         const {rows} = res.payload.data;
         dispatch(postsArr(rows))
     }).catch(() => {
