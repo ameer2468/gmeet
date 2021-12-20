@@ -22,7 +22,7 @@ const App = () => {
 
 
     const userRedux = useAppSelector(userReducer)
-    const {username} = userRedux.authUser;
+    const {username} = userRedux.authUser === undefined ? '' : userRedux.authUser;
     const location = useLocation();
     const dispatch = useAppDispatch();
     const projectHook = useProject();

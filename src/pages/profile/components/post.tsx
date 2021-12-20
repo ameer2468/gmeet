@@ -11,6 +11,7 @@ import {comment} from "../../../redux/types";
 import LoadingSpinner from "../../../components/global/LoadingSpinner";
 import Comment from "./comment";
 import BeatLoader from "react-spinners/BeatLoader";
+import {useParams} from "react-router-dom";
 
 
 interface props {
@@ -29,6 +30,9 @@ const Post = ({data}: props) => {
     const postHook = usePosts();
     const {commentLoading} = postHook.postsStore;
     const {comment} = postHook.postsStore.postForm;
+    const params: {username: string} = useParams();
+    const {user} = useUser();
+    const checkUser = params.username === user.authUser.username;
 
     useEffect(() => {
     }, [data])
@@ -55,12 +59,12 @@ const Post = ({data}: props) => {
             </div>
             <p className='postText'>{data.post}</p>
             <div className="actions">
-                <div onClick={() => {
+                {checkUser ? <div onClick={() => {
                     dispatch(selectPost(data))
                     dispatch(ActiveModal('DELETE_POST'))
                 }} className="delete">
                     <FontAwesomeIcon icon={faTrash}/>
-                </div>
+                </div> : ''}
             </div>
             {data.comments === undefined  ? <div style={{marginTop: '2rem'}}><LoadingSpinner height={60} width={60}/></div> :
                 data.comments.map((value: comment, index: number) => {

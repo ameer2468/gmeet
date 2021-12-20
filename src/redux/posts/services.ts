@@ -1,6 +1,7 @@
 import axios from "axios";
 import {comment, post} from "../types";
 import {createAsyncThunk} from "@reduxjs/toolkit";
+import {loadToken} from "../../services/loadToken";
 
 
 const API_URL = process.env.REACT_APP_API_URL;
@@ -67,9 +68,11 @@ export const deletePostService = createAsyncThunk('posts/delete', async(id: stri
 })
 
 export const getPostsService = createAsyncThunk('posts/getposts', async (user: string) => {
+    const token = await loadToken();
     return await axios.get(`${API_URL}/posts/?user=${user}`, {
         headers: {
             'x-api-key': process.env.REACT_APP_API_KEY,
+            Authorization: token
         }
     })
 })

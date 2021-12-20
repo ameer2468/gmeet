@@ -6,6 +6,8 @@ import {useUser} from "../../../hooks/useUser";
 import ActionsMenu from "../../../components/global/ActionsMenu";
 import {useDetectClickOutside} from "react-detect-click-outside";
 import {useProject} from "../../../hooks/useProject";
+import {NavLink} from "react-router-dom";
+
 
 interface props {
     data: comment;
@@ -23,16 +25,17 @@ const Comment = (props: props) => {
     }
     const options = [{name: 'Delete', onClick: () => projectHook.deleteCommentHandler(props.data.id, userHook.userInfo.username)}]
     const ref = useDetectClickOutside({ onTriggered: closeDrop});
+    const checkUser = props.data.posted_by === authUser.username;
 
 
     return (
                 <div key={props.data.id} className="comments">
                 <div className="comment">
                     <div className="commentInfo">
-                        <p className='poster'>{props.data.posted_by}</p>
+                        <NavLink to={`/profile/${props.data.posted_by}`}><p className='poster'>{props.data.posted_by}</p></NavLink>
                             <div className="side">
                                 <p className='date'>{props.data.date}</p>
-                                {props.data.posted_by === authUser.username ?
+                                {checkUser ?
                                     <div ref={ref} onClick={() => setShow(!show)} className="comment-menu">
                                     <ActionsMenu show={show} options={options}/>
                                     <FontAwesomeIcon className='icon' icon={faEllipsisH}/>

@@ -13,7 +13,7 @@ import {NavLink} from "react-router-dom";
 const Authnav = () => {
 
     const userRedux = useAppSelector(userReducer)
-    const {authUser} = userRedux;
+    const authUser = userRedux.authUser === undefined ? '' : userRedux.authUser;
     const [open, setOpen] = useState(false);
     const loginHook = useLogin();
     const closeDrop = () => {

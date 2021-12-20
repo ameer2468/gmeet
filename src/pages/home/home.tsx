@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import Search from "./components/search";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {ActiveModal} from "../../redux/modals/modalSlice";
-import {projectReducer} from "../../redux/projects/projectSlice";
+import {projectLoading, projectReducer} from "../../redux/projects/projectSlice";
 import LoadingSpinner from "../../components/global/LoadingSpinner";
 import Project from "./components/project";
 import {useProject} from "../../hooks/useProject";
@@ -16,11 +16,12 @@ const Home = () => {
     const {projects} = projectStore;
     const projectHook = useProject();
     const {projectForm} = projectHook.projects;
-    const [value] = useDebounce(projectForm.searchterm, 1000);
+    const [value] = useDebounce(projectForm.searchterm, 500);
 
     /*Requests to Load App*/
 
     useEffect(() => {
+        dispatch(projectLoading(true))
         const getProjectsData = async () => {
            if (value.length > 0 || value.length === 0) {
                await dispatch(getProjectsThunk(value))

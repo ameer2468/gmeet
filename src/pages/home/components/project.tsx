@@ -21,7 +21,7 @@ const Project = ({data, remove, noRequest, profile}: props) => {
     const {projectRequests} = projectHook.projects;
     const dispatch = useAppDispatch();
     const userHook = useUser();
-    const {username} = userHook.authUser;
+    const {username} = userHook.authUser === undefined ? '' : userHook.authUser;
     const userparams: {username: string} = useParams();
     const {loading} = projectHook.projects;
     const [checkJoined, setCheckJoined] = useState<any>([]);

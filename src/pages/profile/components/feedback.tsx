@@ -8,43 +8,50 @@ import { Scrollbars } from 'react-custom-scrollbars';
 import Post from "./post";
 import LoadingSpinner from "../../../components/global/LoadingSpinner";
 import BeatLoader from "react-spinners/BeatLoader";
+import {useParams} from "react-router-dom";
+import {useUser} from "../../../hooks/useUser";
 
 const Posts = () => {
 
     const postHook = usePosts();
     const {posts, postForm, postsLoading, addPostLoading} = postHook.postsStore;
     const postLength = postForm.post.length;
+    const params: {username: string} = useParams();
+    const {user} = useUser();
+    const checkUser = params.username === user.authUser.username;
 
     return (
         <Card height={'auto'} customClass='feedback' flex={'0 0 59%'}>
             <div className="profilePosts">
                 <h1>Profile Posts</h1>
-             <div className="createPost">
-                 <TextArea
-                     useHook={postHook}
-                     height={'7rem'}
-                     name={'post'}
-                     value={postForm.post}
-                     maxLength={200}
-                     placeholder='Write a post...'
-                     maxWidth={'62rem'}
-                 />
-                 <button
-                     disabled={postLength === 0} onClick={() => postHook.submitPost()}
-                     className={`btn btn--green ${postsLoading ? 'btn btn--green' : postLength === 0 && 'disabledButton'}`}>
-                     {postsLoading || addPostLoading ?
-                         <BeatLoader size={8} margin={1} color={'#2a2c3d'} /> :
-                         <p> <FontAwesomeIcon className='commentIcon' icon={faComments}/>Post</p>
-                     }
-                 </button>
-             </div>
+                {!checkUser ? '' :
+                    <div className="createPost">
+                        <TextArea
+                            useHook={postHook}
+                            height={'7rem'}
+                            name={'post'}
+                            value={postForm.post}
+                            maxLength={200}
+                            placeholder='Write a post...'
+                            maxWidth={'62rem'}
+                        />
+                        <button
+                            disabled={postLength === 0} onClick={() => postHook.submitPost()}
+                            className={`btn btn--green ${postsLoading ? 'btn btn--green' : postLength === 0 && 'disabledButton'}`}>
+                            {postsLoading || addPostLoading ?
+                                <BeatLoader size={8} margin={1} color={'#2a2c3d'} /> :
+                                <p> <FontAwesomeIcon className='commentIcon' icon={faComments}/>Post</p>
+                            }
+                        </button>
+                    </div>
+                }
                 {posts.length === 0 ?
                     <h2 className='noPosts'>
                         No posts
                     </h2>
                     :
                    <Scrollbars
-                    style={{height: 280, marginTop: '2rem'}}
+                    style={{height: !checkUser ? 350 : 280, marginTop: '2rem'}}
                    >
                        {postsLoading ?
                            <div style={{
