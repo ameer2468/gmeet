@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBell, faCog, faSignOutAlt, faUser} from "@fortawesome/free-solid-svg-icons";
-import {PhotoPlaceholder} from "react-placeholder-image";
 import {useAppSelector} from "../redux/hooks";
 import {userReducer} from "../redux/user/userSlice";
 import { useDetectClickOutside } from 'react-detect-click-outside';
@@ -39,8 +38,8 @@ const Authnav = () => {
                         <FontAwesomeIcon className='icon' icon={faBell}/>
                     </div>
                     <div ref={ref} onClick={() => setOpen(!open)} className="profile">
-                        <PhotoPlaceholder className='userImage' width={40} height={40} />
-                        <p>{!authUser.username ? '' : authUser.username}</p>
+                        <img alt='profile' src={userRedux.authUser.userImage} className='userImage'/>
+                        <p>{authUser === undefined ? '' : authUser.username}</p>
                         {open ? <motion.div initial={'hidden'} animate={'active'}
                                             variants={regularVariants}
                                             className={'dropdown'}>

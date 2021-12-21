@@ -4,6 +4,7 @@ import {authedUser, loading, status} from "../redux/user/userSlice";
 import {Login} from "../pages/register/types";
 import {useAppDispatch} from "../redux/hooks";
 import {useHistory} from "react-router-dom";
+import {s3} from "../services/s3";
 
 export function useLogin() {
     const dispatch = useAppDispatch();
@@ -23,13 +24,23 @@ export function useLogin() {
             await Auth.signIn({
                 username: inputValues.username,
                 password: inputValues.password
-            }).then(() => {
+            }).then(async () => {
                 setInputValues({
                     username: '',
                     password: ''
                 })
-                Auth.currentUserInfo().then((data) => {
-                    dispatch(authedUser(data))
+                await Auth.currentUserInfo().then((data) => {
+                    const getParams = {
+                        Bucket: 'gmeet-images',
+                        Key: `${inputValues.username}/profile.png`,
+                    };
+                    s3.getSignedUrlPromise('getObject', getParams
+                    ).then((url) => {
+                        dispatch(authedUser({...data, userImage: url}))
+                        dispatch(loading(false))
+                    }).catch((err) => {
+                        console.log(err)
+                    })
                 })
                 dispatch(status(true))
                 dispatch(loading(false))

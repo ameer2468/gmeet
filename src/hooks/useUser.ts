@@ -1,45 +1,39 @@
-import {useAppSelector} from "../redux/hooks";
-import {userReducer} from "../redux/user/userSlice";
-import {useState} from "react";
-import AWS from 'aws-sdk';
+import {useAppDispatch, useAppSelector} from "../redux/hooks";
+import {authedUser, userDetails, userImageHandler, userImageUpload, userReducer} from "../redux/user/userSlice";
 import axios from "axios";
+import {s3} from '../services/s3';
 
 
 export function useUser() {
     const user = useAppSelector(userReducer)
     const {userInfo, authUser} = user;
-    const [userImage, setUserImage] = useState('');
-
-
+    const dispatch = useAppDispatch();
 
     /*User Profile pictures*/
 
-    AWS.config.update({
-        accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
-        secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY_ID,
-    })
-    const s3 = new AWS.S3({
-        params: {Bucket: 'gmeet-images'},
-        region: 'us-east-1',
-        signatureVersion: 'v4'
-    });
-
-    const uploadFile = async (file: any) => {
+    const uploadFile = async () => {
+        dispatch(userImageHandler(true))
+        const file = user.imageUpload;
         const putParams = {
             Bucket: 'gmeet-images',
-            Key: file.name,
+            Key: `${userInfo.username}/profile.png`,
             ContentType: 'image/*'
         };
         const getParams = {
             Bucket: 'gmeet-images',
-            Key: file.name,
+            Key: `${userInfo.username}/profile.png`,
         };
         await s3.getSignedUrlPromise('putObject', putParams).then(async (res) => {
             await axios.put(res, file)
-            s3.getSignedUrlPromise('getObject', getParams
-            ).then((url) => {
-                setUserImage(url)
-            })
+        })
+        s3.getSignedUrlPromise('getObject', getParams
+        ).then((url) => {
+            const updatedObject = {...userInfo, userImage: url}
+            const authObjectUpdate = {...authUser, userImage: url}
+            dispatch(userDetails(updatedObject))
+            dispatch(authedUser(authObjectUpdate))
+            dispatch(userImageHandler(false))
+            dispatch(userImageUpload({name: ''}));
         })
     }
 
@@ -47,7 +41,6 @@ export function useUser() {
     return {
         user,
         userInfo,
-        userImage,
         uploadFile,
         authUser,
     }

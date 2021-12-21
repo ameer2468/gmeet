@@ -29,7 +29,7 @@ const Home = () => {
             }
         }
             getProjectsData();
-    }, [value, dispatch])
+    }, [dispatch, value])
 
 
     return (

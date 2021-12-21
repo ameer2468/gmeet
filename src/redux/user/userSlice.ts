@@ -8,10 +8,13 @@ interface UserState {
         username: string;
         profession: string;
         website: string;
+        userImage: string;
     }
     authUser: any;
     LoggedIn: boolean;
     Loading: boolean;
+    userImageLoading: boolean;
+    imageUpload: any;
 }
 
 // Define the initial state using that type
@@ -20,11 +23,16 @@ const initialState: UserState = {
         id: '',
         username: '',
         profession: '',
-        website: ''
+        website: '',
+        userImage: ''
     },
     authUser: {},
     LoggedIn: false,
-    Loading: false
+    imageUpload: {
+        name: ''
+    },
+    Loading: false,
+    userImageLoading: false
 }
 
 export const userSlice = createSlice({
@@ -38,6 +46,12 @@ export const userSlice = createSlice({
         authedUser: (state, action: PayloadAction<any>) => {
            state.authUser = action.payload
         },
+        userImageHandler: (state, action: PayloadAction<boolean>) => {
+          state.userImageLoading = action.payload;
+        },
+        userImageUpload: (state, action: PayloadAction<any>) => {
+            state.imageUpload = action.payload;
+        },
         status: (state, action: PayloadAction<boolean>) => {
             state.LoggedIn = action.payload;
         },
@@ -47,7 +61,7 @@ export const userSlice = createSlice({
     },
 })
 
-export const { userDetails, status, loading, authedUser } = userSlice.actions
+export const { userDetails, status, loading, authedUser, userImageHandler, userImageUpload } = userSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 export const userReducer = (state: RootState) => state.userStore;

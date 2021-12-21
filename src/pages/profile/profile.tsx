@@ -14,13 +14,12 @@ const Profile = () => {
     const userInfo = useAppSelector(userReducer)
     const dispatch = useAppDispatch();
 
-
-
     useEffect(() => {
         dispatch(postsLoadingHandler(true))
         dispatch(loading(true))
         dispatch(getAllUserData(username))
     }, [dispatch, username])
+
 
     return (
         <div className="profileContent">

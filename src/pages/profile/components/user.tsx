@@ -1,11 +1,12 @@
-import React, {useState} from 'react';
+import React, {useEffect, useRef} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faGlobe, faEdit} from "@fortawesome/free-solid-svg-icons";
+import {faGlobe, faEdit, faPencilAlt,faCheck} from "@fortawesome/free-solid-svg-icons";
 import Card from "./card";
 import LoadingSpinner from "../../../components/global/LoadingSpinner";
-import {useAppSelector} from "../../../redux/hooks";
-import {userReducer} from "../../../redux/user/userSlice";
+import {useAppDispatch, useAppSelector} from "../../../redux/hooks";
+import {userImageUpload, userReducer} from "../../../redux/user/userSlice";
 import {useUser} from "../../../hooks/useUser";
+import placeholder from '../../../assets/images/placeholder.png';
 
 interface props {
     data: any;
@@ -15,10 +16,18 @@ const User = ({data}: props) => {
 
     const {Loading} = useAppSelector(userReducer);
     const userHook = useUser();
-    const [selectedFile, setSelectedFile] = useState(null);
+    const {imageUpload} = userHook.user;
+    const uploadRef = useRef<any>(null);
+    const dispatch = useAppDispatch();
 
-    const handleFileInput = async (e: any) => {
-            setSelectedFile(e.target.files[0])
+    useEffect(() => {
+    }, [data])
+
+    const handleUploadClick = () => {
+        uploadRef.current?.click();
+    }
+    const handleFileInput = (e: any) => {
+       dispatch(userImageUpload(e.target.files[0]));
     }
 
     return (
@@ -36,7 +45,22 @@ const User = ({data}: props) => {
                             <LoadingSpinner height={60} width={60}/>
                         </div> :
                             <div className="wrap">
-                                <img src={userHook.userImage ? userHook.userImage : ''} alt="profile"/>
+                                {userHook.user.userImageLoading ? <div style={{marginBottom: '2rem'}}><LoadingSpinner height={60} width={60}/></div> :
+                                    <div className="userImage">
+                                        {data.username !== userHook.authUser.username ? '' :
+                                            <div className="actions">
+                                                <button onClick={handleUploadClick} className="uploadImage">
+                                                    <FontAwesomeIcon icon={faPencilAlt}/>
+                                                </button>
+                                                {imageUpload.name !== '' ?
+                                                    <button className='confirm' onClick={() => userHook.uploadFile()}>
+                                                        <FontAwesomeIcon icon={faCheck}/>
+                                                </button> : ''}
+                                            </div>
+                                        }
+                                        <img onError={e => {e.currentTarget.src = placeholder}} src={data.userImage} alt="profile"/>
+                                    </div>
+                                }
                                 <div className="titles">
                                     <h1>{data.username}</h1>
                                     <h2>
@@ -53,8 +77,7 @@ const User = ({data}: props) => {
                                     <FontAwesomeIcon style={{marginRight: '0.5rem'}} icon={faEdit}/>
                                     Edit Profile
                                 </button>
-                                <input type="file" onChange={handleFileInput}/>
-                                <button onClick={() => userHook.uploadFile(selectedFile)}>upload</button>
+                                <input style={{display: 'none'}} ref={uploadRef} type="file" onChange={handleFileInput}/>
                             </div>
                         }
                     </div>

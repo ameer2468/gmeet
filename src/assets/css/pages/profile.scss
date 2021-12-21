@@ -298,14 +298,6 @@
           width: 100%;
           max-width: 50%;
           text-align: center;
-          img {
-            top: 1.5rem;
-            display: inline-block;
-            width: 100%;
-            margin-right: 0;
-            max-width: 10rem;
-            margin-bottom: 3rem;
-          }
           .titles {
             text-align: center;
           }
@@ -316,6 +308,56 @@
           width: 100%;
           justify-content: space-evenly;
           height: auto;
+          .userImage {
+            background: lighten(rgba($cardbg, 0.3), 10);
+            border-radius: 20rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 12rem;
+            height: 12rem;
+            position: relative;
+            margin: 0 auto 3rem auto;
+            .actions {
+              position: absolute;
+              right: 0;
+              top: 8rem;
+              .confirm {
+                background: #4a5dc7;
+                border: 0;
+                color: white;
+                width: 3rem;
+                height: 3rem;
+                border-radius: 5rem;
+                margin-left: 6rem;
+                transition: all 0.3s;
+                &:hover {
+                  transition: all 0.3s;
+                  background: darken(#4a5dc7, 10%);
+                  cursor: pointer;
+                }
+              }
+              .uploadImage {
+                background: $green;
+                color: $cardbg;
+                width: 3rem;
+                height: 3rem;
+                border: 0;
+                border-radius: 5rem;
+                transition: all 0.3s;
+                &:hover {
+                  transition: all 0.3s;
+                  background: darken($green, 10%);
+                  cursor: pointer;
+                }
+              }
+            }
+            img {
+              width: 100%;
+              max-width: 7rem;
+              align-self: center;
+            }
+          }
         }
         .website {
           margin: 2.5rem auto 0 auto;

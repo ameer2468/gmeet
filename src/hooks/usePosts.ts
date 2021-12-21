@@ -12,8 +12,7 @@ export const usePosts = () => {
     const dispatch = useAppDispatch();
     const postsStore = useAppSelector(postsReducer);
     const userStore = useAppSelector(userReducer);
-    const authUser = userStore.authUser;
-    const {username} = authUser === undefined ? '' : authUser;
+    const username = userStore.authUser.username;
 
 
     function onChange(key: string, value: string) {

@@ -17,6 +17,7 @@ const reducers = combineReducers({
 
 const persistConfig = {
     key: 'root',
+    blacklist: ['modalStore', 'projectStore', 'postsStore'],
     storage
 };
 
