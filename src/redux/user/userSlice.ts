@@ -28,9 +28,7 @@ const initialState: UserState = {
     },
     authUser: {},
     LoggedIn: false,
-    imageUpload: {
-        name: ''
-    },
+    imageUpload: '',
     Loading: false,
     userImageLoading: false
 }

@@ -33,7 +33,7 @@ export function useUser() {
             dispatch(userDetails(updatedObject))
             dispatch(authedUser(authObjectUpdate))
             dispatch(userImageHandler(false))
-            dispatch(userImageUpload({name: ''}));
+            dispatch(userImageUpload(''));
         })
     }
 

@@ -52,7 +52,7 @@ const User = ({data}: props) => {
                                                 <button onClick={handleUploadClick} className="uploadImage">
                                                     <FontAwesomeIcon icon={faPencilAlt}/>
                                                 </button>
-                                                {imageUpload.name !== '' ?
+                                                {imageUpload !== '' ?
                                                     <button className='confirm' onClick={() => userHook.uploadFile()}>
                                                         <FontAwesomeIcon icon={faCheck}/>
                                                 </button> : ''}
