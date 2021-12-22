@@ -5,6 +5,7 @@ import {Login} from "../pages/register/types";
 import {useAppDispatch} from "../redux/hooks";
 import {useHistory} from "react-router-dom";
 import {s3} from "../services/s3";
+import {notify} from "../helpers/notify";
 
 export function useLogin() {
     const dispatch = useAppDispatch();
@@ -38,8 +39,8 @@ export function useLogin() {
                     ).then((url) => {
                         dispatch(authedUser({...data, userImage: url}))
                         dispatch(loading(false))
-                    }).catch((err) => {
-                        console.log(err)
+                    }).catch(() => {
+                        notify('An error has occurred')
                     })
                 })
                 dispatch(status(true))
