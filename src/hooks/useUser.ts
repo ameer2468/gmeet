@@ -17,7 +17,7 @@ export function useUser() {
         const putParams = {
             Bucket: 'gmeet-images',
             Key: `${userInfo.username}/profile.png`,
-            ContentType: 'image/*'
+            ContentType: 'image/*',
         };
         const getParams = {
             Bucket: 'gmeet-images',
@@ -32,9 +32,9 @@ export function useUser() {
             const authObjectUpdate = {...authUser, userImage: url}
             dispatch(userDetails(updatedObject))
             dispatch(authedUser(authObjectUpdate))
-            dispatch(userImageHandler(false))
-            dispatch(userImageUpload(''));
+            dispatch(userImageUpload(undefined));
         })
+        dispatch(userImageHandler(false))
     }
 
 

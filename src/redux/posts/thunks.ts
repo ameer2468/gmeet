@@ -55,13 +55,9 @@ export function addCommentThunk(data: comment)  {
     return async (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
         const {postsStore} = getState();
         const originalPosts = postsStore.posts;
-        await dispatch(addCommentService(data)).then(() => {
+        dispatch(addCommentService(data)).then(() => {
             const newComment = {
-                post_id: data.post_id,
-                id: data.id,
-                comment: data.comment,
-                date: data.date,
-                posted_by: data.posted_by
+               ...data
             }
             const updateArr = originalPosts.map((value) => {
                 return value.post_id === data.post_id ?

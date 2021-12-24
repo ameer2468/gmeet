@@ -16,6 +16,8 @@ const User = ({data}: props) => {
 
     const {Loading} = useAppSelector(userReducer);
     const userHook = useUser();
+    const {userImageLoading} = userHook.user;
+    const authUser = userHook.authUser.username;
     const {imageUpload} = userHook.user;
     const uploadRef = useRef<any>(null);
     const dispatch = useAppDispatch();
@@ -45,17 +47,19 @@ const User = ({data}: props) => {
                             <LoadingSpinner height={60} width={60}/>
                         </div> :
                             <div className="wrap">
-                                {userHook.user.userImageLoading ? <div style={{marginBottom: '2rem'}}><LoadingSpinner height={60} width={60}/></div> :
+                                {userImageLoading ? <div style={{marginBottom: '2rem'}}><LoadingSpinner height={60} width={60}/></div> :
                                     <div className="userImage">
-                                        {data.username !== userHook.authUser.username ? '' :
+                                        {data.username !== authUser ? '' :
                                             <div className="actions">
                                                 <button onClick={handleUploadClick} className="uploadImage">
                                                     <FontAwesomeIcon icon={faPencilAlt}/>
                                                 </button>
-                                                {imageUpload !== '' ?
+                                                {imageUpload === undefined || imageUpload === '' ?
+                                                    '' :
                                                     <button className='confirm' onClick={() => userHook.uploadFile()}>
                                                         <FontAwesomeIcon icon={faCheck}/>
-                                                </button> : ''}
+                                                    </button>
+                                                }
                                             </div>
                                         }
                                         <img onError={e => {e.currentTarget.src = placeholder}} src={data.userImage} alt="profile"/>
@@ -73,10 +77,13 @@ const User = ({data}: props) => {
                                         www.aashhab.design
                                     </div>
                                 </a>}
-                                <button style={{marginTop: '3rem'}} className='btn btn--green'>
-                                    <FontAwesomeIcon style={{marginRight: '0.5rem'}} icon={faEdit}/>
-                                    Edit Profile
-                                </button>
+                                {data.username === authUser ?
+                                    <button style={{marginTop: '3rem'}} className='btn btn--green'>
+                                        <FontAwesomeIcon style={{marginRight: '0.5rem'}} icon={faEdit}/>
+                                        Edit Profile
+                                    </button>
+                                    : ''
+                                }
                                 <input style={{display: 'none'}} ref={uploadRef} type="file" onChange={handleFileInput}/>
                             </div>
                         }

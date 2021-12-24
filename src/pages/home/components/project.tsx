@@ -70,7 +70,7 @@ const Project = ({data, remove, noRequest, profile}: props) => {
                                    Join requests
                                </button>
                            :
-                           userHook.user.userInfo.username !== data.owner && checkJoined.length === 0  ?
+                           username !== data.owner && checkJoined.length === 0  ?
                                <button onClick={() => {
                                    projectHook.toggleJoin(data)
                                }} className='btn btn--transparent'>Request To Join</button>

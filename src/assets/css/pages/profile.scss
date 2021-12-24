@@ -126,7 +126,12 @@
         .poster {
           font-weight: bold;
           font-size: 2rem;
+          transition: all 0.3s;
           color: white;
+          &:hover {
+            opacity: 0.5;
+            transition: all 0.3s;
+          }
         }
       }
       .noPosts {
