@@ -258,6 +258,9 @@ body {
 .profileContent .profileContainer .profilePosts .commentInfo .comment-menu .icon {
   font-size: 2.3rem;
 }
+.profileContent .profileContainer .profilePosts .commentInfo .comment-menu:hover {
+  cursor: pointer;
+}
 .profileContent .profileContainer .profilePosts .postInfo {
   display: flex;
   justify-content: space-between;
@@ -273,6 +276,9 @@ body {
   z-index: 50 !important;
   top: 4rem;
   right: 2rem;
+}
+.profileContent .profileContainer .profilePosts .postInfo .ActionsMenu .menuIcon {
+  margin-right: 0.8rem;
 }
 .profileContent .profileContainer .profilePosts .postInfo .date {
   font-size: 1.4rem;
@@ -816,9 +822,11 @@ body {
   z-index: 50 !important;
   background: #171a28;
   right: 0;
+  width: auto;
   transition: all 0.3s;
   display: none;
   flex-direction: column;
+  text-align: justify;
   top: 2.5rem;
   height: auto;
   padding: 1rem 2rem;
@@ -826,8 +834,13 @@ body {
 }
 .ActionsMenu p {
   font-size: 1.4rem;
-  margin: 0.2rem 0;
+  margin: 0.2rem auto;
+  display: flex;
+  align-items: center;
   transition: all 0.3s;
+}
+.ActionsMenu p .menuIcon {
+  margin-right: 1rem;
 }
 .ActionsMenu p:hover {
   opacity: 0.8;

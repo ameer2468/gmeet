@@ -18,17 +18,24 @@
   z-index: 50!important;
   background: darken($bg, 0.1);
   right: 0;
+  width: auto;
   transition: all 0.3s;
   display: none;
   flex-direction: column;
+  text-align: justify;
   top: 2.5rem;
   height: auto;
   padding: 1rem 2rem;
   border-radius: 1rem;
   p {
     font-size: 1.4rem;
-    margin: 0.2rem 0;
+    margin: 0.2rem auto;
+    display: flex;
+    align-items: center;
     transition: all 0.3s;
+    .menuIcon {
+      margin-right: 1rem;
+    }
     &:hover {
       opacity: 0.8;
       transition: all 0.3s;

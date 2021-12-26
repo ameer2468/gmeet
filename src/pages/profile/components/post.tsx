@@ -79,7 +79,7 @@ const Post = ({data}: props) => {
                     name={'comment'}/>
                 <button disabled={comment.length === 0} onClick={() => postHook.submitComment(data.post_id)} className={`btn btn--green ${comment.length === 0 && 'disabledButton'}`}>
                     {commentLoading ?  <BeatLoader size={8} margin={1} color={'#2a2c3d'} /> :
-                        <p> <FontAwesomeIcon className='commentIcon' icon={faComments}/>Comment</p>}
+                        <p><FontAwesomeIcon className='commentIcon' icon={faComments}/>Comment</p>}
                 </button>
             </div>
         </div>

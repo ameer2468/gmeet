@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {comment} from "../../../redux/types";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEllipsisH} from "@fortawesome/free-solid-svg-icons";
+import {faEllipsisH, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
 import {useUser} from "../../../hooks/useUser";
 import ActionsMenu from "../../../components/global/ActionsMenu";
 import {useDetectClickOutside} from "react-detect-click-outside";
@@ -23,7 +23,7 @@ const Comment = (props: props) => {
     const closeDrop = () => {
         setShow(false);
     }
-    const options = [{name: 'Delete', onClick: () => projectHook.deleteCommentHandler(props.data.id, userHook.userInfo.username)}]
+    const options = [{icon: faTrashAlt, name: 'Delete Comment', onClick: () => projectHook.deleteCommentHandler(props.data.id, userHook.userInfo.username)}]
     const ref = useDetectClickOutside({ onTriggered: closeDrop});
     const checkUser = props.data.posted_by === authUser.username;
 

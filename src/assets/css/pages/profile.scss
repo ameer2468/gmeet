@@ -64,6 +64,9 @@
           .icon {
             font-size: 2.3rem;
           }
+          &:hover {
+            cursor: pointer;
+          }
         }
       }
       .postInfo {
@@ -80,6 +83,9 @@
           z-index: 50!important;
           top: 4rem;
           right: 2rem;
+          .menuIcon {
+            margin-right: 0.8rem;
+          }
         }
         .date {
           font-size: 1.4rem;

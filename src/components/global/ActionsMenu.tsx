@@ -1,4 +1,5 @@
 import React from 'react';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 interface option {
     onClick?: () => void;
@@ -17,7 +18,7 @@ const ActionsMenu = (props: props) => {
     return (
         <div className={`ActionsMenu ${props.show ? 'showMenu' : ''}`}>
             {props.options.map((value, index) => {
-                return <p key={index.toString()} onClick={value.onClick}>{`${value.icon ? value.icon : ''} ${value.name}`}</p>
+                return <p key={index.toString()} onClick={value.onClick}><FontAwesomeIcon className='menuIcon' icon={value.icon}/>{value.name}</p>
             })}
         </div>
     );
