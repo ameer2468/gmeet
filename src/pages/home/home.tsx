@@ -1,7 +1,6 @@
 import React, {useEffect} from 'react';
 import Search from "./components/search";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
-import {ActiveModal} from "../../redux/modals/modalSlice";
 import {projectLoading, projectReducer} from "../../redux/projects/projectSlice";
 import LoadingSpinner from "../../components/global/LoadingSpinner";
 import Project from "./components/project";
@@ -43,7 +42,7 @@ const Home = () => {
                     <button
                         className='btn btn--green'
                         onClick={() => {
-                            dispatch(ActiveModal('ADD_PROJECT'))
+                           projectHook.toggleCreateProject()
                         }}
                     >
                         + Add Project

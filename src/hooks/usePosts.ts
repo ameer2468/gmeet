@@ -47,9 +47,9 @@ export const usePosts = () => {
         }))
     }
 
-    function deletePostHandler() {
+    function deletePostHandler(id: string) {
         dispatch(deletePostLoading(true));
-        dispatch(deletePostThunk(postsStore.selectedPost.post_id)).then(() => {
+        dispatch(deletePostThunk(id)).then(() => {
             dispatch(deletePostLoading(false));
             dispatch(ActiveModal(''));
         })

@@ -6,6 +6,7 @@ import {authedUser, loading, userDetails, userImageHandler, userImageUpload} fro
 import {getRequestsThunk, getUserProjectsThunk} from "../projects/thunks";
 import {getCommentsThunk, getPostsThunk} from "../posts/thunks";
 import {postsLoadingHandler} from "../posts/postsSlice";
+import {notify} from "../../helpers/notify";
 
 export function createUserThunk(data: User) {
     return (dispatch: ThunkDispatch<RootState, any, Action>) => {
@@ -28,6 +29,8 @@ export function getCurrentUserThunk(username: string) {
                 dispatch(userImageHandler(false));
                 dispatch(loading(false))
             })
+        }).catch(() => {
+            notify('An error has occurred')
         })
     }
 }
@@ -52,6 +55,8 @@ export function uploadUserAssetThunk() {
             dispatch(userDetails(updatedObject))
             dispatch(authedUser(authObjectUpdate))
             dispatch(userImageHandler(false));
+        }).catch(() => {
+            notify('An error has occurred')
         })
     }
 }

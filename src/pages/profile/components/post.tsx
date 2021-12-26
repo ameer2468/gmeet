@@ -1,17 +1,16 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faComments, faTrash} from "@fortawesome/free-solid-svg-icons";
+import {faComments, faEllipsisH, faPencilAlt, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
 import {useUser} from "../../../hooks/useUser";
-import {ActiveModal} from "../../../redux/modals/modalSlice";
-import {useAppDispatch} from "../../../redux/hooks";
-import {selectPost} from "../../../redux/posts/postsSlice";
-import TextArea from "../../../components/global/textarea";
 import {usePosts} from "../../../hooks/usePosts";
 import {comment} from "../../../redux/types";
 import LoadingSpinner from "../../../components/global/LoadingSpinner";
 import Comment from "./comment";
-import BeatLoader from "react-spinners/BeatLoader";
 import {useParams} from "react-router-dom";
+import {useDetectClickOutside} from "react-detect-click-outside";
+import ActionsMenu from "../../../components/global/ActionsMenu";
+import TextArea from "../../../components/global/textarea";
+import {BeatLoader} from "react-spinners";
 
 
 interface props {
@@ -26,13 +25,22 @@ interface props {
 
 const Post = ({data}: props) => {
 
-    const dispatch = useAppDispatch();
     const postHook = usePosts();
     const {commentLoading, postsLoading} = postHook.postsStore;
     const {comment} = postHook.postsStore.postForm;
     const params: {username: string} = useParams();
     const {user} = useUser();
     const checkUser = params.username === user.authUser.username;
+    const [show, setShow] = useState(false);
+    const closeDrop = () => {
+        setShow(false);
+    }
+    const ref = useDetectClickOutside({ onTriggered: closeDrop});
+    const options = [
+        {icon: faPencilAlt, name: 'Edit Post', onClick: () => console.log('')},
+        {icon: faTrashAlt , name: 'Delete Post', onClick: () => postHook.deletePostHandler(data.post_id)}
+    ]
+
 
     useEffect(() => {
     }, [data])
@@ -42,17 +50,16 @@ const Post = ({data}: props) => {
         <div className={'post'}>
             <div className={`postInfo`}>
                 <p className='poster'>{data.user}</p>
-                <p className='date'>{data.date}</p>
+                <div className="side">
+                    <p className='date'>{data.date}</p>
+                    {checkUser ?
+                    <div ref={ref} onClick={() => setShow(!show)} className="comment-menu">
+                        <ActionsMenu show={show} options={options}/>
+                        <FontAwesomeIcon className='icon' icon={faEllipsisH}/>
+                    </div> : '' }
+                </div>
             </div>
             <p className='postText'>{data.post}</p>
-            <div className="actions">
-                {checkUser ? <div onClick={() => {
-                    dispatch(selectPost(data))
-                    dispatch(ActiveModal('DELETE_POST'))
-                }} className="delete">
-                    <FontAwesomeIcon icon={faTrash}/>
-                </div> : ''}
-            </div>
             {postsLoading ? '' :
                 data.comments === undefined  ? <div style={{marginTop: '2rem'}}><LoadingSpinner height={60} width={60}/></div> :
                         data.comments.map((value: comment, index: number) => {

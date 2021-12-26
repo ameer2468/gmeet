@@ -6,13 +6,12 @@ import AddProject from "../modals/addProject";
 import Confirm from "../modals/confirm";
 import {useProject} from "../hooks/useProject";
 import Requests from "../modals/requests";
-import {usePosts} from "../hooks/usePosts";
+import EditProject from "../modals/editProject";
 
 const ModalManager = () => {
 
     const modals = useAppSelector(modalReducer)
     const projectHook = useProject();
-    const postHook = usePosts();
 
     switch(modals.activeModal) {
         case 'JOIN':
@@ -21,12 +20,8 @@ const ModalManager = () => {
             return <Requests/>
         case 'ADD_PROJECT':
             return <AddProject/>
-        case 'DELETE_POST':
-            return <Confirm
-                message={'Are you sure you want to delete this post?'}
-                submit={() => postHook.deletePostHandler()}
-                title={'Delete Post'}
-            />
+        case 'EDIT_PROJECT':
+            return <EditProject/>
         case 'DELETE_COMMENT':
             return <Confirm
                 message={'Are you sure you want to delete this comment?'}

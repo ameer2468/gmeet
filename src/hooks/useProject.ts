@@ -26,7 +26,7 @@ import {notify} from "../helpers/notify";
 import {projectLoading} from "../redux/projects/projectSlice";
 import {acceptRequest, IcreateProject} from "../redux/types";
 import {deleteProjectThunk, getProjectsThunk, joinProjectsThunk} from "../redux/projects/thunks";
-import {deleteCommentThunk} from "../redux/posts/thunks";
+import {deleteCommentThunk, deletePostThunk} from "../redux/posts/thunks";
 
 
 export const useProject = () => {
@@ -49,9 +49,20 @@ export const useProject = () => {
         ))
     }
 
+    function toggleCreateProject() {
+        dispatch(ActiveModal('ADD_PROJECT'))
+        dispatch(projectValues({...projectForm, name: '', description: ''}))
+    }
+
     function toggleDelete(projectInfo: project) {
         dispatch(ActiveModal('DELETE_PROJECT'))
         dispatch(selectedProject(projectInfo))
+    }
+
+    function toggleEditProject(projectData: project) {
+        dispatch(ActiveModal('EDIT_PROJECT'));
+        dispatch(selectedProject(projectData))
+        dispatch(projectValues({...projectForm, name: projectData.name, description: projectData.description}))
     }
 
     function toggleJoin(projectInfo: project) {
@@ -93,6 +104,10 @@ export const useProject = () => {
 
     function deleteCommentHandler(id: string, username: string ) {
         dispatch(deleteCommentThunk(id, username))
+    }
+
+    function deletePostHandler(id: string) {
+       dispatch(deletePostThunk(id));
     }
 
     function acceptHandler(data: acceptRequest) {
@@ -183,9 +198,11 @@ function joinProject() {
         rejectHandler,
         toggleDelete,
         toggleRequests,
-        getUserProjects,
+        toggleEditProject,
+        toggleCreateProject,
         deleteCommentHandler,
         deleteProjectHandler,
+        deletePostHandler,
         getSearchProjects,
         acceptHandler,
         createProjectHandler,

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faTrash} from "@fortawesome/free-solid-svg-icons";
+import {faTrash, faPencilAlt} from "@fortawesome/free-solid-svg-icons";
 import {useProject} from "../../../hooks/useProject";
 import {selectedProject} from "../../../redux/projects/projectSlice";
 import {useAppDispatch} from "../../../redux/hooks";
@@ -42,6 +42,13 @@ const Project = ({data, remove, noRequest, profile}: props) => {
                <div className='projectCard'>
                    {!remove ? '' :
                        !checkUser ? '' :
+                           <>
+                           <div onClick={() => {
+                               projectHook.toggleEditProject(data)
+                           }
+                           } className="edit">
+                               <FontAwesomeIcon className={'icon'} icon={faPencilAlt}/>
+                           </div>
                            <div
                                className="delete"
                                onClick={() => {
@@ -50,6 +57,7 @@ const Project = ({data, remove, noRequest, profile}: props) => {
                            >
                                <FontAwesomeIcon className='icon' icon={faTrash}/>
                            </div>
+                           </>
                    }
                    <h2>{data.name}</h2>
                    <p>{data.description}</p>

@@ -11,22 +11,23 @@
 
 .showMenu {
   display: flex!important;
-  opacity: 1!important;
-  transition: all 0.3s!important;
 }
 
 .ActionsMenu {
   position: absolute;
+  z-index: 50!important;
   background: darken($bg, 0.1);
   right: 0;
   transition: all 0.3s;
-  top: -4rem;
-  opacity: 0;
+  display: none;
+  flex-direction: column;
+  top: 2.5rem;
   height: auto;
-  padding: 1rem 1.5rem;
+  padding: 1rem 2rem;
   border-radius: 1rem;
   p {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
+    margin: 0.2rem 0;
     transition: all 0.3s;
     &:hover {
       opacity: 0.8;
