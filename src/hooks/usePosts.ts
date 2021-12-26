@@ -28,9 +28,7 @@ export const usePosts = () => {
             posted_by: username,
             date: moment().format('MMMM Do YYYY, h:mm:ss a'),
             comment: postsStore.postForm.comment
-        })).then(() => {
-            dispatch(commentPostLoading(false))
-        })
+        }))
        dispatch(postValues({
             ...postsStore.postForm, comment: ''
         }))

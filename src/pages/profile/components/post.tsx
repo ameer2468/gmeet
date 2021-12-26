@@ -37,6 +37,7 @@ const Post = ({data}: props) => {
     useEffect(() => {
     }, [data])
 
+
     return (
         <div className={'post'}>
             <div className={`postInfo`}>

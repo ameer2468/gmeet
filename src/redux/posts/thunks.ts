@@ -12,7 +12,7 @@ import {comment, post} from "../types";
 import {
     postsArr,
     addPosts,
-    deletePost, addPostHandler,
+    deletePost, addPostHandler, commentPostLoading,
 } from "./postsSlice";
 import {notify} from "../../helpers/notify";
 
@@ -64,6 +64,7 @@ export function addCommentThunk(data: comment)  {
                     {...value, comments: [...value.comments, newComment ]} : value;
             })
             dispatch(postsArr(updateArr))
+            dispatch(commentPostLoading(false))
         }).catch((err) => {
             return notify(err.message)
         })
