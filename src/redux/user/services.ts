@@ -18,6 +18,35 @@ export const createUser = createAsyncThunk('user/create', async (data: User) => 
     })
 })
 
+export const getUserImage = createAsyncThunk('user/asset', async (username: string) => {
+    return await axios.get(`${URL}/asset`, {
+        headers: {
+            'x-api-key': process.env.REACT_APP_API_KEY,
+        },
+        params: {
+            username: username
+        }
+    }).catch((err) => {
+        console.log(err)
+    })
+})
+
+export const uploadUserAsset = createAsyncThunk('user/asset', async (data: any) => {
+    const file = data.file;
+    return await axios.post(`${URL}/asset`, {
+            username: data.username
+        }, {
+        headers: {
+            'x-api-key': process.env.REACT_APP_API_KEY,
+        }
+        }).then((res) => {
+        const url = res.data.fileUploadURL;
+            axios.put(`${url}`, file)
+        }).catch((err) => {
+        console.log(err)
+    })
+    })
+
 export const getUser = createAsyncThunk('getUsers/user', async (username: string) => {
     const token = await loadToken();
     return await axios.get(`${URL}/user`, {

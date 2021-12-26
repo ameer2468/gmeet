@@ -20,15 +20,15 @@ interface props {
         post_id: string;
         date: string;
         comments: any;
+        user: string;
     }
 }
 
 const Post = ({data}: props) => {
 
-    const userHook = useUser();
     const dispatch = useAppDispatch();
     const postHook = usePosts();
-    const {commentLoading} = postHook.postsStore;
+    const {commentLoading, postsLoading} = postHook.postsStore;
     const {comment} = postHook.postsStore.postForm;
     const params: {username: string} = useParams();
     const {user} = useUser();
@@ -37,9 +37,30 @@ const Post = ({data}: props) => {
     useEffect(() => {
     }, [data])
 
-
     return (
         <div className={'post'}>
+            <div className={`postInfo`}>
+                <p className='poster'>{data.user}</p>
+                <p className='date'>{data.date}</p>
+            </div>
+            <p className='postText'>{data.post}</p>
+            <div className="actions">
+                {checkUser ? <div onClick={() => {
+                    dispatch(selectPost(data))
+                    dispatch(ActiveModal('DELETE_POST'))
+                }} className="delete">
+                    <FontAwesomeIcon icon={faTrash}/>
+                </div> : ''}
+            </div>
+            {postsLoading ? '' :
+                data.comments === undefined  ? <div style={{marginTop: '2rem'}}><LoadingSpinner height={60} width={60}/></div> :
+                        data.comments.map((value: comment, index: number) => {
+                            return (
+                                <Comment index={index} key={value.id} data={value}/>
+                            )
+                        })
+
+            }
             <div className="leaveComment">
                 <TextArea
                     maxWidth={'70%'}
@@ -53,26 +74,6 @@ const Post = ({data}: props) => {
                         <p> <FontAwesomeIcon className='commentIcon' icon={faComments}/>Comment</p>}
                 </button>
             </div>
-            <div className={`postInfo`}>
-                <p className='poster'>{userHook.userInfo.username}</p>
-                <p className='date'>{data.date}</p>
-            </div>
-            <p className='postText'>{data.post}</p>
-            <div className="actions">
-                {checkUser ? <div onClick={() => {
-                    dispatch(selectPost(data))
-                    dispatch(ActiveModal('DELETE_POST'))
-                }} className="delete">
-                    <FontAwesomeIcon icon={faTrash}/>
-                </div> : ''}
-            </div>
-            {data.comments === undefined  ? <div style={{marginTop: '2rem'}}><LoadingSpinner height={60} width={60}/></div> :
-                data.comments.map((value: comment, index: number) => {
-                        return (
-                           <Comment index={index} key={value.id} data={value}/>
-                        )
-                    })
-            }
         </div>
     );
 };

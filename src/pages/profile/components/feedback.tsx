@@ -45,7 +45,7 @@ const Posts = () => {
                         </button>
                     </div>
                 }
-                {posts.length === 0 ?
+                {!postsLoading && posts.length === 0 ?
                     <h2 className='noPosts'>
                         No posts
                     </h2>

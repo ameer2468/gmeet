@@ -18,9 +18,7 @@ Amplify.configure(awsconfig)
 
 const App = () => {
 
-
     const userRedux = useAppSelector(userReducer)
-    const userInfo = userRedux.authUser === undefined ? '' : userRedux.authUser;
     const location = useLocation();
 
     const GlobalRoutes = [
@@ -37,9 +35,9 @@ const App = () => {
     const RouteHandler = userRedux.LoggedIn ? AuthRoutes : GlobalRoutes;
 
    const CheckRoute = RouteHandler.find((value) => {
-       if (location.pathname.startsWith('/profile') && userInfo.username.length > 0) {
+       if (location.pathname.startsWith('/profile') && Object.keys(userRedux.authUser).length > 0) {
            return location.pathname;
-       } if (location.pathname.startsWith('/project') && userInfo.username.length > 0) {
+       } if (location.pathname.startsWith('/project') && Object.keys(userRedux.authUser).length > 0) {
            return location.pathname;
        } else {
            return value.path === location.pathname;

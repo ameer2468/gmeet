@@ -25,7 +25,6 @@ const Home = () => {
 
     useEffect(() => {
         dispatch(projectLoading(true))
-        // dispatch(getCurrentUserThunk(username))
         const getProjectsData = async () => {
            if (value.length > 0 || value.length === 0) {
                await dispatch(getProjectsThunk(value))

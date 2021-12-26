@@ -60,9 +60,6 @@ export function useLogin() {
         dispatch(loading(true))
         localStorage.removeItem('persist:root')
         Auth.signOut().then(() => {
-            // dispatch(authedUser({
-            //     username: ''
-            // }))
             dispatch(loading(false));
             dispatch(status(false));
             history.push('/')

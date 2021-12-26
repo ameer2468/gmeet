@@ -20,7 +20,6 @@ const Authnav = () => {
     }
     const ref = useDetectClickOutside({ onTriggered: closeDrop});
 
-
     return (
         <nav className="authnav">
             <div className="container">
@@ -37,7 +36,7 @@ const Authnav = () => {
                         <FontAwesomeIcon className='icon' icon={faBell}/>
                     </div>
                     <div ref={ref} onClick={() => setOpen(!open)} className="profile">
-                        <img alt='profile' src={userRedux.authUser.userImage} className='userImage'/>
+                        <img alt='profile' src={authUser.userImage} className='userImage'/>
                         <p>{authUser === undefined ? '' : authUser.username}</p>
                         {open ? <motion.div initial={'hidden'} animate={'active'}
                                             variants={regularVariants}

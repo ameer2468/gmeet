@@ -1,12 +1,11 @@
 import {Action, ThunkDispatch} from "@reduxjs/toolkit";
 import {RootState} from "../store";
 import {User} from "./types";
-import {createUser, getUser} from "./services";
-import {authedUser, loading, userDetails} from "./userSlice";
+import {createUser, getUser, getUserImage, uploadUserAsset} from "./services";
+import {authedUser, loading, userDetails, userImageHandler, userImageUpload} from "./userSlice";
 import {getRequestsThunk, getUserProjectsThunk} from "../projects/thunks";
 import {getCommentsThunk, getPostsThunk} from "../posts/thunks";
 import {postsLoadingHandler} from "../posts/postsSlice";
-import {s3} from '../../services/s3';
 
 export function createUserThunk(data: User) {
     return (dispatch: ThunkDispatch<RootState, any, Action>) => {
@@ -14,41 +13,41 @@ export function createUserThunk(data: User) {
     }
 }
 
-
 export function getCurrentUserThunk(username: string) {
-    return (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
-        const {userStore} = getState()
-        const authUser = userStore.authUser;
-        dispatch(getUser(username)).then((res: any) => {
-            const getParams = {
-                Bucket: 'gmeet-images',
-                Key: `${username}/profile.png`,
-            };
+    return async (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
+        await dispatch(getUser(username)).then((res: any) => {
             const {rows} = res.payload.data;
-            s3.getSignedUrlPromise('getObject', getParams
-            ).then((url) => {
-                dispatch(userDetails({...rows[0], userImage: url}))
-                const authObjectUpdate = {...authUser, userImage: url}
-                dispatch(authedUser(authObjectUpdate))
+            dispatch(getUserImage(username)).then((res: any) => {
+                const imageUrl = res.payload.data.imageUrl;
+                const updatedObject = {...rows[0], userImage: imageUrl}
+                dispatch(userDetails(updatedObject))
+                dispatch(userImageHandler(false));
                 dispatch(loading(false))
             })
         })
     }
 }
 
-export function getImageProfileUserThunk(username: string) {
-    return (dispatch: ThunkDispatch<RootState, any, Action>) => {
-        dispatch(getUser(username)).then((res: any) => {
-            const getParams = {
-                Bucket: 'gmeet-images',
-                Key: `${username}/profile.png`,
-            };
-            const {rows} = res.payload.data;
-            s3.getSignedUrlPromise('getObject', getParams
-            ).then((url) => {
-                dispatch(userDetails({...rows[0], userImage: url}))
-                dispatch(loading(false))
-            })
+export function uploadUserAssetThunk() {
+    return async (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
+        const {userStore} = getState();
+        const userInfo = userStore.userInfo;
+        const authUser = userStore.authUser;
+        const data = {
+            file: userStore.imageUpload,
+            username: userStore.authUser.username
+        }
+        dispatch(userImageHandler(true));
+        await dispatch(uploadUserAsset(data)).then(() => {
+            dispatch(userImageUpload(undefined));
+        })
+        dispatch(getUserImage(data.username)).then((res: any) => {
+            const imageUrl = res.payload.data.imageUrl;
+            const authObjectUpdate = {...authUser, userImage: imageUrl}
+            const updatedObject = {...userInfo, userImage: imageUrl}
+            dispatch(userDetails(updatedObject))
+            dispatch(authedUser(authObjectUpdate))
+            dispatch(userImageHandler(false));
         })
     }
 }
@@ -58,9 +57,8 @@ export function getAllUserData(username: string) {
         await dispatch(getUserProjectsThunk(username))
         dispatch(getRequestsThunk());
         await dispatch(getPostsThunk(username));
-        dispatch(getCommentsThunk(username)).then(() => {
-            dispatch(postsLoadingHandler(false))
-        });
-        dispatch(getImageProfileUserThunk(username));
+        await dispatch(getCommentsThunk(username));
+        await dispatch(getCurrentUserThunk(username));
+        dispatch(postsLoadingHandler(false))
     }
 }

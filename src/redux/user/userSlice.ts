@@ -39,7 +39,7 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         userDetails: (state, action: PayloadAction<any>) => {
-           state.userInfo = action.payload;
+            state.userInfo = action.payload;
         },
         authedUser: (state, action: PayloadAction<any>) => {
            state.authUser = action.payload

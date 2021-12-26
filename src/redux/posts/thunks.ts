@@ -12,7 +12,7 @@ import {comment, post} from "../types";
 import {
     postsArr,
     addPosts,
-    deletePost, addPostHandler
+    deletePost, addPostHandler,
 } from "./postsSlice";
 import {notify} from "../../helpers/notify";
 

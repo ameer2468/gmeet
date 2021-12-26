@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useRef} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faGlobe, faEdit, faPencilAlt,faCheck} from "@fortawesome/free-solid-svg-icons";
 import Card from "./card";
@@ -7,6 +7,7 @@ import {useAppDispatch, useAppSelector} from "../../../redux/hooks";
 import {userImageUpload, userReducer} from "../../../redux/user/userSlice";
 import {useUser} from "../../../hooks/useUser";
 import placeholder from '../../../assets/images/placeholder.png';
+import {uploadUserAssetThunk} from "../../../redux/user/thunk";
 
 interface props {
     data: any;
@@ -22,8 +23,6 @@ const User = ({data}: props) => {
     const uploadRef = useRef<any>(null);
     const dispatch = useAppDispatch();
 
-    useEffect(() => {
-    }, [data])
 
     const handleUploadClick = () => {
         uploadRef.current?.click();
@@ -31,6 +30,7 @@ const User = ({data}: props) => {
     const handleFileInput = (e: any) => {
        dispatch(userImageUpload(e.target.files[0]));
     }
+
 
     return (
                 <Card height={'50rem'} flex={'0 0 40%'} customClass={'user'}>
@@ -56,7 +56,7 @@ const User = ({data}: props) => {
                                                 </button>
                                                 {imageUpload === undefined || imageUpload === '' ?
                                                     '' :
-                                                    <button className='confirm' onClick={() => userHook.uploadFile()}>
+                                                    <button className='confirm' onClick={() => dispatch(uploadUserAssetThunk())}>
                                                         <FontAwesomeIcon icon={faCheck}/>
                                                     </button>
                                                 }

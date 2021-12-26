@@ -27,7 +27,6 @@ const Comment = (props: props) => {
     const ref = useDetectClickOutside({ onTriggered: closeDrop});
     const checkUser = props.data.posted_by === authUser.username;
 
-
     return (
                 <div key={props.data.id} className="comments">
                 <div className="comment">

@@ -38,9 +38,12 @@ export const addCommentService = createAsyncThunk('comments/addcomment', async(d
 })
 
 export const getCommentsService = createAsyncThunk('posts/getcomments', async (user: string) => {
-    return await axios.get(`${API_URL}/comments/?user=${user}`, {
+    return await axios.get(`${API_URL}/comments`, {
         headers: {
             'x-api-key': process.env.REACT_APP_API_KEY,
+        },
+        params: {
+            user: user
         }
     })
 })
@@ -69,10 +72,13 @@ export const deletePostService = createAsyncThunk('posts/delete', async(id: stri
 
 export const getPostsService = createAsyncThunk('posts/getposts', async (user: string) => {
     const token = await loadToken();
-    return await axios.get(`${API_URL}/posts/?user=${user}`, {
+    return await axios.get(`${API_URL}/posts`, {
         headers: {
             'x-api-key': process.env.REACT_APP_API_KEY,
             Authorization: token
+        },
+        params: {
+            user: user
         }
     })
 })
