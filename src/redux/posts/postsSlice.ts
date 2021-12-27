@@ -7,11 +7,13 @@ interface PostsState {
     postForm: {
         post: string;
         comment: string;
+        editpost: string
     },
     posts: posts[]
     postsLoading: boolean;
     selectedPost: posts;
     addPostLoading: boolean;
+    editPost: boolean;
     deletePostLoading: boolean;
     commentLoading: boolean;
     comments: comment[]
@@ -22,11 +24,13 @@ const initialState: PostsState = {
    deletePostLoading: false,
     postsLoading: false,
     addPostLoading: false,
+    editPost: false,
     commentLoading: false,
    comments: [],
    postForm: {
        post: '',
-       comment: ''
+       comment: '',
+       editpost: ''
    },
     selectedPost: {
         post_id: '',
@@ -61,6 +65,9 @@ export const postsSlice = createSlice({
         deletePostLoading: (state, action: PayloadAction<boolean>) => {
             state.deletePostLoading = action.payload;
         },
+        editPost: (state, action: PayloadAction<boolean>) => {
+          state.editPost = action.payload;
+        },
         commentPostLoading: (state, action: PayloadAction<boolean>) => {
             state.commentLoading = action.payload;
         },
@@ -89,6 +96,7 @@ export const {
     commentPostLoading,
     commentsArr,
     addPosts,
+    editPost,
     deletePostLoading,
     selectPost,
     postsLoadingHandler,

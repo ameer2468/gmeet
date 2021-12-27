@@ -4,7 +4,7 @@ import {
     addCommentService,
     addPostService,
     deleteCommentService,
-    deletePostService,
+    deletePostService, editPostService,
     getCommentsService,
     getPostsService
 } from "./services";
@@ -31,6 +31,23 @@ export function addPostThunk(data: post) {
        }).catch(() => {
            return notify('An error has occurred')
        })
+    }
+}
+
+export function editPostThunk(post_id: string) {
+    return async (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
+        const {postsStore} = getState();
+        const post = postsStore.postForm.editpost;
+        await dispatch(editPostService({post_id, post}))
+            .then(() => {
+                const newArr = postsStore.posts.map((value) => {
+                    return value.post_id === post_id ? {...value, post: post} : value
+                })
+                dispatch(postsArr(newArr))
+            })
+            .catch(() => {
+                return notify('An error has occurred')
+            });
     }
 }
 

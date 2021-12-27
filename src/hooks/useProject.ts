@@ -6,7 +6,6 @@ import {
     addProject,
     selectedProject,
     deleteLoading,
-    userProjects,
     joinLoading,
     requestsLoading,
     projectRequests
@@ -14,7 +13,6 @@ import {
 import {
     acceptRequests,
     createProject,
-    getProject,
     getProjects,
     rejectJoinRequest
 } from "../redux/projects/services";
@@ -72,14 +70,14 @@ export const useProject = () => {
         dispatch(joinLoading(false))
     }
 
-  function getUserProjects(user: string) {
-        dispatch(projectLoading(true));
-        return dispatch(getProject(user)).then((res: any) => {
-            const {data} = res.payload;
-            dispatch(userProjects(data.rows))
-            dispatch(projectLoading(false));
-        })
-    }
+  // function getUserProjects(user: string) {
+  //       dispatch(projectLoading(true));
+  //       return dispatch(getProject(user)).then((res: any) => {
+  //           const {data} = res.payload;
+  //           dispatch(userProjects(data.rows))
+  //           dispatch(projectLoading(false));
+  //       })
+  //   }
 
     async function getSearchProjects(search: string) {
             await dispatch(getProjects(search))

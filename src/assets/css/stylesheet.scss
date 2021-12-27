@@ -17,6 +17,8 @@ textarea, input {
 textarea {
   padding: 2rem;
   resize: none;
+  white-space: pre-line;
+  overflow: hidden;
   @include Textarea;
 }
 

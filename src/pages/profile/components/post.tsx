@@ -26,8 +26,8 @@ interface props {
 const Post = ({data}: props) => {
 
     const postHook = usePosts();
-    const {commentLoading, postsLoading} = postHook.postsStore;
-    const {comment} = postHook.postsStore.postForm;
+    const {commentLoading, postsLoading, editPost} = postHook.postsStore;
+    const {comment, editpost} = postHook.postsStore.postForm;
     const params: {username: string} = useParams();
     const {user} = useUser();
     const checkUser = params.username === user.authUser.username;
@@ -37,8 +37,12 @@ const Post = ({data}: props) => {
     }
     const ref = useDetectClickOutside({ onTriggered: closeDrop});
     const options = [
-        {icon: faPencilAlt, name: 'Edit Post', onClick: () => console.log('')},
-        {icon: faTrashAlt , name: 'Delete Post', onClick: () => postHook.deletePostHandler(data.post_id)}
+        {
+            icon: faPencilAlt, name: 'Edit Post',
+            onClick: () => postHook.editPostHandler(true)},
+        {
+            icon: faTrashAlt , name: 'Delete Post',
+            onClick: () => postHook.deletePostHandler(data.post_id)}
     ]
 
 
@@ -59,7 +63,32 @@ const Post = ({data}: props) => {
                     </div> : '' }
                 </div>
             </div>
-            <p className='postText'>{data.post}</p>
+            {editPost ?
+                <>
+                <TextArea
+                    maxWidth={'100%'}
+                    placeholder={data.post}
+                    value={editpost}
+                    maxLength={200}
+                    useHook={postHook}
+                    height={'7rem'}
+                    name={'editpost'}
+                />
+                <button
+                    className='btn btn--green'
+                    onClick={() => postHook.submitEditPost(data.post_id)}
+                >
+                    Confirm
+                </button>
+                 <button
+                     onClick={() => postHook.editPostHandler(false)}
+                     style={{marginLeft: '2rem'}}
+                     className='btn btn--transparent'>Cancel
+                 </button>
+                </>
+                :
+                <p className='postText'>{data.post}</p>
+            }
             {postsLoading ? '' :
                 data.comments === undefined  ? <div style={{marginTop: '2rem'}}><LoadingSpinner height={60} width={60}/></div> :
                         data.comments.map((value: comment, index: number) => {

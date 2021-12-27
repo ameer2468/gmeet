@@ -15,6 +15,8 @@ textarea, input {
 textarea {
   padding: 2rem;
   resize: none;
+  white-space: pre-line;
+  overflow: hidden;
   width: 100%;
   border: 1px solid transparent;
   color: #c1c1c1;

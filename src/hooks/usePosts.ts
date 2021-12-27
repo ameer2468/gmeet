@@ -1,8 +1,8 @@
 import {useAppDispatch, useAppSelector} from "../redux/hooks";
-import {commentPostLoading, deletePostLoading, postsReducer, postValues} from "../redux/posts/postsSlice";
+import {commentPostLoading, deletePostLoading, editPost, postsReducer, postValues} from "../redux/posts/postsSlice";
 import {userReducer} from "../redux/user/userSlice";
 import {v4 as uuidv4} from "uuid";
-import {addCommentThunk, addPostThunk, deletePostThunk} from "../redux/posts/thunks";
+import {addCommentThunk, addPostThunk, deletePostThunk, editPostThunk} from "../redux/posts/thunks";
 import moment from "moment";
 import {ActiveModal} from "../redux/modals/modalSlice";
 
@@ -18,6 +18,16 @@ export const usePosts = () => {
     function onChange(key: string, value: string) {
         return dispatch(postValues(
             {...postsStore.postForm, [key]: value}))
+    }
+
+    function editPostHandler(active: boolean) {
+        dispatch(editPost(active));
+    }
+
+    async function submitEditPost(post_id: string) {
+        await dispatch(editPostThunk(post_id))
+        editPostHandler(false)
+        dispatch(postValues({...postsStore.postForm, editpost: ''}))
     }
 
     function submitComment(post_id: string) {
@@ -59,6 +69,8 @@ export const usePosts = () => {
         onChange,
         postsStore,
         submitPost,
+        submitEditPost,
+        editPostHandler,
         submitComment,
         deletePostHandler
     }
