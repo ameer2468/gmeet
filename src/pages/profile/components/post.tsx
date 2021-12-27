@@ -26,7 +26,7 @@ interface props {
 const Post = ({data}: props) => {
 
     const postHook = usePosts();
-    const {commentLoading, postsLoading, editPost} = postHook.postsStore;
+    const {commentLoading, postsLoading, editPost, editPostLoading} = postHook.postsStore;
     const {comment, editpost} = postHook.postsStore.postForm;
     const params: {username: string} = useParams();
     const {user} = useUser();
@@ -75,10 +75,11 @@ const Post = ({data}: props) => {
                     name={'editpost'}
                 />
                 <button
-                    className='btn btn--green'
+                    className={`btn btn--green ${editpost.length === 0 && 'disabledButton'}`}
+                    disabled={editpost.length === 0}
                     onClick={() => postHook.submitEditPost(data.post_id)}
                 >
-                    Confirm
+                    {editPostLoading ? <BeatLoader size={8} margin={1} color={'#2a2c3d'} /> : 'Confirm' }
                 </button>
                  <button
                      onClick={() => postHook.editPostHandler(false)}

@@ -4,7 +4,7 @@ import {authedUser, loading, status} from "../redux/user/userSlice";
 import {Login} from "../pages/register/types";
 import {useAppDispatch} from "../redux/hooks";
 import {useHistory} from "react-router-dom";
-import {getCurrentUserThunk} from "../redux/user/thunk";
+import {getAssetThunk} from "../redux/user/thunk";
 
 export function useLogin() {
     const dispatch = useAppDispatch();
@@ -32,7 +32,7 @@ export function useLogin() {
                 await Auth.currentUserInfo().then((data) => {
                     dispatch(authedUser(data))
                 });
-                dispatch(getCurrentUserThunk(inputValues.username));
+                dispatch(getAssetThunk(inputValues.username));
                 dispatch(status(true))
                 dispatch(loading(false))
                 history.push('/home')

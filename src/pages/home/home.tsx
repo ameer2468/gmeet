@@ -8,6 +8,7 @@ import {useProject} from "../../hooks/useProject";
 import {useDebounce} from "use-debounce";
 import {getProjectsThunk, getRequestsThunk} from "../../redux/projects/thunks";
 import {useUser} from "../../hooks/useUser";
+import {getAssetThunk} from "../../redux/user/thunk";
 
 const Home = () => {
 
@@ -17,13 +18,14 @@ const Home = () => {
     const projectHook = useProject();
     const {projectForm} = projectHook.projects;
     const userHook = useUser();
-    const {username} = userHook.user.userInfo;
+    const {username} = userHook.authUser;
     const [value] = useDebounce(projectForm.searchterm, 500);
 
     /*Requests to Load App*/
 
     useEffect(() => {
         dispatch(projectLoading(true))
+        dispatch(getAssetThunk(username))
         const getProjectsData = async () => {
            if (value.length > 0 || value.length === 0) {
                await dispatch(getProjectsThunk(value))

@@ -824,7 +824,7 @@ body {
   z-index: 50 !important;
   background: #171a28;
   right: 0;
-  width: auto;
+  width: 17rem;
   transition: all 0.3s;
   display: none;
   flex-direction: column;
@@ -1049,7 +1049,8 @@ body {
 .authnav .container .side {
   display: flex;
   height: 100%;
-  width: auto;
+  width: 100%;
+  max-width: 23rem;
   align-items: center;
 }
 .authnav .container .side .profile {

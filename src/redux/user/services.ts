@@ -26,8 +26,6 @@ export const getUserImage = createAsyncThunk('user/asset', async (username: stri
         params: {
             username: username
         }
-    }).catch((err) => {
-        console.log(err)
     })
 })
 

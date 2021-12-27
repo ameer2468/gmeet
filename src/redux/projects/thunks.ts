@@ -1,4 +1,4 @@
-import {deleteProject, getProjects, getRequests, getUserProjects, joinProjectRequest} from "./services";
+import {deleteProject, editProjects, getProjects, getRequests, getUserProjects, joinProjectRequest} from "./services";
 import {
     deleteLoading,
     joinLoading, projectLoading,
@@ -50,6 +50,24 @@ export function getUserProjectsThunk(username: string) {
     }
 }
 
+export function editProjectThunk() {
+    return async (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState ) => {
+        const {projectStore} = getState();
+        const {selectedProject, projectForm} = projectStore;
+        const projectsArr = projectStore.userProjects;
+        const data = {
+            project_id: selectedProject.project_id,
+            name: projectForm.name,
+            description: projectForm.description
+        }
+        await dispatch(editProjects(data))
+        const updateUserProjects = projectsArr.map((value) => {
+            return value.project_id === selectedProject.project_id ?
+                {...value, name: projectForm.name, description: projectForm.description} : value
+        })
+        dispatch(userProjects(updateUserProjects));
+    }
+}
 
 export function getProjectsThunk(value?: string) {
     return (dispatch: ThunkDispatch<RootState, any, Action>) => {

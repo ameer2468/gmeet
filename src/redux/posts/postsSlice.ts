@@ -15,6 +15,7 @@ interface PostsState {
     addPostLoading: boolean;
     editPost: boolean;
     deletePostLoading: boolean;
+    editPostLoading: boolean;
     commentLoading: boolean;
     comments: comment[]
 }
@@ -22,6 +23,7 @@ interface PostsState {
 // Define the initial state using that type
 const initialState: PostsState = {
    deletePostLoading: false,
+    editPostLoading: false,
     postsLoading: false,
     addPostLoading: false,
     editPost: false,
@@ -71,6 +73,9 @@ export const postsSlice = createSlice({
         commentPostLoading: (state, action: PayloadAction<boolean>) => {
             state.commentLoading = action.payload;
         },
+        editPostLoading: (state, action:PayloadAction<boolean>) => {
+          state.editPostLoading = action.payload;
+        },
         postsArr: (state, action:PayloadAction<any>) => {
           state.posts = action.payload;
         },
@@ -94,6 +99,7 @@ export const {
     deletePost,
     addComment,
     commentPostLoading,
+    editPostLoading,
     commentsArr,
     addPosts,
     editPost,

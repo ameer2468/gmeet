@@ -9,11 +9,13 @@ const EditProject = () => {
 
     const projectHook = useProject();
     const {projectForm} = projectHook;
+    const {editProjectLoading} = projectHook.projects;
 
     return (
         <Modal
-            submit={() => console.log('')}
+            submit={() => projectHook.editProject()}
             title={'Edit Project'}
+            loading={editProjectLoading}
             buttonText={'Confirm'}>
             <form className='generalForm'>
                 <Input value={projectForm.name} useHook={projectHook} name={'name'} maxWidth={'100%'} placeholder={'Project name'}/>

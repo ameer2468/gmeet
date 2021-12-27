@@ -8,7 +8,7 @@ import {
     deleteLoading,
     joinLoading,
     requestsLoading,
-    projectRequests
+    projectRequests, editProjectLoading
 } from "../redux/projects/projectSlice";
 import {
     acceptRequests,
@@ -23,7 +23,7 @@ import {v4 as uuidv4} from "uuid";
 import {notify} from "../helpers/notify";
 import {projectLoading} from "../redux/projects/projectSlice";
 import {acceptRequest, IcreateProject} from "../redux/types";
-import {deleteProjectThunk, getProjectsThunk, joinProjectsThunk} from "../redux/projects/thunks";
+import {deleteProjectThunk, editProjectThunk, getProjectsThunk, joinProjectsThunk} from "../redux/projects/thunks";
 import {deleteCommentThunk, deletePostThunk} from "../redux/posts/thunks";
 
 
@@ -68,6 +68,14 @@ export const useProject = () => {
         dispatch(projectValues({...projectForm, why: '', speciality: ''}))
         dispatch(selectedProject(projectInfo))
         dispatch(joinLoading(false))
+    }
+
+   async function editProject() {
+        dispatch(editProjectLoading(true))
+       await dispatch(editProjectThunk());
+       notify('Project edited successfully')
+       dispatch(ActiveModal(''));
+       dispatch(editProjectLoading(false))
     }
 
   // function getUserProjects(user: string) {
@@ -191,6 +199,7 @@ function joinProject() {
         projects,
         projectForm,
         toggleJoin,
+        editProject,
         joinProject,
         closeModal,
         rejectHandler,

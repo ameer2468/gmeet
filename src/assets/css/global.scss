@@ -18,7 +18,7 @@
   z-index: 50!important;
   background: darken($bg, 0.1);
   right: 0;
-  width: auto;
+  width: 17rem;
   transition: all 0.3s;
   display: none;
   flex-direction: column;
@@ -201,7 +201,8 @@
     .side {
       display: flex;
       height: 100%;
-      width: auto;
+      width: 100%;
+      max-width: 23rem;
       align-items: center;
       .profile {
         display: flex;

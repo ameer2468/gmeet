@@ -28,6 +28,12 @@ export interface IcreateProject {
     }
 }
 
+export interface editProject {
+    project_id: string;
+    name: string;
+    description: string;
+}
+
 export interface project {
     project_id: string;
     name: string;

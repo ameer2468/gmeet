@@ -14,18 +14,32 @@ export function createUserThunk(data: User) {
     }
 }
 
-export function getCurrentUserThunk(username: string) {
+export function getAssetThunk(username: string) {
     return async (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
-        const {userStore} = getState();
-        const {authUser} = userStore;
+        await dispatch(getUser(username)).then((res: any) => {
+            const {userStore} = getState();
+            const {authUser} = userStore;
+            dispatch(getUserImage(username)).then((res: any) => {
+                const imageUrl = res.payload.data.imageUrl;
+                const authObjectUpdate = {...authUser, userImage: imageUrl}
+                dispatch(authedUser(authObjectUpdate))
+                dispatch(userImageHandler(false));
+                dispatch(loading(false))
+            })
+        }).catch(() => {
+            notify('An error has occurred')
+        })
+    }
+}
+
+export function getCurrentUserThunk(username: string) {
+    return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
         await dispatch(getUser(username)).then((res: any) => {
             const {rows} = res.payload.data;
             dispatch(getUserImage(username)).then((res: any) => {
                 const imageUrl = res.payload.data.imageUrl;
                 const updatedObject = {...rows[0], userImage: imageUrl}
-                const authObjectUpdate = {...authUser, userImage: imageUrl}
                 dispatch(userDetails(updatedObject))
-                dispatch(authedUser(authObjectUpdate))
                 dispatch(userImageHandler(false));
                 dispatch(loading(false))
             })
