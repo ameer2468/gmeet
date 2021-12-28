@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {Auth} from "aws-amplify";
-import {authedUser, loading, status} from "../redux/user/userSlice";
+import {authedUser, loading, status, userImageHandler} from "../redux/user/userSlice";
 import {Login} from "../pages/register/types";
 import {useAppDispatch} from "../redux/hooks";
 import {useHistory} from "react-router-dom";
@@ -21,6 +21,7 @@ export function useLogin() {
                 return setError('Please fill in all the fields')
             }
             dispatch(loading(true))
+            dispatch(userImageHandler(true))
             await Auth.signIn({
                 username: inputValues.username,
                 password: inputValues.password
@@ -32,7 +33,7 @@ export function useLogin() {
                 await Auth.currentUserInfo().then((data) => {
                     dispatch(authedUser(data))
                 });
-                dispatch(getAssetThunk(inputValues.username));
+                await dispatch(getAssetThunk(inputValues.username));
                 dispatch(status(true))
                 dispatch(loading(false))
                 history.push('/home')

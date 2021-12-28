@@ -9,11 +9,13 @@ import { motion } from 'framer-motion';
 import {regularVariants} from "../helpers/framer";
 import {NavLink} from "react-router-dom";
 import placeholder from '../assets/images/placeholder.png'
+import LoadingSpinner from "./global/LoadingSpinner";
 
 const Authnav = () => {
 
     const userRedux = useAppSelector(userReducer)
     const authUser = userRedux.authUser === undefined ? '' : userRedux.authUser;
+    const {userImageLoading} = userRedux;
     const [open, setOpen] = useState(false);
     const loginHook = useLogin();
     const closeDrop = () => {
@@ -37,7 +39,7 @@ const Authnav = () => {
                         <FontAwesomeIcon className='icon' icon={faBell}/>
                     </div>
                     <div ref={ref} onClick={() => setOpen(!open)} className="profile">
-                        {authUser === undefined ? '' : <img onError={e => e.currentTarget.src = placeholder} alt='profile' src={authUser.userImage} className='userImage'/>}
+                        {userImageLoading ? <div style={{marginRight: 15, marginTop: 5}}><LoadingSpinner height={25} width={25}/></div> : <img onError={e => e.currentTarget.src = placeholder} alt='profile' src={authUser.userImage} className='userImage'/>}
                         <p>{authUser === undefined ? '' : authUser.username}</p>
                         {open ? <motion.div initial={'hidden'} animate={'active'}
                                             variants={regularVariants}
