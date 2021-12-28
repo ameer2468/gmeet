@@ -59,16 +59,15 @@ export function uploadUserAssetThunk() {
             username: userStore.authUser.username
         }
         dispatch(userImageHandler(true));
-        await dispatch(uploadUserAsset(data)).then(() => {
-            dispatch(userImageUpload(undefined));
-        })
-        dispatch(getUserImage(data.username)).then((res: any) => {
+        await dispatch(uploadUserAsset(data));
+        await dispatch(getUserImage(data.username)).then((res: any) => {
             const imageUrl = res.payload.data.imageUrl;
             const authObjectUpdate = {...authUser, userImage: imageUrl}
             const updatedObject = {...userInfo, userImage: imageUrl}
             dispatch(userDetails(updatedObject))
             dispatch(authedUser(authObjectUpdate))
             dispatch(userImageHandler(false));
+            dispatch(userImageUpload(undefined));
         }).catch(() => {
             notify('An error has occurred')
         })
