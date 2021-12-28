@@ -29,7 +29,7 @@ export const getUserImage = createAsyncThunk('user/asset', async (username: stri
     })
 })
 
-export const uploadUserAsset = createAsyncThunk('user/asset', async (data: any) => {
+export const uploadUserAsset = createAsyncThunk('user/asset', async (data: {username: string, file: File}) => {
     const file = data.file;
     return await axios.post(`${URL}/asset`, {
             username: data.username

@@ -70,7 +70,7 @@ export const deletePostService = createAsyncThunk('posts/delete', async(id: stri
     })
 })
 
-export const editPostService = createAsyncThunk('posts/editpost', async(data: any) => {
+export const editPostService = createAsyncThunk('posts/editpost', async(data: {post_id: string, post: string}) => {
     return await axios.put(`${API_URL}/posts`, {
         post_id: data.post_id,
         post: data.post

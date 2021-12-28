@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {FormEvent, useState} from "react";
 import {Auth} from "aws-amplify";
 import {authedUser, loading, status, userImageHandler} from "../redux/user/userSlice";
 import {Login} from "../pages/register/types";
@@ -15,7 +15,7 @@ export function useLogin() {
     })
     const [error, setError] = useState('');
 
-   async function loginHandler(e: any) {
+   async function loginHandler(e: FormEvent<HTMLFormElement>) {
             e.preventDefault();
             if (inputValues.username.length === 0 || inputValues.password.length === 0) {
                 return setError('Please fill in all the fields')
@@ -39,6 +39,8 @@ export function useLogin() {
                 history.push('/home')
             }).catch((err) => {
                 if (err.code === 'UserNotFoundException') {
+                    setError('This account does not exist')
+                } else if (err.code === 'NotAuthorizedException') {
                     setError('Incorrect username or password')
                 } else {
                     setError(err)
