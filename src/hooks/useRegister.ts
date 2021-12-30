@@ -23,11 +23,11 @@ export function useRegister() {
     async function confirmSignUp(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
         try {
-            await dispatch(loading(true))
+           dispatch(loading(true))
             await Auth.confirmSignUp(inputValues.username, inputValues.code);
-            await setInputValues({email: "", password: "", username: "", code: "", confirmpass: "", profession: ""})
-            await setStep(prevState => prevState + 1);
-            await dispatch(loading(false))
+            setInputValues({email: "", password: "", username: "", code: "", confirmpass: "", profession: ""})
+            setStep(prevState => prevState + 1);
+            dispatch(loading(false))
         } catch (error) {
             setError('Error confirming signup')
             dispatch(loading(false))
@@ -39,7 +39,7 @@ export function useRegister() {
         if (inputValues.confirmpass !== inputValues.password) {
             return setError('Password does not match confirm password')
         } else {
-            await dispatch(loading(true))
+           dispatch(loading(true))
             await Auth.signUp({
                 username: inputValues.username,
                 password: inputValues.password,

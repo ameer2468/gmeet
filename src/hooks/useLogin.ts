@@ -38,10 +38,8 @@ export function useLogin() {
                 dispatch(loading(false))
                 history.push('/home')
             }).catch((err) => {
-                if (err.code === 'UserNotFoundException') {
-                    setError('This account does not exist')
-                } else if (err.code === 'NotAuthorizedException') {
-                    setError('Incorrect username or password')
+                if (err.code === 'UserNotFoundException' || err.code === 'NotAuthorizedException') {
+                    setError('Invalid username or password')
                 } else {
                     setError(err)
                 }
