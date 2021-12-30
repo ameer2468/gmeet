@@ -58,9 +58,10 @@ export function uploadUserAssetThunk() {
             file: userStore.imageUpload,
             username: userStore.authUser.username
         }
+        console.log(data.file)
         dispatch(userImageHandler(true));
         await dispatch(uploadUserAsset(data));
-        await dispatch(getUserImage(data.username)).then((res: any) => {
+        dispatch(getUserImage(data.username)).then((res: any) => {
             const imageUrl = res.payload.data.imageUrl;
             const authObjectUpdate = {...authUser, userImage: imageUrl}
             const updatedObject = {...userInfo, userImage: imageUrl}

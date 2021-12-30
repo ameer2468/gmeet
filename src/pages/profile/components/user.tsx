@@ -8,6 +8,7 @@ import {userImageUpload, userReducer} from "../../../redux/user/userSlice";
 import {useUser} from "../../../hooks/useUser";
 import placeholder from '../../../assets/images/placeholder.png';
 import {uploadUserAssetThunk} from "../../../redux/user/thunk";
+import {notify} from "../../../helpers/notify";
 
 interface props {
     data: any;
@@ -28,7 +29,11 @@ const User = ({data}: props) => {
         uploadRef.current?.click();
     }
     const handleFileInput = (e: any) => {
-       dispatch(userImageUpload(e.target.files[0]));
+       const file = e.target.files[0]
+        if (file.size > 210000) {
+            return notify('You cannot upload a file larger than 200kb')
+        }
+       dispatch(userImageUpload(file));
     }
 
 
