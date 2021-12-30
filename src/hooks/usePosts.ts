@@ -34,8 +34,8 @@ export const usePosts = () => {
 
     async function submitEditPost(post_id: string) {
         dispatch(editPostLoading(true))
-        await dispatch(editPostThunk(post_id))
-        editPostHandler(false)
+        dispatch(editPostThunk(post_id))
+        await editPostHandler(false)
         notify('Post edited successfully')
         dispatch(postValues({...postsStore.postForm, editpost: ''}))
         dispatch(editPostLoading(false))

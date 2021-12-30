@@ -13,6 +13,7 @@ const Profile = () => {
     const {username} = params;
     const userStore = useAppSelector(userReducer)
     const dispatch = useAppDispatch();
+    const {Loading} = userStore;
 
     useEffect(() => {
             dispatch(postsLoadingHandler(true))
@@ -23,9 +24,17 @@ const Profile = () => {
     return (
         <div className="profileContent">
             <div className="profileContainer">
-                <User data={userStore.userInfo}/>
-                <Posts/>
-                <Projects/>
+                {!Loading && !userStore.userInfo.username ?
+                    <div style={{width: '100%', textAlign: 'center', marginTop: '30rem'}}>
+                        <h1 style={{fontSize: '10rem'}}>User Not Found</h1>
+                    </div>
+                    :
+                  <>
+                      <User data={userStore.userInfo}/>
+                      <Posts/>
+                      <Projects/>
+                  </>
+                }
             </div>
         </div>
     );

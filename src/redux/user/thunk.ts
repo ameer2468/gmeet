@@ -76,11 +76,11 @@ export function uploadUserAssetThunk() {
 
 export function getAllUserData(username: string) {
     return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
-        await dispatch(getUserProjectsThunk(username))
+        dispatch(getCurrentUserThunk(username));
+        dispatch(getUserProjectsThunk(username))
         dispatch(getRequestsThunk());
         await dispatch(getPostsThunk(username));
         await dispatch(getCommentsThunk(username));
-        await dispatch(getCurrentUserThunk(username));
         dispatch(postsLoadingHandler(false))
     }
 }
