@@ -21,6 +21,7 @@ const Profile = () => {
             dispatch(getAllUserData(username))
     }, [dispatch, username])
 
+
     return (
         <div className="profileContent">
             <div className="profileContainer">

@@ -312,6 +312,7 @@ body {
 .profileContent .profileContainer .profilePosts .postInfo {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 0.7rem;
 }
 .profileContent .profileContainer .profilePosts .postInfo .comment-menu {
   transition: all 0.3s;
