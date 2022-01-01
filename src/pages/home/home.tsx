@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import Search from "./components/search";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
-import {projectLoading, projectReducer} from "../../redux/projects/projectSlice";
+import {projectReducer} from "../../redux/projects/projectSlice";
 import LoadingSpinner from "../../components/global/LoadingSpinner";
 import Project from "./components/project";
 import {useProject} from "../../hooks/useProject";
@@ -24,7 +24,6 @@ const Home = () => {
     /*Requests to Load App*/
 
     useEffect(() => {
-        dispatch(projectLoading(true))
         dispatch(getAssetThunk(username))
         const getProjectsData = async () => {
            if (value.length > 0 || value.length === 0) {

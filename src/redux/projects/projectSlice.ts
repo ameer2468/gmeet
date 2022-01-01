@@ -17,11 +17,13 @@ interface ProjectState {
     selectedProject: project;
     deleteLoading: boolean;
     joinLoading: boolean;
+    projectDetails: any;
+    projectDetailsLoading: boolean;
     projectForm: {
         name: string;
         description: string;
         searchterm: string;
-        speciality: string;
+        role: string;
         why: string;
     }
 }
@@ -31,8 +33,10 @@ const initialState: ProjectState = {
     projects: [],
     userProjects: [],
     projectRequests: [],
+    projectDetails: {},
     loading: false,
     createLoading: false,
+    projectDetailsLoading: false,
     requestsLoading: false,
     joinLoading: false,
     editProjectLoading: false,
@@ -40,16 +44,16 @@ const initialState: ProjectState = {
     selectedProject: {
         project_id: '',
         name: '',
+        role: '',
         owner: '',
         description: '',
-        members: ['']
     },
     error: false,
     projectForm: {
         name: '',
         description: '',
         searchterm: '',
-        speciality: '',
+        role: '',
         why: ''
     }
 }
@@ -73,8 +77,14 @@ export const projectSlice = createSlice({
         selectedProject: (state, action: PayloadAction<project>) => {
             state.selectedProject = action.payload;
         },
+        projectDetails: (state, action: PayloadAction<any>) => {
+            state.projectDetails = action.payload;
+        },
+        projectDetailsLoading: (state, action: PayloadAction<boolean>) => {
+            state.projectDetailsLoading = action.payload;
+        },
         addProject: (state, action: PayloadAction<project>) => {
-            state.projects.push(action.payload)
+            state.projects = [action.payload, ...state.projects]
         },
         removeProject: (state, action: PayloadAction<string>) => {
             state.userProjects = state.userProjects.filter((value) => value.project_id !== action.payload)
@@ -120,6 +130,8 @@ export const {
     projectValues,
     removeProject,
     projectRequests,
+    projectDetails,
+    projectDetailsLoading,
     editProjectLoading,
     userProjects,
     projectArr,

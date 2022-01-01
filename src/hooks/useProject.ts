@@ -118,15 +118,12 @@ export const useProject = () => {
 
     function acceptHandler(data: acceptRequest) {
         dispatch(requestsLoading(true));
-        const pullProject = projects.projects.filter((value) => {
-            return value.project_id === data.project_id;
-        })
-        const membersArr = pullProject[0].members;
-        const newMembers = [membersArr,data.members].toString()
         return dispatch(acceptRequests(data = {
+            user_id: data.user_id,
             id: data.id,
             project_id: projects.selectedProject.project_id,
-            members: newMembers
+            role: data.role
+
         })).then(() => {
             notify('Member successfully added to project!')
             dispatch(requestsLoading(false));
@@ -146,7 +143,7 @@ export const useProject = () => {
 
 
 function joinProject() {
-        if (projectForm.speciality.length === 0 || projectForm.why.length === 0) {
+        if (projectForm.role.length === 0 || projectForm.why.length === 0) {
             return notify('Speciality and a reason to join are required')
         }
         dispatch(joinLoading(true))
@@ -155,12 +152,14 @@ function joinProject() {
         const data = {
             project_id: projects.selectedProject.project_id,
             user: userInfo.username,
+            user_id: userInfo.id,
             why: projectForm.why,
-            speciality: projectForm.speciality,
+            role: projectForm.role,
             id: uuidv4()
         }
-        dispatch(joinProjectsThunk(data, projects.projects, notify))
-        dispatch(getProjectsThunk());
+    dispatch(joinProjectsThunk(data))
+    dispatch(getProjectsThunk());
+    notify('Request submitted successfully')
     }
 
     function createProjectHandler() {
@@ -173,16 +172,18 @@ function joinProject() {
           name: projectForm.name,
           description: projectForm.description,
           owner: userInfo.username,
-          members: [userInfo.username]
+          user_id: userInfo.id,
+          role: 'Founder'
         }
       return dispatch(createProject(data)).then((res) => {
           const {data} = res.payload as IcreateProject;
           const newProj = {
               project_id: data.project_id,
               name: data.name,
-              members: data.members,
               description: data.description,
               owner: data.owner,
+              user_id: data.user_id,
+              role: data.role,
               requests: []
           }
           notify(`Project ${data.name} added successfully`);

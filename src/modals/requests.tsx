@@ -28,14 +28,14 @@ const Requests = () => {
                                     <h2>{value.user}</h2>
                                     <p className='speciality'>
                                         <FontAwesomeIcon className={'role-icon'} icon={faCode}/>
-                                        {value.speciality}
+                                        {value.role}
                                     </p>
                                     <p>{value.why}</p>
                                     <div className="buttons">
                                         <button onClick={(e) => {
                                             e.preventDefault();
                                             projectHook.acceptHandler(
-                                                {id: value.id, project_id: value.project_id, members: value.user}
+                                                {id: value.id, project_id: value.project_id, role: value.role, user_id: value.user_id}
                                             )
                                         }} className='btn btn--purple'>Accept</button>
                                         <button onClick={(e) => {

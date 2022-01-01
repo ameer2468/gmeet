@@ -39,8 +39,8 @@ export interface project {
     name: string;
     description: string;
     owner: string;
-    members: string[];
-    id?: string;
+    role: string;
+    user_id?: string;
     requests?: projectRequest[]
 }
 
@@ -55,9 +55,10 @@ export interface selectedProject {
 
 export interface projectRequest {
     project_id: string;
+    user_id: string;
     user: string;
     why: string;
-    speciality: string;
+    role: string;
     id: string;
 }
 

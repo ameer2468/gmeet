@@ -33,8 +33,9 @@ export const joinProjectRequest =
     return await axios.post(`${URL}/project`, {
         project_id: data.project_id,
         user: data.user,
+        user_id: data.user_id,
         why: data.why,
-        speciality: data.speciality,
+        role: data.role,
         id: data.id
     },{
         headers: {
@@ -46,8 +47,9 @@ export const joinProjectRequest =
 export const acceptRequests = createAsyncThunk('requests/accept', async (data: acceptRequest) => {
     return await axios.post(`${URL}/requests`, {
         project_id: data.project_id,
-        members: data.members,
-        id: data.id
+        id: data.id,
+        user_id: data.user_id,
+        role: data.role
     }, {
         headers: {
             'x-api-key': process.env.REACT_APP_API_KEY,
@@ -128,7 +130,8 @@ export const createProject = createAsyncThunk('projects/createproject', async (d
         name: data.name,
         description: data.description,
         owner: data.owner,
-        members: data.members.toString()
+        user_id: data.user_id,
+        role: data.role,
     },{
         headers: {
             'x-api-key': process.env.REACT_APP_API_KEY,

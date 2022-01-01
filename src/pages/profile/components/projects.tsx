@@ -6,6 +6,8 @@ import LoadingSpinner from "../../../components/global/LoadingSpinner";
 import Project from "../../home/components/project";
 import { Scrollbars } from 'react-custom-scrollbars';
 
+
+
 const Projects = () => {
 
     const projectStore = useAppSelector(projectReducer)

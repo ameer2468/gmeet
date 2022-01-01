@@ -10,6 +10,10 @@ html {
   font-size: 62.5%;
 }
 
+svg {
+  fill: white!important;
+}
+
 textarea, input {
   font-family: Sofia pro, 'sans-serif';
 }
@@ -45,6 +49,7 @@ body {
 
 @import 'pages/landing';
 @import 'pages/home';
+@import 'pages/details';
 @import 'pages/profile';
 @import 'modals';
 @import 'global';

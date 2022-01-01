@@ -8,6 +8,10 @@ html {
   font-size: 62.5%;
 }
 
+svg {
+  fill: white !important;
+}
+
 textarea, input {
   font-family: Sofia pro, "sans-serif";
 }
@@ -187,6 +191,48 @@ body {
   transform: translateY(-1rem);
   transition: all 0.3s;
   box-shadow: 0 30px 20px -20px rgba(0, 0, 0, 0.15);
+}
+
+.detailsContent {
+  width: 100vw;
+  padding: 0 2rem;
+  height: auto;
+  min-height: 100vh;
+  background: #275957;
+  background: linear-gradient(162deg, #275957 -40%, #121424 78%);
+}
+.detailsContent .detailsContainer {
+  padding: 15rem 0 0 0;
+  width: 100%;
+  max-width: 150rem;
+  margin: 0 auto;
+}
+.detailsContent .detailsContainer header .user {
+  display: flex;
+  align-items: center;
+}
+.detailsContent .detailsContainer header .username {
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.detailsContent .detailsContainer header .username:hover {
+  color: white;
+  transition: all 0.3s;
+}
+.detailsContent .detailsContainer header img {
+  width: 100%;
+  max-width: 2.5rem;
+  height: 2.5rem;
+  margin: 0.5rem 1rem 0 1.5rem;
+}
+.detailsContent .detailsContainer header h1 {
+  font-size: 5rem;
+  color: white;
+}
+.detailsContent .detailsContainer header h3 {
+  font-weight: normal;
+  margin-top: 0.5rem;
+  font-size: 2.2rem;
 }
 
 .profileContent {
@@ -807,6 +853,21 @@ body {
 .justifyCenter {
   display: flex;
   justify-items: center !important;
+}
+
+.dd-header svg path {
+  fill: white;
+}
+
+.dd-list-item svg path {
+  fill: #4ad58b;
+}
+.dd-list-item:hover {
+  background: #4ad58b !important;
+  color: #12131f !important;
+}
+.dd-list-item:hover svg path {
+  fill: #12131f !important;
 }
 
 .disabledButton {

@@ -23,6 +23,7 @@ const Authnav = () => {
     }
     const ref = useDetectClickOutside({ onTriggered: closeDrop});
 
+
     return (
         <nav className="authnav">
             <div className="container">

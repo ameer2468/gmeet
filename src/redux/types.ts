@@ -1,7 +1,8 @@
 export interface acceptRequest {
     id: string;
     project_id: string;
-    members: string;
+    role: string;
+    user_id: string;
 }
 
 export interface post extends posts {}
@@ -37,6 +38,8 @@ export interface IcreateProject {
         name: string;
         description: string;
         owner: string;
+        user_id: string;
+        role: string;
         members: string[]
         requests: requests[]
     }

@@ -14,9 +14,16 @@ export function createUserThunk(data: User) {
     }
 }
 
+export function getAUserAsset(username: string) {
+    return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
+        const userImage: any = await dispatch(getUserImage(username));
+        return userImage.payload.data.imageUrl;
+    }
+}
+
 export function getAssetThunk(username: string) {
     return async (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
-        await dispatch(getUser(username)).then((res: any) => {
+        await dispatch(getUser(username)).then(() => {
             const {userStore} = getState();
             const {authUser} = userStore;
             dispatch(getUserImage(username)).then((res: any) => {
@@ -31,6 +38,7 @@ export function getAssetThunk(username: string) {
         })
     }
 }
+
 
 export function getCurrentUserThunk(username: string) {
     return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
@@ -58,7 +66,6 @@ export function uploadUserAssetThunk() {
             file: userStore.imageUpload,
             username: userStore.authUser.username
         }
-        console.log(data.file)
         dispatch(userImageHandler(true));
         await dispatch(uploadUserAsset(data));
         dispatch(getUserImage(data.username)).then((res: any) => {

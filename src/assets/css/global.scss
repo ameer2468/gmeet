@@ -3,6 +3,25 @@
   justify-items: center!important;
 }
 
+.dd-header {
+  svg path {
+    fill: white;
+  }
+}
+
+.dd-list-item {
+  svg path {
+    fill: $green;
+  }
+  &:hover {
+    background: $green!important;
+    color: $cardbg!important;
+    svg path {
+      fill: $cardbg!important;
+    }
+  }
+}
+
 .disabledButton {
   cursor: not-allowed!important;
   background: gray!important;

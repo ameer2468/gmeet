@@ -7,10 +7,11 @@ const Search = () => {
     const projectHook = useProject();
     const {projectForm} = projectHook.projects;
     const [value] = useDebounce(projectForm.searchterm, 1000);
+    const length = projectHook.projects.projects.length;
 
     return (
         <div className="search">
-            <h1>Search Projects</h1>
+            <h1>Search Projects: {length}</h1>
             <form onSubmit={(e) => {
                 e.preventDefault()
                 projectHook.getSearchProjects(value)
