@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBell, faCog, faSignOutAlt, faUser} from "@fortawesome/free-solid-svg-icons";
-import {useAppSelector} from "../redux/hooks";
+import {useAppDispatch, useAppSelector} from "../redux/hooks";
 import {userReducer} from "../redux/user/userSlice";
 import { useDetectClickOutside } from 'react-detect-click-outside';
 import {useLogin} from "../hooks/useLogin";
@@ -10,6 +10,7 @@ import {regularVariants} from "../helpers/framer";
 import {NavLink} from "react-router-dom";
 import placeholder from '../assets/images/placeholder.png'
 import LoadingSpinner from "./global/LoadingSpinner";
+import {getProjectsThunk} from "../redux/projects/thunks";
 
 const Authnav = () => {
 
@@ -22,7 +23,7 @@ const Authnav = () => {
         setOpen(false);
     }
     const ref = useDetectClickOutside({ onTriggered: closeDrop});
-
+    const dispatch = useAppDispatch();
 
     return (
         <nav className="authnav">
@@ -31,7 +32,9 @@ const Authnav = () => {
                     <h1>Project</h1>
                     <nav>
                         <ul>
-                            <li><NavLink to={'/home'}>Home</NavLink></li>
+                            <li><NavLink onClick={() => {
+                                dispatch(getProjectsThunk())
+                            }} to={'/home'}>Home</NavLink></li>
                         </ul>
                     </nav>
                 </div>
