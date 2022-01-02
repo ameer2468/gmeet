@@ -7,7 +7,7 @@ $border: #5A6091;
 $gray: #282828;
 $cardbg: #12131f;
 $activeBorder: #3f4378;
-$green: #4ad58b;
+$green: #4aabd5;
 $purepurple: $green;
 $purple: #4a36ff;
 
@@ -37,6 +37,7 @@ $purple: #4a36ff;
   border: 1px solid transparent;
   color: $text;
   padding: 2rem 2rem;
+  line-height: 2rem;
   font-size: 1.5rem;
   border-radius: 0.5rem;
   background-color: lighten(rgba($input, 0.5), 2);

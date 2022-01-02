@@ -21,7 +21,7 @@ const TextArea = (props: props) => {
     return (
         <textarea
             placeholder={props.placeholder}
-            maxLength={!props.maxLength ? 100 : 200}
+            maxLength={!props.maxLength ? 100 : props.maxLength}
             className={props.className ? props.className : 'textarea'}
             value={props.value}
             onSubmit={props.submit}

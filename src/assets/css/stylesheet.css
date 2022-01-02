@@ -25,6 +25,7 @@ textarea {
   border: 1px solid transparent;
   color: #c1c1c1;
   padding: 2rem 2rem;
+  line-height: 2rem;
   font-size: 1.5rem;
   border-radius: 0.5rem;
   background-color: rgba(22, 23, 37, 0.5);
@@ -32,7 +33,7 @@ textarea {
 }
 textarea:focus {
   outline: 0;
-  border: 1px solid #4ad58b;
+  border: 1px solid #4aabd5;
   transition: all 0.3s;
 }
 textarea::placeholder {
@@ -110,13 +111,19 @@ body {
   font-size: 2.3rem;
 }
 
+.article-text {
+  font-size: 1.7rem;
+  line-height: 1.5;
+  margin-top: 1.5rem;
+}
+
 .HomeContent {
   width: 100vw;
   padding: 0 2rem;
   height: auto;
   min-height: 100vh;
-  background: #275957;
-  background: linear-gradient(162deg, #275957 -40%, #121424 78%);
+  background: #386e7f;
+  background: linear-gradient(162deg, #386e7f -40%, #121424 78%);
 }
 .HomeContent .homeContainer {
   padding: 15rem 0 0 0;
@@ -147,6 +154,7 @@ body {
   background: rgba(18, 19, 31, 0.2);
   border-radius: 0.5rem;
   transition: all 0.3s;
+  width: 100%;
   padding: 3rem;
   text-align: center;
 }
@@ -177,6 +185,10 @@ body {
 .HomeContent .homeContainer .projectCard p {
   margin: 2rem 0 3rem 0;
   font-size: 1.55rem;
+  height: 13.2rem;
+  text-align: justify;
+  word-break: break-all;
+  width: 100%;
   line-height: 2.5rem;
 }
 .HomeContent .homeContainer .projectCard .buttons button {
@@ -198,8 +210,8 @@ body {
   padding: 0 2rem;
   height: auto;
   min-height: 100vh;
-  background: #275957;
-  background: linear-gradient(162deg, #275957 -40%, #121424 78%);
+  background: #386e7f;
+  background: linear-gradient(162deg, #386e7f -40%, #121424 78%);
 }
 .detailsContent .detailsContainer {
   padding: 15rem 0 0 0;
@@ -239,8 +251,8 @@ body {
   width: 100vw;
   height: 100vh;
   padding: 0 2rem;
-  background: #275957;
-  background: linear-gradient(162deg, #275957 -40%, #121424 78%);
+  background: #386e7f;
+  background: linear-gradient(162deg, #386e7f -40%, #121424 78%);
 }
 .profileContent .btn {
   font-size: 1.5rem;
@@ -382,7 +394,7 @@ body {
   transition: all 0.3s;
 }
 .profileContent .profileContainer .profilePosts .post .actions .delete:hover, .profileContent .profileContainer .profilePosts .post .actions .edit:hover {
-  border: 1px solid #4ad58b;
+  border: 1px solid #4aabd5;
   transition: all 0.3s;
   cursor: pointer;
 }
@@ -475,7 +487,7 @@ body {
   transition: all 0.3s;
 }
 .profileContent .profileContainer .listings .projectCard .edit:hover {
-  border: 1px solid #4ad58b;
+  border: 1px solid #4aabd5;
   transition: all 0.3s;
   cursor: pointer;
 }
@@ -494,7 +506,7 @@ body {
   transition: all 0.3s;
 }
 .profileContent .profileContainer .listings .projectCard .delete:hover {
-  border: 1px solid #4ad58b;
+  border: 1px solid #4aabd5;
   transition: all 0.3s;
   cursor: pointer;
 }
@@ -522,6 +534,7 @@ body {
 .profileContent .profileContainer .listings .projectCard p {
   margin: 2rem 0 3rem 0;
   font-size: 1.55rem;
+  height: 9.5rem;
   line-height: 2.5rem;
 }
 .profileContent .profileContainer .listings .projectCard .buttons {
@@ -624,7 +637,7 @@ body {
   cursor: pointer;
 }
 .profileContent .profileContainer .user .info .userImage .actions .uploadImage {
-  background: #4ad58b;
+  background: #4aabd5;
   color: #12131f;
   width: 3rem;
   height: 3rem;
@@ -634,7 +647,7 @@ body {
 }
 .profileContent .profileContainer .user .info .userImage .actions .uploadImage:hover {
   transition: all 0.3s;
-  background: #2cc071;
+  background: #2c93c0;
   cursor: pointer;
 }
 .profileContent .profileContainer .user .info .userImage img {
@@ -666,7 +679,7 @@ body {
   margin-right: 1rem;
 }
 .profileContent .profileContainer .user .website:hover {
-  border: 1px solid #4ad58b;
+  border: 1px solid #4aabd5;
   transition: all 0.3s;
 }
 .profileContent .profileContainer .user h2 {
@@ -718,6 +731,7 @@ body {
   border: 1px solid transparent;
   color: #c1c1c1;
   padding: 2rem 2rem;
+  line-height: 2rem;
   font-size: 1.5rem;
   border-radius: 0.5rem;
   background-color: rgba(22, 23, 37, 0.5);
@@ -725,7 +739,7 @@ body {
 }
 .modalWrap .modal .textarea:focus {
   outline: 0;
-  border: 1px solid #4ad58b;
+  border: 1px solid #4aabd5;
   transition: all 0.3s;
 }
 .modalWrap .modal .textarea::placeholder {
@@ -745,7 +759,7 @@ body {
 }
 .modalWrap .modal input:focus {
   outline: 0;
-  border: 1px solid #4ad58b;
+  border: 1px solid #4aabd5;
   transition: all 0.3s;
 }
 .modalWrap .modal input::placeholder {
@@ -770,7 +784,7 @@ body {
 }
 .modalWrap .modal .close:hover {
   transition: all 0.3s;
-  border: 1px solid #4ad58b;
+  border: 1px solid #4aabd5;
   cursor: pointer;
 }
 
@@ -856,21 +870,23 @@ body {
   justify-items: center !important;
 }
 
+/*Profession selection dropdown*/
 .dd-header svg path {
   fill: white;
 }
 
 .dd-list-item svg path {
-  fill: #4ad58b;
+  fill: #4aabd5;
 }
 .dd-list-item:hover {
-  background: #4ad58b !important;
+  background: #4aabd5 !important;
   color: #12131f !important;
 }
 .dd-list-item:hover svg path {
   fill: #12131f !important;
 }
 
+/*End of dropdown*/
 .disabledButton {
   cursor: not-allowed !important;
   background: gray !important;
@@ -935,11 +951,11 @@ body {
   background: #ff1765;
 }
 .btn--green {
-  background: #4ad58b;
+  background: #4aabd5;
   color: #2a2c3d;
 }
 .btn--green:hover {
-  background: #2ec876;
+  background: #2e99c8;
 }
 .btn--gray {
   background: #282828;
@@ -950,11 +966,11 @@ body {
   opacity: 1;
 }
 .btn--purepurple {
-  background: #4ad58b;
+  background: #4aabd5;
   color: #2a2c3d;
 }
 .btn--purepurple:hover {
-  background: #2ec876;
+  background: #2e99c8;
   opacity: 1;
 }
 .btn--purple {
@@ -1033,7 +1049,7 @@ body {
 }
 .input:focus {
   outline: 0;
-  border: 1px solid #4ad58b;
+  border: 1px solid #4aabd5;
   transition: all 0.3s;
 }
 .input::placeholder {
@@ -1045,6 +1061,7 @@ body {
   border: 1px solid transparent;
   color: #c1c1c1;
   padding: 2rem 2rem;
+  line-height: 2rem;
   font-size: 1.5rem;
   border-radius: 0.5rem;
   background-color: rgba(22, 23, 37, 0.5);
@@ -1053,7 +1070,7 @@ body {
 }
 .textarea:focus {
   outline: 0;
-  border: 1px solid #4ad58b;
+  border: 1px solid #4aabd5;
   transition: all 0.3s;
 }
 .textarea::placeholder {
@@ -1115,6 +1132,92 @@ body {
   max-width: 23rem;
   align-items: center;
 }
+.authnav .container .side .notification {
+  position: relative;
+}
+.authnav .container .side .notification .alert {
+  width: 0.75rem;
+  height: 0.75rem;
+  right: 1rem;
+  top: 0.2rem;
+  border-radius: 10rem;
+  position: absolute;
+  background: lightcoral;
+}
+.authnav .container .side .notification .icon {
+  font-size: 2rem;
+}
+.authnav .container .side .notification .icon:hover {
+  cursor: pointer;
+}
+.authnav .container .side .notification .notifications {
+  position: absolute;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  right: 0;
+  width: 27rem;
+  margin-top: 1.5rem;
+  border-radius: 0.5rem;
+  background: #171a28;
+}
+@keyframes animation {
+  0% {
+    width: 0.7rem;
+    height: 0.7rem;
+    left: 0;
+    opacity: 1;
+    top: 0.1rem;
+  }
+  100% {
+    width: 2rem;
+    height: 2rem;
+    left: -0.6rem;
+    top: -0.7rem;
+    opacity: 0;
+  }
+}
+.authnav .container .side .notification .notification-item {
+  width: 100%;
+  flex: 0 0 100%;
+  margin: 1rem auto;
+  position: relative;
+}
+.authnav .container .side .notification .notification-item .title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.authnav .container .side .notification .notification-item .circle {
+  width: 0.7rem;
+  height: 0.7rem;
+  margin-right: 1.6rem;
+  background: #99f692;
+  border-radius: 3rem;
+  position: relative;
+}
+.authnav .container .side .notification .notification-item .circle::before {
+  content: "";
+  width: 0.7rem;
+  height: 0.7rem;
+  position: absolute;
+  left: -0.2rem;
+  z-index: 40;
+  margin-right: 1rem;
+  background: #99f692;
+  border-radius: 3rem;
+  animation: animation 1s ease-out infinite;
+}
+.authnav .container .side .notification .notification-item h3 {
+  font-size: 1.7rem;
+}
+.authnav .container .side .notification .notification-item p {
+  margin-top: 0.5rem;
+  font-size: 1.5rem;
+  text-align: center;
+}
 .authnav .container .side .profile {
   display: flex;
   align-items: center;
@@ -1148,6 +1251,7 @@ body {
 .authnav .container .side .profile .dropdown .icon {
   font-size: 1.4rem;
   margin-left: 0;
+  margin-right: 1rem;
 }
 .authnav .container .side .profile .dropdown li {
   list-style: none;
@@ -1167,16 +1271,6 @@ body {
 .authnav .container .side .profile .userImage {
   width: 3rem;
   top: 0;
-}
-.authnav .container .side .icon {
-  font-size: 2.5rem;
-  transition: all 0.3s;
-  margin: 0 1rem 0 4rem;
-}
-.authnav .container .side .icon:hover {
-  transition: all 0.3s;
-  opacity: 0.5;
-  cursor: pointer;
 }
 .authnav h1 {
   color: white;

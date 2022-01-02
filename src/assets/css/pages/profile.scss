@@ -2,8 +2,8 @@
   width: 100vw;
   height: 100vh;
   padding: 0 2rem;
-  background: rgb(39,89,87);
-  background: linear-gradient(162deg, rgba(39,89,87,1) -40%, rgba(18,20,36,1) 78%);
+  background: rgb(56, 110, 127);
+  background: linear-gradient(162deg, rgb(56,110,127) -40%, rgba(18,20,36,1) 78%);
   .btn {
     font-size: 1.5rem;
     margin-top: 0.5rem;
@@ -283,6 +283,7 @@
         p {
           margin: 2rem 0 3rem 0;
           font-size: 1.55rem;
+          height: 9.5rem;
           line-height: 2.5rem;
         }
         .buttons {

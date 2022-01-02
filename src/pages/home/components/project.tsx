@@ -6,6 +6,7 @@ import {selectedProject} from "../../../redux/projects/projectSlice";
 import {useAppDispatch} from "../../../redux/hooks";
 import {useUser} from "../../../hooks/useUser";
 import {Link, useParams} from "react-router-dom";
+import {shortenText} from "../../../helpers/substring";
 
 interface props {
     data: any;
@@ -60,7 +61,7 @@ const Project = ({data, remove, noRequest, profile}: props) => {
                            </>
                    }
                    <h2>{data.name}</h2>
-                   <p>{data.description}</p>
+                   <p>{shortenText(data.description)}</p>
 
                    <div className={'buttons'}>
                        <Link to={`/project/${data.project_id}`}>

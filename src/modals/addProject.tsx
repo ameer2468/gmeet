@@ -20,7 +20,7 @@ const AddProject = () => {
             buttonText={'Confirm'}>
             <form className='generalForm'>
                 <Input value={projectForm.name} useHook={projectHook} name={'name'} maxWidth={'100%'} placeholder={'Project name'}/>
-                <TextArea useHook={projectHook} name={'description'} maxWidth={'100%'} placeholder={'Project description'} height={'20rem'}/>
+                <TextArea maxLength={500} useHook={projectHook} name={'description'} maxWidth={'100%'} placeholder={'Project description'} height={'20rem'}/>
             </form>
         </Modal>
     );

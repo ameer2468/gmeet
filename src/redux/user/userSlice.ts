@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type {RootState} from "../store";
+import {notificationItem} from "./types";
 
 // Define a type for the slice state
 interface UserState {
@@ -9,6 +10,7 @@ interface UserState {
         profession: string;
         website: string;
         userImage: string;
+        notifications: notificationItem[]
     }
     authUser: any;
     LoggedIn: boolean;
@@ -24,7 +26,8 @@ const initialState: UserState = {
         username: '',
         profession: '',
         website: '',
-        userImage: ''
+        userImage: '',
+        notifications: []
     },
     authUser: {},
     LoggedIn: false,

@@ -7,3 +7,9 @@ export interface User {
     website: string;
     profession: string;
 }
+
+export interface notificationItem {
+    id: string;
+    message: string;
+    user: string;
+}
