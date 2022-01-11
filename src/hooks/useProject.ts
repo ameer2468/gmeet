@@ -142,6 +142,7 @@ export const useProject = () => {
     }
 
 
+
 function joinProject() {
         if (projectForm.role.length === 0 || projectForm.why.length === 0) {
             return notify('Speciality and a reason to join are required')
@@ -176,6 +177,7 @@ function joinProject() {
           role: 'Founder'
         }
       return dispatch(createProject(data)).then((res) => {
+          /*Notification code*/
           const {data} = res.payload as IcreateProject;
           const newProj = {
               project_id: data.project_id,

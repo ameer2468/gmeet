@@ -5,6 +5,7 @@ import {Login} from "../pages/register/types";
 import {useAppDispatch} from "../redux/hooks";
 import {useHistory} from "react-router-dom";
 import {getAssetThunk} from "../redux/user/thunk";
+import {getUserFollowers} from "../redux/user/services";
 
 export function useLogin() {
     const dispatch = useAppDispatch();
@@ -31,7 +32,10 @@ export function useLogin() {
                     password: ''
                 })
                 await Auth.currentUserInfo().then((data) => {
-                    dispatch(authedUser(data))
+                    dispatch(getUserFollowers(data.attributes.sub)).then((res: any) => {
+                        const {following, followers} = res.payload.data;
+                        dispatch(authedUser({...data, following: following, followers: followers}))
+                    })
                 });
                 await dispatch(getAssetThunk(inputValues.username));
                 dispatch(status(true))

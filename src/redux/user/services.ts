@@ -18,6 +18,40 @@ export const createUser = createAsyncThunk('user/create', async (data: User) => 
     })
 })
 
+export const getUserFollowers = createAsyncThunk('getUsers/user', async (id: string) => {
+    return await axios.get(`${URL}/follower`, {
+        headers: {
+            'x-api-key': process.env.REACT_APP_API_KEY,
+        },
+        params: {
+            user_id: id
+        }
+    })
+})
+
+export const unFollowUserService = createAsyncThunk('user/create', async (id: string) => {
+    return await axios.delete(`${URL}/follower`, {
+        headers: {
+            'x-api-key': process.env.REACT_APP_API_KEY,
+        },
+        data: {
+            id: id
+        }
+    })
+})
+
+export const followUserService = createAsyncThunk('user/create', async (info: {id: string, user_id: string, follower_id: string}) => {
+    return await axios.post(`${URL}/follower`, {
+        id: info.id,
+        user_id: info.user_id,
+        follower_id: info.follower_id,
+    },{
+        headers: {
+            'x-api-key': process.env.REACT_APP_API_KEY,
+        },
+    })
+})
+
 export const getUserImage = createAsyncThunk('user/asset', async (username: string) => {
     return await axios.get(`${URL}/asset`, {
         headers: {
@@ -32,18 +66,24 @@ export const getUserImage = createAsyncThunk('user/asset', async (username: stri
 export const uploadUserAsset = createAsyncThunk('user/asset', async (data: {username: string, file: File}) => {
     const file = data.file;
     return await axios.post(`${URL}/asset`, {
-            username: data.username
+            username: data.username,
+            fileType: file.type,
         }, {
         headers: {
             'x-api-key': process.env.REACT_APP_API_KEY,
         }
         }).then((res) => {
-        const url = res.data.fileUploadURL;
-            axios.put(`${url}`, file)
+        const {fileUploadURL, fileType} = res.data;
+            axios.put(`${fileUploadURL}`, file, {
+                headers: {
+                    'Content-Type': fileType,
+                }
+            })
         }).catch((err) => {
         console.log(err)
     })
     })
+
 
 export const getUser = createAsyncThunk('getUsers/user', async (username: string) => {
     const token = await loadToken();

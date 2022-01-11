@@ -10,7 +10,9 @@ interface UserState {
         profession: string;
         website: string;
         userImage: string;
-        notifications: notificationItem[]
+        notifications: notificationItem[],
+        followers: string[],
+        following: string[]
     }
     authUser: any;
     LoggedIn: boolean;
@@ -27,7 +29,9 @@ const initialState: UserState = {
         profession: '',
         website: '',
         userImage: '',
-        notifications: []
+        notifications: [],
+        followers: [],
+        following: []
     },
     authUser: {},
     LoggedIn: false,

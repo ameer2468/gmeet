@@ -56,6 +56,9 @@ export function useRegister() {
                         id: res.userSub,
                         username: inputValues.username.toLowerCase(),
                         profession: inputValues.profession,
+                        followers: [],
+                        following: [],
+                        notifications: [],
                         website: ''
                     }))
                 })

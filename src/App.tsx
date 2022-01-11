@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Landing from "./pages/landing/landing";
 import {Switch, Route, useLocation, Redirect} from 'react-router-dom';
 import Login from "./pages/login/login";
@@ -17,6 +17,10 @@ import ProjectDetails from "./pages/projectdetails/projectDetails";
 Amplify.configure(awsconfig)
 
 const App = () => {
+
+    useEffect(() => {
+
+    }, [])
 
     const userRedux = useAppSelector(userReducer)
     const location = useLocation();

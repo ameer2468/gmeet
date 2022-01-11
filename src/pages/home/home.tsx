@@ -34,7 +34,6 @@ const Home = () => {
             getProjectsData();
     }, [dispatch, value, username])
 
-
     return (
         <div className='HomeContent'>
             <div className="homeContainer">

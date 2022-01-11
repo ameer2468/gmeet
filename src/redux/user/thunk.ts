@@ -1,12 +1,21 @@
 import {Action, ThunkDispatch} from "@reduxjs/toolkit";
 import {RootState} from "../store";
 import {User} from "./types";
-import {createUser, getUser, getUserImage, uploadUserAsset} from "./services";
+import {
+    createUser,
+    followUserService,
+    getUser,
+    getUserFollowers,
+    getUserImage,
+    unFollowUserService,
+    uploadUserAsset
+} from "./services";
 import {authedUser, loading, userDetails, userImageHandler, userImageUpload} from "./userSlice";
 import {getRequestsThunk, getUserProjectsThunk} from "../projects/thunks";
 import {getCommentsThunk, getPostsThunk} from "../posts/thunks";
 import {postsLoadingHandler} from "../posts/postsSlice";
 import {notify} from "../../helpers/notify";
+import {projectLoading} from "../projects/projectSlice";
 
 export function createUserThunk(data: User) {
     return (dispatch: ThunkDispatch<RootState, any, Action>) => {
@@ -39,9 +48,53 @@ export function getAssetThunk(username: string) {
     }
 }
 
+export function getUserFollowersThunk(id: string) {
+    return async (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
+        const userReducer = getState();
+        const {userInfo} = userReducer.userStore;
+       await dispatch(getUserFollowers(id)).then((res: any) => {
+           const {followers, following} = res.payload.data;
+           dispatch(userDetails({...userInfo, followers: followers, following: following}))
+        });
+    }
+}
+
+export function followUserThunk(info: {id: string, user_id: string, follower_id: string}) {
+    return async (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
+        const userReducer = getState();
+        const {authUser} = userReducer.userStore;
+        const data = {...info}
+        dispatch(followUserService(data))
+            .then((res: any) => {
+                const {data} = res.payload;
+                dispatch(authedUser({...authUser,
+                    following: [...authUser.following, data]
+                }))
+            })
+            .catch(() => {
+            notify('An error has occurred')
+        })
+    }
+}
+
+export function unFollowUserThunk(id: string) {
+    return async (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
+        const userReducer = getState();
+        const {authUser} = userReducer.userStore;
+        dispatch(unFollowUserService(id))
+            .then(() => {
+                dispatch(authedUser({...authUser,
+                    following: authUser.following.filter((item: any) => item.id !== id),
+                }))
+            })
+            .catch(() => {
+            notify('An error has occurred')
+        })
+    }
+}
 
 export function getCurrentUserThunk(username: string) {
-    return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
+    return async (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
         await dispatch(getUser(username)).then((res: any) => {
             const {rows} = res.payload.data;
             dispatch(getUserImage(username)).then((res: any) => {
@@ -82,11 +135,13 @@ export function uploadUserAssetThunk() {
     }
 }
 
-export function getAllUserData(username: string) {
+export function getAllUserData(username: string, id: string) {
     return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
-        dispatch(getCurrentUserThunk(username));
-        dispatch(getUserProjectsThunk(username))
-        dispatch(getRequestsThunk());
+        dispatch(projectLoading(true));
+        await dispatch(getCurrentUserThunk(username));
+        await dispatch(getUserProjectsThunk(username))
+        await dispatch(getRequestsThunk());
+        await dispatch(getUserFollowersThunk(id));
         await dispatch(getPostsThunk(username));
         await dispatch(getCommentsThunk(username));
         dispatch(postsLoadingHandler(false))

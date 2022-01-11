@@ -51,10 +51,9 @@ const Projects = () => {
                                 </h2>
                                 :
                             <Scrollbars
-                                width={'100%'}
                                 style={{height: 500}}
                             >
-                                <div className="projectsContainer">
+                                <div className="listingsContainer">
                                     {userProjects.map((value) => {
                                         return <Project profile={true} noRequest={true} remove={true} key={value.project_id} data={value}/>
                                     })}

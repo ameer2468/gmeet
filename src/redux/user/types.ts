@@ -6,6 +6,9 @@ export interface User {
     username: string;
     website: string;
     profession: string;
+    followers: string[],
+    following: string[],
+    notifications: notificationItem[],
 }
 
 export interface notificationItem {

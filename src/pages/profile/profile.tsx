@@ -14,12 +14,13 @@ const Profile = () => {
     const userStore = useAppSelector(userReducer)
     const dispatch = useAppDispatch();
     const {Loading} = userStore;
+    const {id} = userStore.userInfo;
 
     useEffect(() => {
             dispatch(postsLoadingHandler(true))
             dispatch(loading(true))
-            dispatch(getAllUserData(username))
-    }, [dispatch, username])
+            dispatch(getAllUserData(username, id))
+    }, [dispatch, username, id])
 
 
     return (

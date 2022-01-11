@@ -1,6 +1,6 @@
 import React, {useRef} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faGlobe, faEdit, faPencilAlt,faCheck} from "@fortawesome/free-solid-svg-icons";
+import {faGlobe, faEdit, faPencilAlt,faCheck, faUser} from "@fortawesome/free-solid-svg-icons";
 import Card from "./card";
 import LoadingSpinner from "../../../components/global/LoadingSpinner";
 import {useAppDispatch, useAppSelector} from "../../../redux/hooks";
@@ -19,11 +19,10 @@ const User = ({data}: props) => {
     const {Loading} = useAppSelector(userReducer);
     const userHook = useUser();
     const {userImageLoading} = userHook.user;
-    const authUser = userHook.authUser.username;
+    const {authUser} = userHook;
     const {imageUpload} = userHook.user;
     const uploadRef = useRef<any>(null);
     const dispatch = useAppDispatch();
-
 
     const handleUploadClick = () => {
         uploadRef.current?.click();
@@ -82,12 +81,16 @@ const User = ({data}: props) => {
                                         www.aashhab.design
                                     </div>
                                 </a>}
-                                {data.username === authUser ?
+                                {authUser.username === data.username ?
                                     <button style={{marginTop: '3rem'}} className='btn btn--green'>
                                         <FontAwesomeIcon style={{marginRight: '0.5rem'}} icon={faEdit}/>
                                         Edit Profile
                                     </button>
-                                    : ''
+                                    :
+                                    <button onClick={() => userHook.followHandler(data.username, data.id)} style={{marginTop: '3rem'}} className='btn btn--green'>
+                                        <FontAwesomeIcon style={{marginRight: '0.5rem'}} icon={faUser}/>
+                                        {authUser.following.map((item: any) => item.follower_id).includes(data.id) ? 'Unfollow' : 'Follow'}
+                                    </button>
                                 }
                                 <input style={{display: 'none'}} ref={uploadRef} type="file" onChange={handleFileInput}/>
                             </div>
