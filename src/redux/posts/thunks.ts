@@ -12,7 +12,7 @@ import {comment, post} from "../types";
 import {
     postsArr,
     addPosts,
-    deletePost, addPostHandler, commentPostLoading,
+    deletePost, addPostHandler, commentPostLoading, postsLoadingHandler,
 } from "./postsSlice";
 import {notify} from "../../helpers/notify";
 
@@ -62,6 +62,8 @@ export function getCommentsThunk(user: string) {
                 return {...value, comments: getComments}
             })
             dispatch(postsArr(updatePosts as []))
+            dispatch(commentPostLoading(false))
+            dispatch(postsLoadingHandler(false))
         }).catch(() => {
             return notify('An error has occurred')
         });

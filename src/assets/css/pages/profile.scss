@@ -2,8 +2,7 @@
   width: 100vw;
   height: 100vh;
   padding: 0 2rem;
-  background: rgb(56, 110, 127);
-  background: linear-gradient(162deg, rgb(56,110,127) -40%, rgba(18,20,36,1) 78%);
+  @include pageBackground;
   .btn {
     font-size: 1.5rem;
     margin-top: 0.5rem;

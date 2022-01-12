@@ -33,7 +33,7 @@ textarea {
 }
 textarea:focus {
   outline: 0;
-  border: 1px solid #4aabd5;
+  border: 1px solid #4ad5bc;
   transition: all 0.3s;
 }
 textarea::placeholder {
@@ -394,7 +394,7 @@ body {
   transition: all 0.3s;
 }
 .profileContent .profileContainer .profilePosts .post .actions .delete:hover, .profileContent .profileContainer .profilePosts .post .actions .edit:hover {
-  border: 1px solid #4aabd5;
+  border: 1px solid #4ad5bc;
   transition: all 0.3s;
   cursor: pointer;
 }
@@ -486,7 +486,7 @@ body {
   transition: all 0.3s;
 }
 .profileContent .profileContainer .listings .projectCard .edit:hover {
-  border: 1px solid #4aabd5;
+  border: 1px solid #4ad5bc;
   transition: all 0.3s;
   cursor: pointer;
 }
@@ -505,7 +505,7 @@ body {
   transition: all 0.3s;
 }
 .profileContent .profileContainer .listings .projectCard .delete:hover {
-  border: 1px solid #4aabd5;
+  border: 1px solid #4ad5bc;
   transition: all 0.3s;
   cursor: pointer;
 }
@@ -637,7 +637,7 @@ body {
   cursor: pointer;
 }
 .profileContent .profileContainer .user .info .userImage .actions .uploadImage {
-  background: #4aabd5;
+  background: #4ad5bc;
   color: #12131f;
   width: 3rem;
   height: 3rem;
@@ -647,7 +647,7 @@ body {
 }
 .profileContent .profileContainer .user .info .userImage .actions .uploadImage:hover {
   transition: all 0.3s;
-  background: #2c93c0;
+  background: #2cc0a5;
   cursor: pointer;
 }
 .profileContent .profileContainer .user .info .userImage img {
@@ -679,7 +679,7 @@ body {
   margin-right: 1rem;
 }
 .profileContent .profileContainer .user .website:hover {
-  border: 1px solid #4aabd5;
+  border: 1px solid #4ad5bc;
   transition: all 0.3s;
 }
 .profileContent .profileContainer .user h2 {
@@ -739,7 +739,7 @@ body {
 }
 .modalWrap .modal .textarea:focus {
   outline: 0;
-  border: 1px solid #4aabd5;
+  border: 1px solid #4ad5bc;
   transition: all 0.3s;
 }
 .modalWrap .modal .textarea::placeholder {
@@ -759,7 +759,7 @@ body {
 }
 .modalWrap .modal input:focus {
   outline: 0;
-  border: 1px solid #4aabd5;
+  border: 1px solid #4ad5bc;
   transition: all 0.3s;
 }
 .modalWrap .modal input::placeholder {
@@ -784,7 +784,7 @@ body {
 }
 .modalWrap .modal .close:hover {
   transition: all 0.3s;
-  border: 1px solid #4aabd5;
+  border: 1px solid #4ad5bc;
   cursor: pointer;
 }
 
@@ -876,10 +876,10 @@ body {
 }
 
 .dd-list-item svg path {
-  fill: #4aabd5;
+  fill: #4ad5bc;
 }
 .dd-list-item:hover {
-  background: #4aabd5 !important;
+  background: #4ad5bc !important;
   color: #12131f !important;
 }
 .dd-list-item:hover svg path {
@@ -951,11 +951,11 @@ body {
   background: #ff1765;
 }
 .btn--green {
-  background: #4aabd5;
+  background: #4ad5bc;
   color: #2a2c3d;
 }
 .btn--green:hover {
-  background: #2e99c8;
+  background: #2ec8ac;
 }
 .btn--gray {
   background: #282828;
@@ -966,11 +966,11 @@ body {
   opacity: 1;
 }
 .btn--purepurple {
-  background: #4aabd5;
+  background: #4ad5bc;
   color: #2a2c3d;
 }
 .btn--purepurple:hover {
-  background: #2e99c8;
+  background: #2ec8ac;
   opacity: 1;
 }
 .btn--purple {
@@ -1049,7 +1049,7 @@ body {
 }
 .input:focus {
   outline: 0;
-  border: 1px solid #4aabd5;
+  border: 1px solid #4ad5bc;
   transition: all 0.3s;
 }
 .input::placeholder {
@@ -1070,7 +1070,7 @@ body {
 }
 .textarea:focus {
   outline: 0;
-  border: 1px solid #4aabd5;
+  border: 1px solid #4ad5bc;
   transition: all 0.3s;
 }
 .textarea::placeholder {

@@ -5,25 +5,33 @@ import Login from "./pages/login/login";
 import Register from "./pages/register/register";
 import Amplify from "aws-amplify";
 import awsconfig from './aws-exports';
-import {useAppSelector} from "./redux/hooks";
-import {userReducer} from "./redux/user/userSlice";
+import {useAppDispatch, useAppSelector} from "./redux/hooks";
+import {authedUser, userReducer} from "./redux/user/userSlice";
 import Home from "./pages/home/home";
 import ModalManager from "./components/ModalManager";
 import Profile from "./pages/profile/profile";
 import Authnav from "./components/authnav";
 import { ToastContainer } from 'react-toastify';
 import ProjectDetails from "./pages/projectdetails/projectDetails";
+import {getUserFollowers} from "./redux/user/services";
 
 Amplify.configure(awsconfig)
 
 const App = () => {
 
-    useEffect(() => {
-
-    }, [])
-
     const userRedux = useAppSelector(userReducer)
     const location = useLocation();
+    const {authUser} = userRedux;
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        if (!authUser.following || !authUser.followers) {
+            dispatch(getUserFollowers(authUser.id)).then((res: any) => {
+                const {following, followers} = res.payload.data;
+                dispatch(authedUser({...authUser, following: following, followers: followers}))
+            })
+        }
+    }, [])
 
     const GlobalRoutes = [
         {path: '/', component: Landing},

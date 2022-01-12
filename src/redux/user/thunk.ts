@@ -15,7 +15,6 @@ import {getRequestsThunk, getUserProjectsThunk} from "../projects/thunks";
 import {getCommentsThunk, getPostsThunk} from "../posts/thunks";
 import {postsLoadingHandler} from "../posts/postsSlice";
 import {notify} from "../../helpers/notify";
-import {projectLoading} from "../projects/projectSlice";
 
 export function createUserThunk(data: User) {
     return (dispatch: ThunkDispatch<RootState, any, Action>) => {
@@ -94,7 +93,7 @@ export function unFollowUserThunk(id: string) {
 }
 
 export function getCurrentUserThunk(username: string) {
-    return async (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
+    return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
         await dispatch(getUser(username)).then((res: any) => {
             const {rows} = res.payload.data;
             dispatch(getUserImage(username)).then((res: any) => {
@@ -137,13 +136,11 @@ export function uploadUserAssetThunk() {
 
 export function getAllUserData(username: string, id: string) {
     return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
-        dispatch(projectLoading(true));
         await dispatch(getCurrentUserThunk(username));
         await dispatch(getUserProjectsThunk(username))
         await dispatch(getRequestsThunk());
         await dispatch(getUserFollowersThunk(id));
         await dispatch(getPostsThunk(username));
         await dispatch(getCommentsThunk(username));
-        dispatch(postsLoadingHandler(false))
     }
 }

@@ -7,10 +7,15 @@ $border: #5A6091;
 $gray: #282828;
 $cardbg: #12131f;
 $activeBorder: #3f4378;
-$green: #4aabd5;
+$green: #4ad5bc;
 $purepurple: $green;
 $purple: #4a36ff;
+$pageBackground: rgb(56, 110, 127);
 
+@mixin pageBackground {
+  background: $pageBackground;
+  background: linear-gradient(162deg, $pageBackground -40%, rgba(18,20,36,1) 78%);
+}
 
 @mixin largeTitle {
   font-size: 7rem;

@@ -3,8 +3,7 @@
   padding: 0 2rem;
   height: auto;
   min-height: 100vh;
-  background: rgb(56, 110, 127);
-  background: linear-gradient(162deg, rgb(56,110,127) -40%, rgba(18,20,36,1) 78%);
+  @include pageBackground;
   .homeContainer {
     padding: 15rem 0 0 0;
     width: 100%;

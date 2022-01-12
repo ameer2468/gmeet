@@ -53,7 +53,7 @@ const User = ({data}: props) => {
                             <div className="wrap">
                                 {userImageLoading ? <div style={{marginBottom: '2rem'}}><LoadingSpinner height={60} width={60}/></div> :
                                     <div className="userImage">
-                                        {data.username !== authUser ? '' :
+                                        {authUser.username === data.username ?
                                             <div className="actions">
                                                 <button onClick={handleUploadClick} className="uploadImage">
                                                     <FontAwesomeIcon icon={faPencilAlt}/>
@@ -65,6 +65,8 @@ const User = ({data}: props) => {
                                                     </button>
                                                 }
                                             </div>
+                                            :
+                                            ''
                                         }
                                         <img onError={e => {e.currentTarget.src = placeholder}} src={data.userImage} alt="profile"/>
                                     </div>
@@ -89,7 +91,7 @@ const User = ({data}: props) => {
                                     :
                                     <button onClick={() => userHook.followHandler(data.username, data.id)} style={{marginTop: '3rem'}} className='btn btn--green'>
                                         <FontAwesomeIcon style={{marginRight: '0.5rem'}} icon={faUser}/>
-                                        {authUser.following.map((item: any) => item.follower_id).includes(data.id) ? 'Unfollow' : 'Follow'}
+                                        {authUser.following.map((item: { follower_id: string }) => item.follower_id).includes(data.id) ? 'Unfollow' : 'Follow'}
                                     </button>
                                 }
                                 <input style={{display: 'none'}} ref={uploadRef} type="file" onChange={handleFileInput}/>

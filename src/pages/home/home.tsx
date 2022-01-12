@@ -31,7 +31,7 @@ const Home = () => {
                dispatch(getRequestsThunk());
             }
         }
-            getProjectsData();
+        getProjectsData();
     }, [dispatch, value, username])
 
     return (

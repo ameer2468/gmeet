@@ -7,6 +7,7 @@ import {loading, userReducer} from "../../redux/user/userSlice";
 import {useParams} from "react-router-dom";
 import {getAllUserData} from "../../redux/user/thunk";
 import {postsLoadingHandler} from "../../redux/posts/postsSlice";
+import {projectLoading} from "../../redux/projects/projectSlice";
 const Profile = () => {
 
     const params: {username: string} = useParams();
@@ -17,8 +18,9 @@ const Profile = () => {
     const {id} = userStore.userInfo;
 
     useEffect(() => {
+            dispatch(loading(true));
+            dispatch(projectLoading(true));
             dispatch(postsLoadingHandler(true))
-            dispatch(loading(true))
             dispatch(getAllUserData(username, id))
     }, [dispatch, username, id])
 
