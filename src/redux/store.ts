@@ -12,12 +12,12 @@ const reducers = combineReducers({
     userStore: userSlice.reducer,
     modalStore: modalSlice.reducer,
     projectStore: projectSlice.reducer,
-    postsStore: postsSlice.reducer
+    postsStore: postsSlice.reducer,
 })
 
 const persistConfig = {
     key: 'root',
-    blacklist: ['modalStore', 'projectStore', 'postsStore'],
+    blacklist: ['modalStore', 'projectStore', 'postsStore', 'resetStore'],
     storage
 };
 

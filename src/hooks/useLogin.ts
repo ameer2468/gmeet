@@ -1,10 +1,10 @@
 import {FormEvent, useState} from "react";
 import {Auth} from "aws-amplify";
-import {authedUser, loading, status, userImageHandler} from "../redux/user/userSlice";
+import {authedUser, loading, reset, status, userImageHandler} from "../redux/user/userSlice";
 import {Login} from "../pages/register/types";
 import {useAppDispatch} from "../redux/hooks";
 import {useHistory} from "react-router-dom";
-import {getAssetThunk} from "../redux/user/thunk";
+import {getAssetThunk, getNotifications} from "../redux/user/thunk";
 import {getUserFollowers} from "../redux/user/services";
 
 export function useLogin() {
@@ -31,11 +31,12 @@ export function useLogin() {
                     username: '',
                     password: ''
                 })
-                await Auth.currentUserInfo().then((data) => {
-                    dispatch(getUserFollowers(data.attributes.sub)).then((res: any) => {
+                await Auth.currentUserInfo().then(async (data) => {
+                    await dispatch(getUserFollowers(data.attributes.sub)).then((res: any) => {
                         const {following, followers} = res.payload.data;
                         dispatch(authedUser({...data, following: following, followers: followers}))
                     })
+                    dispatch(getNotifications(data.attributes.sub))
                 });
                 await dispatch(getAssetThunk(inputValues.username));
                 dispatch(status(true))
@@ -53,10 +54,11 @@ export function useLogin() {
 
     const logoutHandler = () => {
         dispatch(loading(true))
-        localStorage.removeItem('persist:root')
+        localStorage.removeItem('persist:root');
         Auth.signOut().then(() => {
             dispatch(loading(false));
             dispatch(status(false));
+            dispatch(reset())
             history.push('/')
         })
     }

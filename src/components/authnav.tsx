@@ -46,7 +46,7 @@ const Authnav = () => {
                 </div>
                 <div className="side">
                     <div ref={notifref} className="notification">
-                        <div className="alert"/>
+                        {authUser.notifications.length === 0 ? '' :  <div className="alert"/>}
                         <FontAwesomeIcon onClick={() => setOpenNotifications(!openNotifications)} className='icon' icon={faBell}/>
                         {openNotifications ?
                             <motion.div

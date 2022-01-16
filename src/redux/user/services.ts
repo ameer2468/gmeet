@@ -84,6 +84,28 @@ export const uploadUserAsset = createAsyncThunk('user/asset', async (data: {user
     })
     })
 
+export const sendNotifications = createAsyncThunk('notifications/post', async (data: {user_ids: [], message: string}) => {
+    return await axios.post(`${URL}/notification`, {
+        user_ids: [`${[...data.user_ids]}`],
+        text: data.message
+    }, {
+        headers: {
+            'x-api-key': process.env.REACT_APP_API_KEY,
+        },
+    })
+})
+
+export const getNotificationsService = createAsyncThunk('get/notifications', async (id: string) => {
+    return await axios.get(`${URL}/notification`, {
+        headers: {
+            'x-api-key': process.env.REACT_APP_API_KEY,
+        },
+        params: {
+            id: id
+        }
+    })
+})
+
 
 export const getUser = createAsyncThunk('getUsers/user', async (username: string) => {
     const token = await loadToken();

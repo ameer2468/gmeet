@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type {RootState} from "../store";
-import {notificationItem} from "./types";
 
 // Define a type for the slice state
 interface UserState {
@@ -10,7 +9,6 @@ interface UserState {
         profession: string;
         website: string;
         userImage: string;
-        notifications: notificationItem[],
         followers: string[],
         following: string[]
     }
@@ -29,7 +27,6 @@ const initialState: UserState = {
         profession: '',
         website: '',
         userImage: '',
-        notifications: [],
         followers: [],
         following: []
     },
@@ -62,11 +59,14 @@ export const userSlice = createSlice({
         },
         loading: (state, action: PayloadAction<boolean>) => {
             state.Loading = action.payload;
+        },
+        reset(state) {
+            Object.assign(state, initialState)
         }
     },
 })
 
-export const { userDetails, status, loading, authedUser, userImageHandler, userImageUpload } = userSlice.actions
+export const { userDetails, status, loading, authedUser, userImageHandler, userImageUpload, reset } = userSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 export const userReducer = (state: RootState) => state.userStore;

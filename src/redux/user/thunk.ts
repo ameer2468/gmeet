@@ -3,17 +3,16 @@ import {RootState} from "../store";
 import {User} from "./types";
 import {
     createUser,
-    followUserService,
+    followUserService, getNotificationsService,
     getUser,
     getUserFollowers,
-    getUserImage,
+    getUserImage, sendNotifications,
     unFollowUserService,
     uploadUserAsset
 } from "./services";
 import {authedUser, loading, userDetails, userImageHandler, userImageUpload} from "./userSlice";
 import {getRequestsThunk, getUserProjectsThunk} from "../projects/thunks";
 import {getCommentsThunk, getPostsThunk} from "../posts/thunks";
-import {postsLoadingHandler} from "../posts/postsSlice";
 import {notify} from "../../helpers/notify";
 
 export function createUserThunk(data: User) {
@@ -54,6 +53,23 @@ export function getUserFollowersThunk(id: string) {
        await dispatch(getUserFollowers(id)).then((res: any) => {
            const {followers, following} = res.payload.data;
            dispatch(userDetails({...userInfo, followers: followers, following: following}))
+        });
+    }
+}
+
+export function sendNotificationThunk(user_ids: [], message: string) {
+    return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
+        dispatch(sendNotifications({user_ids, message}));
+    }
+}
+
+export function getNotifications(id: string) {
+    return async (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
+        const userReducer = getState();
+        const {authUser} = userReducer.userStore;
+        await dispatch(getNotificationsService(id)).then((res: any) => {
+            const {rows} = res.payload.data;
+            dispatch(authedUser({...authUser, notifications: rows}))
         });
     }
 }

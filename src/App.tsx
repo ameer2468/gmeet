@@ -14,6 +14,7 @@ import Authnav from "./components/authnav";
 import { ToastContainer } from 'react-toastify';
 import ProjectDetails from "./pages/projectdetails/projectDetails";
 import {getUserFollowers} from "./redux/user/services";
+import {getNotifications} from "./redux/user/thunk";
 
 Amplify.configure(awsconfig)
 
@@ -23,15 +24,27 @@ const App = () => {
     const location = useLocation();
     const {authUser} = userRedux;
     const dispatch = useAppDispatch();
+    const authUserLength = Object.entries(authUser).length;
 
     useEffect(() => {
-        if (!authUser.following || !authUser.followers) {
-            dispatch(getUserFollowers(authUser.id)).then((res: any) => {
-                const {following, followers} = res.payload.data;
-                dispatch(authedUser({...authUser, following: following, followers: followers}))
-            })
+        if (authUserLength !== 0) {
+          const interval =  setInterval(() => {
+              dispatch(getNotifications(authUser.attributes.sub))
+          }, 10000)
+         return () => clearInterval(interval)
         }
-    }, [])
+    }, [authUser, dispatch, authUserLength])
+
+    useEffect(() => {
+        if (authUserLength !== 0) {
+            if (!authUser.following || !authUser.followers) {
+                dispatch(getUserFollowers(authUser.id)).then((res: any) => {
+                        const {following, followers} = res.payload.data;
+                        dispatch(authedUser({...authUser, following: following, followers: followers}))
+                })
+            }
+        }
+    }, [authUser, dispatch, authUserLength])
 
     const GlobalRoutes = [
         {path: '/', component: Landing},

@@ -25,6 +25,7 @@ import {projectLoading} from "../redux/projects/projectSlice";
 import {acceptRequest, IcreateProject} from "../redux/types";
 import {deleteProjectThunk, editProjectThunk, getProjectsThunk, joinProjectsThunk} from "../redux/projects/thunks";
 import {deleteCommentThunk, deletePostThunk} from "../redux/posts/thunks";
+import {sendNotificationThunk} from "../redux/user/thunk";
 
 
 export const useProject = () => {
@@ -33,7 +34,7 @@ export const useProject = () => {
     const {projectForm} = projects;
     const dispatch = useAppDispatch();
     const userHook = useUser();
-    const {userInfo} = userHook;
+    const {userInfo, authUser} = userHook;
 
 
     function onChange(key: string, value: string) {
@@ -178,6 +179,11 @@ function joinProject() {
         }
       return dispatch(createProject(data)).then((res) => {
           /*Notification code*/
+          const {followers} = authUser;
+          const userFollowers = followers.map((value: any) => {
+              return value.user_id;
+          })
+          dispatch(sendNotificationThunk(userFollowers, `${authUser.username} has created a new project`))
           const {data} = res.payload as IcreateProject;
           const newProj = {
               project_id: data.project_id,
