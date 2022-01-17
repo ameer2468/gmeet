@@ -37,8 +37,8 @@ export function useLogin() {
                         dispatch(authedUser({...data, following: following, followers: followers}))
                     })
                     dispatch(getNotifications(data.attributes.sub))
+                    dispatch(getAssetThunk(inputValues.username));
                 });
-                await dispatch(getAssetThunk(inputValues.username));
                 dispatch(status(true))
                 dispatch(loading(false))
                 history.push('/home')
