@@ -63,7 +63,6 @@ export function getCommentsThunk(user: string) {
             })
             dispatch(postsArr(updatePosts as []))
             dispatch(commentPostLoading(false))
-            dispatch(postsLoadingHandler(false))
         }).catch(() => {
             return notify('An error has occurred')
         });
@@ -115,6 +114,7 @@ return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
    await dispatch(getPostsService(user)).then((res: any) => {
         const {rows} = res.payload.data;
         dispatch(postsArr(rows))
+        dispatch(postsLoadingHandler(false))
     }).catch(() => {
         return notify('An error has occurred')
     });

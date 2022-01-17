@@ -3,11 +3,9 @@ import User from "./components/user";
 import Posts from "./components/feedback";
 import Projects from "./components/projects";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
-import {loading, userReducer} from "../../redux/user/userSlice";
+import {userReducer} from "../../redux/user/userSlice";
 import {useParams} from "react-router-dom";
 import {getAllUserData} from "../../redux/user/thunk";
-import {postsLoadingHandler} from "../../redux/posts/postsSlice";
-import {projectLoading} from "../../redux/projects/projectSlice";
 const Profile = () => {
 
     const params: {username: string} = useParams();
@@ -15,16 +13,11 @@ const Profile = () => {
     const userStore = useAppSelector(userReducer)
     const dispatch = useAppDispatch();
     const {Loading} = userStore;
-    const {id} = userStore.userInfo;
 
     useEffect(() => {
-            dispatch(loading(true));
-            dispatch(projectLoading(true));
-            dispatch(postsLoadingHandler(true))
-            dispatch(getAllUserData(username, id))
-    }, [dispatch, username, id])
+            dispatch(getAllUserData(username))
+    }, [dispatch, username])
 
-    console.log(userStore.authUser)
 
 
     return (

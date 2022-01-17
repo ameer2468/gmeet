@@ -1,6 +1,6 @@
 import {useAppDispatch, useAppSelector} from "../redux/hooks";
 import {userReducer} from "../redux/user/userSlice";
-import {followUserThunk, getNotifications, unFollowUserThunk} from "../redux/user/thunk";
+import {followUserThunk, unFollowUserThunk} from "../redux/user/thunk";
 import {v4 as uuidv4} from "uuid";
 
 

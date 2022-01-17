@@ -4,7 +4,6 @@ import {faComments, faEllipsisH, faPencilAlt, faTrashAlt} from "@fortawesome/fre
 import {useUser} from "../../../hooks/useUser";
 import {usePosts} from "../../../hooks/usePosts";
 import {comment} from "../../../redux/types";
-import LoadingSpinner from "../../../components/global/LoadingSpinner";
 import Comment from "./comment";
 import {useParams} from "react-router-dom";
 import {useDetectClickOutside} from "react-detect-click-outside";
@@ -26,7 +25,7 @@ interface props {
 const Post = ({data}: props) => {
 
     const postHook = usePosts();
-    const {commentLoading, postsLoading, editPost, editPostLoading} = postHook.postsStore;
+    const {commentLoading, editPost, editPostLoading} = postHook.postsStore;
     const {comment, editpost} = postHook.postsStore.postForm;
     const params: {username: string} = useParams();
     const {user} = useUser();
@@ -90,8 +89,7 @@ const Post = ({data}: props) => {
                 :
                 <p className='postText'>{data.post}</p>
             }
-            {postsLoading ? '' :
-                data.comments === undefined  ? <div style={{marginTop: '2rem'}}><LoadingSpinner height={60} width={60}/></div> :
+            {data.comments === undefined  ? '' :
                         data.comments.map((value: comment, index: number) => {
                             return (
                                 <Comment index={index} key={value.id} data={value}/>

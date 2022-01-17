@@ -45,11 +45,6 @@ const Posts = () => {
                         </button>
                     </div>
                 }
-                {!postsLoading && posts.length === 0 ?
-                    <h2 className='noPosts'>
-                        No posts
-                    </h2>
-                    :
                    <Scrollbars
                     style={{height: !checkUser ? 350 : 280, marginTop: '2rem'}}
                    >
@@ -64,7 +59,11 @@ const Posts = () => {
                                textAlign: 'center',
                            }}>
                                <LoadingSpinner height={60} width={60}/>
-                           </div>
+                           </div> :
+                           posts.length === 0 ?
+                               <h2 className='noPosts'>
+                                   No posts
+                               </h2>
                        :
                            <div className="posts">
                                {posts.map((value) => {
@@ -75,7 +74,6 @@ const Posts = () => {
                            </div>
                        }
                    </Scrollbars>
-                }
             </div>
         </Card>
     );
