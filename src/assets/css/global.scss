@@ -3,11 +3,6 @@
   justify-items: center!important;
 }
 
-
-
-
-
-
 /*Profession selection dropdown*/
 
 .dd-header {
@@ -307,7 +302,7 @@
           }
           p {
             margin-top: 0.5rem;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             text-align: center;
           }
         }
@@ -501,6 +496,7 @@ h1 {
     justify-content: space-between;
     p {
       transition: all 0.3s;
+      font-size: 1.3rem;
       &:hover {
         cursor: pointer;
         color: white;
@@ -551,7 +547,7 @@ h1 {
       background: #4a5dc7;
       color: white;
       font-weight: bold;
-      font-family: Sofia pro, 'sans-serif';
+      font-family: Poppins, 'sans-serif' !important;
       font-size: 1.5rem;
       transition: all 0.3s;
       &:hover {

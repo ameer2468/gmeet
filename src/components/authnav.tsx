@@ -25,11 +25,12 @@ const Authnav = () => {
     const closeDrop = () => {
         setOpen(false);
     }
-    const closeNotifcation = () => {
+    const closeNotification = () => {
         setOpenNotifications(false);
     }
     const ref = useDetectClickOutside({ onTriggered: closeDrop});
-    const notifref = useDetectClickOutside({ onTriggered: closeNotifcation});
+    const notifref = useDetectClickOutside({ onTriggered: closeNotification});
+
 
     return (
         <nav className="authnav">
@@ -45,19 +46,21 @@ const Authnav = () => {
                     </nav>
                 </div>
                 <div className="side">
-                    <div ref={notifref} className="notification">
-                        {authUser.notifications.length === 0 ? '' :  <div className="alert"/>}
-                        <FontAwesomeIcon onClick={() => setOpenNotifications(!openNotifications)} className='icon' icon={faBell}/>
-                        {openNotifications ?
-                            <motion.div
-                                initial={'hidden'} animate={'active'}
-                                variants={regularVariants}
-                            >
-                                <Notifications/>
-                            </motion.div>
-                            : ''
-                        }
-                    </div>
+                    {!authUser.notifications ? '' :
+                        <div ref={notifref} className="notification">
+                            {authUser.notifications.length === 0 ? '' :  <div className="alert"/>}
+                            <FontAwesomeIcon onClick={() => setOpenNotifications(!openNotifications)} className='icon' icon={faBell}/>
+                            {openNotifications ?
+                                <motion.div
+                                    initial={'hidden'} animate={'active'}
+                                    variants={regularVariants}
+                                >
+                                    <Notifications/>
+                                </motion.div>
+                                : ''
+                            }
+                        </div>
+                    }
                     <div ref={ref} onClick={() => setOpen(!open)} className="profile">
                         {userImageLoading ? <div style={{marginRight: 15, marginTop: 5}}><LoadingSpinner height={25} width={25}/></div> : <img onError={e => e.currentTarget.src = placeholder} alt='profile' src={authUser.userImage} className='userImage'/>}
                         <p>{authUser === undefined ? '' : authUser.username}</p>

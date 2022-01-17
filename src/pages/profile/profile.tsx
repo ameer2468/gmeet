@@ -24,6 +24,8 @@ const Profile = () => {
             dispatch(getAllUserData(username, id))
     }, [dispatch, username, id])
 
+    console.log(userStore.authUser)
+
 
     return (
         <div className="profileContent">

@@ -18,7 +18,7 @@ $pageBackground: rgb(56, 110, 127);
 }
 
 @mixin largeTitle {
-  font-size: 7rem;
+  font-size: 6rem;
   font-weight: bold;
 }
 
@@ -114,11 +114,11 @@ $pageBackground: rgb(56, 110, 127);
   max-width: 13.5rem;
   height: 5rem;
   border: 0;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   border-radius: 0.5rem;
   font-weight: bold;
   color: white;
-  font-family: Sofia pro, 'sans-serif';
+  font-family: Poppins, 'sans-serif' !important;
   transition: all 0.3s;
   &:hover {
     cursor: pointer;

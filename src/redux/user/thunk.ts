@@ -10,7 +10,7 @@ import {
     unFollowUserService,
     uploadUserAsset
 } from "./services";
-import {authedUser, loading, userDetails, userImageHandler, userImageUpload} from "./userSlice";
+import {authedUser, loading, notificationLoading, userDetails, userImageHandler, userImageUpload} from "./userSlice";
 import {getRequestsThunk, getUserProjectsThunk} from "../projects/thunks";
 import {getCommentsThunk, getPostsThunk} from "../posts/thunks";
 import {notify} from "../../helpers/notify";
@@ -67,9 +67,11 @@ export function getNotifications(id: string) {
     return async (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
         const userReducer = getState();
         const {authUser} = userReducer.userStore;
-        await dispatch(getNotificationsService(id)).then((res: any) => {
+        dispatch(notificationLoading(true));
+        await dispatch(getNotificationsService(id)).then(async (res: any) => {
             const {rows} = res.payload.data;
-            dispatch(authedUser({...authUser, notifications: rows}))
+            await dispatch(authedUser({...authUser, notifications: rows}))
+            dispatch(notificationLoading(false));
         });
     }
 }
