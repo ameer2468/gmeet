@@ -15,7 +15,10 @@ const Profile = () => {
     const {Loading} = userStore;
 
     useEffect(() => {
-            dispatch(getAllUserData(username))
+            const getData = async () => {
+                await dispatch(getAllUserData(username))
+            }
+            getData();
     }, [dispatch, username])
 
 

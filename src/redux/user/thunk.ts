@@ -114,9 +114,10 @@ export function unFollowUserThunk(id: string) {
 
 export function getCurrentUserThunk(username: string) {
     return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
-        await dispatch(getUser(username)).then((res: any) => {
+        dispatch(loading(true));
+        await dispatch(getUser(username)).then(async (res: any) => {
             const {rows} = res.payload.data;
-            dispatch(getUserImage(username)).then((res: any) => {
+            await dispatch(getUserImage(username)).then((res: any) => {
                 const imageUrl = res.payload.data.imageUrl;
                 const updatedObject = {...rows[0], userImage: imageUrl}
                 dispatch(userDetails(updatedObject))
@@ -158,13 +159,12 @@ export function getAllUserData(username: string) {
     return async (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
         const userReducer = getState();
         const {id} = userReducer.userStore.userInfo;
-        dispatch(loading(true));
         dispatch(projectLoading(true));
         dispatch(postsLoadingHandler(true))
         dispatch(commentPostLoading(true));
-       dispatch(getCurrentUserThunk(username));
-       dispatch(getUserProjectsThunk(username))
-        dispatch(getRequestsThunk());
+        await dispatch(getCurrentUserThunk(username));
+        await dispatch(getUserProjectsThunk(username))
+        await dispatch(getRequestsThunk());
        await dispatch(getUserFollowersThunk(id));
        await dispatch(getPostsThunk(username));
        await dispatch(getCommentsThunk(username));
