@@ -13,11 +13,10 @@ const Notifications = () => {
                 authUser.notifications.map((value: any, index: number) => {
                     return (
                             <div key={index.toString()} className="notification-item">
-                                <div className="title">
-                                    <div className="circle"/>
-                                    <h3>Project post</h3>
-                                </div>
-                                <p>{value.text}</p>
+                               <div className="wrap">
+                                   <div className="circle"/>
+                                   <p>{value.text}</p>
+                               </div>
                             </div>
                         )
                     })

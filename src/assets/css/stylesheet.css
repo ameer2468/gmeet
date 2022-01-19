@@ -1154,11 +1154,11 @@ body {
   position: absolute;
   padding: 1rem 2rem;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
   right: 0;
-  width: 35rem;
+  width: 38rem;
   margin-top: 1.5rem;
   border-radius: 0.5rem;
   background: #171a28;
@@ -1179,10 +1179,12 @@ body {
   margin: 1rem auto;
   position: relative;
 }
-.authnav .container .side .notification .notification-item .title {
+.authnav .container .side .notification .notification-item .wrap {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: left;
+  width: 100%;
+  margin: 0 auto;
 }
 .authnav .container .side .notification .notification-item .circle {
   width: 0.5rem;
@@ -1210,7 +1212,7 @@ body {
 .authnav .container .side .notification .notification-item p {
   margin-top: 0.5rem;
   font-size: 1.3rem;
-  text-align: center;
+  text-align: left;
 }
 .authnav .container .side .profile {
   display: flex;

@@ -23,7 +23,7 @@ const Comment = (props: props) => {
     const closeDrop = () => {
         setShow(false);
     }
-    const options = [{icon: faTrashAlt, name: 'Delete Comment', onClick: () => projectHook.deleteCommentHandler(props.data.id, userHook.userInfo.username)}]
+    const options = [{icon: faTrashAlt, name: 'Delete', onClick: () => projectHook.deleteCommentHandler(props.data.id, userHook.userInfo.username)}]
     const ref = useDetectClickOutside({ onTriggered: closeDrop});
     const checkUser = props.data.posted_by === authUser.username;
 

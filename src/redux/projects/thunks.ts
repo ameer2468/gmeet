@@ -37,7 +37,7 @@ export function deleteProjectThunk(project_id: string) {
 }
 
 export function joinProjectsThunk(data: projectRequest) {
-    return (dispatch: ThunkDispatch<RootState, any, Action>) => {
+    return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
         dispatch(joinProjectRequest(data)).then( async() => {
             dispatch(joinLoading(false))
             dispatch(ActiveModal(''))

@@ -32,12 +32,12 @@ export function useLogin() {
                     password: ''
                 })
                 await Auth.currentUserInfo().then(async (data) => {
-                    await dispatch(getUserFollowers(data.attributes.sub)).then((res: any) => {
+                    await dispatch(getUserFollowers(data.attributes.sub)).then(async (res: any) => {
                         const {following, followers} = res.payload.data;
                         dispatch(authedUser({...data, following: following, followers: followers}))
                     })
-                    dispatch(getNotifications(data.attributes.sub))
-                    dispatch(getAssetThunk(inputValues.username));
+                    await dispatch(getNotifications(data.attributes.sub))
+                    await dispatch(getAssetThunk(inputValues.username));
                 });
                 dispatch(status(true))
                 dispatch(loading(false))
