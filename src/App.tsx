@@ -30,7 +30,7 @@ const App = () => {
         if (authUserLength !== 0) {
           const interval =  setInterval(() => {
               dispatch(getNotifications(authUser.attributes.sub))
-          }, 10000)
+          }, 100000)
          return () => clearInterval(interval)
         }
     }, [authUser, dispatch, authUserLength])

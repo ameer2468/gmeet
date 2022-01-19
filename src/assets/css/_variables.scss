@@ -7,10 +7,10 @@ $border: #5A6091;
 $gray: #282828;
 $cardbg: #12131f;
 $activeBorder: #3f4378;
-$green: #4ad5bc;
+$green: #49ebfa;
 $purepurple: $green;
 $purple: #4a36ff;
-$pageBackground: rgb(56, 110, 127);
+$pageBackground: darken($green, 45%);
 
 @mixin pageBackground {
   background: $pageBackground;

@@ -11,7 +11,7 @@ const Notifications = () => {
         <div className="notifications">
             {authUser.notifications.length === 0 ? 'No Notifications' :
                 authUser.notifications.map((value: any, index: number) => {
-                        return (
+                    return (
                             <div key={index.toString()} className="notification-item">
                                 <div className="title">
                                     <div className="circle"/>

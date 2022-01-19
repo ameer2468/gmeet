@@ -34,7 +34,7 @@ textarea {
 }
 textarea:focus {
   outline: 0;
-  border: 1px solid #4ad5bc;
+  border: 1px solid #49ebfa;
   transition: all 0.3s;
 }
 textarea::placeholder {
@@ -123,8 +123,8 @@ body {
   padding: 0 2rem;
   height: auto;
   min-height: 100vh;
-  background: #386e7f;
-  background: linear-gradient(162deg, #386e7f -40%, #121424 78%);
+  background: #03545b;
+  background: linear-gradient(162deg, #03545b -40%, #121424 78%);
 }
 .HomeContent .homeContainer {
   padding: 15rem 0 0 0;
@@ -211,8 +211,8 @@ body {
   padding: 0 2rem;
   height: auto;
   min-height: 100vh;
-  background: #386e7f;
-  background: linear-gradient(162deg, #386e7f -40%, #121424 78%);
+  background: #03545b;
+  background: linear-gradient(162deg, #03545b -40%, #121424 78%);
 }
 .detailsContent .detailsContainer {
   padding: 15rem 0 0 0;
@@ -252,11 +252,11 @@ body {
   width: 100vw;
   height: 100vh;
   padding: 0 2rem;
-  background: #386e7f;
-  background: linear-gradient(162deg, #386e7f -40%, #121424 78%);
+  background: #03545b;
+  background: linear-gradient(162deg, #03545b -40%, #121424 78%);
 }
 .profileContent .btn {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   margin-top: 0.5rem;
 }
 .profileContent .profileContainer {
@@ -395,7 +395,7 @@ body {
   transition: all 0.3s;
 }
 .profileContent .profileContainer .profilePosts .post .actions .delete:hover, .profileContent .profileContainer .profilePosts .post .actions .edit:hover {
-  border: 1px solid #4ad5bc;
+  border: 1px solid #49ebfa;
   transition: all 0.3s;
   cursor: pointer;
 }
@@ -415,7 +415,7 @@ body {
   left: 0;
   right: 0;
   font-weight: normal;
-  top: 65%;
+  top: 50%;
   font-size: 2.2rem;
   opacity: 0.2;
 }
@@ -487,7 +487,7 @@ body {
   transition: all 0.3s;
 }
 .profileContent .profileContainer .listings .projectCard .edit:hover {
-  border: 1px solid #4ad5bc;
+  border: 1px solid #49ebfa;
   transition: all 0.3s;
   cursor: pointer;
 }
@@ -506,7 +506,7 @@ body {
   transition: all 0.3s;
 }
 .profileContent .profileContainer .listings .projectCard .delete:hover {
-  border: 1px solid #4ad5bc;
+  border: 1px solid #49ebfa;
   transition: all 0.3s;
   cursor: pointer;
 }
@@ -638,7 +638,7 @@ body {
   cursor: pointer;
 }
 .profileContent .profileContainer .user .info .userImage .actions .uploadImage {
-  background: #4ad5bc;
+  background: #49ebfa;
   color: #12131f;
   width: 3rem;
   height: 3rem;
@@ -648,7 +648,7 @@ body {
 }
 .profileContent .profileContainer .user .info .userImage .actions .uploadImage:hover {
   transition: all 0.3s;
-  background: #2cc0a5;
+  background: #17e6f9;
   cursor: pointer;
 }
 .profileContent .profileContainer .user .info .userImage img {
@@ -680,7 +680,7 @@ body {
   margin-right: 1rem;
 }
 .profileContent .profileContainer .user .website:hover {
-  border: 1px solid #4ad5bc;
+  border: 1px solid #49ebfa;
   transition: all 0.3s;
 }
 .profileContent .profileContainer .user h2 {
@@ -740,7 +740,7 @@ body {
 }
 .modalWrap .modal .textarea:focus {
   outline: 0;
-  border: 1px solid #4ad5bc;
+  border: 1px solid #49ebfa;
   transition: all 0.3s;
 }
 .modalWrap .modal .textarea::placeholder {
@@ -760,7 +760,7 @@ body {
 }
 .modalWrap .modal input:focus {
   outline: 0;
-  border: 1px solid #4ad5bc;
+  border: 1px solid #49ebfa;
   transition: all 0.3s;
 }
 .modalWrap .modal input::placeholder {
@@ -785,7 +785,7 @@ body {
 }
 .modalWrap .modal .close:hover {
   transition: all 0.3s;
-  border: 1px solid #4ad5bc;
+  border: 1px solid #49ebfa;
   cursor: pointer;
 }
 
@@ -877,10 +877,10 @@ body {
 }
 
 .dd-list-item svg path {
-  fill: #4ad5bc;
+  fill: #49ebfa;
 }
 .dd-list-item:hover {
-  background: #4ad5bc !important;
+  background: #49ebfa !important;
   color: #12131f !important;
 }
 .dd-list-item:hover svg path {
@@ -903,19 +903,18 @@ body {
   z-index: 50 !important;
   background: #171a28;
   right: 0;
-  width: 17rem;
   transition: all 0.3s;
   display: none;
   flex-direction: column;
-  text-align: justify;
   top: 2.5rem;
   height: auto;
   padding: 1rem 2rem;
   border-radius: 1rem;
 }
 .ActionsMenu p {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   margin: 0.2rem auto;
+  width: 100%;
   display: flex;
   align-items: center;
   transition: all 0.3s;
@@ -952,11 +951,11 @@ body {
   background: #ff1765;
 }
 .btn--green {
-  background: #4ad5bc;
+  background: #49ebfa;
   color: #2a2c3d;
 }
 .btn--green:hover {
-  background: #2ec8ac;
+  background: #21e7f9;
 }
 .btn--gray {
   background: #282828;
@@ -967,11 +966,11 @@ body {
   opacity: 1;
 }
 .btn--purepurple {
-  background: #4ad5bc;
+  background: #49ebfa;
   color: #2a2c3d;
 }
 .btn--purepurple:hover {
-  background: #2ec8ac;
+  background: #21e7f9;
   opacity: 1;
 }
 .btn--purple {
@@ -1050,7 +1049,7 @@ body {
 }
 .input:focus {
   outline: 0;
-  border: 1px solid #4ad5bc;
+  border: 1px solid #49ebfa;
   transition: all 0.3s;
 }
 .input::placeholder {
@@ -1071,7 +1070,7 @@ body {
 }
 .textarea:focus {
   outline: 0;
-  border: 1px solid #4ad5bc;
+  border: 1px solid #49ebfa;
   transition: all 0.3s;
 }
 .textarea::placeholder {
@@ -1159,7 +1158,7 @@ body {
   align-items: center;
   flex-wrap: wrap;
   right: 0;
-  width: 27rem;
+  width: 35rem;
   margin-top: 1.5rem;
   border-radius: 0.5rem;
   background: #171a28;
@@ -1210,7 +1209,7 @@ body {
 }
 .authnav .container .side .notification .notification-item p {
   margin-top: 0.5rem;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   text-align: center;
 }
 .authnav .container .side .profile {

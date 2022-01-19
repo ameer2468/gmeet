@@ -30,10 +30,9 @@ const Project = ({data, remove, noRequest, profile}: props) => {
 
 
     useEffect(() => {
-        const check = projectRequests.filter((value) => {
-            return value.user === username && data.project_id === value.project_id;
-        })
-        setCheckJoined(check)
+       setCheckJoined(projectRequests.filter((value) => {
+           return value.user === username && data.project_id === value.project_id;
+       }))
     }, [loading, data.project_id, projectRequests, username])
 
 
@@ -65,7 +64,7 @@ const Project = ({data, remove, noRequest, profile}: props) => {
 
                    <div className={'buttons'}>
                        <Link to={`/project/${data.project_id}`}>
-                           <button className='btn btn--gray'>Project Details</button>
+                           <button className='btn btn--green'>Project Details</button>
                        </Link>
                        {noRequest ?
                            !checkUser ? '' :

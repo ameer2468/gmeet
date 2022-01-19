@@ -153,8 +153,8 @@ function joinProject() {
         dispatch(requestsLoading(true))
         const data = {
             project_id: projects.selectedProject.project_id,
-            user: userInfo.username,
-            user_id: userInfo.id,
+            user: authUser.username,
+            user_id: authUser.attributes.sub,
             why: projectForm.why,
             role: projectForm.role,
             id: uuidv4()

@@ -41,18 +41,17 @@
   z-index: 50!important;
   background: darken($bg, 0.1);
   right: 0;
-  width: 17rem;
   transition: all 0.3s;
   display: none;
   flex-direction: column;
-  text-align: justify;
   top: 2.5rem;
   height: auto;
   padding: 1rem 2rem;
   border-radius: 1rem;
   p {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     margin: 0.2rem auto;
+    width: 100%;
     display: flex;
     align-items: center;
     transition: all 0.3s;
@@ -252,7 +251,7 @@
           align-items: center;
           flex-wrap: wrap;
           right: 0;
-          width: 27rem;
+          width: 35rem;
           margin-top: 1.5rem;
           border-radius: 0.5rem;
          background: $bg;
@@ -302,7 +301,7 @@
           }
           p {
             margin-top: 0.5rem;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             text-align: center;
           }
         }

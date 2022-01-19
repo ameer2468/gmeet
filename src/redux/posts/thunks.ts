@@ -12,7 +12,7 @@ import {comment, post} from "../types";
 import {
     postsArr,
     addPosts,
-    deletePost, addPostHandler, commentPostLoading, postsLoadingHandler,
+    deletePost, addPostHandler, commentPostLoading,
 } from "./postsSlice";
 import {notify} from "../../helpers/notify";
 
@@ -114,7 +114,6 @@ return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
    await dispatch(getPostsService(user)).then((res: any) => {
         const {rows} = res.payload.data;
         dispatch(postsArr(rows))
-        dispatch(postsLoadingHandler(false))
     }).catch(() => {
         return notify('An error has occurred')
     });

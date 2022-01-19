@@ -166,7 +166,9 @@ export function getAllUserData(username: string) {
         await dispatch(getUserProjectsThunk(username))
         await dispatch(getRequestsThunk());
        await dispatch(getUserFollowersThunk(id));
-       await dispatch(getPostsThunk(username));
-       await dispatch(getCommentsThunk(username));
+       await dispatch(getPostsThunk(username)).then(async () => {
+           await dispatch(getCommentsThunk(username));
+           dispatch(postsLoadingHandler(false))
+       })
     }
 }
