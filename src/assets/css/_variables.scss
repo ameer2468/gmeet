@@ -104,9 +104,16 @@ $pageBackground: darken($green, 45%);
 }
 
 @mixin content {
-  font-size: 1.7rem;
+  font-size: 1.5rem;
   color: $text;
   line-height: 3rem;
+}
+
+@mixin pageContainer {
+  padding: 15rem 0 0 0;
+  width: 100%;
+  max-width: 150rem;
+  margin: 0 auto;
 }
 
 @mixin button {

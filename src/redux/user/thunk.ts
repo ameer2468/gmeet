@@ -79,7 +79,7 @@ export function getNotifications(id: string) {
 }
 
 export function followUserThunk(info: {id: string, user_id: string, follower_id: string}) {
-    return async (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
+    return (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
         const userReducer = getState();
         const {authUser} = userReducer.userStore;
         const data = {...info}

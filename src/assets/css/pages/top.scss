@@ -1,0 +1,15 @@
+.TopContent {
+  width: 100vw;
+  padding: 0 2rem;
+  height: auto;
+  min-height: 100vh;
+  @include pageBackground;
+  .TopContainer {
+    @include pageContainer;
+    h1 {
+      color: white;
+      @include mediumTitle;
+      margin-bottom: 2rem;
+    }
+  }
+}

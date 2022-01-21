@@ -15,6 +15,7 @@ import { ToastContainer } from 'react-toastify';
 import ProjectDetails from "./pages/projectdetails/projectDetails";
 import {getUserFollowers} from "./redux/user/services";
 import {getNotifications} from "./redux/user/thunk";
+import Top from "./pages/topprojects/top";
 
 Amplify.configure(awsconfig)
 
@@ -54,6 +55,7 @@ const App = () => {
     const AuthRoutes = [
         {path: '/', component: Landing},
         {path: '/home', component: Home},
+        {path: '/top', component: Top},
         {path: '/project/:id', component: ProjectDetails},
         {path: '/profile/:username', component: Profile}
     ]

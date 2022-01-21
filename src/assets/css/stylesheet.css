@@ -85,7 +85,7 @@ body {
   text-align: center;
 }
 .header .container p {
-  font-size: 1.7rem;
+  font-size: 1.5rem;
   color: #c1c1c1;
   line-height: 3rem;
   text-align: center;
@@ -116,6 +116,27 @@ body {
   font-size: 1.7rem;
   line-height: 1.5;
   margin-top: 1.5rem;
+}
+
+.TopContent {
+  width: 100vw;
+  padding: 0 2rem;
+  height: auto;
+  min-height: 100vh;
+  background: #03545b;
+  background: linear-gradient(162deg, #03545b -40%, #121424 78%);
+}
+.TopContent .TopContainer {
+  padding: 15rem 0 0 0;
+  width: 100%;
+  max-width: 150rem;
+  margin: 0 auto;
+}
+.TopContent .TopContainer h1 {
+  color: white;
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
 }
 
 .HomeContent {
@@ -250,7 +271,7 @@ body {
 
 .profileContent {
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   padding: 0 2rem;
   background: #03545b;
   background: linear-gradient(162deg, #03545b -40%, #121424 78%);
@@ -1104,6 +1125,11 @@ body {
 }
 .authnav nav {
   margin-left: 3rem;
+  width: 100%;
+}
+.authnav nav ul {
+  display: inline-block;
+  width: 100%;
 }
 .authnav nav ul a {
   font-size: 1.7rem;
@@ -1115,6 +1141,8 @@ body {
 }
 .authnav nav ul li {
   list-style: none;
+  display: inline-block;
+  padding: 0 2rem;
 }
 .authnav .container {
   display: flex;
@@ -1128,8 +1156,7 @@ body {
 .authnav .container .side {
   display: flex;
   height: 100%;
-  width: 100%;
-  max-width: 23rem;
+  width: auto;
   align-items: center;
 }
 .authnav .container .side .notification {
@@ -1218,7 +1245,7 @@ body {
   align-items: center;
   justify-content: center;
   padding: 1rem 2rem;
-  width: 100%;
+  width: 15rem;
   height: 5rem;
   border-radius: 0.5rem;
   margin-left: 4rem;

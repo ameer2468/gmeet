@@ -168,8 +168,9 @@ function joinProject() {
             id: uuidv4()
         }
     dispatch(joinProjectsThunk(data)).then(() => {
-        /*Notification code*/
-       sendNotification(userFollowers, `${authUser.username} has requested to join your project ${projects.selectedProject.name}`)
+       if (userFollowers.length > 0) {
+           sendNotification(userFollowers, `${authUser.username} has requested to join your project ${projects.selectedProject.name}`)
+       }
     })
     dispatch(getProjectsThunk());
     notify('Request submitted successfully')
@@ -190,7 +191,9 @@ function joinProject() {
         }
       return dispatch(createProject(data)).then((res) => {
           const {data} = res.payload as IcreateProject;
-          sendNotification(userFollowers, `${authUser.username} has created a new project: ${data.name}`)
+          if (userFollowers.length > 0) {
+              sendNotification(userFollowers, `${authUser.username} has created a new project: ${data.name}`)
+          }
           const newProj = {
               project_id: data.project_id,
               name: data.name,

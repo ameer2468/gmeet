@@ -42,6 +42,7 @@ const Authnav = () => {
                             <li><NavLink onClick={() => {
                                 dispatch(getProjectsThunk())
                             }} to={'/home'}>Home</NavLink></li>
+                            <li><NavLink to={'/top'}>Top Projects</NavLink></li>
                         </ul>
                     </nav>
                 </div>

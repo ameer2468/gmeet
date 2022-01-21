@@ -5,10 +5,7 @@
   min-height: 100vh;
   @include pageBackground;
   .homeContainer {
-    padding: 15rem 0 0 0;
-    width: 100%;
-    max-width: 150rem;
-    margin: 0 auto;
+    @include pageContainer;
     .search {
       width: 100%;
       h1 {
