@@ -189,9 +189,8 @@ function joinProject() {
           role: 'Founder'
         }
       return dispatch(createProject(data)).then((res) => {
-          /*Notification code*/
-         sendNotification(userFollowers, `${authUser.username} has created a new project`)
           const {data} = res.payload as IcreateProject;
+          sendNotification(userFollowers, `${authUser.username} has created a new project: ${data.name}`)
           const newProj = {
               project_id: data.project_id,
               name: data.name,
