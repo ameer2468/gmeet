@@ -20,6 +20,7 @@ const Input = (props: props) => {
             className='input'
             name={props.name}
             value={props.value}
+            autoComplete={'off'}
             onChange={(e: ChangeEvent<HTMLInputElement>) => onChange(props.name, e.target.value)}
             style={{maxWidth: props.maxWidth}}
             type="text"/>

@@ -9,6 +9,7 @@ import {useUser} from "../../../hooks/useUser";
 import placeholder from '../../../assets/images/placeholder.png';
 import {uploadUserAssetThunk} from "../../../redux/user/thunk";
 import {notify} from "../../../helpers/notify";
+import {NavLink} from "react-router-dom";
 
 interface props {
     data: any;
@@ -84,10 +85,10 @@ const User = ({data}: props) => {
                                     </div>
                                 </a>}
                                 {authUser.username === data.username ?
-                                    <button style={{marginTop: '3rem'}} className='btn btn--green'>
+                                    <NavLink to={'/editprofile'}><button style={{marginTop: '3rem'}} className='btn btn--green'>
                                         <FontAwesomeIcon style={{marginRight: '0.5rem'}} icon={faEdit}/>
                                         Edit Profile
-                                    </button>
+                                    </button></NavLink>
                                     :
                                     <button onClick={() => userHook.followHandler(data.username, data.id)} style={{marginTop: '3rem'}} className='btn btn--green'>
                                         <FontAwesomeIcon style={{marginRight: '0.5rem'}} icon={faUser}/>

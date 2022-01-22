@@ -4,14 +4,14 @@ import {
     getProjects,
     getRequests,
     getUserProjects,
-    joinProjectRequest
+    joinProjectRequest, TopProjects
 } from "./services";
 import {
     deleteLoading,
     joinLoading, projectDetails, projectDetailsLoading, projectLoading,
     projectRequests,
     removeProject,
-    requestsLoading,
+    requestsLoading, topProjectsHandler, topProjectsLoading,
     userProjects
 } from "./projectSlice";
 import {Action, ThunkDispatch} from "@reduxjs/toolkit";
@@ -43,6 +43,17 @@ export function joinProjectsThunk(data: projectRequest) {
             dispatch(ActiveModal(''))
             dispatch(getRequestsThunk());
          })
+    }
+}
+
+export function getTopProjectsThunk() {
+    return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
+        dispatch(topProjectsLoading(true))
+        await dispatch(TopProjects()).then((res: any) => {
+            const {rows} = res.payload.data;
+            dispatch(topProjectsHandler(rows))
+            dispatch(topProjectsLoading(false))
+        })
     }
 }
 

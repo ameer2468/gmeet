@@ -62,6 +62,13 @@ export interface projectRequest {
     id: string;
 }
 
+export interface topProjects {
+    project_id: string;
+    owner: string;
+    name: string;
+    count: string;
+}
+
 export interface projectCreate {
     name: string;
     description: string;

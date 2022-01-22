@@ -27,14 +27,14 @@ textarea {
   color: #c1c1c1;
   padding: 2rem 2rem;
   line-height: 2rem;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   border-radius: 0.5rem;
   background-color: rgba(22, 23, 37, 0.5);
   transition: all 0.3s;
 }
 textarea:focus {
   outline: 0;
-  border: 1px solid #49ebfa;
+  border: 1px solid #46e8b2;
   transition: all 0.3s;
 }
 textarea::placeholder {
@@ -104,7 +104,7 @@ body {
   text-align: center;
   padding: 4rem;
   background: rgba(61, 63, 78, 0.2);
-  backdrop-filter: blur(130px);
+  backdrop-filter: blur(10px);
   border-radius: 16px;
 }
 .header .container .cards .card h2 {
@@ -123,8 +123,8 @@ body {
   padding: 0 2rem;
   height: auto;
   min-height: 100vh;
-  background: #03545b;
-  background: linear-gradient(162deg, #03545b -40%, #121424 78%);
+  background: #08402e;
+  background: linear-gradient(162deg, #08402e -40%, #121424 78%);
 }
 .TopContent .TopContainer {
   padding: 15rem 0 0 0;
@@ -132,7 +132,68 @@ body {
   max-width: 150rem;
   margin: 0 auto;
 }
-.TopContent .TopContainer h1 {
+.TopContent .TopContainer .heading {
+  margin-bottom: 3rem;
+}
+.TopContent .TopContainer .heading h1 {
+  color: white;
+  font-size: 3rem;
+  font-weight: bold;
+}
+.TopContent .TopContainer .heading p {
+  font-size: 1.5rem;
+}
+.TopContent .TopContainer .titles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  width: 100%;
+  margin: 6rem 0 2rem 0;
+  font-size: 1.6rem;
+}
+.TopContent .TopContainer .topProject {
+  background: rgba(18, 19, 31, 0.2);
+  padding: 2rem;
+  margin-bottom: 1rem;
+  border-radius: 1rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  width: 100%;
+  transition: all 0.3s;
+}
+.TopContent .TopContainer .topProject:hover {
+  transform: translateY(-0.5rem);
+  transition: all 0.3s;
+  box-shadow: 0 30px 20px -20px rgba(0, 0, 0, 0.15);
+}
+.TopContent .TopContainer .topProject a {
+  font-size: 1.6rem;
+  transition: all 0.3s;
+}
+.TopContent .TopContainer .topProject a:hover {
+  opacity: 0.7;
+  transition: all 0.3s;
+}
+.TopContent .TopContainer .topProject p {
+  font-size: 1.6rem;
+}
+
+.editProfileContent {
+  width: 100vw;
+  padding: 0 2rem;
+  height: auto;
+  min-height: 100vh;
+  background: #08402e;
+  background: linear-gradient(162deg, #08402e -40%, #121424 78%);
+}
+.editProfileContent .editProfileContainer {
+  padding: 15rem 0 0 0;
+  width: 100%;
+  max-width: 150rem;
+  margin: 0 auto;
+}
+.editProfileContent .editProfileContainer h1 {
   color: white;
   font-size: 3rem;
   font-weight: bold;
@@ -144,8 +205,8 @@ body {
   padding: 0 2rem;
   height: auto;
   min-height: 100vh;
-  background: #03545b;
-  background: linear-gradient(162deg, #03545b -40%, #121424 78%);
+  background: #08402e;
+  background: linear-gradient(162deg, #08402e -40%, #121424 78%);
 }
 .HomeContent .homeContainer {
   padding: 15rem 0 0 0;
@@ -232,8 +293,8 @@ body {
   padding: 0 2rem;
   height: auto;
   min-height: 100vh;
-  background: #03545b;
-  background: linear-gradient(162deg, #03545b -40%, #121424 78%);
+  background: #08402e;
+  background: linear-gradient(162deg, #08402e -40%, #121424 78%);
 }
 .detailsContent .detailsContainer {
   padding: 15rem 0 0 0;
@@ -273,8 +334,8 @@ body {
   width: 100vw;
   height: 100%;
   padding: 0 2rem;
-  background: #03545b;
-  background: linear-gradient(162deg, #03545b -40%, #121424 78%);
+  background: #08402e;
+  background: linear-gradient(162deg, #08402e -40%, #121424 78%);
 }
 .profileContent .btn {
   font-size: 1.3rem;
@@ -416,7 +477,7 @@ body {
   transition: all 0.3s;
 }
 .profileContent .profileContainer .profilePosts .post .actions .delete:hover, .profileContent .profileContainer .profilePosts .post .actions .edit:hover {
-  border: 1px solid #49ebfa;
+  border: 1px solid #46e8b2;
   transition: all 0.3s;
   cursor: pointer;
 }
@@ -508,7 +569,7 @@ body {
   transition: all 0.3s;
 }
 .profileContent .profileContainer .listings .projectCard .edit:hover {
-  border: 1px solid #49ebfa;
+  border: 1px solid #46e8b2;
   transition: all 0.3s;
   cursor: pointer;
 }
@@ -527,7 +588,7 @@ body {
   transition: all 0.3s;
 }
 .profileContent .profileContainer .listings .projectCard .delete:hover {
-  border: 1px solid #49ebfa;
+  border: 1px solid #46e8b2;
   transition: all 0.3s;
   cursor: pointer;
 }
@@ -659,7 +720,7 @@ body {
   cursor: pointer;
 }
 .profileContent .profileContainer .user .info .userImage .actions .uploadImage {
-  background: #49ebfa;
+  background: #46e8b2;
   color: #12131f;
   width: 3rem;
   height: 3rem;
@@ -669,7 +730,7 @@ body {
 }
 .profileContent .profileContainer .user .info .userImage .actions .uploadImage:hover {
   transition: all 0.3s;
-  background: #17e6f9;
+  background: #1cdf9e;
   cursor: pointer;
 }
 .profileContent .profileContainer .user .info .userImage img {
@@ -701,7 +762,7 @@ body {
   margin-right: 1rem;
 }
 .profileContent .profileContainer .user .website:hover {
-  border: 1px solid #49ebfa;
+  border: 1px solid #46e8b2;
   transition: all 0.3s;
 }
 .profileContent .profileContainer .user h2 {
@@ -726,13 +787,14 @@ body {
 }
 .modalWrap .limit {
   position: absolute;
-  bottom: 31%;
+  bottom: 15%;
   opacity: 0.5;
-  left: 7%;
+  left: 3%;
 }
 .modalWrap .modal {
   width: 100%;
   max-width: 60rem;
+  height: auto;
   position: relative;
   left: 0;
   right: 0;
@@ -754,14 +816,14 @@ body {
   color: #c1c1c1;
   padding: 2rem 2rem;
   line-height: 2rem;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   border-radius: 0.5rem;
   background-color: rgba(22, 23, 37, 0.5);
   transition: all 0.3s;
 }
 .modalWrap .modal .textarea:focus {
   outline: 0;
-  border: 1px solid #49ebfa;
+  border: 1px solid #46e8b2;
   transition: all 0.3s;
 }
 .modalWrap .modal .textarea::placeholder {
@@ -774,14 +836,14 @@ body {
   border: 1px solid transparent;
   color: #c1c1c1;
   padding: 0 2rem;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   border-radius: 0.5rem;
   background-color: rgba(22, 23, 37, 0.5);
   transition: all 0.3s;
 }
 .modalWrap .modal input:focus {
   outline: 0;
-  border: 1px solid #49ebfa;
+  border: 1px solid #46e8b2;
   transition: all 0.3s;
 }
 .modalWrap .modal input::placeholder {
@@ -806,8 +868,49 @@ body {
 }
 .modalWrap .modal .close:hover {
   transition: all 0.3s;
-  border: 1px solid #49ebfa;
+  border: 1px solid #46e8b2;
   cursor: pointer;
+}
+
+/*Join modal*/
+.joinModal {
+  max-width: 80rem !important;
+}
+.joinModal .whyjoin {
+  position: relative;
+}
+.joinModal .projects-list {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1rem;
+}
+.joinModal h3 {
+  color: white;
+  width: 100%;
+  text-align: left;
+  font-size: 1.4rem;
+  margin: 0.5rem 0 1rem 0;
+}
+.joinModal .user-project {
+  background-color: rgba(22, 23, 37, 0.5);
+  width: 100%;
+  display: inline-block;
+  border: 1px solid #333338;
+  padding: 2rem;
+  border-radius: 1rem;
+  transition: all 0.3s;
+}
+.joinModal .user-project p {
+  width: 100%;
+  max-width: 20rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.joinModal .user-project:hover {
+  opacity: 0.7;
+  transition: all 0.3s;
 }
 
 /*Requests Modal*/
@@ -897,11 +1000,15 @@ body {
   fill: white;
 }
 
+.dd-header-title {
+  color: #c1c1c1;
+}
+
 .dd-list-item svg path {
-  fill: #49ebfa;
+  fill: #46e8b2;
 }
 .dd-list-item:hover {
-  background: #49ebfa !important;
+  background: #46e8b2 !important;
   color: #12131f !important;
 }
 .dd-list-item:hover svg path {
@@ -972,11 +1079,11 @@ body {
   background: #ff1765;
 }
 .btn--green {
-  background: #49ebfa;
+  background: #46e8b2;
   color: #2a2c3d;
 }
 .btn--green:hover {
-  background: #21e7f9;
+  background: #22e3a3;
 }
 .btn--gray {
   background: #282828;
@@ -987,11 +1094,11 @@ body {
   opacity: 1;
 }
 .btn--purepurple {
-  background: #49ebfa;
+  background: #46e8b2;
   color: #2a2c3d;
 }
 .btn--purepurple:hover {
-  background: #21e7f9;
+  background: #22e3a3;
   opacity: 1;
 }
 .btn--purple {
@@ -1055,6 +1162,7 @@ body {
 
 .generalForm {
   margin: 3rem 0;
+  height: auto;
 }
 
 .input {
@@ -1062,15 +1170,16 @@ body {
   height: 5.5rem;
   border: 1px solid transparent;
   color: #c1c1c1;
+  margin: 0.5rem 0;
   padding: 0 2rem;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   border-radius: 0.5rem;
   background-color: #12131f;
   transition: all 0.3s;
 }
 .input:focus {
   outline: 0;
-  border: 1px solid #49ebfa;
+  border: 1px solid #46e8b2;
   transition: all 0.3s;
 }
 .input::placeholder {
@@ -1083,7 +1192,7 @@ body {
   color: #c1c1c1;
   padding: 2rem 2rem;
   line-height: 2rem;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   border-radius: 0.5rem;
   background-color: rgba(22, 23, 37, 0.5);
   transition: all 0.3s;
@@ -1091,7 +1200,7 @@ body {
 }
 .textarea:focus {
   outline: 0;
-  border: 1px solid #49ebfa;
+  border: 1px solid #46e8b2;
   transition: all 0.3s;
 }
 .textarea::placeholder {
@@ -1180,6 +1289,8 @@ body {
 .authnav .container .side .notification .notifications {
   position: absolute;
   padding: 1rem 3rem;
+  background: rgba(18, 19, 31, 0.4);
+  backdrop-filter: blur(5rem);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1188,7 +1299,6 @@ body {
   width: 36rem;
   margin-top: 1.5rem;
   border-radius: 0.5rem;
-  background: #171a28;
 }
 @keyframes animation {
   0% {
@@ -1249,12 +1359,13 @@ body {
   height: 5rem;
   border-radius: 0.5rem;
   margin-left: 4rem;
-  background: rgba(23, 26, 40, 0.4);
+  background: rgba(18, 19, 31, 0.3);
+  backdrop-filter: blur(5rem);
   transition: all 0.3s;
   position: relative;
 }
 .authnav .container .side .profile:hover {
-  background: #171a27;
+  background: rgba(18, 19, 31, 0.6);
   cursor: pointer;
   transition: all 0.3s;
 }
@@ -1268,7 +1379,8 @@ body {
   z-index: 10;
   padding: 1.5rem;
   justify-content: center;
-  background: #171a28;
+  background: rgba(18, 19, 31, 0.3);
+  backdrop-filter: blur(5rem);
 }
 .authnav .container .side .profile .dropdown .icon {
   font-size: 1.4rem;

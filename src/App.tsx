@@ -16,6 +16,7 @@ import ProjectDetails from "./pages/projectdetails/projectDetails";
 import {getUserFollowers} from "./redux/user/services";
 import {getNotifications} from "./redux/user/thunk";
 import Top from "./pages/topprojects/top";
+import EditProfile from "./pages/editprofile/editprofile";
 
 Amplify.configure(awsconfig)
 
@@ -57,7 +58,8 @@ const App = () => {
         {path: '/home', component: Home},
         {path: '/top', component: Top},
         {path: '/project/:id', component: ProjectDetails},
-        {path: '/profile/:username', component: Profile}
+        {path: '/profile/:username', component: Profile},
+        {path: '/editprofile', component: EditProfile}
     ]
     const RouteHandler = userRedux.LoggedIn ? AuthRoutes : GlobalRoutes;
 

@@ -16,6 +16,13 @@ export const deleteProject = createAsyncThunk('projects/deleteproject', async (i
     })
 })
 
+export const TopProjects = createAsyncThunk('projects/topprojects', async () => {
+    return await axios.get(`${URL}/projects/top`, {
+        headers: {
+            'x-api-key': process.env.REACT_APP_API_KEY,
+        },
+    })
+})
 
 export const rejectJoinRequest = createAsyncThunk('projects/rejectrequest', async(id: string) => {
     return await axios.delete(`${URL}/requests`, {

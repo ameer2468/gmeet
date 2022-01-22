@@ -12,6 +12,7 @@ import placeholder from '../assets/images/placeholder.png'
 import LoadingSpinner from "./global/LoadingSpinner";
 import {getProjectsThunk} from "../redux/projects/thunks";
 import Notifications from "./global/notifications";
+import {getNotifications} from "../redux/user/thunk";
 
 const Authnav = () => {
 
@@ -47,10 +48,13 @@ const Authnav = () => {
                     </nav>
                 </div>
                 <div className="side">
-                    {!authUser.notifications ? '' :
-                        <div ref={notifref} className="notification">
-                            {authUser.notifications.length === 0 ? '' :  <div className="alert"/>}
-                            <FontAwesomeIcon onClick={() => setOpenNotifications(!openNotifications)} className='icon' icon={faBell}/>
+                    <div ref={notifref} className="notification">
+                            <div className="alert"/>
+                            <FontAwesomeIcon onClick={() => {
+                                setOpenNotifications(!openNotifications)
+                                dispatch(getNotifications(authUser.attributes.sub))
+                            }
+                            } className='icon' icon={faBell}/>
                             {openNotifications ?
                                 <motion.div
                                     initial={'hidden'} animate={'active'}
@@ -61,7 +65,6 @@ const Authnav = () => {
                                 : ''
                             }
                         </div>
-                    }
                     <div ref={ref} onClick={() => setOpen(!open)} className="profile">
                         {userImageLoading ? <div style={{marginRight: 15, marginTop: 5}}><LoadingSpinner height={25} width={25}/></div> : <img onError={e => e.currentTarget.src = placeholder} alt='profile' src={authUser.userImage} className='userImage'/>}
                         <p>{authUser === undefined ? '' : authUser.username}</p>

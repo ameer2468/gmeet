@@ -70,7 +70,7 @@ export const useProject = () => {
 
     function toggleJoin(projectInfo: project) {
         dispatch(ActiveModal('JOIN'));
-        dispatch(projectValues({...projectForm, why: '', speciality: ''}))
+        dispatch(projectValues({...projectForm, why: '', speciality: '', gituser: ''}))
         dispatch(selectedProject(projectInfo))
         dispatch(joinLoading(false))
     }

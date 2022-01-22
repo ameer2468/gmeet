@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type {RootState} from "../store";
-import {project, projectRequest} from "./types";
+import {project, projectRequest, topProjects} from "./types";
 import {getProjects} from "./services";
 
 
@@ -9,6 +9,7 @@ interface ProjectState {
     projects: project[],
     userProjects: project[],
     projectRequests: projectRequest[]
+    topProjects: topProjects[]
     loading: boolean;
     createLoading: boolean;
     requestsLoading: boolean;
@@ -18,9 +19,11 @@ interface ProjectState {
     deleteLoading: boolean;
     joinLoading: boolean;
     projectDetails: any;
+    topProjectsLoading: boolean;
     projectDetailsLoading: boolean;
     projectForm: {
         name: string;
+        gituser: string;
         description: string;
         searchterm: string;
         role: string;
@@ -33,8 +36,10 @@ const initialState: ProjectState = {
     projects: [],
     userProjects: [],
     projectRequests: [],
+    topProjects: [],
     projectDetails: {},
     loading: false,
+    topProjectsLoading: false,
     createLoading: false,
     projectDetailsLoading: false,
     requestsLoading: false,
@@ -53,6 +58,7 @@ const initialState: ProjectState = {
         name: '',
         description: '',
         searchterm: '',
+        gituser: '',
         role: '',
         why: ''
     }
@@ -80,8 +86,14 @@ export const projectSlice = createSlice({
         projectDetails: (state, action: PayloadAction<any>) => {
             state.projectDetails = action.payload;
         },
+        topProjectsLoading: (state, action: PayloadAction<boolean>) => {
+          state.topProjectsLoading = action.payload;
+        },
         projectDetailsLoading: (state, action: PayloadAction<boolean>) => {
             state.projectDetailsLoading = action.payload;
+        },
+        topProjectsHandler: (state, action: PayloadAction<topProjects[]>) => {
+            state.topProjects = action.payload;
         },
         addProject: (state, action: PayloadAction<project>) => {
             state.projects = [action.payload, ...state.projects]
@@ -130,6 +142,7 @@ export const {
     projectValues,
     removeProject,
     projectRequests,
+    topProjectsHandler,
     projectDetails,
     projectDetailsLoading,
     editProjectLoading,
@@ -138,6 +151,7 @@ export const {
     selectedProject,
     projectLoading,
     requestsLoading,
+    topProjectsLoading,
     deleteLoading,
     joinLoading,
     createProjectLoading,

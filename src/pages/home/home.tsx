@@ -2,13 +2,13 @@ import React, {useEffect} from 'react';
 import Search from "./components/search";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {projectReducer} from "../../redux/projects/projectSlice";
-import LoadingSpinner from "../../components/global/LoadingSpinner";
 import Project from "./components/project";
 import {useProject} from "../../hooks/useProject";
 import {useDebounce} from "use-debounce";
 import {getProjectsThunk, getRequestsThunk} from "../../redux/projects/thunks";
 import {useUser} from "../../hooks/useUser";
 import {getAssetThunk} from "../../redux/user/thunk";
+import ProjectCardLoader from "../../components/global/placeholders/projectCard";
 
 const Home = () => {
 
@@ -34,6 +34,7 @@ const Home = () => {
         getProjectsData();
     }, [dispatch, value, username])
 
+
     return (
         <div className='HomeContent'>
             <div className="homeContainer">
@@ -49,9 +50,13 @@ const Home = () => {
                     </button>
                 </div>
                     <div className="projectsContainer">
-                        {projectStore.loading || projectStore.requestsLoading ? <div className="center">
-                                <LoadingSpinner height={60} width={60}/>
-                            </div> :
+                        {projectStore.loading || projectStore.requestsLoading ?
+                            <div style={{display: 'flex', justifyContent: "center", position: 'relative', top: '-10rem'}}>
+                                {Array.from(Array(projects.length > 8 ? 8 : projects.length).keys()).map(i => (
+                                    <ProjectCardLoader key={i}/>
+                                ))}
+                            </div>
+                            :
                            projects.map((value) => {
                                 return <Project remove={false} profile={false} key={value.project_id} data={value}/>
                             })

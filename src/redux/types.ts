@@ -15,6 +15,16 @@ export interface posts {
     comments: comment[]
 }
 
+export interface followers {
+    id: string;
+    user_id: string;
+}
+
+export interface following {
+    follower_id: string;
+    id: string;
+}
+
 
 export interface comment {
     post_id: string;

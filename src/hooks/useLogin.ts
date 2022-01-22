@@ -4,7 +4,7 @@ import {authedUser, loading, reset, status, userImageHandler} from "../redux/use
 import {Login} from "../pages/register/types";
 import {useAppDispatch} from "../redux/hooks";
 import {useHistory} from "react-router-dom";
-import {getAssetThunk, getNotifications} from "../redux/user/thunk";
+import {getAssetThunk} from "../redux/user/thunk";
 import {getUserFollowers} from "../redux/user/services";
 
 export function useLogin() {
@@ -36,7 +36,6 @@ export function useLogin() {
                         const {following, followers} = res.payload.data;
                         dispatch(authedUser({...data, following: following, followers: followers}))
                     })
-                    await dispatch(getNotifications(data.attributes.sub))
                     await dispatch(getAssetThunk(inputValues.username));
                 });
                 dispatch(status(true))

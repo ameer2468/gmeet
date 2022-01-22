@@ -2,6 +2,7 @@ import {useAppDispatch, useAppSelector} from "../redux/hooks";
 import {userReducer} from "../redux/user/userSlice";
 import {followUserThunk, sendNotificationThunk, unFollowUserThunk} from "../redux/user/thunk";
 import {v4 as uuidv4} from "uuid";
+import {following} from "../redux/types";
 
 
 export function useUser() {
@@ -15,8 +16,8 @@ export function useUser() {
     }
 
     function followHandler(user: string, id: string) {
-        const checkIfFollowing = authUser.following.map((item: any) => item.follower_id).includes(id);
-        const filterFollowers = authUser.following.filter((value: any) => {
+        const checkIfFollowing = authUser.following.map((item: following) => item.follower_id).includes(id);
+        const filterFollowers = authUser.following.filter((value: following) => {
             return value.follower_id === id;
         })
         const userId = filterFollowers.length === 0 ? '' : filterFollowers[0].id;
@@ -27,9 +28,7 @@ export function useUser() {
         }
         if (!checkIfFollowing) {
             dispatch(followUserThunk(data));
-            if (filterFollowers.length > 0) {
-                sendNotification([id] as unknown as [], `${authUser.username} has followed you!`)
-            }
+            sendNotification([id] as unknown as [], `${authUser.username} has followed you!`)
         } else {
            dispatch(unFollowUserThunk(userId));
         }
