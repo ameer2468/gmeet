@@ -3,14 +3,22 @@ import {RootState} from "../store";
 import {User} from "./types";
 import {
     createUser,
-    followUserService, getNotificationsService,
+    followUserService, getGlobalMessages, getNotificationsService,
     getUser,
     getUserFollowers,
-    getUserImage, sendNotifications,
+    getUserImage, postGlobalMessage, sendNotifications,
     unFollowUserService,
     uploadUserAsset
 } from "./services";
-import {authedUser, loading, notificationLoading, userDetails, userImageHandler, userImageUpload} from "./userSlice";
+import {
+    authedUser,
+    globalMessagesHandler,
+    loading,
+    notificationLoading,
+    userDetails, userFormHandler,
+    userImageHandler,
+    userImageUpload
+} from "./userSlice";
 import {getRequestsThunk, getUserProjectsThunk} from "../projects/thunks";
 import {getCommentsThunk, getPostsThunk} from "../posts/thunks";
 import {notify} from "../../helpers/notify";
@@ -93,6 +101,28 @@ export function followUserThunk(info: {id: string, user_id: string, follower_id:
             .catch(() => {
             notify('An error has occurred')
         })
+    }
+}
+
+export function getGlobalMessagesThunk() {
+    return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
+        await dispatch(getGlobalMessages()).then((res: any) => {
+            const {rows} = res.payload.data;
+            dispatch(globalMessagesHandler(rows))
+        });
+    }
+}
+
+export function sendGlobalMessageThunk(data: {username: string, message: string, time: string}) {
+    return async (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
+        const userReducer = getState();
+        const {globalMessages} = userReducer.userStore;
+        const {userForm} = userReducer.userStore;
+        await dispatch(postGlobalMessage(data)).then((res: any) => {
+            const {data} = res.payload;
+            dispatch(globalMessagesHandler([...globalMessages, data]))
+            dispatch(userFormHandler({...userForm, globalMessage: ''}))
+        });
     }
 }
 

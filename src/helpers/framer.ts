@@ -11,3 +11,15 @@ export const regularVariants = {
         y: 20,
     }
 }
+
+export const chatVariant = {
+    active: {
+        type: 'normal',
+        opacity: 1,
+        x: 0
+    },
+    hidden: {
+        opacity: 0,
+        x: 200,
+    }
+}

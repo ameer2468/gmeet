@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrash, faPencilAlt} from "@fortawesome/free-solid-svg-icons";
 import {useProject} from "../../../hooks/useProject";
@@ -15,7 +15,7 @@ interface props {
     profile?: boolean;
 }
 
-const Project = ({data, remove, noRequest, profile}: props) => {
+const Project = ({data, remove, noRequest}: props) => {
 
 
     const projectHook = useProject();
@@ -25,16 +25,7 @@ const Project = ({data, remove, noRequest, profile}: props) => {
     const {username} = userHook.authUser === undefined ? '' : userHook.authUser;
     const userparams: {username: string} = useParams();
     const {loading} = projectHook.projects;
-    const [checkJoined, setCheckJoined] = useState<any>([]);
-    const checkUser = userparams.username === username;
-
-
-    useEffect(() => {
-       setCheckJoined(projectRequests.filter((value) => {
-           return value.user === username && data.project_id === value.project_id;
-       }))
-    }, [loading, data.project_id, projectRequests, username])
-
+    const checkUser = userparams.username === username
 
     return (
        <>
@@ -78,7 +69,9 @@ const Project = ({data, remove, noRequest, profile}: props) => {
                                    Join requests
                                </button>
                            :
-                           username !== data.owner && checkJoined.length === 0  ?
+                           username !== data.owner && projectRequests.filter((value) => {
+                               return value.user === username && data.project_id === value.project_id;
+                           }).length === 0  ?
                                <button onClick={() => {
                                    projectHook.toggleJoin(data)
                                }} className='btn btn--transparent'>Request To Join</button>

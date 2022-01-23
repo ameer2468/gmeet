@@ -1,10 +1,11 @@
 import {useAppDispatch, useAppSelector} from "../redux/hooks";
 import {changePasswordLoading, userFormHandler, userReducer} from "../redux/user/userSlice";
-import {followUserThunk, sendNotificationThunk, unFollowUserThunk} from "../redux/user/thunk";
+import {followUserThunk, sendGlobalMessageThunk, sendNotificationThunk, unFollowUserThunk} from "../redux/user/thunk";
 import {v4 as uuidv4} from "uuid";
 import {following} from "../redux/types";
 import {Auth} from "aws-amplify";
 import {notify} from "../helpers/notify";
+import moment from "moment";
 
 
 export function useUser() {
@@ -19,6 +20,15 @@ export function useUser() {
 
     function sendNotification(users: [], text: string) {
         dispatch(sendNotificationThunk(users, text))
+    }
+
+    async function sendGlobalMessage() {
+        const data = {
+            username: authUser.username,
+            message: userForm.globalMessage,
+            time: moment().format('MMM Do YYYY, h:mm a')
+        }
+        await dispatch(sendGlobalMessageThunk(data))
     }
 
     function followHandler(user: string, id: string) {
@@ -79,6 +89,7 @@ export function useUser() {
         userInfo,
         onChange,
         changePassword,
+        sendGlobalMessage,
         forgotPassword,
         forgotPasswordConfirm,
         followHandler,

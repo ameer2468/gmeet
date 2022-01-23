@@ -26,6 +26,10 @@
     form {
       display: flex;
       flex-direction: column;
+      input {
+        background: rgba($cardbg, 0.4);
+        backdrop-filter: blur(5rem);
+      }
       button {
         margin-top: 1rem;
         max-width: 100%;

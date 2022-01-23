@@ -15,6 +15,7 @@ export interface userForm {
     oldPassword: string;
     newPassword: string;
     username: string;
+    globalMessage: string;
     code: string;
     password: string;
 }

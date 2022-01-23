@@ -216,6 +216,10 @@ body {
   display: flex;
   flex-direction: column;
 }
+.editProfileContent .editProfileContainer .changePassword form input {
+  background: rgba(18, 19, 31, 0.4);
+  backdrop-filter: blur(5rem);
+}
 .editProfileContent .editProfileContainer .changePassword form button {
   margin-top: 1rem;
   max-width: 100%;
@@ -1036,6 +1040,57 @@ body {
   fill: #12131f !important;
 }
 
+/*Global Chat*/
+.GlobalChat {
+  width: 100%;
+  max-width: 20vw;
+  height: 100vh;
+  position: fixed;
+  background: #12131f;
+  padding: 5rem;
+  right: 0;
+  z-index: 30;
+  border-left: 1px solid rgba(70, 232, 178, 0.1);
+}
+.GlobalChat .controls {
+  position: relative;
+}
+.GlobalChat .messages-container {
+  margin: 2rem 0;
+  width: 100%;
+  height: 70vh;
+  background: #151624;
+  border-radius: 1rem;
+  padding: 2rem;
+}
+.GlobalChat .messages-container .message {
+  width: 100%;
+  background: #12131f;
+  padding: 2rem;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+}
+.GlobalChat .messages-container .message .user {
+  color: white;
+  font-size: 1.7rem;
+  font-weight: bold;
+}
+.GlobalChat .messages-container .message .text {
+  font-size: 1.25rem;
+  line-height: 2rem;
+  margin-top: 0.5rem;
+}
+.GlobalChat button {
+  max-width: 100%;
+  margin-top: 1.5rem;
+}
+.GlobalChat textarea {
+  background: #151624;
+}
+.GlobalChat h1 {
+  color: white;
+}
+
 /*End of dropdown*/
 .disabledButton {
   cursor: not-allowed !important;
@@ -1289,6 +1344,18 @@ body {
   height: 100%;
   width: auto;
   align-items: center;
+}
+.authnav .container .side .chat {
+  margin-left: 4rem;
+}
+.authnav .container .side .chat .chatIcon {
+  font-size: 2rem;
+  transition: all 0.3s;
+}
+.authnav .container .side .chat .chatIcon:hover {
+  cursor: pointer;
+  transition: all 0.3s;
+  opacity: 0.7;
 }
 .authnav .container .side .notification {
   position: relative;

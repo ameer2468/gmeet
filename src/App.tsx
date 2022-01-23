@@ -18,6 +18,7 @@ import {getNotifications} from "./redux/user/thunk";
 import Top from "./pages/topprojects/top";
 import EditProfile from "./pages/editprofile/editprofile";
 import Forgot from "./pages/forgotPassword/forgot";
+import Chat from "./components/global/chat/chat";
 
 Amplify.configure(awsconfig)
 
@@ -83,6 +84,7 @@ const App = () => {
         <>
             <ToastContainer/>
           <ModalManager/>
+            {!authUser ? '' : <Chat/>}
             {location.pathname === '/' ? '' : RouteHandler === AuthRoutes && <Authnav/>}
           <Switch>
             {RouteHandler.map(({path, component}: any) => {

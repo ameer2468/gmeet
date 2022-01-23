@@ -19,6 +19,8 @@ interface UserState {
     userImageLoading: boolean;
     notificationLoading: boolean;
     changePasswordLoading: boolean;
+    globalMessages: any[];
+    toggleChat: boolean;
     imageUpload: any;
     userForm: userForm;
 }
@@ -35,16 +37,19 @@ const initialState: UserState = {
         following: []
     },
     authUser: {},
+    globalMessages: [],
     userForm: {
         oldPassword: '',
         newPassword: '',
         username: '',
         code: '',
-        password: ''
+        password: '',
+        globalMessage: ''
     },
     LoggedIn: false,
     changePasswordLoading: false,
     imageUpload: '',
+    toggleChat: false,
     Loading: false,
     notificationLoading: false,
     userImageLoading: false
@@ -66,6 +71,12 @@ export const userSlice = createSlice({
         },
         userFormHandler: (state, action: PayloadAction<userForm>) => {
             state.userForm = action.payload;
+        },
+        toggleChatHandler: (state, action: PayloadAction<boolean>) => {
+            state.toggleChat = action.payload;
+        },
+        globalMessagesHandler: (state, action: PayloadAction<any>) => {
+            state.globalMessages = action.payload;
         },
         changePasswordLoading: (state, action: PayloadAction<boolean>) => {
             state.changePasswordLoading = action.payload;
@@ -91,9 +102,11 @@ export const userSlice = createSlice({
 export const {
     userDetails,
     userFormHandler,
+    globalMessagesHandler,
     changePasswordLoading,
     status,
     loading,
+    toggleChatHandler,
     authedUser,
     userImageHandler,
     userImageUpload,
