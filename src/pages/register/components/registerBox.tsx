@@ -66,8 +66,7 @@ const RegisterBox = () => {
                         <input autoComplete={'none'} required onChange={inputHandler} name='confirmpass' value={registerHook.inputValues.confirmpass}  placeholder='Confirm password' type="password"/>
                         {registerHook.error.length === 0 ? '' :  <p className='error'>{registerHook.error}</p>}
                         <div className="links">
-                            <p>Forgot password?</p>
-                            <Link to={'/login'}><p className='bold'>Have an account? Login now</p></Link>
+                            <Link to={'/login'}><p>Have an account? Login now</p></Link>
                         </div>
                         <button className={checkRegisterForm ? 'disabledButton' : ''} disabled={checkRegisterForm}>{Loading ? <LoadingSpinner height={35} width={35}/> : 'Confirm'}</button>
                     </form> : registerHook.step === 1 ?

@@ -5,7 +5,7 @@ import {projectReducer} from "../../redux/projects/projectSlice";
 import Project from "./components/project";
 import {useProject} from "../../hooks/useProject";
 import {useDebounce} from "use-debounce";
-import {getProjectsThunk, getRequestsThunk} from "../../redux/projects/thunks";
+import {getProjectsThunk} from "../../redux/projects/thunks";
 import {useUser} from "../../hooks/useUser";
 import {getAssetThunk} from "../../redux/user/thunk";
 import ProjectCardLoader from "../../components/global/placeholders/projectCard";
@@ -25,10 +25,9 @@ const Home = () => {
 
     useEffect(() => {
         dispatch(getAssetThunk(username))
-        const getProjectsData = async () => {
+        const getProjectsData = () => {
            if (value.length > 0 || value.length === 0) {
-               await dispatch(getProjectsThunk(value))
-               dispatch(getRequestsThunk());
+               dispatch(getProjectsThunk(value))
             }
         }
         getProjectsData();

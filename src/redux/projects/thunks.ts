@@ -108,6 +108,7 @@ export function getProjectsThunk(value?: string) {
         dispatch(projectLoading(true));
         await dispatch(getProjects(value ? value : '')).then(() => {
             dispatch(projectLoading(false));
+            dispatch(getRequestsThunk());
         })
     }
 }

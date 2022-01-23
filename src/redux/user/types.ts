@@ -14,6 +14,9 @@ export interface User {
 export interface userForm {
     oldPassword: string;
     newPassword: string;
+    username: string;
+    code: string;
+    password: string;
 }
 
 export interface notificationItem {

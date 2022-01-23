@@ -201,12 +201,16 @@ body {
 }
 .editProfileContent .editProfileContainer h2 {
   width: 100%;
-  color: white;
-  margin-bottom: 1rem;
+  color: #c1c1c1;
+  margin-bottom: 2rem;
 }
 .editProfileContent .editProfileContainer .changePassword {
   width: 100%;
   max-width: 35%;
+  background: rgba(18, 19, 31, 0.4);
+  backdrop-filter: blur(5rem);
+  padding: 3rem;
+  border-radius: 1rem;
 }
 .editProfileContent .editProfileContainer .changePassword form {
   display: flex;

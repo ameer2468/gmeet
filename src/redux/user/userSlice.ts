@@ -38,6 +38,9 @@ const initialState: UserState = {
     userForm: {
         oldPassword: '',
         newPassword: '',
+        username: '',
+        code: '',
+        password: ''
     },
     LoggedIn: false,
     changePasswordLoading: false,

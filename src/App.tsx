@@ -17,6 +17,7 @@ import {getUserFollowers} from "./redux/user/services";
 import {getNotifications} from "./redux/user/thunk";
 import Top from "./pages/topprojects/top";
 import EditProfile from "./pages/editprofile/editprofile";
+import Forgot from "./pages/forgotPassword/forgot";
 
 Amplify.configure(awsconfig)
 
@@ -51,6 +52,7 @@ const App = () => {
     const GlobalRoutes = [
         {path: '/', component: Landing},
         {path: '/login', component: Login},
+        {path: '/forgot-password', component: Forgot},
         {path: '/register', component: Register}
     ]
     const AuthRoutes = [

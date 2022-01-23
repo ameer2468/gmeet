@@ -40,6 +40,16 @@ export function useUser() {
         }
     }
 
+    async function forgotPassword() {
+        await Auth.forgotPassword(userForm.username);
+    }
+
+    async function forgotPasswordConfirm() {
+        await Auth.forgotPasswordSubmit(userForm.username, userForm.code, userForm.password).then(() => {
+            dispatch(userFormHandler({...userForm, code: '', password: '', username: ''}))
+        });
+    }
+
     async function changePassword() {
         if (userForm.newPassword.length === 0 || userForm.oldPassword.length === 0) {
            return notify('Please fill all fields')
@@ -69,6 +79,8 @@ export function useUser() {
         userInfo,
         onChange,
         changePassword,
+        forgotPassword,
+        forgotPasswordConfirm,
         followHandler,
         authUser,
     }
