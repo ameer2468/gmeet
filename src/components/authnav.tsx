@@ -10,7 +10,6 @@ import {regularVariants} from "../helpers/framer";
 import {NavLink} from "react-router-dom";
 import placeholder from '../assets/images/placeholder.png'
 import LoadingSpinner from "./global/LoadingSpinner";
-import {getProjectsThunk} from "../redux/projects/thunks";
 import Notifications from "./global/notifications";
 import {getNotifications} from "../redux/user/thunk";
 
@@ -40,9 +39,7 @@ const Authnav = () => {
                     <h1>Project</h1>
                     <nav>
                         <ul>
-                            <li><NavLink onClick={() => {
-                                dispatch(getProjectsThunk())
-                            }} to={'/home'}>Home</NavLink></li>
+                            <li><NavLink to={'/home'}>Home</NavLink></li>
                             <li><NavLink to={'/top'}>Top Projects</NavLink></li>
                         </ul>
                     </nav>

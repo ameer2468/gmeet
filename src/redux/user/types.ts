@@ -11,6 +11,11 @@ export interface User {
     notifications: notificationItem[],
 }
 
+export interface userForm {
+    oldPassword: string;
+    newPassword: string;
+}
+
 export interface notificationItem {
     id: string;
     message: string;

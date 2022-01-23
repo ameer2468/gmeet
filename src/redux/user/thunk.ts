@@ -156,19 +156,20 @@ export function uploadUserAssetThunk() {
 }
 
 export function getAllUserData(username: string) {
-    return async (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
+    return (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
         const userReducer = getState();
         const {id} = userReducer.userStore.userInfo;
         dispatch(projectLoading(true));
         dispatch(postsLoadingHandler(true))
         dispatch(commentPostLoading(true));
-        await dispatch(getCurrentUserThunk(username));
-        await dispatch(getUserProjectsThunk(username))
-        await dispatch(getRequestsThunk());
-       await dispatch(getUserFollowersThunk(id));
-       dispatch(getPostsThunk(username)).then(async () => {
-           await dispatch(getCommentsThunk(username));
-           dispatch(postsLoadingHandler(false))
+        dispatch(getCurrentUserThunk(username));
+        dispatch(getUserProjectsThunk(username))
+        dispatch(getRequestsThunk());
+        dispatch(getUserFollowersThunk(id));
+        dispatch(getPostsThunk(username)).then(() => {
+           dispatch(getCommentsThunk(username)).then(() => {
+               dispatch(postsLoadingHandler(false))
+           });
        })
     }
 }

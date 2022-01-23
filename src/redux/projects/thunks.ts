@@ -105,7 +105,10 @@ export function editProjectThunk() {
 
 export function getProjectsThunk(value?: string) {
     return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
-        await dispatch(getProjects(value ? value : ''))
+        dispatch(projectLoading(true));
+        await dispatch(getProjects(value ? value : '')).then(() => {
+            dispatch(projectLoading(false));
+        })
     }
 }
 

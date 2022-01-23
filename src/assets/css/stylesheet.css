@@ -199,6 +199,23 @@ body {
   font-weight: bold;
   margin-bottom: 2rem;
 }
+.editProfileContent .editProfileContainer h2 {
+  width: 100%;
+  color: white;
+  margin-bottom: 1rem;
+}
+.editProfileContent .editProfileContainer .changePassword {
+  width: 100%;
+  max-width: 35%;
+}
+.editProfileContent .editProfileContainer .changePassword form {
+  display: flex;
+  flex-direction: column;
+}
+.editProfileContent .editProfileContainer .changePassword form button {
+  margin-top: 1rem;
+  max-width: 100%;
+}
 
 .HomeContent {
   width: 100vw;
@@ -1020,6 +1037,7 @@ body {
   cursor: not-allowed !important;
   background: gray !important;
   opacity: 0.7;
+  color: #12131f !important;
 }
 
 .showMenu {

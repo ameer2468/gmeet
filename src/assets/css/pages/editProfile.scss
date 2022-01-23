@@ -11,5 +11,22 @@
     @include mediumTitle;
     margin-bottom: 2rem;
   }
+  h2 {
+    width: 100%;
+    color: white;
+    margin-bottom: 1rem;
+  }
+  .changePassword {
+    width: 100%;
+    max-width: 35%;
+    form {
+      display: flex;
+      flex-direction: column;
+      button {
+        margin-top: 1rem;
+        max-width: 100%;
+      }
+    }
+  }
   }
 }

@@ -2,8 +2,8 @@ import React, {useEffect} from 'react';
 import {getTopProjectsThunk} from "../../redux/projects/thunks";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {projectReducer} from "../../redux/projects/projectSlice";
-import LoadingSpinner from "../../components/global/LoadingSpinner";
 import { NavLink } from 'react-router-dom';
+import TopLoader from "../../components/global/placeholders/topPlaceholder";
 
 const Top = () => {
 
@@ -22,9 +22,11 @@ const Top = () => {
                     <h1>Top Projects</h1>
                     <p>These are the top 10 most popular projects based on join requests</p>
                 </div>
-                {topProjectsLoading ? <div className="center">
-                    <LoadingSpinner height={60} width={60}/>
-                </div> :
+                {topProjectsLoading ?
+                    <div style={{display: 'flex', justifyContent: "center", position: 'relative', top: '-10rem'}}>
+                    <TopLoader/>
+                    </div>
+                        :
                     <>
                     <div className="titles">
                         <h3>Project Name</h3>

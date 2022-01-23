@@ -8,6 +8,7 @@ interface props {
         onChange: (key: string, value: string) => void;
     }
     name: string;
+    type?: string;
 }
 
 const Input = (props: props) => {
@@ -23,7 +24,7 @@ const Input = (props: props) => {
             autoComplete={'off'}
             onChange={(e: ChangeEvent<HTMLInputElement>) => onChange(props.name, e.target.value)}
             style={{maxWidth: props.maxWidth}}
-            type="text"/>
+            type={`${props.type ? props.type : 'text'}`}/>
     );
 };
 

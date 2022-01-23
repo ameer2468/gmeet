@@ -1,15 +1,21 @@
 import {useAppDispatch, useAppSelector} from "../redux/hooks";
-import {userReducer} from "../redux/user/userSlice";
+import {changePasswordLoading, userFormHandler, userReducer} from "../redux/user/userSlice";
 import {followUserThunk, sendNotificationThunk, unFollowUserThunk} from "../redux/user/thunk";
 import {v4 as uuidv4} from "uuid";
 import {following} from "../redux/types";
+import {Auth} from "aws-amplify";
+import {notify} from "../helpers/notify";
 
 
 export function useUser() {
     const user = useAppSelector(userReducer)
-    const {userInfo, authUser} = user;
+    const {userInfo, authUser, userForm} = user;
     const dispatch = useAppDispatch();
 
+
+    function onChange(key: string, value: string) {
+        return dispatch(userFormHandler({...userForm, [key]: value}))
+    }
 
     function sendNotification(users: [], text: string) {
         dispatch(sendNotificationThunk(users, text))
@@ -34,11 +40,35 @@ export function useUser() {
         }
     }
 
+    async function changePassword() {
+        if (userForm.newPassword.length === 0 || userForm.oldPassword.length === 0) {
+           return notify('Please fill all fields')
+        }
+        dispatch(changePasswordLoading(true));
+        const user = await Auth.currentAuthenticatedUser();
+        await Auth.changePassword(user, userForm.oldPassword, userForm.newPassword)
+            .then(() => {
+                notify('Password changed successfully!');
+                dispatch(userFormHandler({
+                    ...userForm,
+                    oldPassword: '',
+                    newPassword: '',
+                }));
+            })
+            .catch((err) => {
+                notify(err.message);
+                dispatch(changePasswordLoading(false));
+            });
+        dispatch(changePasswordLoading(false));
+    }
+
 
 
     return {
         user,
         userInfo,
+        onChange,
+        changePassword,
         followHandler,
         authUser,
     }

@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type {RootState} from "../store";
+import {userForm} from "./types";
 
 // Define a type for the slice state
 interface UserState {
@@ -17,7 +18,9 @@ interface UserState {
     Loading: boolean;
     userImageLoading: boolean;
     notificationLoading: boolean;
+    changePasswordLoading: boolean;
     imageUpload: any;
+    userForm: userForm;
 }
 
 // Define the initial state using that type
@@ -32,7 +35,12 @@ const initialState: UserState = {
         following: []
     },
     authUser: {},
+    userForm: {
+        oldPassword: '',
+        newPassword: '',
+    },
     LoggedIn: false,
+    changePasswordLoading: false,
     imageUpload: '',
     Loading: false,
     notificationLoading: false,
@@ -53,6 +61,12 @@ export const userSlice = createSlice({
         userImageHandler: (state, action: PayloadAction<boolean>) => {
           state.userImageLoading = action.payload;
         },
+        userFormHandler: (state, action: PayloadAction<userForm>) => {
+            state.userForm = action.payload;
+        },
+        changePasswordLoading: (state, action: PayloadAction<boolean>) => {
+            state.changePasswordLoading = action.payload;
+        },
         notificationLoading: (state, action: PayloadAction<boolean>) => {
             state.notificationLoading = action.payload;
         },
@@ -71,7 +85,17 @@ export const userSlice = createSlice({
     },
 })
 
-export const { userDetails, status, loading, authedUser, userImageHandler, userImageUpload, notificationLoading, reset } = userSlice.actions
+export const {
+    userDetails,
+    userFormHandler,
+    changePasswordLoading,
+    status,
+    loading,
+    authedUser,
+    userImageHandler,
+    userImageUpload,
+    notificationLoading, reset
+} = userSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 export const userReducer = (state: RootState) => state.userStore;
