@@ -33,7 +33,6 @@ const Home = () => {
         getProjectsData();
     }, [dispatch, value, username])
 
-
     return (
         <div className='HomeContent'>
             <div className="homeContainer">
@@ -51,7 +50,7 @@ const Home = () => {
                     <div className="projectsContainer">
                         {projectStore.loading || projectStore.requestsLoading ?
                             <div style={{display: 'flex', justifyContent: "center", position: 'relative', top: '-10rem'}}>
-                                {Array.from(Array(projects.length > 8 ? 8 : projects.length).keys()).map(i => (
+                                {Array.from(Array(4).keys()).map(i => (
                                     <ProjectCardLoader key={i}/>
                                 ))}
                             </div>

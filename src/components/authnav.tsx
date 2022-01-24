@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faBell, faCog, faSignOutAlt, faUser, faCommentDots} from "@fortawesome/free-solid-svg-icons";
+import {faBell, faCog, faSignOutAlt, faUser} from "@fortawesome/free-solid-svg-icons";
 import {useAppDispatch, useAppSelector} from "../redux/hooks";
-import {toggleChatHandler, userReducer} from "../redux/user/userSlice";
+import {userReducer} from "../redux/user/userSlice";
 import { useDetectClickOutside } from 'react-detect-click-outside';
 import {useLogin} from "../hooks/useLogin";
 import { motion } from 'framer-motion';
@@ -16,8 +16,8 @@ import {getNotifications} from "../redux/user/thunk";
 const Authnav = () => {
 
     const userRedux = useAppSelector(userReducer)
+    const {userImageLoading} = userRedux;
     const authUser = userRedux.authUser === undefined ? '' : userRedux.authUser;
-    const {userImageLoading, toggleChat} = userRedux;
     const [open, setOpen] = useState(false);
     const [openNotifications, setOpenNotifications] = useState(false);
     const loginHook = useLogin();
@@ -45,11 +45,6 @@ const Authnav = () => {
                     </nav>
                 </div>
                 <div className="side">
-                    <div onClick={() => {
-                        dispatch(toggleChatHandler(!toggleChat))
-                    }} style={{marginRight: '4rem'}} className="chat">
-                        <FontAwesomeIcon className='chatIcon' icon={faCommentDots}/>
-                    </div>
                     <div ref={notifref} className="notification">
                             <div className="alert"/>
                             <FontAwesomeIcon onClick={() => {

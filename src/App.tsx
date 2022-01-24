@@ -19,6 +19,7 @@ import Top from "./pages/topprojects/top";
 import EditProfile from "./pages/editprofile/editprofile";
 import Forgot from "./pages/forgotPassword/forgot";
 import Chat from "./components/global/chat/chat";
+import ChatToggle from "./components/chatToggle";
 
 Amplify.configure(awsconfig)
 
@@ -60,7 +61,7 @@ const App = () => {
         {path: '/', component: Landing},
         {path: '/home', component: Home},
         {path: '/top', component: Top},
-        {path: '/project/:id', component: ProjectDetails},
+        {path: '/project/:name', component: ProjectDetails},
         {path: '/profile/:username', component: Profile},
         {path: '/editprofile', component: EditProfile}
     ]
@@ -84,7 +85,12 @@ const App = () => {
         <>
             <ToastContainer/>
           <ModalManager/>
-            {!authUser ? '' : <Chat/>}
+            {!authUser ? '' :
+                <>
+                <ChatToggle/>
+                <Chat/>
+               </>
+            }
             {location.pathname === '/' ? '' : RouteHandler === AuthRoutes && <Authnav/>}
           <Switch>
             {RouteHandler.map(({path, component}: any) => {

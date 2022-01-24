@@ -48,7 +48,7 @@ const Chat = () => {
                         <div className="controls">
                             <p style={{position: 'absolute', bottom: 80, right: 10, fontSize: '1.2rem'}} className="wordCount">{`${150 - userStore.userForm.globalMessage.length} / 150 remaining`}</p>
                             <TextArea value={globalMessage} maxLength={150} maxWidth={'100%'} placeholder={'Type a message...'} useHook={userHook} height={'12rem'} name={'globalMessage'}/>
-                            <button onClick={() => userHook.sendGlobalMessage()} className='btn btn--green'>Send</button>
+                            <button disabled={globalMessage.length === 0} onClick={() => userHook.sendGlobalMessage()} className={`${globalMessage.length === 0 && 'disabledButton'} btn btn--green`}>Send</button>
                         </div>
                     </div>
                 </motion.div>

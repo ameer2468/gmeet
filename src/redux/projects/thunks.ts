@@ -19,6 +19,7 @@ import {ActiveModal} from "../modals/modalSlice";
 import {projectRequest} from "./types";
 import {RootState} from "../store";
 import {getAUserAsset} from "../user/thunk";
+import {authedUser} from "../user/userSlice";
 
 
 export function deleteProjectThunk(project_id: string) {
@@ -57,18 +58,15 @@ export function getTopProjectsThunk() {
     }
 }
 
-export function getProjectDetails(id: string) {
+export function getProjectDetails(name: string) {
     return (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
         dispatch(projectDetailsLoading(true));
-        dispatch(getProjectsThunk('')).then(async () => {
+        dispatch(getProjectsThunk(name)).then(async () => {
             const projectReducer = getState();
-            const {projectStore} = projectReducer;
-            const project = projectStore.projects.filter((value) => {
-                return value.project_id === id;
-            })
-            const username = project[0].owner;
+            const projectData = projectReducer.projectStore.projects[0]
+            const username =  projectData.owner;
             const userImage = await dispatch(getAUserAsset(username));
-            dispatch(projectDetails({project: project[0], userImage: userImage}))
+            dispatch(projectDetails({project: projectData, userImage: userImage}))
             dispatch(projectDetailsLoading(false));
         });
     }
@@ -106,17 +104,23 @@ export function editProjectThunk() {
 export function getProjectsThunk(value?: string) {
     return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
         dispatch(projectLoading(true));
-        await dispatch(getProjects(value ? value : '')).then(() => {
+        await dispatch(getProjects(value ? value : '')).then(async () => {
+            await dispatch(getRequestsThunk());
             dispatch(projectLoading(false));
-            dispatch(getRequestsThunk());
         })
     }
 }
 
 export function getRequestsThunk() {
-    return (dispatch: ThunkDispatch<RootState, any, Action>) => {
-        dispatch(getRequests()).then((res: { payload: any; }) => {
+    return async (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
+        const userReducer = getState();
+        const {authUser} = userReducer.userStore;
+        await dispatch(getRequests()).then((res: { payload: any; }) => {
             const {payload} = res;
+            const userRequests = payload.filter((value: any) => {
+                return value.user === authUser.username;
+            })
+            dispatch(authedUser({...authUser, requests: userRequests}))
             dispatch(projectRequests(payload))
             dispatch(requestsLoading(false))
         });

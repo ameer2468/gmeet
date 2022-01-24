@@ -29,6 +29,27 @@
 
 /*Global Chat*/
 
+.chatToggle {
+  position: fixed;
+  z-index: 40;
+  bottom: 10rem;
+  font-size: 2rem;
+  height: 5rem;
+  width: 5rem;
+  background: #368fff;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5rem;
+  transition: all 0.3s;
+  &:hover {
+    background: darken(#368fff, 10%);
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+}
+
 .GlobalChat {
   width: 22.5%;
   height: 100vh;

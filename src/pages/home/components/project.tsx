@@ -3,10 +3,11 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrash, faPencilAlt} from "@fortawesome/free-solid-svg-icons";
 import {useProject} from "../../../hooks/useProject";
 import {selectedProject} from "../../../redux/projects/projectSlice";
-import {useAppDispatch} from "../../../redux/hooks";
+import {useAppDispatch, useAppSelector} from "../../../redux/hooks";
 import {useUser} from "../../../hooks/useUser";
 import {Link, useParams} from "react-router-dom";
 import {shortenText} from "../../../helpers/substring";
+import {userReducer} from "../../../redux/user/userSlice";
 
 interface props {
     data: any;
@@ -19,10 +20,11 @@ const Project = ({data, remove, noRequest}: props) => {
 
 
     const projectHook = useProject();
-    const {projectRequests} = projectHook.projects;
     const dispatch = useAppDispatch();
     const userHook = useUser();
+    const userStore = useAppSelector(userReducer);
     const {username} = userHook.authUser === undefined ? '' : userHook.authUser;
+    const {authUser} = userStore;
     const userparams: {username: string} = useParams();
     const {loading} = projectHook.projects;
     const checkUser = userparams.username === username
@@ -54,7 +56,7 @@ const Project = ({data, remove, noRequest}: props) => {
                    <p>{shortenText(data.description)}</p>
 
                    <div className={'buttons'}>
-                       <Link to={`/project/${data.project_id}`}>
+                       <Link to={`/project/${data.name}`}>
                            <button className='btn btn--green'>Project Details</button>
                        </Link>
                        {noRequest ?
@@ -69,8 +71,8 @@ const Project = ({data, remove, noRequest}: props) => {
                                    Join requests
                                </button>
                            :
-                           username !== data.owner && projectRequests.filter((value) => {
-                               return value.user === username && data.project_id === value.project_id;
+                           username !== data.owner && authUser.requests.filter((value: any) => {
+                               return value.project_id === data.project_id;
                            }).length === 0  ?
                                <button onClick={() => {
                                    projectHook.toggleJoin(data)
