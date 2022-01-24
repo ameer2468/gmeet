@@ -177,9 +177,12 @@ function joinProject() {
     }
 
     function createProjectHandler() {
-        if (projectForm.name.length === 0 || projectForm.name.length === 0) {
+        if (projectForm.name.length === 0 || projectForm.description.length === 0) {
             return notify('A project name and description is required');
         }
+        if (projects.projects.find((value: any) => {
+            return value.name === projectForm.name
+        })) { return notify('Project name already exists') }
       dispatch(createProjectLoading(true))
         const data = {
           project_id: uuidv4(),

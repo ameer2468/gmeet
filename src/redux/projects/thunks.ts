@@ -10,7 +10,6 @@ import {
     deleteLoading,
     joinLoading, projectDetails, projectDetailsLoading, projectLoading,
     projectRequests,
-    removeProject,
     requestsLoading, topProjectsHandler, topProjectsLoading,
     userProjects
 } from "./projectSlice";
@@ -23,13 +22,14 @@ import {authedUser} from "../user/userSlice";
 
 
 export function deleteProjectThunk(project_id: string) {
-    return (dispatch: ThunkDispatch<RootState, any, Action>) => {
+    return (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
+        const projectsReducer = getState();
+        const userProjectsData = projectsReducer.projectStore.userProjects;
         dispatch(deleteProject(project_id))
             .then(() => {
-                dispatch(removeProject(project_id))
                 dispatch(deleteLoading(false))
                 dispatch(ActiveModal(''))
-                dispatch(getProjectsThunk());
+                dispatch(userProjects(userProjectsData.filter(project => project.project_id !== project_id)))
             })
             .catch(() => {
                 dispatch(deleteLoading(false))

@@ -98,9 +98,6 @@ export const projectSlice = createSlice({
         addProject: (state, action: PayloadAction<project>) => {
             state.projects = [action.payload, ...state.projects]
         },
-        removeProject: (state, action: PayloadAction<string>) => {
-            state.userProjects = state.userProjects.filter((value) => value.project_id !== action.payload)
-        },
         projectLoading: (state, action: PayloadAction<boolean>) => {
             state.loading = action.payload;
         },
@@ -140,7 +137,6 @@ export const projectSlice = createSlice({
 export const {
     addProject,
     projectValues,
-    removeProject,
     projectRequests,
     topProjectsHandler,
     projectDetails,
