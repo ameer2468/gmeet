@@ -32,7 +32,7 @@ const App = () => {
     const authUserLength = Object.entries(authUser).length;
 
     useEffect(() => {
-        if (authUserLength !== 0) {
+        if (authUserLength > 1) {
           const interval =  setInterval(() => {
               dispatch(getNotifications(authUser.attributes.sub))
           }, 100000)
@@ -41,7 +41,7 @@ const App = () => {
     }, [authUser, dispatch, authUserLength])
 
     useEffect(() => {
-        if (authUserLength !== 0) {
+        if (authUserLength > 1) {
             if (!authUser.following || !authUser.followers) {
                 dispatch(getUserFollowers(authUser.id)).then((res: any) => {
                         const {following, followers} = res.payload.data;

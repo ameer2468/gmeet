@@ -6,8 +6,6 @@ import Project from "./components/project";
 import {useProject} from "../../hooks/useProject";
 import {useDebounce} from "use-debounce";
 import {getProjectsThunk} from "../../redux/projects/thunks";
-import {useUser} from "../../hooks/useUser";
-import {getAssetThunk} from "../../redux/user/thunk";
 import ProjectCardLoader from "../../components/global/placeholders/projectCard";
 
 const Home = () => {
@@ -17,21 +15,19 @@ const Home = () => {
     const {projects} = projectStore;
     const projectHook = useProject();
     const {projectForm} = projectHook.projects;
-    const userHook = useUser();
-    const {username} = userHook.authUser;
     const [value] = useDebounce(projectForm.searchterm, 500);
+
 
     /*Requests to Load App*/
 
     useEffect(() => {
-        dispatch(getAssetThunk(username))
         const getProjectsData = () => {
            if (value.length > 0 || value.length === 0) {
                dispatch(getProjectsThunk(value))
             }
         }
         getProjectsData();
-    }, [dispatch, value, username])
+    }, [dispatch, value]);
 
     return (
         <div className='HomeContent'>

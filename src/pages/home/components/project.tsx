@@ -20,6 +20,8 @@ const Project = ({data, remove, noRequest}: props) => {
 
 
     const projectHook = useProject();
+    const {projects} = projectHook;
+    const {requestsLoading} = projects;
     const dispatch = useAppDispatch();
     const userHook = useUser();
     const userStore = useAppSelector(userReducer);
@@ -29,9 +31,10 @@ const Project = ({data, remove, noRequest}: props) => {
     const {loading} = projectHook.projects;
     const checkUser = userparams.username === username
 
+
     return (
        <>
-           {loading ? '' :
+           {loading || requestsLoading ? '' :
                <div className='projectCard'>
                    {!remove ? '' :
                        !checkUser ? '' :
@@ -71,13 +74,13 @@ const Project = ({data, remove, noRequest}: props) => {
                                    Join requests
                                </button>
                            :
-                           username !== data.owner && authUser.requests.filter((value: any) => {
-                               return value.project_id === data.project_id;
-                           }).length === 0  ?
+                            username !== data.owner && requestsLoading ? '' :
+                                !authUser.requests ? '' : authUser.requests.includes(data.project_id) ?
                                <button onClick={() => {
                                    projectHook.toggleJoin(data)
                                }} className='btn btn--transparent'>Request To Join</button>
                                : ''
+
                        }
                    </div>
                </div>

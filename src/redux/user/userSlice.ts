@@ -20,6 +20,7 @@ interface UserState {
     notificationLoading: boolean;
     changePasswordLoading: boolean;
     globalMessages: any[];
+    imageTimeStamp: any;
     toggleChat: boolean;
     imageUpload: any;
     userForm: userForm;
@@ -36,7 +37,10 @@ const initialState: UserState = {
         followers: [],
         following: []
     },
-    authUser: {},
+    authUser: {
+        requests: []
+    },
+    imageTimeStamp: '',
     globalMessages: [],
     userForm: {
         oldPassword: '',
@@ -84,6 +88,9 @@ export const userSlice = createSlice({
         notificationLoading: (state, action: PayloadAction<boolean>) => {
             state.notificationLoading = action.payload;
         },
+        imageTimeHandler: (state, action: PayloadAction<any>) => {
+            state.imageTimeStamp = action.payload;
+        },
         userImageUpload: (state, action: PayloadAction<any>) => {
             state.imageUpload = action.payload;
         },
@@ -102,6 +109,7 @@ export const userSlice = createSlice({
 export const {
     userDetails,
     userFormHandler,
+    imageTimeHandler,
     globalMessagesHandler,
     changePasswordLoading,
     status,

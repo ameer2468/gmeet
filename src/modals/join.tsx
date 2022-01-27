@@ -79,9 +79,9 @@ const Join = () => {
                 <Scrollbars style={{height: userProjects.length === 0 ? 0 : userProjects.length > 3 ? 200 : 120}}>
                     {userProjects.length === 0 ? '' : <h3>Public Projects</h3>}
                     <div className="projects-list">
-                        {userProjects.length === 0 ? '' : userProjects.map((value: any) => {
+                        {userProjects.length === 0 ? '' : userProjects.map((value: any, index: number) => {
                             return (
-                                <a rel='noreferrer' target='_blank' href={value.html_url}><div className="user-project">
+                                <a key={index.toString()} rel='noreferrer' target='_blank' href={value.html_url}><div className="user-project">
                                     <p>{value.name}</p>
                                 </div></a>
                             )

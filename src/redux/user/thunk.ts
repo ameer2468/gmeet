@@ -12,7 +12,7 @@ import {
 } from "./services";
 import {
     authedUser,
-    globalMessagesHandler,
+    globalMessagesHandler, imageTimeHandler,
     loading,
     notificationLoading,
     userDetails, userFormHandler,
@@ -38,12 +38,15 @@ export function getAUserAsset(username: string) {
     }
 }
 
-export function getAssetThunk(username: string) {
+export function getAssetThunk(user?: string) {
     return async (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
-        await dispatch(getUser(username)).then(() => {
+        const userReducer = getState();
+        const {authUser} = userReducer.userStore;
+        const {username} = authUser;
+        await dispatch(getUser(user ? user : username)).then(() => {
             const {userStore} = getState();
             const {authUser} = userStore;
-            dispatch(getUserImage(username)).then((res: any) => {
+            dispatch(getUserImage(user ? user : username)).then((res: any) => {
                 const imageUrl = res.payload.data.imageUrl;
                 const authObjectUpdate = {...authUser, userImage: imageUrl}
                 dispatch(authedUser(authObjectUpdate))
@@ -133,7 +136,7 @@ export function unFollowUserThunk(id: string) {
         dispatch(unFollowUserService(id))
             .then(() => {
                 dispatch(authedUser({...authUser,
-                    following: authUser.following.filter((item: any) => item.id !== id),
+                    following: authUser.following.filter((item: {id: string}) => item.id !== id),
                 }))
             })
             .catch(() => {
@@ -170,29 +173,29 @@ export function uploadUserAssetThunk() {
             username: userStore.authUser.username
         }
         dispatch(userImageHandler(true));
-        await dispatch(uploadUserAsset(data));
-        dispatch(getUserImage(data.username)).then((res: any) => {
-            const imageUrl = res.payload.data.imageUrl;
-            const authObjectUpdate = {...authUser, userImage: imageUrl}
-            const updatedObject = {...userInfo, userImage: imageUrl}
-            dispatch(userDetails(updatedObject))
-            dispatch(authedUser(authObjectUpdate))
-            dispatch(userImageHandler(false));
-            dispatch(userImageUpload(undefined));
-        }).catch(() => {
-            notify('An error has occurred')
+        await dispatch(uploadUserAsset(data)).then(() => {
+            dispatch(imageTimeHandler(Date.now()))
         })
+       await dispatch(getUserImage(data.username)).then((res: any) => {
+                const imageUrl = res.payload.data.imageUrl;
+                dispatch(userDetails({...userInfo, userImage: imageUrl}))
+                dispatch(authedUser({...authUser, userImage: imageUrl}))
+                dispatch(userImageHandler(false));
+                dispatch(userImageUpload(undefined));
+            }).catch(() => {
+                notify('An error has occurred')
+            })
     }
 }
 
 export function getAllUserData(username: string) {
-    return (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
+    return async (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
         const userReducer = getState();
         const {id} = userReducer.userStore.userInfo;
         dispatch(projectLoading(true));
         dispatch(postsLoadingHandler(true))
         dispatch(commentPostLoading(true));
-        dispatch(getCurrentUserThunk(username));
+        await dispatch(getCurrentUserThunk(username));
         dispatch(getUserProjectsThunk(username))
         dispatch(getRequestsThunk());
         dispatch(getUserFollowersThunk(id));

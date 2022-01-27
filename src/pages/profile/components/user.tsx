@@ -7,7 +7,6 @@ import {useAppDispatch, useAppSelector} from "../../../redux/hooks";
 import {userImageUpload, userReducer} from "../../../redux/user/userSlice";
 import {useUser} from "../../../hooks/useUser";
 import placeholder from '../../../assets/images/placeholder.png';
-import {uploadUserAssetThunk} from "../../../redux/user/thunk";
 import {notify} from "../../../helpers/notify";
 import {NavLink} from "react-router-dom";
 
@@ -30,12 +29,11 @@ const User = ({data}: props) => {
     }
     const handleFileInput = (e: any) => {
        const file = e.target.files[0]
-        if (file.size > 210000) {
-            return notify('You cannot upload a file larger than 200kb')
+        if (file.size > 810000) {
+            return notify('You cannot upload a file larger than 800kb')
         }
        dispatch(userImageUpload(file));
     }
-
 
     return (
                 <Card height={'50rem'} flex={'0 0 40%'} customClass={'user'}>
@@ -61,7 +59,9 @@ const User = ({data}: props) => {
                                                 </button>
                                                 {imageUpload === undefined || imageUpload === '' ?
                                                     '' :
-                                                    <button className='confirm' onClick={() => dispatch(uploadUserAssetThunk())}>
+                                                    <button className='confirm' onClick={() => {
+                                                        userHook.uploadUserImage();
+                                                    }}>
                                                         <FontAwesomeIcon icon={faCheck}/>
                                                     </button>
                                                 }
@@ -69,7 +69,12 @@ const User = ({data}: props) => {
                                             :
                                             ''
                                         }
-                                        <img onError={e => {e.currentTarget.src = placeholder}} src={data.userImage} alt="profile"/>
+                                        {
+                                            userImageLoading ? '' :
+                                            <img key={data.userImage} onError={e => {
+                                                e.currentTarget.src = placeholder
+                                            }} src={data.userImage} alt="profile"/>
+                                        }
                                     </div>
                                 }
                                 <div className="titles">

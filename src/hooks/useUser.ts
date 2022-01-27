@@ -1,6 +1,12 @@
 import {useAppDispatch, useAppSelector} from "../redux/hooks";
-import {changePasswordLoading, userFormHandler, userReducer} from "../redux/user/userSlice";
-import {followUserThunk, sendGlobalMessageThunk, sendNotificationThunk, unFollowUserThunk} from "../redux/user/thunk";
+import {authedUser, changePasswordLoading, userDetails, userFormHandler, userReducer} from "../redux/user/userSlice";
+import {
+    followUserThunk,
+    sendGlobalMessageThunk,
+    sendNotificationThunk,
+    unFollowUserThunk,
+    uploadUserAssetThunk
+} from "../redux/user/thunk";
 import {v4 as uuidv4} from "uuid";
 import {following} from "../redux/types";
 import {Auth} from "aws-amplify";
@@ -82,6 +88,11 @@ export function useUser() {
         dispatch(changePasswordLoading(false));
     }
 
+    function uploadUserImage() {
+        dispatch(userDetails({...userInfo, userImage: ''}))
+        dispatch(authedUser({...authUser, userImage:  ''}))
+        dispatch(uploadUserAssetThunk())
+    }
 
 
     return {
@@ -90,6 +101,7 @@ export function useUser() {
         onChange,
         changePassword,
         sendGlobalMessage,
+        uploadUserImage,
         forgotPassword,
         forgotPasswordConfirm,
         followHandler,

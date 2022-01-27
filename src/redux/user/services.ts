@@ -78,7 +78,7 @@ export const getUserImage = createAsyncThunk('user/asset', async (username: stri
             'x-api-key': process.env.REACT_APP_API_KEY,
         },
         params: {
-            username: username
+            username: username,
         }
     })
 })

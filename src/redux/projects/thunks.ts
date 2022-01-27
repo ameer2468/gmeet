@@ -104,8 +104,8 @@ export function editProjectThunk() {
 export function getProjectsThunk(value?: string) {
     return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
         dispatch(projectLoading(true));
+        await dispatch(getRequestsThunk());
         await dispatch(getProjects(value ? value : '')).then(async () => {
-            await dispatch(getRequestsThunk());
             dispatch(projectLoading(false));
         })
     }
@@ -115,6 +115,7 @@ export function getRequestsThunk() {
     return async (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
         const userReducer = getState();
         const {authUser} = userReducer.userStore;
+        dispatch(requestsLoading(true));
         await dispatch(getRequests()).then((res: { payload: any; }) => {
             const {payload} = res;
             const userRequests = payload.filter((value: any) => {
@@ -123,6 +124,8 @@ export function getRequestsThunk() {
             dispatch(authedUser({...authUser, requests: userRequests}))
             dispatch(projectRequests(payload))
             dispatch(requestsLoading(false))
-        });
+        }).catch((err) => {
+            console.log(err)
+        })
     }
 }

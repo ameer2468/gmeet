@@ -31,7 +31,6 @@ const Authnav = () => {
     const ref = useDetectClickOutside({ onTriggered: closeDrop});
     const notifref = useDetectClickOutside({ onTriggered: closeNotification});
 
-
     return (
         <nav className="authnav">
             <div className="container">
@@ -62,7 +61,10 @@ const Authnav = () => {
                             }
                         </div>
                     <div ref={ref} onClick={() => setOpen(!open)} className="profile">
-                        {userImageLoading ? <div style={{marginRight: 15, marginTop: 5}}><LoadingSpinner height={25} width={25}/></div> : <img onError={e => e.currentTarget.src = placeholder} alt='profile' src={authUser.userImage} className='userImage'/>}
+                        {userImageLoading ? <div style={{marginRight: 15, marginTop: 5}}>
+                            <LoadingSpinner height={25} width={25}/></div> :
+                            <img key={authUser.userImage} onError={e => e.currentTarget.src = placeholder} alt='profile'
+                                 src={authUser.userImage} className='userImage'/>}
                         <p>{authUser === undefined ? '' : authUser.username}</p>
                         {open ? <motion.div initial={'hidden'} animate={'active'}
                                             variants={regularVariants}
