@@ -88,10 +88,10 @@ export function useUser() {
         dispatch(changePasswordLoading(false));
     }
 
-    function uploadUserImage() {
+    async function uploadUserImage() {
         dispatch(userDetails({...userInfo, userImage: ''}))
         dispatch(authedUser({...authUser, userImage:  ''}))
-        dispatch(uploadUserAssetThunk())
+        await dispatch(uploadUserAssetThunk())
     }
 
 

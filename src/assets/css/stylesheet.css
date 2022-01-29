@@ -760,7 +760,7 @@ body {
 }
 .profileContent .profileContainer .user .info .userImage img {
   width: 100%;
-  max-width: 7rem;
+  border-radius: 10rem;
   align-self: center;
 }
 .profileContent .profileContainer .user .website {

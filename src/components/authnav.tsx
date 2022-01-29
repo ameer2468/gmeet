@@ -11,13 +11,13 @@ import {NavLink} from "react-router-dom";
 import placeholder from '../assets/images/placeholder.png'
 import LoadingSpinner from "./global/LoadingSpinner";
 import Notifications from "./global/notifications";
-import {getNotifications} from "../redux/user/thunk";
+import {getAssetThunk, getNotifications} from "../redux/user/thunk";
 
 const Authnav = () => {
 
-    const userRedux = useAppSelector(userReducer)
-    const {userImageLoading} = userRedux;
-    const authUser = userRedux.authUser === undefined ? '' : userRedux.authUser;
+    const userStore = useAppSelector(userReducer)
+    const {userImageLoading} = userStore;
+    const authUser = userStore.authUser === undefined ? '' : userStore.authUser;
     const [open, setOpen] = useState(false);
     const [openNotifications, setOpenNotifications] = useState(false);
     const loginHook = useLogin();
@@ -30,6 +30,7 @@ const Authnav = () => {
     }
     const ref = useDetectClickOutside({ onTriggered: closeDrop});
     const notifref = useDetectClickOutside({ onTriggered: closeNotification});
+
 
     return (
         <nav className="authnav">
@@ -63,7 +64,12 @@ const Authnav = () => {
                     <div ref={ref} onClick={() => setOpen(!open)} className="profile">
                         {userImageLoading ? <div style={{marginRight: 15, marginTop: 5}}>
                             <LoadingSpinner height={25} width={25}/></div> :
-                            <img key={authUser.userImage} onError={e => e.currentTarget.src = placeholder} alt='profile'
+                            <img key={authUser.userImage} onError={(e) => {
+                                    if (!userImageLoading) {
+                                        dispatch(getAssetThunk(authUser.username))
+                                    }
+                                    e.currentTarget.src = placeholder
+                            }} alt='profile'
                                  src={authUser.userImage} className='userImage'/>}
                         <p>{authUser === undefined ? '' : authUser.username}</p>
                         {open ? <motion.div initial={'hidden'} animate={'active'}

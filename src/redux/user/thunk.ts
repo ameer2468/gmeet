@@ -3,19 +3,24 @@ import {RootState} from "../store";
 import {User} from "./types";
 import {
     createUser,
-    followUserService, getGlobalMessages, getNotificationsService,
+    followUserService,
+    getGlobalMessages,
+    getNotificationsService,
     getUser,
     getUserFollowers,
-    getUserImage, postGlobalMessage, sendNotifications,
+    getUserImage,
+    postGlobalMessage,
+    sendNotifications,
     unFollowUserService,
     uploadUserAsset
 } from "./services";
 import {
     authedUser,
-    globalMessagesHandler, imageTimeHandler,
+    globalMessagesHandler,
     loading,
     notificationLoading,
-    userDetails, userFormHandler,
+    userDetails,
+    userFormHandler,
     userImageHandler,
     userImageUpload
 } from "./userSlice";
@@ -43,6 +48,7 @@ export function getAssetThunk(user?: string) {
         const userReducer = getState();
         const {authUser} = userReducer.userStore;
         const {username} = authUser;
+        dispatch(userImageHandler(true));
         await dispatch(getUser(user ? user : username)).then(() => {
             const {userStore} = getState();
             const {authUser} = userStore;
@@ -173,18 +179,17 @@ export function uploadUserAssetThunk() {
             username: userStore.authUser.username
         }
         dispatch(userImageHandler(true));
-        await dispatch(uploadUserAsset(data)).then(() => {
-            dispatch(imageTimeHandler(Date.now()))
-        })
-       await dispatch(getUserImage(data.username)).then((res: any) => {
-                const imageUrl = res.payload.data.imageUrl;
-                dispatch(userDetails({...userInfo, userImage: imageUrl}))
-                dispatch(authedUser({...authUser, userImage: imageUrl}))
-                dispatch(userImageHandler(false));
-                dispatch(userImageUpload(undefined));
-            }).catch(() => {
+        await dispatch(uploadUserAsset(data));
+        const newImage = await dispatch(getUserImage(data.username)).then((res: any) => {
+            return res.payload.data.imageUrl;
+            })
+            .catch(() => {
                 notify('An error has occurred')
             })
+        dispatch(userDetails({...userInfo, userImage: await newImage}))
+        dispatch(authedUser({...authUser, userImage: await newImage}))
+        dispatch(userImageHandler(false));
+        dispatch(userImageUpload(undefined));
     }
 }
 

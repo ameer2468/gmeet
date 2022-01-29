@@ -31,8 +31,8 @@ export function useLogin() {
                     username: '',
                     password: ''
                 })
-                await Auth.currentUserInfo().then((data) => {
-                    dispatch(getUserFollowers(data.attributes.sub)).then(async (res: any) => {
+                await Auth.currentUserInfo().then(async (data) => {
+                    await dispatch(getUserFollowers(data.attributes.sub)).then(async (res: any) => {
                         const {following, followers} = res.payload.data;
                         dispatch(authedUser({...data, following: following, followers: followers}))
                     })
