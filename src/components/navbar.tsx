@@ -23,7 +23,7 @@ const Navbar = () => {
                      :
                      <>
                          <Link to={'/register'}><button className='btn btn--green'>Register</button></Link>
-                         <Link to={'/login'}><button className='btn btn--transparent'>Login</button></Link>
+                         <Link to={'/login'}><button className='btn btn--white'>Login</button></Link>
                          </>
                  }
              </ul>

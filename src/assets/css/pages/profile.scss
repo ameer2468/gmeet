@@ -358,6 +358,7 @@
             background: lighten(rgba($cardbg, 0.3), 10);
             border-radius: 20rem;
             display: flex;
+            border: 1.5px solid $customborder;
             justify-content: center;
             align-items: center;
             width: 12rem;

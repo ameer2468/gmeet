@@ -30,6 +30,7 @@
       .card {
         flex: 0 0 30%;
         text-align: center;
+        position: relative;
         padding: 4rem;
         @include Card;
         border-radius: 16px;

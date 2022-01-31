@@ -1,5 +1,4 @@
 import React, {ChangeEvent} from 'react';
-import art from '../../../assets/images/art.png'
 import {faArrowLeft} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
 import {useRegister} from "../../../hooks/useRegister";
@@ -8,6 +7,7 @@ import {useAppSelector} from "../../../redux/hooks";
 import {userReducer} from "../../../redux/user/userSlice";
 import LoadingSpinner from "../../../components/global/LoadingSpinner";
 import {motion} from "framer-motion";
+import underline from "../../../assets/images/underline.png";
 
 const RegisterBox = () => {
 
@@ -36,6 +36,18 @@ const RegisterBox = () => {
         }
     }
 
+    const underStyle = {
+        backgroundImage: `url(${underline})`,
+        width: '29rem',
+        height: '2rem',
+        top: '46%',
+        left: '15%',
+        zIndex: '-1',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: '100%',
+        position: 'absolute' as 'absolute',
+    }
+
     const inputHandler = (e: ChangeEvent<HTMLInputElement>) => {
         registerHook.setInputValues({...registerHook.inputValues, [e.target.name]: e.target.value})
     }
@@ -43,8 +55,10 @@ const RegisterBox = () => {
     return (
             <div className="registerBox">
                 <div className="side">
-                    <h3>Some of our members...</h3>
-                    <img src={art} alt={'users'}/>
+                    <h3 style={{textAlign: 'center', width: '78%'}}>
+                        Connecting people through working together on projects
+                    </h3>
+                    <div style={underStyle} className="underline"/>
                 </div>
                 <div className="side">
                     <Link to={'/'}>

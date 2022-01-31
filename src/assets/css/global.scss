@@ -151,11 +151,18 @@
       background: darken($pink, 8%)
     }
   }
+  &--white {
+    background: white;
+    color: $navbg;
+    &:hover {
+      background: darken(#c6c6c6, 8%)
+    }
+  }
   &--green {
     background: $sitetheme;
     color: $navbg;
     &:hover {
-      background: darken($sitetheme, 8%)
+      background: darken($sitetheme, 25%)
     }
   }
   &--gray {
