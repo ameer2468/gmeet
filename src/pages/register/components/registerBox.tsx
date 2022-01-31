@@ -62,7 +62,7 @@ const RegisterBox = () => {
                 </div>
                 <div className="side">
                     <Link to={'/'}>
-                        <div className="back">
+                        <div style={{position: 'relative', top: '1.5rem'}} className="back">
                         <FontAwesomeIcon className='icon' icon={faArrowLeft}/>
                         <p>Back To Home</p>
                     </div>
