@@ -6,39 +6,39 @@ const Header = () => {
     const underStyleOne = {
         backgroundImage: `url(${underline})`,
         width: '21rem',
-        height: '2rem',
-        top: '21%',
+        height: '0.5rem',
+        top: '21.5%',
         left: '50%',
         transform: 'translateX(-50%)',
         zIndex: '-1',
         backgroundRepeat: 'no-repeat',
-        backgroundSize: '100%',
+        backgroundSize: '100% 100%',
         position: 'absolute' as 'absolute',
     }
 
     const underStyleTwo = {
         backgroundImage: `url(${underline})`,
         width: '26rem',
-        height: '2rem',
-        top: '21%',
+        height: '0.5rem',
+        top: '21.5%',
         left: '50%',
         transform: 'translateX(-50%)',
         zIndex: '-1',
         backgroundRepeat: 'no-repeat',
-        backgroundSize: '100%',
+        backgroundSize: '100% 100%',
         position: 'absolute' as 'absolute',
     }
 
     const underStyleThree = {
         backgroundImage: `url(${underline})`,
-        width: '14rem',
-        height: '2rem',
-        top: '21%',
+        width: '13rem',
+        height: '0.5rem',
+        top: '21.5%',
         left: '50%',
         transform: 'translateX(-50%)',
         zIndex: '-1',
         backgroundRepeat: 'no-repeat',
-        backgroundSize: '100%',
+        backgroundSize: '100% 100%',
         position: 'absolute' as 'absolute',
     }
 

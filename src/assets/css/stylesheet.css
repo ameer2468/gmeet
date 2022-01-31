@@ -1768,7 +1768,7 @@ body {
 .LoginWrap form input:focus {
   outline: 0;
   caret-color: white;
-  border: 1px solid #c1c1c1;
+  border: 1px solid #d9ff50;
   transition: all 0.3s;
 }
 .LoginWrap .loginBox {
