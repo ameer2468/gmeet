@@ -100,9 +100,9 @@ export const userSlice = createSlice({
         loading: (state, action: PayloadAction<boolean>) => {
             state.Loading = action.payload;
         },
-        reset(state) {
-            Object.assign(state, initialState)
-        }
+        // reset(state) {
+        //     Object.assign(state, initialState)
+        // }
     },
 })
 
@@ -118,7 +118,7 @@ export const {
     authedUser,
     userImageHandler,
     userImageUpload,
-    notificationLoading, reset
+    notificationLoading,
 } = userSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type

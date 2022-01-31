@@ -1,6 +1,6 @@
 import {FormEvent, useState} from "react";
 import {Auth} from "aws-amplify";
-import {authedUser, loading, reset, status, userImageHandler} from "../redux/user/userSlice";
+import {authedUser, loading, status, userImageHandler} from "../redux/user/userSlice";
 import {Login} from "../pages/register/types";
 import {useAppDispatch} from "../redux/hooks";
 import {useHistory} from "react-router-dom";
@@ -57,7 +57,6 @@ export function useLogin() {
         Auth.signOut().then(() => {
             dispatch(loading(false));
             dispatch(status(false));
-            dispatch(reset())
             history.push('/')
         })
     }
