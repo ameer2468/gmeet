@@ -31,8 +31,7 @@
         flex: 0 0 30%;
         text-align: center;
         padding: 4rem;
-        background: rgba(61, 63, 78, 0.2);
-        backdrop-filter: blur(10px);
+        @include Card;
         border-radius: 16px;
         h2 {
           color: white;

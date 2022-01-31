@@ -18,8 +18,6 @@ import {getNotifications} from "./redux/user/thunk";
 import Top from "./pages/topprojects/top";
 import EditProfile from "./pages/editprofile/editprofile";
 import Forgot from "./pages/forgotPassword/forgot";
-import Chat from "./components/global/chat/chat";
-import ChatToggle from "./components/chatToggle";
 
 Amplify.configure(awsconfig)
 

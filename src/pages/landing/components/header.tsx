@@ -1,21 +1,20 @@
 import React from 'react';
-import bg from '../../../assets/images/bg.png'
 
 const Header = () => {
 
-    const bgStyle = {
-        backgroundImage: `url(${bg})`,
-        backgroundSize: 'cover',
-        position: 'absolute' as 'absolute',
-        top: 0,
-        width: '100%',
-        height: '100%',
-        zIndex: -1,
-    }
+    // const bgStyle = {
+    //     backgroundImage: `url(${bg})`,
+    //     backgroundSize: 'cover',
+    //     position: 'absolute' as 'absolute',
+    //     top: 0,
+    //     width: '100%',
+    //     height: '100%',
+    //     zIndex: -1,
+    // }
 
     return (
         <section className="header">
-            <div style={bgStyle}/>
+            <div/>
             <div className="container">
                 <h1>Connect & Meet other designers & developers</h1>
                 <p>A community built for designers to communicate with other designers. Gmeet aims to connect you with like-minded people so you can collaborate on projects and perhaps even build your own team! all through our platform to make meeting other designers easier and more productice.</p>

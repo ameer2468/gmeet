@@ -11,7 +11,7 @@ const Navbar = () => {
     return (
         <nav className='homeNav'>
             <div className="side">
-                <h1>Project</h1>
+                <h1>Gmeet</h1>
             </div>
          <div className="side">
              <ul>
@@ -22,7 +22,7 @@ const Navbar = () => {
                          <Link to={'/home'}><button className='btn btn--green marginRight'>Projects home</button></Link>
                      :
                      <>
-                         <Link to={'/register'}><button className='btn btn--purple'>Register</button></Link>
+                         <Link to={'/register'}><button className='btn btn--green'>Register</button></Link>
                          <Link to={'/login'}><button className='btn btn--transparent'>Login</button></Link>
                          </>
                  }

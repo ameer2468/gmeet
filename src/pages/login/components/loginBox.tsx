@@ -1,5 +1,5 @@
 import React, {ChangeEvent} from 'react';
-import art from '../../../assets/images/art.png'
+import underline from '../../../assets/images/underline.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faArrowLeft} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
@@ -36,11 +36,26 @@ const LoginBox = () => {
         }
     }
 
+    const underStyle = {
+        backgroundImage: `url(${underline})`,
+        width: '29rem',
+        height: '2rem',
+        top: '46%',
+        left: '15%',
+        zIndex: '-1',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: '100%',
+        position: 'absolute' as 'absolute',
+    }
+
+
     return (
             <div className="loginBox">
                 <div className="side">
-                    <h3>Some of our members...</h3>
-                    <img src={art} alt={'users'}/>
+                    <h3 style={{textAlign: 'center', width: '78%'}}>
+                        Connecting people through working together on projects
+                    </h3>
+                    <div style={underStyle} className="underline"/>
                 </div>
                 <div className="side">
                     <Link to={'/'}>

@@ -43,7 +43,7 @@ body {
   color: $text;
   overflow-x: hidden;
   font-size: 1.3rem;
-  background: $bg;
+  background: $pageBackground;
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
