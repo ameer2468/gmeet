@@ -14,7 +14,13 @@
         margin-bottom: 2rem;
       }
       input {
-        background: rgba($input, 0.3);
+        @include Card;
+        &:focus {
+          outline: 0;
+          caret-color: white;
+          border: 1px solid $sitetheme;
+          transition: all 0.3s;
+        }
       }
     }
     .projectsContainer {
