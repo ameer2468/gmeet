@@ -48,7 +48,7 @@ const Header = () => {
             <div/>
             <div className="container">
                 <h1>Connect & Meet other designers & developers</h1>
-                <p>A community built for designers to communicate with other designers. Gmeet aims to connect you with like-minded people so you can collaborate on projects and perhaps even build your own team! all through our platform to make meeting other designers easier and more productice.</p>
+                <p>A community built for designers & developers to communicate with other like-minds. Gmeet aims to connect you with like-minded people so you can collaborate on projects and perhaps even build your own team! all through our platform to make meeting other designers easier and more productice.</p>
                 <div className="cards">
                     <div className="card">
                         <h2>Create Projects</h2>

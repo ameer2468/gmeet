@@ -46,6 +46,8 @@ const ForgotBox = () => {
         position: 'absolute' as 'absolute',
     }
 
+    console.log(userForm)
+
     return (
             <div className="loginBox">
                 <div className="side">
