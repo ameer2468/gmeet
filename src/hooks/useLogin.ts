@@ -2,10 +2,11 @@ import {FormEvent, useState} from "react";
 import {Auth} from "aws-amplify";
 import {authedUser, loading, status, userImageHandler} from "../redux/user/userSlice";
 import {Login} from "../pages/register/types";
-import {useAppDispatch} from "../redux/hooks";
+import {useAppDispatch, useAppSelector} from "../redux/hooks";
 import {useHistory} from "react-router-dom";
 import {getAssetThunk} from "../redux/user/thunk";
 import {getUserFollowers} from "../redux/user/services";
+import {RootState} from "../redux/store";
 
 export function useLogin() {
     const dispatch = useAppDispatch();
@@ -15,6 +16,7 @@ export function useLogin() {
         password: ''
     })
     const [error, setError] = useState('');
+    const {authUser} = useAppSelector((state: RootState) => state.userStore);
 
    async function loginHandler(e: FormEvent<HTMLFormElement>) {
             e.preventDefault();
@@ -31,13 +33,14 @@ export function useLogin() {
                     username: '',
                     password: ''
                 })
-                await Auth.currentUserInfo().then(async (data) => {
-                    await dispatch(getUserFollowers(data.attributes.sub)).then(async (res: any) => {
-                        const {following, followers} = res.payload.data;
-                        dispatch(authedUser({...data, following: following, followers: followers}))
-                    })
-                    dispatch(getAssetThunk(data.username));
+                await Auth.currentUserInfo().then((data) => {
+                    dispatch(authedUser({...data}))
                 });
+                await dispatch(getUserFollowers(authUser.attributes.sub)).then(async (res: any) => {
+                    const {following, followers} = res.payload.data;
+                    dispatch(authedUser({...authUser, following: following, followers: followers}))
+                })
+                await dispatch(getAssetThunk(authUser.username));
                 dispatch(status(true))
                 dispatch(loading(false))
                 history.push('/home')
