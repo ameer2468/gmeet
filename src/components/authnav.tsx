@@ -36,11 +36,12 @@ const Authnav = () => {
         <nav className="authnav">
             <div className="container">
                 <div className="side">
-                    <h1>Project</h1>
+                    <h1>Gmeet</h1>
                     <nav>
                         <ul>
                             <li><NavLink to={'/home'}>Home</NavLink></li>
                             <li><NavLink to={'/top'}>Top Projects</NavLink></li>
+                            <li><NavLink to={''}>Discord</NavLink></li>
                         </ul>
                     </nav>
                 </div>
@@ -85,8 +86,12 @@ const Authnav = () => {
                                     </NavLink>
                                 </li>
                                 <li>
+                                    <NavLink
+                                        to={`/editprofile`}
+                                    >
                                     <FontAwesomeIcon className='icon' icon={faCog}/>
                                     Settings
+                                    </NavLink>
                                 </li>
                                 <li onClick={() => loginHook.logoutHandler()}>
                                     <FontAwesomeIcon className='icon' icon={faSignOutAlt}/>

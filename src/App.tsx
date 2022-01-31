@@ -85,12 +85,12 @@ const App = () => {
         <>
             <ToastContainer/>
           <ModalManager/>
-            {!authUser ? '' :
-                <>
-                <ChatToggle/>
-                <Chat/>
-               </>
-            }
+            {/*{!authUser ? '' :*/}
+            {/*    <>*/}
+            {/*    <ChatToggle/>*/}
+            {/*    <Chat/>*/}
+            {/*   </>*/}
+            {/*}*/}
             {location.pathname === '/' ? '' : RouteHandler === AuthRoutes && <Authnav/>}
           <Switch>
             {RouteHandler.map(({path, component}: any) => {

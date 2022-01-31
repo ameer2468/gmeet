@@ -25,7 +25,7 @@
       margin-top: 5rem;
     }
     .projectCard {
-      background: rgba($cardbg, 0.2);
+      @include Card;
       border-radius: 0.5rem;
       transition: all 0.3s;
       width: 100%;

@@ -29,12 +29,14 @@ textarea {
   line-height: 2rem;
   font-size: 1.4rem;
   border-radius: 0.5rem;
-  background-color: rgba(22, 23, 37, 0.5);
+  background: rgba(45, 45, 45, 0.3);
+  backdrop-filter: blur(20px);
+  border: 1px solid #393939;
   transition: all 0.3s;
 }
 textarea:focus {
   outline: 0;
-  border: 1px solid #46e8b2;
+  border: 1px solid #d9ff50;
   transition: all 0.3s;
 }
 textarea::placeholder {
@@ -123,8 +125,7 @@ body {
   padding: 0 2rem;
   height: auto;
   min-height: 100vh;
-  background: #08402e;
-  background: linear-gradient(162deg, #08402e -40%, #121424 78%);
+  background: #181818;
 }
 .TopContent .TopContainer {
   padding: 15rem 0 0 0;
@@ -152,7 +153,9 @@ body {
   font-size: 1.6rem;
 }
 .TopContent .TopContainer .topProject {
-  background: rgba(18, 19, 31, 0.2);
+  background: rgba(45, 45, 45, 0.3);
+  backdrop-filter: blur(20px);
+  border: 1px solid #393939;
   padding: 2rem;
   margin-bottom: 1rem;
   border-radius: 1rem;
@@ -184,8 +187,7 @@ body {
   padding: 0 2rem;
   height: auto;
   min-height: 100vh;
-  background: #08402e;
-  background: linear-gradient(162deg, #08402e -40%, #121424 78%);
+  background: #181818;
 }
 .editProfileContent .editProfileContainer {
   padding: 15rem 0 0 0;
@@ -207,7 +209,7 @@ body {
 .editProfileContent .editProfileContainer .changePassword {
   width: 100%;
   max-width: 35%;
-  background: rgba(18, 19, 31, 0.3);
+  background: rgba(45, 45, 45, 0.3);
   backdrop-filter: blur(5rem);
   padding: 3rem;
   border-radius: 1rem;
@@ -217,7 +219,7 @@ body {
   flex-direction: column;
 }
 .editProfileContent .editProfileContainer .changePassword form input {
-  background: rgba(18, 19, 31, 0.1);
+  background: rgba(45, 45, 45, 0.1);
   backdrop-filter: blur(5rem);
 }
 .editProfileContent .editProfileContainer .changePassword form button {
@@ -230,8 +232,7 @@ body {
   padding: 0 2rem;
   height: auto;
   min-height: 100vh;
-  background: #08402e;
-  background: linear-gradient(162deg, #08402e -40%, #121424 78%);
+  background: #181818;
 }
 .HomeContent .homeContainer {
   padding: 15rem 0 0 0;
@@ -259,7 +260,9 @@ body {
   margin-top: 5rem;
 }
 .HomeContent .homeContainer .projectCard {
-  background: rgba(18, 19, 31, 0.2);
+  background: rgba(45, 45, 45, 0.3);
+  backdrop-filter: blur(20px);
+  border: 1px solid #393939;
   border-radius: 0.5rem;
   transition: all 0.3s;
   width: 100%;
@@ -318,8 +321,7 @@ body {
   padding: 0 2rem;
   height: auto;
   min-height: 100vh;
-  background: #08402e;
-  background: linear-gradient(162deg, #08402e -40%, #121424 78%);
+  background: #181818;
 }
 .detailsContent .detailsContainer {
   padding: 15rem 0 0 0;
@@ -359,8 +361,7 @@ body {
   width: 100vw;
   height: 100%;
   padding: 0 2rem;
-  background: #08402e;
-  background: linear-gradient(162deg, #08402e -40%, #121424 78%);
+  background: #181818;
 }
 .profileContent .btn {
   font-size: 1.3rem;
@@ -463,7 +464,7 @@ body {
 }
 .profileContent .profileContainer .profilePosts .post {
   font-size: 1.7rem;
-  background: rgba(37, 39, 63, 0.3);
+  background: rgba(71, 71, 71, 0.3);
   padding: 1.5rem 2rem;
   border-radius: 0.5rem;
   position: relative;
@@ -492,7 +493,7 @@ body {
   width: 3rem;
   margin-right: 1rem;
   height: 3rem;
-  background: #212339;
+  background: #414141;
   border-radius: 3rem;
   font-size: 1.2rem;
   display: flex;
@@ -502,7 +503,7 @@ body {
   transition: all 0.3s;
 }
 .profileContent .profileContainer .profilePosts .post .actions .delete:hover, .profileContent .profileContainer .profilePosts .post .actions .edit:hover {
-  border: 1px solid #46e8b2;
+  border: 1px solid #d9ff50;
   transition: all 0.3s;
   cursor: pointer;
 }
@@ -531,10 +532,12 @@ body {
   color: white;
 }
 .profileContent .profileContainer .profilePosts .textarea {
-  background: rgba(37, 39, 63, 0.3);
+  background: rgba(71, 71, 71, 0.3);
 }
 .profileContent .profileContainer .card {
-  background: rgba(18, 19, 31, 0.3);
+  background: rgba(45, 45, 45, 0.3);
+  backdrop-filter: blur(20px);
+  border: 1px solid #393939;
   padding: 2rem;
   height: 20rem;
   display: flex;
@@ -565,7 +568,9 @@ body {
   padding: 0 3rem;
 }
 .profileContent .profileContainer .listings .projectCard {
-  background: rgba(24, 25, 41, 0.4);
+  background: rgba(45, 45, 45, 0.3);
+  backdrop-filter: blur(20px);
+  border: 1px solid #393939;
   width: 100%;
   height: auto;
   border-radius: 0.5rem;
@@ -582,10 +587,10 @@ body {
 .profileContent .profileContainer .listings .projectCard .edit {
   position: absolute;
   right: 4.5rem;
-  top: -1rem;
+  top: -1.5rem;
   width: 5rem;
   height: 5rem;
-  background: #191b2c;
+  background: #373737;
   border-radius: 4rem;
   display: flex;
   justify-content: center;
@@ -594,17 +599,17 @@ body {
   transition: all 0.3s;
 }
 .profileContent .profileContainer .listings .projectCard .edit:hover {
-  border: 1px solid #46e8b2;
+  border: 1px solid #d9ff50;
   transition: all 0.3s;
   cursor: pointer;
 }
 .profileContent .profileContainer .listings .projectCard .delete {
   position: absolute;
   right: -1.5rem;
-  top: -1rem;
+  top: -1.5rem;
   width: 5rem;
   height: 5rem;
-  background: #191b2c;
+  background: #373737;
   border-radius: 4rem;
   display: flex;
   justify-content: center;
@@ -613,7 +618,7 @@ body {
   transition: all 0.3s;
 }
 .profileContent .profileContainer .listings .projectCard .delete:hover {
-  border: 1px solid #46e8b2;
+  border: 1px solid #d9ff50;
   transition: all 0.3s;
   cursor: pointer;
 }
@@ -656,7 +661,7 @@ body {
   font-size: 2rem;
 }
 .profileContent .profileContainer .listings .projectCard:hover {
-  transform: translateY(-1rem);
+  transform: translateY(-0.2rem);
   transition: all 0.3s;
   box-shadow: 0 30px 20px -20px rgba(0, 0, 0, 0.15);
 }
@@ -686,8 +691,9 @@ body {
   font-size: 2.5rem;
 }
 .profileContent .profileContainer .user {
-  background: rgba(18, 19, 31, 0.5);
+  background: rgba(45, 45, 45, 0.3);
   backdrop-filter: blur(20px);
+  border: 1px solid #393939;
   display: flex;
   align-items: center;
   padding: 3rem 2rem !important;
@@ -714,7 +720,7 @@ body {
   height: auto;
 }
 .profileContent .profileContainer .user .info .userImage {
-  background: rgba(37, 39, 63, 0.3);
+  background: rgba(71, 71, 71, 0.3);
   border-radius: 20rem;
   display: flex;
   justify-content: center;
@@ -745,8 +751,8 @@ body {
   cursor: pointer;
 }
 .profileContent .profileContainer .user .info .userImage .actions .uploadImage {
-  background: #46e8b2;
-  color: #12131f;
+  background: #d9ff50;
+  color: #2d2d2d;
   width: 3rem;
   height: 3rem;
   border: 0;
@@ -755,7 +761,7 @@ body {
 }
 .profileContent .profileContainer .user .info .userImage .actions .uploadImage:hover {
   transition: all 0.3s;
-  background: #1cdf9e;
+  background: #ceff1d;
   cursor: pointer;
 }
 .profileContent .profileContainer .user .info .userImage img {
@@ -766,7 +772,7 @@ body {
 .profileContent .profileContainer .user .website {
   margin: 2.5rem auto 0 auto;
   padding: 1rem;
-  background: rgba(37, 39, 63, 0.3);
+  background: rgba(71, 71, 71, 0.3);
   border-radius: 0.5rem;
   width: 100%;
   border: 1px solid transparent;
@@ -787,7 +793,7 @@ body {
   margin-right: 1rem;
 }
 .profileContent .profileContainer .user .website:hover {
-  border: 1px solid #46e8b2;
+  border: 1px solid #d9ff50;
   transition: all 0.3s;
 }
 .profileContent .profileContainer .user h2 {
@@ -804,7 +810,7 @@ body {
   position: fixed;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(33, 34, 45, 0.54);
+  background-color: rgba(33, 33, 33, 0.54);
   z-index: 200;
   display: flex;
   align-items: center;
@@ -826,8 +832,10 @@ body {
   bottom: 0;
   text-align: center;
   top: 0;
+  background: rgba(45, 45, 45, 0.3);
+  backdrop-filter: blur(20px);
+  border: 1px solid #393939;
   margin: auto;
-  background: rgba(18, 19, 31, 0.2);
   backdrop-filter: blur(10px);
   padding: 3rem;
   border-radius: 0.5rem;
@@ -843,12 +851,14 @@ body {
   line-height: 2rem;
   font-size: 1.4rem;
   border-radius: 0.5rem;
-  background-color: rgba(22, 23, 37, 0.5);
+  background: rgba(45, 45, 45, 0.3);
+  backdrop-filter: blur(20px);
+  border: 1px solid #393939;
   transition: all 0.3s;
 }
 .modalWrap .modal .textarea:focus {
   outline: 0;
-  border: 1px solid #46e8b2;
+  border: 1px solid #d9ff50;
   transition: all 0.3s;
 }
 .modalWrap .modal .textarea::placeholder {
@@ -858,17 +868,19 @@ body {
   margin-bottom: 1.5rem;
   width: 100%;
   height: 5.5rem;
-  border: 1px solid transparent;
+  background: rgba(45, 45, 45, 0.3);
+  backdrop-filter: blur(20px);
+  border: 1px solid #393939;
   color: #c1c1c1;
   padding: 0 2rem;
   font-size: 1.4rem;
   border-radius: 0.5rem;
-  background-color: rgba(22, 23, 37, 0.5);
+  background-color: rgba(50, 50, 50, 0.5);
   transition: all 0.3s;
 }
 .modalWrap .modal input:focus {
   outline: 0;
-  border: 1px solid #46e8b2;
+  border: 1px solid #d9ff50;
   transition: all 0.3s;
 }
 .modalWrap .modal input::placeholder {
@@ -878,7 +890,7 @@ body {
   position: absolute;
   right: -1rem;
   top: -1rem;
-  background: #191b2c;
+  background: #373737;
   width: 5rem;
   height: 5rem;
   display: flex;
@@ -893,7 +905,7 @@ body {
 }
 .modalWrap .modal .close:hover {
   transition: all 0.3s;
-  border: 1px solid #46e8b2;
+  border: 1px solid #d9ff50;
   cursor: pointer;
 }
 
@@ -964,14 +976,14 @@ body {
 }
 .modal-requests .buttons .btn--purple {
   background: #368fff;
-  color: #12131f;
+  color: #2d2d2d;
 }
 .modal-requests .buttons .btn--purple:hover {
   opacity: 0.7;
 }
 .modal-requests .buttons .btn--red {
   background: #ff4080;
-  color: #12131f;
+  color: #2d2d2d;
 }
 .modal-requests .buttons .btn--red:hover {
   opacity: 0.7;
@@ -988,7 +1000,7 @@ body {
   width: 100%;
   max-width: 17rem;
   text-overflow: ellipsis;
-  border: 0.3rem solid #12131f;
+  border: 0.3rem solid #2d2d2d;
   overflow: hidden;
   white-space: nowrap;
   font-weight: bold;
@@ -1009,7 +1021,7 @@ body {
 }
 .modal-requests .request {
   flex: 0 0 47%;
-  background: #12131f;
+  background: #2d2d2d;
   padding: 2rem 1.5rem;
   position: relative;
   border-radius: 1rem;
@@ -1030,14 +1042,14 @@ body {
 }
 
 .dd-list-item svg path {
-  fill: #46e8b2;
+  fill: #d9ff50;
 }
 .dd-list-item:hover {
-  background: #46e8b2 !important;
-  color: #12131f !important;
+  background: #d9ff50 !important;
+  color: #2d2d2d !important;
 }
 .dd-list-item:hover svg path {
-  fill: #12131f !important;
+  fill: #2d2d2d !important;
 }
 
 /*Global Chat*/
@@ -1066,12 +1078,12 @@ body {
   width: 22.5%;
   height: 100vh;
   position: fixed;
-  background: #12131f;
+  background: #2d2d2d;
   top: 0;
   padding: 3rem;
   right: 0;
   z-index: 30;
-  border-left: 1px solid rgba(70, 232, 178, 0.1);
+  border-left: 1px solid rgba(217, 255, 80, 0.1);
 }
 .GlobalChat .controls {
   position: relative;
@@ -1080,13 +1092,13 @@ body {
   margin: 2rem 0;
   width: 100%;
   height: 65vh;
-  background: #151624;
+  background: #313131;
   border-radius: 1rem;
   padding: 2rem;
 }
 .GlobalChat .messages-container .message {
   width: 100%;
-  background: #12131f;
+  background: #2d2d2d;
   padding: 2rem;
   border-radius: 1rem;
   margin-bottom: 1rem;
@@ -1106,7 +1118,7 @@ body {
   margin-top: 1.5rem;
 }
 .GlobalChat textarea {
-  background: #151624;
+  background: #313131;
 }
 .GlobalChat h1 {
   color: white;
@@ -1117,7 +1129,7 @@ body {
   cursor: not-allowed !important;
   background: gray !important;
   opacity: 0.7;
-  color: #12131f !important;
+  color: #2d2d2d !important;
 }
 
 .showMenu {
@@ -1127,7 +1139,7 @@ body {
 .ActionsMenu {
   position: absolute;
   z-index: 50 !important;
-  background: #171a28;
+  background: #252525;
   right: 0;
   transition: all 0.3s;
   display: none;
@@ -1177,11 +1189,11 @@ body {
   background: #ff1765;
 }
 .btn--green {
-  background: #46e8b2;
+  background: #d9ff50;
   color: #2a2c3d;
 }
 .btn--green:hover {
-  background: #22e3a3;
+  background: #d0ff27;
 }
 .btn--gray {
   background: #282828;
@@ -1192,11 +1204,11 @@ body {
   opacity: 1;
 }
 .btn--purepurple {
-  background: #46e8b2;
+  background: #d9ff50;
   color: #2a2c3d;
 }
 .btn--purepurple:hover {
-  background: #22e3a3;
+  background: #d0ff27;
   opacity: 1;
 }
 .btn--purple {
@@ -1266,7 +1278,9 @@ body {
 .input {
   width: 100%;
   height: 5.5rem;
-  border: 1px solid transparent;
+  background: rgba(45, 45, 45, 0.3);
+  backdrop-filter: blur(20px);
+  border: 1px solid #393939;
   color: #c1c1c1;
   margin: 0.5rem 0;
   padding: 0 2rem;
@@ -1277,7 +1291,7 @@ body {
 }
 .input:focus {
   outline: 0;
-  border: 1px solid #46e8b2;
+  border: 1px solid #d9ff50;
   transition: all 0.3s;
 }
 .input::placeholder {
@@ -1292,13 +1306,15 @@ body {
   line-height: 2rem;
   font-size: 1.4rem;
   border-radius: 0.5rem;
-  background-color: rgba(22, 23, 37, 0.5);
+  background: rgba(45, 45, 45, 0.3);
+  backdrop-filter: blur(20px);
+  border: 1px solid #393939;
   transition: all 0.3s;
   background: #12131f;
 }
 .textarea:focus {
   outline: 0;
-  border: 1px solid #46e8b2;
+  border: 1px solid #d9ff50;
   transition: all 0.3s;
 }
 .textarea::placeholder {
@@ -1397,10 +1413,12 @@ body {
   cursor: pointer;
 }
 .authnav .container .side .notification .notifications {
+  background: rgba(45, 45, 45, 0.3);
+  backdrop-filter: blur(20px);
+  border: 1px solid #393939;
   position: absolute;
   padding: 1rem 3rem;
-  background: rgba(18, 19, 31, 0.4);
-  backdrop-filter: blur(5rem);
+  backdrop-filter: blur(100);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1469,13 +1487,14 @@ body {
   height: 5rem;
   border-radius: 0.5rem;
   margin-left: 4rem;
-  background: rgba(18, 19, 31, 0.3);
+  background: rgba(45, 45, 45, 0.3);
   backdrop-filter: blur(5rem);
+  border: 1px solid #393939;
   transition: all 0.3s;
   position: relative;
 }
 .authnav .container .side .profile:hover {
-  background: rgba(18, 19, 31, 0.6);
+  background: rgba(45, 45, 45, 0.6);
   cursor: pointer;
   transition: all 0.3s;
 }
@@ -1484,12 +1503,13 @@ body {
   top: 6.5rem;
   width: 100%;
   height: auto;
+  border: 1px solid #393939;
   display: flex;
   border-radius: 0.5rem;
   z-index: 10;
   padding: 1.5rem;
   justify-content: center;
-  background: rgba(18, 19, 31, 0.3);
+  background: #1b1b1b;
   backdrop-filter: blur(5rem);
 }
 .authnav .container .side .profile .dropdown .icon {

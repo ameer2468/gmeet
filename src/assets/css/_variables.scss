@@ -5,16 +5,17 @@ $input: #12131f;
 $navbg: #2a2c3d;
 $border: #5A6091;
 $gray: #282828;
-$cardbg: #12131f;
+$cardbg: #2d2d2d;
 $activeBorder: #3f4378;
-$green: #46e8b2;
-$purepurple: $green;
+$sitetheme: #d9ff50;
+$purepurple: $sitetheme;
 $purple: #4a36ff;
-$pageBackground: darken($green, 45%);
+$customborder: #393939;
+$pageBackground: #181818;
 
 @mixin pageBackground {
   background: $pageBackground;
-  background: linear-gradient(162deg, $pageBackground -40%, rgba(18,20,36,1) 78%);
+  //background: linear-gradient(162deg, $pageBackground -40%, rgba(18,20,36,1) 78%);
 }
 
 @mixin largeTitle {
@@ -45,11 +46,11 @@ $pageBackground: darken($green, 45%);
   line-height: 2rem;
   font-size: 1.4rem;
   border-radius: 0.5rem;
-  background-color: lighten(rgba($input, 0.5), 2);
+  @include Card;
   transition: all 0.3s;
   &:focus {
     outline: 0;
-    border: 1px solid $green;
+    border: 1px solid $sitetheme;
     transition: all 0.3s;
   }
   &::placeholder {
@@ -58,23 +59,24 @@ $pageBackground: darken($green, 45%);
 }
 
 @mixin Card {
-  background: rgba($cardbg, 0.5);
+  background: rgba($cardbg, 0.3);
   backdrop-filter: blur(20px);
+  border: 1px solid $customborder;
 }
 
 @mixin LighterInput {
   width: 100%;
   height: 5.5rem;
-  border: 1px solid transparent;
+  @include Card;
   color: $text;
   padding: 0 2rem;
   font-size: 1.4rem;
   border-radius: 0.5rem;
-  background-color: lighten(rgba($input, 0.5), 2);
+  background-color: lighten(rgba($cardbg, 0.5), 2);
   transition: all 0.3s;
   &:focus {
     outline: 0;
-    border: 1px solid $green;
+    border: 1px solid $sitetheme;
     transition: all 0.3s;
   }
   &::placeholder {
@@ -86,7 +88,7 @@ $pageBackground: darken($green, 45%);
 @mixin Input {
   width: 100%;
   height: 5.5rem;
-  border: 1px solid transparent;
+  @include Card;
   color: $text;
   margin: 0.5rem 0;
   padding: 0 2rem;
@@ -96,7 +98,7 @@ $pageBackground: darken($green, 45%);
   transition: all 0.3s;
   &:focus {
     outline: 0;
-    border: 1px solid $green;
+    border: 1px solid $sitetheme;
     transition: all 0.3s;
   }
   &::placeholder {

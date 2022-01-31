@@ -17,7 +17,9 @@ const AddProject = () => {
             submit={() => projectHook.createProjectHandler()}
             title={'Add Project'}
             loading={createLoading}
-            buttonText={'Confirm'}>
+            buttonText={'Confirm'}
+            disabled={projectForm.name.length === 0 || projectForm.description.length === 0}
+        >
             <form className='generalForm'>
                 <Input value={projectForm.name} useHook={projectHook} name={'name'} maxWidth={'100%'} placeholder={'Project name'}/>
                 <TextArea maxLength={500} useHook={projectHook} name={'description'} maxWidth={'100%'} placeholder={'Project description'} height={'20rem'}/>

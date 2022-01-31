@@ -2,7 +2,7 @@
   position: fixed;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(33, 34, 45, 0.54);
+  background-color: rgba(33, 33, 33, 0.54);
   z-index: 200;
   display: flex;
   align-items: center;
@@ -23,8 +23,8 @@
     bottom: 0;
     text-align: center;
     top: 0;
+    @include Card;
     margin: auto;
-    background: rgba($cardbg, 0.2);
     backdrop-filter: blur(10px);
     padding: 3rem;
     border-radius: 0.5rem;
@@ -42,7 +42,7 @@
       position: absolute;
       right: -1rem;
       top: -1rem;
-      background: lighten($input, 4);
+      background: lighten($cardbg, 4);
       width: 5rem;
       height: 5rem;
       display: flex;
@@ -56,7 +56,7 @@
       }
       &:hover {
         transition: all 0.3s;
-        border: 1px solid $green;
+        border: 1px solid $sitetheme;
         cursor: pointer;
       }
     }

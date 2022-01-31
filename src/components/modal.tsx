@@ -15,9 +15,10 @@ interface props {
     submit: () => void;
     loading?: boolean;
     className?: string;
+    disabled?: any;
 }
 
-const Modal = ({children,buttonText, title, submit, loading, className}: props) => {
+const Modal = ({children,buttonText, title, submit, loading, className, disabled}: props) => {
 
     const modals = useAppSelector(modalReducer)
     const {activeModal} = modals;
@@ -37,7 +38,7 @@ const Modal = ({children,buttonText, title, submit, loading, className}: props) 
                     </div>
                     <h1>{title}</h1>
                     {children}
-                    <button onClick={submit} className='btn btn--green'>{
+                    <button disabled={disabled} onClick={submit} className={`btn btn--green ${disabled ? 'disabledButton' : ''}`}>{
                         loading ?
                             <BeatLoader size={8} margin={1} color={'#2a2c3d'} />
                             : buttonText
