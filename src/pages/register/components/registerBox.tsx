@@ -38,13 +38,13 @@ const RegisterBox = () => {
 
     const underStyle = {
         backgroundImage: `url(${underline})`,
-        width: '29rem',
+        width: '13rem',
         height: '2rem',
         top: '46%',
-        left: '15%',
+        left: '38%',
         zIndex: '-1',
         backgroundRepeat: 'no-repeat',
-        backgroundSize: '100%',
+        backgroundSize: '140%',
         position: 'absolute' as 'absolute',
     }
 
@@ -56,7 +56,7 @@ const RegisterBox = () => {
             <div className="registerBox">
                 <div className="side">
                     <h3 style={{textAlign: 'center', width: '78%'}}>
-                        Connecting people through working together on projects
+                        You are one step closer to joining and creating projects
                     </h3>
                     <div style={underStyle} className="underline"/>
                 </div>
