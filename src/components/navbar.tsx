@@ -30,6 +30,9 @@ const Navbar = () => {
                 <div className={`bar3 ${toggleHidden ? 'bar3active' : ''}`}/>
             </div>
          <motion.div
+             style={{
+                 display: toggleHidden ? 'block' : 'none'
+             }}
              variants={menuVariant}
              initial="closed"
              animate={toggleHidden ? "open" : "closed"}
