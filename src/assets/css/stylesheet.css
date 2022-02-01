@@ -1743,9 +1743,6 @@ body {
   opacity: 0.5;
   transition: all 0.3s;
 }
-.homeNav .side {
-  flex: 0 0 50%;
-}
 .homeNav .side:nth-child(2) {
   text-align: right;
 }
