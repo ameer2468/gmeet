@@ -1295,7 +1295,7 @@ body {
 
 /*Landing page hidden menu*/
 .toggleHidden {
-  display: flex;
+  display: none;
   height: 5rem;
   width: 5rem;
   flex-direction: column;
@@ -1922,6 +1922,10 @@ body {
 @media all and (max-width: 768px) {
   html {
     font-size: 52%;
+  }
+
+  .toggleHidden {
+    display: flex;
   }
 
   .LoginWrap .loginBox, .LoginWrap .registerBox {
