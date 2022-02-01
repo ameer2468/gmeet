@@ -112,11 +112,11 @@ export function getProjectsThunk(value?: string) {
 }
 
 export function getRequestsThunk() {
-    return async (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
+    return (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
         const userReducer = getState();
         const {authUser} = userReducer.userStore;
         dispatch(requestsLoading(true));
-        await dispatch(getRequests()).then((res: { payload: any; }) => {
+        dispatch(getRequests()).then((res: { payload: any; }) => {
             const {payload} = res;
             const userRequests = payload.filter((value: any) => {
                 return value.user === authUser.username;
