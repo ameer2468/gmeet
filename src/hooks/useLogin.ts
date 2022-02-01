@@ -33,14 +33,14 @@ export function useLogin() {
                     username: '',
                     password: ''
                 })
-                await Auth.currentUserInfo().then((data) => {
+                await Auth.currentUserInfo().then(async (data) => {
                     dispatch(authedUser({...data}))
+                    await dispatch(getUserFollowers(data.attributes.sub)).then(async (res: any) => {
+                        const {following, followers} = res.payload.data;
+                        dispatch(authedUser({...data, following: following, followers: followers}))
+                    })
                 });
-                await dispatch(getUserFollowers(authUser.attributes.sub)).then(async (res: any) => {
-                    const {following, followers} = res.payload.data;
-                    dispatch(authedUser({...authUser, following: following, followers: followers}))
-                })
-                await dispatch(getAssetThunk(authUser.username));
+                dispatch(getAssetThunk(authUser.username));
                 dispatch(status(true))
                 dispatch(loading(false))
                 history.push('/home')
