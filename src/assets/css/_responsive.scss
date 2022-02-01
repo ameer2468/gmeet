@@ -10,3 +10,44 @@
   }
 }
 }
+
+@media all and (max-width: 768px) {
+  html {
+    font-size: 52%;
+  }
+  .LoginWrap {
+    .loginBox, .registerBox {
+      height: 100vh;
+    }
+    .side:nth-child(1) {
+      display: none;
+    }
+    .side:nth-child(2) {
+      flex: 0 0 100% !important;
+    }
+  }
+  .homeNav .side  {
+    ul {
+      display: none!important;
+    }
+  }
+  .header .container {
+    padding: 0 2rem;
+    p {
+      font-size: 1.7rem;
+    }
+    h1 {
+      font-size: 3.5rem;
+      line-height: 5rem;
+    }
+    .cards {
+      flex-direction: column;
+     .card {
+       margin-bottom: 2rem;
+       .underline {
+         top: 26.5%;
+       }
+     }
+    }
+  }
+}

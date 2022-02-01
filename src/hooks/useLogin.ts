@@ -2,11 +2,10 @@ import {FormEvent, useState} from "react";
 import {Auth} from "aws-amplify";
 import {authedUser, loading, status, userImageHandler} from "../redux/user/userSlice";
 import {Login} from "../pages/register/types";
-import {useAppDispatch, useAppSelector} from "../redux/hooks";
+import {useAppDispatch} from "../redux/hooks";
 import {useHistory} from "react-router-dom";
 import {getAssetThunk} from "../redux/user/thunk";
 import {getUserFollowers} from "../redux/user/services";
-import {RootState} from "../redux/store";
 
 export function useLogin() {
     const dispatch = useAppDispatch();
@@ -16,7 +15,6 @@ export function useLogin() {
         password: ''
     })
     const [error, setError] = useState('');
-    const {authUser} = useAppSelector((state: RootState) => state.userStore);
 
    async function loginHandler(e: FormEvent<HTMLFormElement>) {
             e.preventDefault();
@@ -40,7 +38,7 @@ export function useLogin() {
                         dispatch(authedUser({...data, following: following, followers: followers}))
                     })
                 });
-                dispatch(getAssetThunk(authUser.username));
+                dispatch(getAssetThunk(inputValues.username));
                 dispatch(status(true))
                 dispatch(loading(false))
                 history.push('/home')

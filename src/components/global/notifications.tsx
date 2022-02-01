@@ -11,19 +11,22 @@ const Notifications = () => {
 
     return (
         <div className="notifications">
-            {notificationLoading ? <NotificationLoader/> : authUser.notifications.length === 0 ? 'No Notifications' :
-                notificationLoading ? <NotificationLoader/> :
-                    authUser.notifications.map((value: any, index: number) => {
-                        return (
-                            <div key={index.toString()} className="notification-item">
-                                <div className="wrap">
-                                    <div className="circle"/>
-                                    <p>{value.text}</p>
+            <button className={'readButton'}>Mark all as read</button>
+            <div className="container">
+                {notificationLoading ? <NotificationLoader/> : authUser.notifications.length === 0 ? 'No Notifications' :
+                    notificationLoading ? <NotificationLoader/> :
+                        authUser.notifications.map((value: any, index: number) => {
+                            return (
+                                <div key={index.toString()} className="notification-item">
+                                    <div className="wrap">
+                                        <div className="circle"/>
+                                        <p>{value.text}</p>
+                                    </div>
                                 </div>
-                            </div>
-                        )
-                    })
-            }
+                            )
+                        })
+                }
+            </div>
         </div>
     );
 };

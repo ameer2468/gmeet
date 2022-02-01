@@ -1,3 +1,4 @@
+
 .justifyCenter {
   display: flex;
   justify-items: center!important;
@@ -24,6 +25,25 @@
     svg path {
       fill: $cardbg!important;
     }
+  }
+}
+
+
+/*Mark as read*/
+
+.readButton {
+  @include Card;
+  padding: 1.3rem 2rem;
+  color: $text;
+  width: 100%;
+  border-top: 0;
+  border-radius: 0.5rem 0.5rem 0 0;
+  margin-right: auto;
+  transition: all 0.3s;
+  &:hover {
+    background-color: lighten(rgba($cardbg, 0.8), 2);
+    cursor: pointer;
+    transition: all 0.3s;
   }
 }
 
@@ -225,6 +245,75 @@
   text-align: center;
 }
 
+/*Landing page hidden menu*/
+
+.toggleHidden {
+  display: flex;
+  height: 5rem;
+  width: 5rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  right: 3rem;
+  z-index: 500;
+  background: $sitetheme;
+  border-radius: 1rem;
+  .bar1active {
+    transition: all 0.3s;
+    transform: rotate(45deg);
+    position: relative;
+    top: 1rem;
+  }
+  .bar2active {
+    transition: all 0.3s;
+    transform: translateX(-30px);
+    opacity: 0;
+  }
+  .bar3active {
+    transition: all 0.3s;
+    transform: rotate(-45deg);
+    position: relative;
+    bottom: 0.7rem;
+  }
+  .bar1, .bar2, .bar3 {
+    background: #1b1b1b;
+    width: 3rem;
+    height: 0.3rem;
+    margin: 0.3rem 0;
+  }
+}
+
+.hidden-menu {
+  position: fixed;
+  right: 0;
+  background: rgba(darken($cardbg, 5%), 0.9);
+  backdrop-filter: blur(10px);
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  padding: 2rem;
+  z-index: 20;
+  button {
+    margin: 1rem 0;
+    max-width: 15.5rem;
+    height: 6rem;
+    font-size: 1.5rem;
+  }
+  ul {
+    display: flex!important;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    li {
+      margin: 1rem 0;
+    }
+    .navLink {
+      font-size: 2rem!important;
+    }
+  }
+}
 
 .modalHide {
   opacity: 0!important;
@@ -345,18 +434,26 @@
           }
         }
         .notifications {
-          @include Card;
+          background: #1f1f1f;
+          backdrop-filter: blur(20px);
+          border: 1px solid $customborder;
          position: absolute;
-          padding: 1rem 3rem;
-          backdrop-filter: blur(100);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-wrap: wrap;
           right: 0;
           width: 36rem;
           margin-top: 1.5rem;
           border-radius: 0.5rem;
+          .container {
+            display: flex;
+            padding: 1rem 3rem;
+            background: darken($cardbg, 7%);
+            border: 1px solid #393939;
+            border-radius: 0.5rem;
+            width: 90%;
+            margin: 2rem auto;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+          }
         }
         @keyframes animation {
           0% {
