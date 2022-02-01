@@ -63,3 +63,19 @@
     }
   }
 }
+
+@media all and (max-width: 550px) {
+  .LoginWrap {
+    .welcome {
+      h1 {
+        font-size: 2.5rem;
+      }
+    }
+  }
+  .header .container {
+    h1 {
+      font-size: 3rem;
+      line-height: 4rem;
+    }
+  }
+}
