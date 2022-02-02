@@ -1,5 +1,6 @@
 import React from 'react';
 import underline from "../../../assets/images/underline.png";
+import {NavLink} from "react-router-dom";
 
 const Header = () => {
 
@@ -49,6 +50,10 @@ const Header = () => {
             <div className="container">
                 <h1>Connect & Meet other designers & developers</h1>
                 <p>A community built for designers & developers to communicate with other like-minds. Gmeet aims to connect you with like-minded people so you can collaborate on projects and perhaps even build your own team! all through our platform to make meeting other designers easier and more productice.</p>
+                <div style={{margin: '2rem auto 0 auto', width: '100%', display: 'flex', justifyContent: 'space-evenly'}} className="home-buttons">
+                    <NavLink style={{width: '17rem', textAlign: 'center'}} to={'/register'}><button className='btn btn--green'>Register</button></NavLink>
+                    <NavLink style={{width: '17rem', textAlign: 'center'}} to={'/login'}><button className='btn btn--white'>Login</button></NavLink>
+                </div>
                 <div className="cards">
                     <div className="card">
                         <h2>Create Projects</h2>

@@ -74,8 +74,8 @@ const Authnav = () => {
                     <div ref={ref} onClick={() => setOpen(!open)} className="profile">
                         {userImageLoading ? <div style={{marginRight: 15, marginTop: 5}}>
                             <LoadingSpinner height={25} width={25}/></div> :
-                            <img key={authUser.userImage} onError={(e) => {
-                                    if (!userImageLoading) {
+                            <img style={{width: '3.5rem', height: '3.5rem'}} key={authUser.userImage} onError={(e) => {
+                                    if (!userImageLoading && authUser.userImage === '') {
                                         dispatch(getAssetThunk(authUser.username))
                                     }
                                     e.currentTarget.src = placeholder

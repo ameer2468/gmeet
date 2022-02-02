@@ -71,7 +71,7 @@ const User = ({data}: props) => {
                                         }
                                         {
                                             userImageLoading ? '' :
-                                            <img key={data.userImage} onError={e => {
+                                            <img style={{width: '100%', height: '100%'}} key={data.userImage} onError={e => {
                                                 e.currentTarget.src = placeholder
                                             }} src={data.userImage} alt="profile"/>
                                         }

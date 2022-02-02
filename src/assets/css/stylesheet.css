@@ -746,6 +746,7 @@ body {
 }
 .profileContent .profileContainer .user .info .userImage .actions {
   position: absolute;
+  display: flex;
   right: 0;
   top: 8rem;
 }
@@ -1331,6 +1332,10 @@ body {
   margin: 0.3rem 0;
 }
 
+.home-buttons {
+  display: none !important;
+}
+
 .hidden-menu {
   position: fixed;
   display: none;
@@ -1344,10 +1349,10 @@ body {
   z-index: 20;
 }
 .hidden-menu button {
-  margin: 1rem 0;
   max-width: 15.5rem;
+  margin: 1.5rem 0 0 0 !important;
   height: 6rem;
-  font-size: 1.5rem;
+  font-size: 1.7rem;
 }
 .hidden-menu ul {
   display: flex !important;
@@ -1357,10 +1362,10 @@ body {
   flex-direction: column;
 }
 .hidden-menu ul li {
-  margin: 1rem 0;
+  margin: 0.5rem 0;
 }
 .hidden-menu ul .navLink {
-  font-size: 2rem !important;
+  font-size: 2.7rem !important;
 }
 
 .modalHide {
@@ -1996,6 +2001,10 @@ body {
     z-index: 300;
   }
 
+  .home-buttons {
+    display: flex !important;
+  }
+
   .authnav .container .side .notification {
     z-index: 10;
   }
@@ -2123,6 +2132,59 @@ body {
 @media all and (max-width: 550px) {
   html {
     font-size: 53%;
+  }
+
+  .profileContent .btn {
+    font-size: 1.5rem;
+  }
+  .profileContent .user button {
+    max-width: 17rem !important;
+  }
+
+  .profileContent .profileContainer .profilePosts .commentInfo .date, .postInfo .date {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100%;
+    max-width: 14rem;
+  }
+
+  .btn {
+    font-size: 1.5rem;
+    height: 6rem;
+  }
+
+  .authnav .container .side .profile .dropdown {
+    width: 16rem;
+    top: 7.5rem;
+  }
+  .authnav .container .side .profile .dropdown li {
+    font-size: 1.8rem;
+  }
+
+  .authnav .container .side .profile {
+    margin-left: 2rem;
+    padding: 1rem 1rem;
+    width: 13rem;
+  }
+
+  .HomeContent .homeContainer .projectCard p {
+    font-size: 1.7rem;
+  }
+  .HomeContent .homeContainer .flex {
+    flex-direction: column;
+  }
+  .HomeContent .homeContainer button {
+    max-width: 100% !important;
+  }
+  .HomeContent .homeContainer .search {
+    margin-bottom: 5rem;
+  }
+  .HomeContent .homeContainer .search input {
+    max-width: 100% !important;
+  }
+  .HomeContent .homeContainer .search h1 {
+    font-size: 3rem;
   }
 
   .LoginWrap .welcome h1 {

@@ -367,6 +367,7 @@
             margin: 0 auto 3rem auto;
             .actions {
               position: absolute;
+              display: flex;
               right: 0;
               top: 8rem;
               .confirm {

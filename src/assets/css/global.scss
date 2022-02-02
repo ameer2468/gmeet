@@ -284,6 +284,10 @@
   }
 }
 
+.home-buttons {
+  display: none!important;
+}
+
 .hidden-menu {
   position: fixed;
   display: none;
@@ -296,10 +300,10 @@
   padding: 2rem;
   z-index: 20;
   button {
-    margin: 1rem 0;
     max-width: 15.5rem;
+    margin: 1.5rem 0 0 0!important;
     height: 6rem;
-    font-size: 1.5rem;
+    font-size: 1.7rem;
   }
   ul {
     display: flex!important;
@@ -308,10 +312,10 @@
     align-items: center;
     flex-direction: column;
     li {
-      margin: 1rem 0;
+      margin: 0.5rem 0;
     }
     .navLink {
-      font-size: 2rem!important;
+      font-size: 2.7rem!important;
     }
   }
 }
