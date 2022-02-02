@@ -25,12 +25,21 @@ const Authnav = () => {
     const closeDrop = () => {
         setOpen(false);
     }
+    const [toggleHidden, setToggleHidden] = useState(false);
     const closeNotification = () => {
         setOpenNotifications(false);
     }
     const ref = useDetectClickOutside({ onTriggered: closeDrop});
     const notifref = useDetectClickOutside({ onTriggered: closeNotification});
 
+    const menuVariant = {
+        open: {
+            opacity: 1,
+        },
+        closed: {
+            opacity: 0,
+        }
+    }
 
     return (
         <nav className="authnav">
@@ -38,7 +47,7 @@ const Authnav = () => {
                 <div className="side">
                     <h1>Gmeet</h1>
                     <nav>
-                        <ul>
+                        <ul className='main-nav'>
                             <li><NavLink to={'/home'}>Home</NavLink></li>
                             <li><NavLink to={'/top'}>Top Projects</NavLink></li>
                             <li><NavLink to={''}>Discord</NavLink></li>
@@ -100,6 +109,25 @@ const Authnav = () => {
                             </ul>
                         </motion.div> : ''}
                     </div>
+                    <div onClick={() => setToggleHidden(!toggleHidden)} className="auth-hidden-menu">
+                            <div className={`bar1 ${toggleHidden ? 'bar1active' : ''}`}/>
+                            <div className={`bar2 ${toggleHidden ? 'bar2active' : ''}`}/>
+                            <div className={`bar3 ${toggleHidden ? 'bar3active' : ''}`}/>
+                    </div>
+                    <motion.div
+                        style={{
+                            display: toggleHidden ? 'block' : 'none'
+                        }}
+                        variants={menuVariant}
+                        initial="closed"
+                        animate={toggleHidden ? "open" : "closed"}
+                        className="auth-hidden-nav">
+                        <ul>
+                            <li onClick={() => setToggleHidden(!toggleHidden)}><NavLink to={'/home'}>Home</NavLink></li>
+                            <li onClick={() => setToggleHidden(!toggleHidden)}><NavLink to={'/top'}>Top Projects</NavLink></li>
+                            <li onClick={() => setToggleHidden(!toggleHidden)}><NavLink to={''}>Discord</NavLink></li>
+                        </ul>
+                    </motion.div>
                 </div>
             </div>
         </nav>

@@ -17,7 +17,7 @@ const Search = () => {
                 projectHook.getSearchProjects(value)
             }
             }>
-                <Input name={'searchterm'} useHook={projectHook} placeholder={'Search project by name or category'} maxWidth={'40rem'}/>
+                <Input name={'searchterm'} useHook={projectHook} placeholder={'Search project by name'} maxWidth={'40rem'}/>
             </form>
         </div>
     );

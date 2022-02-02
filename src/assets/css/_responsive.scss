@@ -15,6 +15,101 @@
   html {
     font-size: 52%;
   }
+  .main-nav {
+    display: none!important;
+  }
+  .authnav {
+    .container {
+      .side {
+        .profile {
+          z-index: 300;
+        }
+      }
+    }
+  }
+  .authnav .container .side .notification {
+    z-index: 10;
+  }
+  .HomeContent .homeContainer .projectsContainer {
+    grid-gap: 15px;
+  }
+  .authnav .container .side .notification .notifications {
+    margin: auto;
+    top: 6.2rem;
+    left: 0;
+    width: 29rem;
+  }
+  .auth-hidden-nav {
+    display: flex;
+  }
+  .authnav .container .side {
+    margin-right: 10rem;
+  }
+  .auth-hidden-menu {
+    display: flex;
+  }
+  .editProfileContent{
+    .editProfileContainer {
+      .changePassword {
+        max-width: 100%;
+      }
+    }
+  }
+  .profileContent .profileContainer {
+    .createPost {
+      flex-direction: column;
+      button {
+        max-width: 100%;
+        margin-top: 1rem;
+      }
+    }
+    .user {
+      flex: none!important;
+    }
+    .profilePosts {
+      .posts {
+        padding: 0;
+        margin-top: 1.3rem;
+      }
+      .post {
+        .leaveComment {
+          flex-direction: column;
+          button {
+            max-width: 100%;
+            margin-top: 1rem;
+          }
+          textarea {
+            max-width: 100%!important;
+          }
+        }
+      }
+    }
+    flex-direction: column;
+    .listings {
+      .listingsContainer {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+  .HomeContent {
+    padding: 2rem;
+    .homeContainer {
+      .search {
+        h1 {
+          margin-bottom: 0.5rem;
+        }
+        input {
+          max-width: 25rem!important;
+        }
+      }
+      .projectsContainer {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+  .modalShow {
+    padding : 0 2rem;
+  }
   .toggleHidden {
     display: flex;
   }
@@ -65,6 +160,9 @@
 }
 
 @media all and (max-width: 550px) {
+  html {
+    font-size: 53%;
+  }
   .LoginWrap {
     .welcome {
       h1 {
@@ -77,5 +175,15 @@
       font-size: 3rem;
       line-height: 4rem;
     }
+  }
+}
+
+@media all and (max-width: 430px) {
+  .authnav .container .side:nth-child(2) {
+    position: relative;
+    right: 7rem;
+  }
+  html {
+    font-size: 50%;
   }
 }
