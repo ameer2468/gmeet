@@ -75,7 +75,7 @@ const LoginBox = () => {
                             {errorLength === 0 ? '' : <p className='error'>{loginHook.error.toString()}</p>}
                             <div className="links">
                                 <Link to={'/forgot-password'}><p>Forgot password?</p></Link>
-                                <Link to={'/register'}><p className='bold'>No account? register now</p></Link>
+                                <Link to={'/register'}>No account? register now</Link>
                             </div>
                             <button className={passwordLength === 0 ? 'disabledButton' : ''} disabled={passwordLength === 0}>{Loading ? <LoadingSpinner height={35} width={35}/> : 'Login'}</button>
                         </form>

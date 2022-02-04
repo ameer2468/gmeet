@@ -762,10 +762,9 @@ h1 {
   }
   .links {
     margin: 1rem 0 1rem 0;
-    font-size: 1.5rem;
     display: flex;
     justify-content: space-between;
-    p {
+    a {
       transition: all 0.3s;
       font-size: 1.3rem;
       &:hover {
