@@ -18,6 +18,8 @@ import {getNotifications} from "./redux/user/thunk";
 import Top from "./pages/topprojects/top";
 import EditProfile from "./pages/editprofile/editprofile";
 import Forgot from "./pages/forgotPassword/forgot";
+import About from './pages/about/about';
+import Navbar from "./components/navbar";
 
 Amplify.configure(awsconfig)
 
@@ -53,7 +55,8 @@ const App = () => {
         {path: '/', component: Landing},
         {path: '/login', component: Login},
         {path: '/forgot-password', component: Forgot},
-        {path: '/register', component: Register}
+        {path: '/register', component: Register},
+        {path: '/about', component: About},
     ]
     const AuthRoutes = [
         {path: '/', component: Landing},
@@ -79,6 +82,7 @@ const App = () => {
       return <Redirect to={'/'}/>
    }
 
+
     return (
         <>
             <ToastContainer/>
@@ -89,7 +93,14 @@ const App = () => {
             {/*    <Chat/>*/}
             {/*   </>*/}
             {/*}*/}
-            {location.pathname === '/' ? '' : RouteHandler === AuthRoutes && <Authnav/>}
+            {location.pathname === '/' ? '' : RouteHandler === AuthRoutes
+                ? <Authnav/>
+                :
+                location.pathname !== '/login' &&
+                location.pathname !== '/register' &&
+                location.pathname !== '/forgot-password'
+                && <Navbar/>
+            }
           <Switch>
             {RouteHandler.map(({path, component}: any) => {
                 return <Route key={path} exact path={path} component={component}/>;

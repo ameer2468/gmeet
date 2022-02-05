@@ -983,20 +983,28 @@ body {
   justify-content: space-evenly;
 }
 .modal-requests .buttons .btn {
-  height: 3rem;
-  width: 8rem;
+  height: 4rem;
+  width: 12rem;
   color: white;
   font-weight: bold;
 }
 .modal-requests .buttons .btn--purple {
-  background: #368fff;
+  background: #d9ff50;
   color: #2d2d2d;
 }
 .modal-requests .buttons .btn--purple:hover {
   opacity: 0.7;
 }
+.modal-requests .buttons .btn--decline {
+  background: transparent;
+  border: 1px solid #d9ff50;
+}
+.modal-requests .buttons .btn--decline:hover {
+  background: #d9ff50;
+  color: #333338FF;
+}
 .modal-requests .buttons .btn--red {
-  background: #ff4080;
+  background: #ff40fc;
   color: #2d2d2d;
 }
 .modal-requests .buttons .btn--red:hover {
@@ -1004,27 +1012,31 @@ body {
 }
 .modal-requests h2 {
   margin-top: 1rem;
+  color: white;
 }
 .modal-requests p {
   font-size: 1.5rem;
 }
 .modal-requests .speciality {
   font-size: 1.4rem;
-  background: #4a36ff;
+  background: rgba(45, 45, 45, 0.3);
+  backdrop-filter: blur(20px);
+  border: 1px solid #393939;
+  opacity: 1 !important;
+  background: #2d2d2d;
   width: 100%;
-  max-width: 17rem;
+  max-width: 30rem;
   text-overflow: ellipsis;
-  border: 0.3rem solid #2d2d2d;
   overflow: hidden;
   white-space: nowrap;
   font-weight: bold;
   color: white;
   position: absolute;
-  top: -2rem;
+  top: -2.25rem;
   left: 0;
   right: 0;
   padding: 0.5rem 2rem;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   margin: 0.5rem auto 1.5rem auto;
 }
 .modal-requests .generalForm {
@@ -1034,11 +1046,13 @@ body {
   justify-content: space-between;
 }
 .modal-requests .request {
-  flex: 0 0 47%;
-  background: #2d2d2d;
+  flex: 0 0 100%;
+  background: rgba(45, 45, 45, 0.3);
+  backdrop-filter: blur(20px);
+  border: 1px solid #393939;
   padding: 2rem 1.5rem;
   position: relative;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
 }
 
 .justifyCenter {
@@ -1216,10 +1230,10 @@ body {
   transition: all 0.3s;
 }
 .btn--pink {
-  background: #ff4080;
+  background: #ff40fc;
 }
 .btn--pink:hover {
-  background: #ff1765;
+  background: #ff17fb;
 }
 .btn--white {
   background: white;
@@ -1603,7 +1617,7 @@ body {
 }
 .authnav .container .side .notification .notifications .container {
   display: flex;
-  padding: 1rem 3rem;
+  padding: 1rem 2rem;
   background: #1b1b1b;
   border: 1px solid #393939;
   border-radius: 0.5rem;
@@ -1638,6 +1652,7 @@ body {
 .authnav .container .side .notification .notification-item .circle {
   width: 0.5rem;
   height: 0.5rem;
+  margin-left: 1rem;
   margin-right: 1.6rem;
   background: #99f692;
   border-radius: 3rem;
@@ -1769,6 +1784,17 @@ body {
   margin-right: 1rem;
 }
 
+.infoPage .container {
+  padding: 0 1rem;
+  width: 100%;
+  max-width: 150rem;
+  margin: 0 auto;
+}
+.infoPage h1 {
+  color: white;
+  font-size: 3.5rem;
+}
+
 .homeNav {
   width: 100%;
   max-width: 152rem;
@@ -1780,6 +1806,18 @@ body {
   justify-content: space-between;
   align-items: center;
   position: relative;
+}
+.homeNav .side:nth-child(1) a {
+  font-size: 1.5rem;
+  transition: all 0.3s;
+}
+.homeNav .side:nth-child(1) a:hover {
+  color: white;
+  transition: all 0.3s;
+}
+.homeNav .side:nth-child(1) li {
+  list-style: none;
+  margin-left: 1rem;
 }
 .homeNav button {
   width: 14rem;

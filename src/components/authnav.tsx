@@ -75,9 +75,7 @@ const Authnav = () => {
                         {userImageLoading ? <div style={{marginRight: 15, marginTop: 5}}>
                             <LoadingSpinner height={25} width={25}/></div> :
                             <img style={{width: '3.5rem', height: '3.5rem'}} key={authUser.userImage} onError={(e) => {
-                                    if (!userImageLoading && authUser.userImage === '') {
-                                        dispatch(getAssetThunk(authUser.username))
-                                    }
+                                    dispatch(getAssetThunk(authUser.username))
                                     e.currentTarget.src = placeholder
                             }} alt='profile'
                                  src={authUser.userImage} className='userImage'/>}

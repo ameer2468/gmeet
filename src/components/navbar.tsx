@@ -21,8 +21,9 @@ const Navbar = () => {
 
     return (
         <nav className='homeNav'>
-            <div className="side">
-                <h1>Gmeet</h1>
+            <div style={{display: 'flex', alignItems: 'center'}} className="side">
+                <NavLink to={'/'}><h1>Gmeet</h1></NavLink>
+                <li><NavLink className='navLink' to={'/about'}>About</NavLink></li>
             </div>
             <div onClick={() => setToggleHidden(!toggleHidden)} className="toggleHidden">
                     <div className={`bar1 ${toggleHidden ? 'bar1active' : ''}`}/>
@@ -39,8 +40,6 @@ const Navbar = () => {
              className="hidden-menu">
              <ul>
                  <li><NavLink className='navLink' to={'/'}>About</NavLink></li>
-                 <li><NavLink className='navLink' to={'/'}>Our Story</NavLink></li>
-                 <li><NavLink className='navLink' to={'/'}>Why</NavLink></li>
                  {LoggedIn ?
                      <Link to={'/home'}><button className='btn btn--green marginRight'>Projects home</button></Link>
                      :
@@ -53,9 +52,6 @@ const Navbar = () => {
          </motion.div>
          <div className="side">
              <ul>
-                 <li><NavLink className='navLink' to={'/'}>About</NavLink></li>
-                 <li><NavLink className='navLink' to={'/'}>Our Story</NavLink></li>
-                 <li><NavLink className='navLink' to={'/'}>Why</NavLink></li>
                  {LoggedIn ?
                          <Link to={'/home'}><button className='btn btn--green marginRight'>Projects home</button></Link>
                      :

@@ -515,7 +515,7 @@
           border-radius: 0.5rem;
           .container {
             display: flex;
-            padding: 1rem 3rem;
+            padding: 1rem 2rem;
             background: darken($cardbg, 7%);
             border: 1px solid #393939;
             border-radius: 0.5rem;
@@ -550,6 +550,7 @@
           .circle {
             width: 0.5rem;
             height: 0.5rem;
+            margin-left: 1rem;
             margin-right: 1.6rem;
             background: #99f692;
             border-radius: 3rem;
@@ -686,6 +687,19 @@
   margin-right: 1rem;
 }
 
+.infoPage {
+  .container {
+    padding: 0 1rem;
+    width: 100%;
+    max-width: 150rem;
+    margin: 0 auto;
+  }
+  h1 {
+    color: white;
+    font-size: 3.5rem;
+  }
+}
+
 .homeNav {
   width: 100%;
   max-width: 152rem;
@@ -697,6 +711,20 @@
   justify-content: space-between;
   align-items: center;
   position: relative;
+  .side:nth-child(1) {
+    a {
+      font-size: 1.5rem;
+      transition: all 0.3s;
+      &:hover {
+        color: white;
+        transition: all 0.3s;
+      }
+    }
+    li {
+      list-style: none;
+      margin-left: 1rem;
+    }
+  }
   button {
     width: 14rem;
   }

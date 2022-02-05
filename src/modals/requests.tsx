@@ -41,7 +41,7 @@ const Requests = () => {
                                         <button onClick={(e) => {
                                             e.preventDefault();
                                             projectHook.rejectHandler(value.id)
-                                        }} className='btn btn--red'>Decline</button>
+                                        }} className='btn btn--decline'>Decline</button>
                                     </div>
                                 </div>
                         )})
