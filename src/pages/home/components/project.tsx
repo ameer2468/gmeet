@@ -75,12 +75,13 @@ const Project = ({data, remove, noRequest}: props) => {
                                </button>
                            :
                             username !== data.owner && requestsLoading ? '' :
-                                !authUser.requests ? '' : authUser.requests.includes(data.project_id) ?
+                                !authUser.requests ? '' : authUser.requests.map((value: any) => {
+                                    return value.project_id
+                                }).includes(data.project_id) || data.owner === authUser.username ?
+                                    '' :
                                <button onClick={() => {
                                    projectHook.toggleJoin(data)
                                }} className='btn btn--transparent'>Request To Join</button>
-                               : ''
-
                        }
                    </div>
                </div>

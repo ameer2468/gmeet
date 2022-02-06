@@ -38,11 +38,15 @@ export function deleteProjectThunk(project_id: string) {
 }
 
 export function joinProjectsThunk(data: projectRequest) {
-    return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
+    return async (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
+        const userReducer = getState();
+        const {userStore} = userReducer;
         dispatch(joinProjectRequest(data)).then( async() => {
             dispatch(joinLoading(false))
             dispatch(ActiveModal(''))
-            dispatch(getRequestsThunk());
+            dispatch(authedUser({...userStore.authUser, requests: [
+                    ...userStore.authUser.requests, {...data}
+                ]}))
          })
     }
 }

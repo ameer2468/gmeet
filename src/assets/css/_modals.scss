@@ -84,7 +84,7 @@
     margin: 0.5rem 0 1rem 0;
   }
   .user-project {
-    background-color: lighten(rgba($input, 0.5), 2);
+    @include Card;
     width: 100%;
     display: inline-block;
     border: 1px solid #333338;

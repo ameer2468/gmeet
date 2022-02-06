@@ -6,7 +6,16 @@
 
 /*Profession selection dropdown*/
 
+.dd-scroll-list, .dd-list {
+  background: rgba($cardbg, 0.3) !important;
+  backdrop-filter: blur(20px) !important;
+  border: 1px solid $customborder!important;
+}
+
 .dd-header {
+  background: rgba($cardbg, 0.3) !important;
+  backdrop-filter: blur(20px) !important;
+  border: 1px solid $customborder!important;
   svg path {
     fill: white;
   }

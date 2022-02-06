@@ -21,9 +21,8 @@ import {ActiveModal} from "../redux/modals/modalSlice";
 import {project} from "../redux/projects/types";
 import {v4 as uuidv4} from "uuid";
 import {notify} from "../helpers/notify";
-import {projectLoading} from "../redux/projects/projectSlice";
 import {acceptRequest, IcreateProject} from "../redux/types";
-import {deleteProjectThunk, editProjectThunk, getProjectsThunk, joinProjectsThunk} from "../redux/projects/thunks";
+import {deleteProjectThunk, editProjectThunk, joinProjectsThunk} from "../redux/projects/thunks";
 import {deleteCommentThunk, deletePostThunk} from "../redux/posts/thunks";
 import {sendNotificationThunk} from "../redux/user/thunk";
 
@@ -157,8 +156,6 @@ function joinProject() {
             return notify('Speciality and a reason to join are required')
         }
         dispatch(joinLoading(true))
-        dispatch(projectLoading(true))
-        dispatch(requestsLoading(true))
         const data = {
             project_id: projects.selectedProject.project_id,
             user: authUser.username,
@@ -172,7 +169,6 @@ function joinProject() {
            sendNotification(userFollowers, `${authUser.username} has requested to join your project ${projects.selectedProject.name}`)
        }
     })
-    dispatch(getProjectsThunk());
     notify('Request submitted successfully')
     }
 
