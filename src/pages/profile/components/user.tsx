@@ -29,7 +29,6 @@ const User = ({data}: props) => {
         uploadRef.current?.click();
     }
 
-
     const handleFileInput = (e: any) => {
        const file = e.target.files[0]
         if (file.size > 810000) {
@@ -43,7 +42,6 @@ const User = ({data}: props) => {
        reader.readAsDataURL(e.target.files[0]);
        dispatch(fileUpload(file));
     }
-
 
     return (
                 <Card height={'50rem'} flex={'0 0 40%'} customClass={'user'}>

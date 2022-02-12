@@ -76,9 +76,9 @@ export function getUserFollowersThunk(id: string) {
     }
 }
 
-export function sendNotificationThunk(user_ids: [], message: string) {
+export function sendNotificationThunk(user_id: string, message: string) {
     return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
-        dispatch(sendNotifications({user_ids, message}));
+        dispatch(sendNotifications({user_id, message}));
     }
 }
 

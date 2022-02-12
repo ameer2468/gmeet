@@ -34,10 +34,6 @@ export const useProject = () => {
     const dispatch = useAppDispatch();
     const userHook = useUser();
     const {userInfo, authUser} = userHook;
-    const {followers} = authUser;
-    const userFollowers = !authUser.followers ? '' : followers.map((value: any) => {
-        return value.user_id;
-    })
 
 
     function onChange(key: string, value: string) {
@@ -139,8 +135,8 @@ export const useProject = () => {
         })
     }
 
-    function sendNotification(users: [], text: string) {
-        dispatch(sendNotificationThunk(users, text))
+    function sendNotification(user_id: string, text: string) {
+        dispatch(sendNotificationThunk(user_id, text))
     }
 
 
@@ -165,9 +161,7 @@ function joinProject() {
             id: uuidv4()
         }
     dispatch(joinProjectsThunk(data)).then(() => {
-       if (userFollowers.length > 0) {
-           sendNotification(userFollowers, `${authUser.username} has requested to join your project ${projects.selectedProject.name}`)
-       }
+           sendNotification(authUser.attributes.sub, `${authUser.username} has requested to join your project ${projects.selectedProject.name}`)
     })
     notify('Request submitted successfully')
     }
@@ -190,9 +184,7 @@ function joinProject() {
         }
       return dispatch(createProject(data)).then((res) => {
           const {data} = res.payload as IcreateProject;
-          if (userFollowers.length > 0) {
-              sendNotification(userFollowers, `${authUser.username} has created a new project: ${data.name}`)
-          }
+          sendNotification(authUser.attributes.sub, `${authUser.username} has created a new project: ${data.name}`)
           const newProj = {
               project_id: data.project_id,
               name: data.name,

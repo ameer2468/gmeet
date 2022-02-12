@@ -104,9 +104,9 @@ export const uploadUserAsset = createAsyncThunk('user/asset', async (data: {user
     })
     })
 
-export const sendNotifications = createAsyncThunk('notifications/post', async (data: {user_ids: [], message: string}) => {
+export const sendNotifications = createAsyncThunk('notifications/post', async (data: {user_id: string, message: string}) => {
     return await axios.post(`${URL}/notification`, {
-        user_ids: [`${[...data.user_ids]}`],
+        user_id: data.user_id,
         text: data.message
     }, {
         headers: {

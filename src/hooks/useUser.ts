@@ -24,8 +24,8 @@ export function useUser() {
         return dispatch(userFormHandler({...userForm, [key]: value}))
     }
 
-    function sendNotification(users: [], text: string) {
-        dispatch(sendNotificationThunk(users, text))
+    function sendNotification(user_id: string, text: string) {
+        dispatch(sendNotificationThunk(user_id, text))
     }
 
     async function sendGlobalMessage() {
@@ -50,7 +50,7 @@ export function useUser() {
         }
         if (!checkIfFollowing) {
             dispatch(followUserThunk(data));
-            sendNotification([id] as unknown as [], `${authUser.username} has followed you!`)
+            sendNotification(authUser.attributes.sub, `${authUser.username} has followed you!`)
         } else {
            dispatch(unFollowUserThunk(userId));
         }

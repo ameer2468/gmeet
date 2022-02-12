@@ -17,7 +17,7 @@ const Notifications = () => {
                 <Scrollbars style={{height: '20rem'}}>
                     {notificationLoading ? <div style={{display: 'flex', alignItems: 'center', height: '100%'}}>
                         <NotificationLoader/>
-                    </div> : authUser.notifications.length === 0 ? 'No Notifications' :
+                    </div> : authUser.notifications.length === 0 ? <p style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>No Notifications</p> :
                         notificationLoading ? <div style={{display: 'flex', alignItems: 'center', height: '100%', justifyContent: 'space-evenly'}}>
                             <NotificationLoader/>
                             </div> :
