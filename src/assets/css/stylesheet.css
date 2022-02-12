@@ -2043,6 +2043,10 @@ body {
     font-size: 52%;
   }
 
+  .homeNav .side:nth-child(1) li {
+    display: none;
+  }
+
   .main-nav {
     display: none !important;
   }
@@ -2190,6 +2194,18 @@ body {
   .profileContent .user button {
     max-width: 17rem !important;
   }
+  .profileContent .profileContainer .listings .projectCard a {
+    max-width: 100%;
+    width: 100%;
+  }
+  .profileContent .profileContainer .listings .projectCard .buttons {
+    display: flex;
+    flex-direction: column;
+  }
+  .profileContent .profileContainer .listings .projectCard .buttons button {
+    max-width: 100%;
+    margin-bottom: 0.5rem;
+  }
 
   .profileContent .profileContainer .profilePosts .commentInfo .date, .postInfo .date {
     overflow: hidden;
@@ -2220,6 +2236,9 @@ body {
 
   .HomeContent .homeContainer .projectCard p {
     font-size: 1.7rem;
+  }
+  .HomeContent .homeContainer .projectCard .buttons button {
+    margin-bottom: 1rem;
   }
   .HomeContent .homeContainer .flex {
     flex-direction: column;

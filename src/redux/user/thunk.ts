@@ -22,8 +22,8 @@ import {
     userDetails,
     userFormHandler,
     userImageHandler,
-    userImageUpload
 } from "./userSlice";
+import {fileUpload, userImage} from '../image/imageSlice';
 import {getRequestsThunk, getUserProjectsThunk} from "../projects/thunks";
 import {getCommentsThunk, getPostsThunk} from "../posts/thunks";
 import {notify} from "../../helpers/notify";
@@ -158,7 +158,8 @@ export function getCurrentUserThunk(username: string) {
             const {rows} = res.payload.data;
             await dispatch(getUserImage(username)).then((res: any) => {
                 const imageUrl = res.payload.data.imageUrl;
-                const updatedObject = {...rows[0], userImage: imageUrl}
+                const updatedObject = {...rows[0]}
+                dispatch(userImage(imageUrl))
                 dispatch(userDetails(updatedObject))
                 dispatch(userImageHandler(false));
                 dispatch(loading(false))
@@ -171,25 +172,14 @@ export function getCurrentUserThunk(username: string) {
 
 export function uploadUserAssetThunk() {
     return async (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
-        const {userStore} = getState();
-        const userInfo = userStore.userInfo;
-        const authUser = userStore.authUser;
+        const {userStore, imageStore} = getState();
         const data = {
-            file: userStore.imageUpload,
+            file: imageStore.fileUpload,
             username: userStore.authUser.username
         }
-        dispatch(userImageHandler(true));
         await dispatch(uploadUserAsset(data));
-        const newImage = await dispatch(getUserImage(data.username)).then((res: any) => {
-            return res.payload.data.imageUrl;
-            })
-            .catch(() => {
-                notify('An error has occurred')
-            })
-        dispatch(userDetails({...userInfo, userImage: await newImage}))
-        dispatch(authedUser({...authUser, userImage: await newImage}))
-        dispatch(userImageHandler(false));
-        dispatch(userImageUpload(undefined));
+        dispatch(fileUpload(undefined));
+        notify('Profile picture successfully updated')
     }
 }
 

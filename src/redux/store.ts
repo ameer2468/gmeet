@@ -5,6 +5,7 @@ import {projectSlice} from "./projects/projectSlice";
 import storage from "redux-persist/lib/storage";
 import { persistReducer } from 'redux-persist'
 import {postsSlice} from "./posts/postsSlice";
+import {imageSlice} from "./image/imageSlice";
 import {ThunkDispatch, Action} from "@reduxjs/toolkit";
 import {useDispatch} from "react-redux";
 
@@ -13,11 +14,12 @@ const reducers = combineReducers({
     modalStore: modalSlice.reducer,
     projectStore: projectSlice.reducer,
     postsStore: postsSlice.reducer,
+    imageStore: imageSlice.reducer
 })
 
 const persistConfig = {
     key: 'root',
-    blacklist: ['modalStore', 'projectStore', 'postsStore', 'resetStore'],
+    blacklist: ['modalStore', 'projectStore', 'postsStore', 'resetStore', 'imageStore'],
     storage
 };
 

@@ -88,9 +88,6 @@ export const userSlice = createSlice({
         notificationLoading: (state, action: PayloadAction<boolean>) => {
             state.notificationLoading = action.payload;
         },
-        imageTimeHandler: (state, action: PayloadAction<any>) => {
-            state.imageTimeStamp = action.payload;
-        },
         userImageUpload: (state, action: PayloadAction<any>) => {
             state.imageUpload = action.payload;
         },
@@ -100,19 +97,19 @@ export const userSlice = createSlice({
         loading: (state, action: PayloadAction<boolean>) => {
             state.Loading = action.payload;
         },
-        // reset(state) {
-        //     Object.assign(state, initialState)
-        // }
+        reset(state) {
+            Object.assign(state, initialState)
+        }
     },
 })
 
 export const {
     userDetails,
     userFormHandler,
-    imageTimeHandler,
     globalMessagesHandler,
     changePasswordLoading,
     status,
+    reset,
     loading,
     toggleChatHandler,
     authedUser,

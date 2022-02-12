@@ -1,5 +1,5 @@
 import {useAppDispatch, useAppSelector} from "../redux/hooks";
-import {authedUser, changePasswordLoading, userDetails, userFormHandler, userReducer} from "../redux/user/userSlice";
+import {changePasswordLoading, userFormHandler, userReducer} from "../redux/user/userSlice";
 import {
     followUserThunk,
     sendGlobalMessageThunk,
@@ -88,9 +88,7 @@ export function useUser() {
         dispatch(changePasswordLoading(false));
     }
 
-    async function uploadUserImage() {
-        dispatch(userDetails({...userInfo, userImage: ''}))
-        dispatch(authedUser({...authUser, userImage:  ''}))
+   async function uploadUserImage() {
         await dispatch(uploadUserAssetThunk())
     }
 

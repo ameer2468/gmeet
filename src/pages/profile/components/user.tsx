@@ -4,11 +4,12 @@ import {faGlobe, faEdit, faPencilAlt,faCheck, faUser} from "@fortawesome/free-so
 import Card from "./card";
 import LoadingSpinner from "../../../components/global/LoadingSpinner";
 import {useAppDispatch, useAppSelector} from "../../../redux/hooks";
-import {userImageUpload, userReducer} from "../../../redux/user/userSlice";
+import {authedUser, userReducer} from "../../../redux/user/userSlice";
 import {useUser} from "../../../hooks/useUser";
 import placeholder from '../../../assets/images/placeholder.png';
 import {notify} from "../../../helpers/notify";
 import {NavLink} from "react-router-dom";
+import {fileUpload, imageReducer, userImage} from "../../../redux/image/imageSlice";
 
 interface props {
     data: any;
@@ -17,23 +18,32 @@ interface props {
 const User = ({data}: props) => {
 
     const {Loading} = useAppSelector(userReducer);
+    const imageStore = useAppSelector(imageReducer);
     const userHook = useUser();
     const {userImageLoading} = userHook.user;
     const {authUser} = userHook;
-    const {imageUpload} = userHook.user;
     const uploadRef = useRef<any>(null);
     const dispatch = useAppDispatch();
 
     const handleUploadClick = () => {
         uploadRef.current?.click();
     }
+
+
     const handleFileInput = (e: any) => {
        const file = e.target.files[0]
         if (file.size > 810000) {
             return notify('You cannot upload a file larger than 800kb')
         }
-       dispatch(userImageUpload(file));
+       const reader: FileReader = new FileReader();
+        reader.onload = () => {
+            dispatch(userImage(reader.result))
+            dispatch(authedUser({...authUser, userImage: reader.result}))
+        }
+       reader.readAsDataURL(e.target.files[0]);
+       dispatch(fileUpload(file));
     }
+
 
     return (
                 <Card height={'50rem'} flex={'0 0 40%'} customClass={'user'}>
@@ -57,7 +67,7 @@ const User = ({data}: props) => {
                                                 <button onClick={handleUploadClick} className="uploadImage">
                                                     <FontAwesomeIcon icon={faPencilAlt}/>
                                                 </button>
-                                                {imageUpload === undefined || imageUpload === '' ?
+                                                {imageStore.fileUpload === undefined || imageStore.fileUpload === '' ?
                                                     '' :
                                                     <button className='confirm' onClick={() => {
                                                         userHook.uploadUserImage();
@@ -71,9 +81,9 @@ const User = ({data}: props) => {
                                         }
                                         {
                                             userImageLoading ? '' :
-                                            <img style={{width: '100%', height: '100%'}} key={data.userImage} onError={e => {
+                                            <img style={{width: '100%', height: '100%'}} key={imageStore.userImage} onError={e => {
                                                 e.currentTarget.src = placeholder
-                                            }} src={data.userImage} alt="profile"/>
+                                            }} src={imageStore.userImage} alt="profile"/>
                                         }
                                     </div>
                                 }

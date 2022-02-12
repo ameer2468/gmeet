@@ -11,7 +11,7 @@ import {NavLink} from "react-router-dom";
 import placeholder from '../assets/images/placeholder.png'
 import LoadingSpinner from "./global/LoadingSpinner";
 import Notifications from "./global/notifications";
-import {getAssetThunk, getNotifications} from "../redux/user/thunk";
+import {getNotifications} from "../redux/user/thunk";
 
 const Authnav = () => {
 
@@ -45,7 +45,7 @@ const Authnav = () => {
         <nav className="authnav">
             <div className="container">
                 <div className="side">
-                    <h1>Gmeet</h1>
+                    <NavLink to={'/home'}><h1>Gmeet</h1></NavLink>
                     <nav>
                         <ul className='main-nav'>
                             <li><NavLink to={'/home'}>Home</NavLink></li>
@@ -75,7 +75,7 @@ const Authnav = () => {
                         {userImageLoading ? <div style={{marginRight: 15, marginTop: 5}}>
                             <LoadingSpinner height={25} width={25}/></div> :
                             <img style={{width: '3.5rem', height: '3.5rem'}} key={authUser.userImage} onError={(e) => {
-                                    dispatch(getAssetThunk(authUser.username))
+                                    // dispatch(getAssetThunk(authUser.username))
                                     e.currentTarget.src = placeholder
                             }} alt='profile'
                                  src={authUser.userImage} className='userImage'/>}

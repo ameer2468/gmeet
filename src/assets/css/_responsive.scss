@@ -15,6 +15,9 @@
   html {
     font-size: 52%;
   }
+  .homeNav .side:nth-child(1) li {
+    display: none;
+  }
   .main-nav {
     display: none!important;
   }
@@ -176,6 +179,20 @@
         max-width: 17rem!important;
       }
     }
+    .profileContainer .listings .projectCard {
+      a {
+        max-width: 100%;
+        width: 100%;
+      }
+      .buttons {
+        display: flex;
+        flex-direction: column;
+        button {
+          max-width: 100%;
+          margin-bottom: 0.5rem;
+        }
+      }
+    }
   }
   .profileContent .profileContainer .profilePosts .commentInfo, .postInfo {
     .date {
@@ -206,6 +223,11 @@
     .projectCard {
       p {
         font-size: 1.7rem;
+      }
+      .buttons {
+        button {
+          margin-bottom: 1rem;
+        }
       }
     }
     .flex {
