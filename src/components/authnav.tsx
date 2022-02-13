@@ -41,8 +41,6 @@ const Authnav = () => {
         }
     }
 
-    console.log(notificationLoading)
-
     return (
         <nav className="authnav">
             <div className="container">

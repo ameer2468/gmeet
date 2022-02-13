@@ -100,13 +100,10 @@ export function followUserThunk(info: {id: string, user_id: string, follower_id:
         const userReducer = getState();
         const {authUser} = userReducer.userStore;
         const data = {...info}
+        dispatch(authedUser({...authUser,
+            following: [...authUser.following, data]
+        }))
         dispatch(followUserService(data))
-            .then((res: any) => {
-                const {data} = res.payload;
-                dispatch(authedUser({...authUser,
-                    following: [...authUser.following, data]
-                }))
-            })
             .catch(() => {
             notify('An error has occurred')
         })
@@ -139,12 +136,10 @@ export function unFollowUserThunk(id: string) {
     return async (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
         const userReducer = getState();
         const {authUser} = userReducer.userStore;
+        dispatch(authedUser({...authUser,
+            following: authUser.following.filter((item: {id: string}) => item.id !== id),
+        }))
         dispatch(unFollowUserService(id))
-            .then(() => {
-                dispatch(authedUser({...authUser,
-                    following: authUser.following.filter((item: {id: string}) => item.id !== id),
-                }))
-            })
             .catch(() => {
             notify('An error has occurred')
         })
@@ -191,9 +186,9 @@ export function getAllUserData(username: string) {
         dispatch(postsLoadingHandler(true))
         dispatch(commentPostLoading(true));
         await dispatch(getCurrentUserThunk(username));
-        await dispatch(getUserProjectsThunk(username))
+        dispatch(getUserProjectsThunk(username))
         dispatch(getRequestsThunk());
-        await dispatch(getUserFollowersThunk(id));
+        dispatch(getUserFollowersThunk(id));
         dispatch(getPostsThunk(username)).then(() => {
            dispatch(getCommentsThunk(username)).then(() => {
                dispatch(postsLoadingHandler(false))

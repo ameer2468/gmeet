@@ -116,10 +116,13 @@ body {
   font-size: 2.3rem;
 }
 
-.article-text {
-  font-size: 1.7rem;
-  line-height: 1.5;
+.article .article-text {
+  font-size: 1.55rem;
+  line-height: 2.7rem;
   margin-top: 1.5rem;
+}
+.article .content {
+  margin: 5rem 0;
 }
 
 .TopContent {
@@ -305,12 +308,15 @@ body {
 }
 .HomeContent .homeContainer .projectCard p {
   margin: 2rem 0 3rem 0;
-  font-size: 1.55rem;
+  font-size: 1.4rem;
   height: 13.2rem;
   text-align: justify;
   word-break: break-all;
   width: 100%;
   line-height: 2.5rem;
+}
+.HomeContent .homeContainer .projectCard .buttons {
+  margin-top: 4.5rem;
 }
 .HomeContent .homeContainer .projectCard .buttons button {
   margin: 0 0.5rem;
@@ -359,7 +365,7 @@ body {
   margin: 0.5rem 1rem 0 1.5rem;
 }
 .detailsContent .detailsContainer header h1 {
-  font-size: 5rem;
+  font-size: 4rem;
   color: white;
 }
 .detailsContent .detailsContainer header h3 {
@@ -665,6 +671,7 @@ body {
 }
 .profileContent .profileContainer .listings .projectCard .buttons {
   display: flex;
+  margin-top: 5.5rem;
   justify-content: center;
   color: black;
 }
@@ -1467,7 +1474,7 @@ body {
 
 .error {
   color: #ff7f7f;
-  font-size: 1.7rem;
+  font-size: 1.4rem;
   margin: 0.5rem 0 1rem 0;
 }
 

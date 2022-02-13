@@ -7,6 +7,9 @@ interface props {
 }
 
 const PostInfo = ({projectDetails}: props) => {
+
+
+
     return (
         <div className="article">
             <header>
@@ -19,7 +22,9 @@ const PostInfo = ({projectDetails}: props) => {
                     </NavLink>
                 </div>
             </header>
-            <p className='article-text'>{projectDetails.project.description}</p>
+            <div className="content">
+                <p className='article-text'>{projectDetails.project.description}</p>
+            </div>
         </div>
     );
 };

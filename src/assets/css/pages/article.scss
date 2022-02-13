@@ -1,5 +1,10 @@
-.article-text {
-  font-size: 1.7rem;
-  line-height: 1.5;
-  margin-top: 1.5rem;
+.article {
+  .article-text {
+    font-size: 1.55rem;
+    line-height: 2.7rem;
+    margin-top: 1.5rem;
+  }
+  .content {
+    margin: 5rem 0;
+  }
 }

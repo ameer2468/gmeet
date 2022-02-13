@@ -1,3 +1,3 @@
-export function shortenText(text:string) {
-  return text.substring(0, 200) + `${text.length > 200 ? '...' : ''}`;
+export function shortenText(text:string, length: number) {
+  return text.substring(0, length) + `${text.length > length ? '...' : ''}`;
 }

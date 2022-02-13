@@ -56,7 +56,7 @@ const Project = ({data, remove, noRequest}: props) => {
                            </>
                    }
                    <h2>{data.name}</h2>
-                   <p>{shortenText(data.description)}</p>
+                   <p>{shortenText(data.description, 250)}</p>
 
                    <div className={'buttons'}>
                        <Link to={`/project/${data.name}`}>
