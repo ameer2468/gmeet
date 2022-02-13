@@ -80,6 +80,7 @@ export function getUserProjectsThunk(username: string) {
     return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
         await dispatch(getUserProjects(username)).then((res: any) => {
             const {payload} = res;
+            console.log(payload)
             dispatch(userProjects(payload.data.rows))
             dispatch(projectLoading(false))
         })

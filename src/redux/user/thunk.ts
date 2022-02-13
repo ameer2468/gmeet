@@ -191,9 +191,9 @@ export function getAllUserData(username: string) {
         dispatch(postsLoadingHandler(true))
         dispatch(commentPostLoading(true));
         await dispatch(getCurrentUserThunk(username));
-        dispatch(getUserProjectsThunk(username))
+        await dispatch(getUserProjectsThunk(username))
         dispatch(getRequestsThunk());
-        dispatch(getUserFollowersThunk(id));
+        await dispatch(getUserFollowersThunk(id));
         dispatch(getPostsThunk(username)).then(() => {
            dispatch(getCommentsThunk(username)).then(() => {
                dispatch(postsLoadingHandler(false))

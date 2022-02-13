@@ -11,12 +11,12 @@ import {NavLink} from "react-router-dom";
 import placeholder from '../assets/images/placeholder.png'
 import LoadingSpinner from "./global/LoadingSpinner";
 import Notifications from "./global/notifications";
-import {getNotifications} from "../redux/user/thunk";
+import {getAssetThunk, getNotifications} from "../redux/user/thunk";
 
 const Authnav = () => {
 
     const userStore = useAppSelector(userReducer)
-    const {userImageLoading} = userStore;
+    const {userImageLoading, notificationLoading} = userStore;
     const authUser = userStore.authUser === undefined ? '' : userStore.authUser;
     const [open, setOpen] = useState(false);
     const [openNotifications, setOpenNotifications] = useState(false);
@@ -41,6 +41,8 @@ const Authnav = () => {
         }
     }
 
+    console.log(notificationLoading)
+
     return (
         <nav className="authnav">
             <div className="container">
@@ -56,7 +58,7 @@ const Authnav = () => {
                 </div>
                 <div className="side">
                     <div ref={notifref} className="notification">
-                            <div className="alert"/>
+                        {notificationLoading ? '' : authUser.notifications.length === 0 ? '' : <div className="alert"/> }
                             <FontAwesomeIcon onClick={() => {
                                 setOpenNotifications(!openNotifications)
                                 dispatch(getNotifications(authUser.attributes.sub))
@@ -75,7 +77,7 @@ const Authnav = () => {
                         {userImageLoading ? <div style={{marginRight: 15, marginTop: 5}}>
                             <LoadingSpinner height={25} width={25}/></div> :
                             <img style={{width: '3.5rem', height: '3.5rem'}} key={authUser.userImage} onError={(e) => {
-                                    // dispatch(getAssetThunk(authUser.username))
+                                    dispatch(getAssetThunk(authUser.username))
                                     e.currentTarget.src = placeholder
                             }} alt='profile'
                                  src={authUser.userImage} className='userImage'/>}
