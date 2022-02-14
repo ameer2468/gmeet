@@ -8,7 +8,7 @@ import {
     getNotificationsService,
     getUser,
     getUserFollowers,
-    getUserImage,
+    getUserImage, markAsReadService,
     postGlobalMessage,
     sendNotifications,
     unFollowUserService,
@@ -79,6 +79,23 @@ export function getUserFollowersThunk(id: string) {
 export function sendNotificationThunk(user_id: string, message: string) {
     return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
         dispatch(sendNotifications({user_id, message}));
+    }
+}
+
+export function markAsReadThunk(user_id: string, timestamp: string) {
+    return async (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
+        const userStore = getState();
+        const {authUser} = userStore.userStore;
+        dispatch(markAsReadService({user_id, timestamp})).then(() => {
+            const updateNotifications = {
+                ...authUser, notifications: authUser.notifications.map((value: any) => {
+                    return value.read_at === null ? {...value, read_at: timestamp} : value
+                })
+            }
+            dispatch(authedUser(updateNotifications));
+        }).catch((err) => {
+            console.log(err)
+        })
     }
 }
 

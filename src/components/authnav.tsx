@@ -29,6 +29,9 @@ const Authnav = () => {
     const closeNotification = () => {
         setOpenNotifications(false);
     }
+    const checkRead = !authUser.notifications ? '' : authUser.notifications.filter((value: any) => {
+        return value.read_at === null;
+    })
     const ref = useDetectClickOutside({ onTriggered: closeDrop});
     const notifref = useDetectClickOutside({ onTriggered: closeNotification});
 
@@ -56,7 +59,7 @@ const Authnav = () => {
                 </div>
                 <div className="side">
                     <div ref={notifref} className="notification">
-                        {notificationLoading ? '' : authUser.notifications.length === 0 ? '' : <div className="alert"/> }
+                        {notificationLoading ? '' : checkRead.length === 0 ? '' : <div className="alert"/> }
                             <FontAwesomeIcon onClick={() => {
                                 setOpenNotifications(!openNotifications)
                                 dispatch(getNotifications(authUser.attributes.sub))

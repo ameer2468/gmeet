@@ -1669,6 +1669,13 @@ body {
   width: 100%;
   margin: 0 auto;
 }
+.authnav .container .side .notification .notification-item .emptyCircle {
+  background: grey !important;
+}
+.authnav .container .side .notification .notification-item .emptyCircle::before {
+  animation: none !important;
+  display: none;
+}
 .authnav .container .side .notification .notification-item .circle {
   width: 0.5rem;
   height: 0.5rem;

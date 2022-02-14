@@ -556,6 +556,13 @@
             width: 100%;
             margin: 0 auto;
           }
+          .emptyCircle {
+            background: grey!important;
+            &::before {
+              animation: none!important;
+              display: none;
+            }
+          }
           .circle {
             width: 0.5rem;
             height: 0.5rem;

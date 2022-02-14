@@ -1,7 +1,7 @@
 import {useAppDispatch, useAppSelector} from "../redux/hooks";
 import {changePasswordLoading, userFormHandler, userReducer} from "../redux/user/userSlice";
 import {
-    followUserThunk,
+    followUserThunk, markAsReadThunk,
     sendGlobalMessageThunk,
     sendNotificationThunk,
     unFollowUserThunk,
@@ -26,6 +26,10 @@ export function useUser() {
 
     function sendNotification(user_id: string, text: string) {
         dispatch(sendNotificationThunk(user_id, text))
+    }
+
+    async function markAsRead() {
+        await dispatch(markAsReadThunk(authUser.attributes.sub, moment().format('MMMM Do YYYY')));
     }
 
     async function sendGlobalMessage() {
@@ -101,6 +105,7 @@ export function useUser() {
         sendGlobalMessage,
         uploadUserImage,
         forgotPassword,
+        markAsRead,
         forgotPasswordConfirm,
         followHandler,
         authUser,

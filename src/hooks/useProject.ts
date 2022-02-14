@@ -33,7 +33,7 @@ export const useProject = () => {
     const {projectForm} = projects;
     const dispatch = useAppDispatch();
     const userHook = useUser();
-    const {userInfo, authUser} = userHook;
+    const {authUser} = userHook;
 
 
     function onChange(key: string, value: string) {
@@ -178,8 +178,8 @@ function joinProject() {
           project_id: uuidv4(),
           name: projectForm.name,
           description: projectForm.description,
-          owner: userInfo.username,
-          user_id: userInfo.id,
+          owner: authUser.username,
+          user_id: authUser.attributes.sub,
           role: 'Founder'
         }
       return dispatch(createProject(data)).then((res) => {
@@ -199,6 +199,9 @@ function joinProject() {
           dispatch(createProjectLoading(false))
           dispatch(ActiveModal(''))
           dispatch(projectValues({name: '', description: '', searchterm: ''}))
+      }).catch((err) => {
+          notify(err)
+          dispatch(createProjectLoading(false))
       })
     }
 

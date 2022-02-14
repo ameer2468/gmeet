@@ -115,6 +115,17 @@ export const sendNotifications = createAsyncThunk('notifications/post', async (d
     })
 })
 
+export const markAsReadService = createAsyncThunk('notifications/read', async (data: {user_id: string, timestamp: string}) => {
+    return await axios.put(`${URL}/notification`, {
+        user_id: data.user_id,
+        timestamp: data.timestamp
+    }, {
+        headers: {
+            'x-api-key': process.env.REACT_APP_API_KEY,
+        },
+    })
+})
+
 export const getNotificationsService = createAsyncThunk('get/notifications', async (id: string) => {
     return await axios.get(`${URL}/notification`, {
         headers: {
