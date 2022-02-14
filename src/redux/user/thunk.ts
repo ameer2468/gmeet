@@ -86,14 +86,14 @@ export function markAsReadThunk(user_id: string, timestamp: string) {
     return async (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
         const userStore = getState();
         const {authUser} = userStore.userStore;
-        dispatch(markAsReadService({user_id, timestamp})).then(() => {
-            const updateNotifications = {
-                ...authUser, notifications: authUser.notifications.map((value: any) => {
-                    return value.read_at === null ? {...value, read_at: timestamp} : value
-                })
-            }
-            dispatch(authedUser(updateNotifications));
-        }).catch((err) => {
+        const updateNotifications = {
+            ...authUser, notifications: authUser.notifications.map((value: any) => {
+                return value.read_at === null ? {...value, read_at: timestamp} : value
+            })
+        }
+        dispatch(authedUser(updateNotifications));
+        dispatch(markAsReadService({user_id, timestamp}))
+            .catch((err) => {
             console.log(err)
         })
     }
