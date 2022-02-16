@@ -23,7 +23,9 @@ interface ProjectState {
     projectDetailsLoading: boolean;
     projectForm: {
         name: string;
+        imageSrc: any;
         gituser: string;
+        imageFile: any,
         description: string;
         searchterm: string;
         role: string;
@@ -55,6 +57,8 @@ const initialState: ProjectState = {
     },
     error: false,
     projectForm: {
+        imageFile: {},
+        imageSrc: '',
         name: '',
         description: '',
         searchterm: '',

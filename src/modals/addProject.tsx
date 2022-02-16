@@ -3,6 +3,7 @@ import Modal from "../components/modal";
 import Input from "../components/global/input";
 import TextArea from "../components/global/textarea";
 import {useProject} from "../hooks/useProject";
+import {DropZone} from "../components/DropZone";
 
 
 
@@ -22,7 +23,8 @@ const AddProject = () => {
         >
             <form className='generalForm'>
                 <Input value={projectForm.name} useHook={projectHook} name={'name'} maxWidth={'100%'} placeholder={'Project name'}/>
-                <TextArea maxLength={500} useHook={projectHook} name={'description'} maxWidth={'100%'} placeholder={'Project description'} height={'20rem'}/>
+                <DropZone/>
+                <TextArea maxLength={2000} useHook={projectHook} name={'description'} maxWidth={'100%'} placeholder={'Project description'} height={'20rem'}/>
             </form>
         </Modal>
     );

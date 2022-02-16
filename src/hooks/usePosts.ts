@@ -47,7 +47,7 @@ export const usePosts = () => {
             id: uuidv4(),
             post_id: post_id,
             posted_by: username,
-            date: moment().format('MMMM Do YYYY, h:mm:ss a'),
+            date: moment().format('MMMM Do YYYY, h:mm a'),
             comment: postsStore.postForm.comment
         }))
        dispatch(postValues({
@@ -59,7 +59,7 @@ export const usePosts = () => {
         dispatch(addPostThunk({
             post: postsStore.postForm.post,
             post_id: uuidv4(),
-            date: moment().format('MMMM Do YYYY, h:mm:ss a'),
+            date: moment().format('MMMM Do YYYY, h:mm a'),
             user: username,
             comments: []
         }))

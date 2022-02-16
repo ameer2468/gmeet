@@ -71,6 +71,9 @@ export function useUser() {
     }
 
     async function changePassword() {
+        if (userForm.newPassword !== userForm.confirmOldPassword) {
+            return notify('New and confirm passwords do not match')
+        }
         if (userForm.newPassword.length === 0 || userForm.oldPassword.length === 0) {
            return notify('Please fill all fields')
         }

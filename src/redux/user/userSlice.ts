@@ -43,6 +43,7 @@ const initialState: UserState = {
     imageTimeStamp: '',
     globalMessages: [],
     userForm: {
+        confirmOldPassword: '',
         oldPassword: '',
         newPassword: '',
         username: '',

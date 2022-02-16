@@ -9,6 +9,7 @@ export interface User {
 }
 
 export interface userForm {
+    confirmOldPassword: string;
     oldPassword: string;
     newPassword: string;
     username: string;

@@ -356,6 +356,7 @@
 
 .textarea {
   @include Textarea;
+  overflow: scroll;
   background: $input;
 }
 

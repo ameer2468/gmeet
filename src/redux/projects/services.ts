@@ -118,6 +118,25 @@ export const getUserProjects = createAsyncThunk('projects/getproject', async (us
     })
 })
 
+export const uploadProjectImage = createAsyncThunk('project/image', async(data: {project_id: string, file: any}) => {
+    const file = data.file;
+    return await axios.post(`${URL}/project/image`, {
+        project_id: data.project_id,
+        fileType: file.type
+    }, {
+        headers: {
+            'x-api-key': process.env.REACT_APP_API_KEY,
+        }
+    }).then((res) => {
+        const {fileUploadURL, fileType} = res.data;
+        axios.put(`${fileUploadURL}`, file, {
+            headers: {
+                'Content-Type': fileType,
+            }
+        })
+    })
+})
+
 export const editProjects = createAsyncThunk('project/editproject', async (data: editProject) => {
     return await axios.put(`${URL}/project`, {
         project_id: data.project_id,

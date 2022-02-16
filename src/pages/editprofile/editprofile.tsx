@@ -23,14 +23,22 @@ const EditProfile = () => {
                     }}>
                        <Input
                            maxWidth={'100%'}
-                           placeholder={'Current Password'}
+                           placeholder={'Current password'}
                            useHook={userHook}
                            value={userForm.oldPassword}
                            type={'password'}
                            name={'oldPassword'}/>
                         <Input
                             maxWidth={'100%'}
-                            placeholder={'New Password'}
+                            placeholder={'Confirm current password'}
+                            useHook={userHook}
+                            value={userForm.confirmOldPassword}
+                            type={'password'}
+                            name={'confirmOldpassword'}
+                        />
+                        <Input
+                            maxWidth={'100%'}
+                            placeholder={'New password'}
                             useHook={userHook}
                             value={userForm.newPassword}
                             type={'password'}

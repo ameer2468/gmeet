@@ -14,7 +14,7 @@ import {
     acceptRequests,
     createProject,
     getProjects,
-    rejectJoinRequest
+    rejectJoinRequest, uploadProjectImage
 } from "../redux/projects/services";
 import {useUser} from "./useUser";
 import {ActiveModal} from "../redux/modals/modalSlice";
@@ -49,7 +49,7 @@ export const useProject = () => {
 
     function toggleCreateProject() {
         dispatch(ActiveModal('ADD_PROJECT'))
-        dispatch(projectValues({...projectForm, name: '', description: ''}))
+        dispatch(projectValues({...projectForm, name: '', description: '', imageFile: '', imageSrc: ''}))
     }
 
     function toggleDelete(projectInfo: project) {
@@ -166,7 +166,7 @@ function joinProject() {
     notify('Request submitted successfully')
     }
 
-    function createProjectHandler() {
+    async function createProjectHandler() {
         if (projectForm.name.length === 0 || projectForm.description.length === 0) {
             return notify('A project name and description is required');
         }
@@ -182,7 +182,8 @@ function joinProject() {
           user_id: authUser.attributes.sub,
           role: 'Founder'
         }
-      return dispatch(createProject(data)).then((res) => {
+      await dispatch(uploadProjectImage({project_id: data.project_id, file: projectForm.imageFile}))
+      await dispatch(createProject(data)).then((res) => {
           const {data} = res.payload as IcreateProject;
           sendNotification(authUser.attributes.sub, `${authUser.username} has created a new project: ${data.name}`)
           const newProj = {

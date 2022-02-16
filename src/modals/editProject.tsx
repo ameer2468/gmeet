@@ -25,7 +25,13 @@ const EditProject = () => {
         >
             <form className='generalForm'>
                 <Input value={projectForm.name} useHook={projectHook} name={'name'} maxWidth={'100%'} placeholder={'Project name'}/>
-                <TextArea value={projectForm.description} useHook={projectHook} name={'description'} maxWidth={'100%'} placeholder={'Project description'} height={'20rem'}/>
+                <TextArea maxLength={2000}
+                          value={projectForm.description}
+                          useHook={projectHook}
+                          name={'description'}
+                          maxWidth={'100%'}
+                          placeholder={'Project description'}
+                          height={'20rem'}/>
             </form>
         </Modal>
     );

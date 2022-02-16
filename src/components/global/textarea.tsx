@@ -11,6 +11,7 @@ interface props {
     height: string;
     className?: string;
     name: string;
+    customStyle?: any;
     maxLength?: number;
 }
 
@@ -29,7 +30,7 @@ const TextArea = (props: props) => {
             onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
                 onChange(props.name, e.target.value)
             }}
-            style={{maxWidth: props.maxWidth, height: props.height}}
+            style={{maxWidth: props.maxWidth, height: props.height, ...props.customStyle}}
             />
     );
 };
