@@ -208,7 +208,6 @@
       .projectCard {
         @include Card;
         width: 100%;
-        height: auto;
         border-radius: 0.5rem;
         transition: all 0.3s;
         padding: 3rem;
@@ -225,6 +224,7 @@
           top: -1.5rem;
           width: 5rem;
           height: 5rem;
+          z-index: 10;
           background: lighten($cardbg, 4);
           border-radius: 4rem;
           display: flex;
@@ -242,6 +242,7 @@
           position: absolute;
           right: -1.5rem;
           top: -1.5rem;
+          z-index: 10;
           width: 5rem;
           height: 5rem;
           background: lighten($cardbg, 4);
@@ -283,16 +284,23 @@
           font-size: 1.55rem;
           width: 100%;
           line-height: 2.5rem;
+          position: relative;
+          z-index: 10;
         }
         .buttons {
           display: flex;
           justify-content: center;
           color: black;
+          position: relative;
+          z-index: 10;
+          margin-top: 8.5rem;
         }
         h2 {
           color: white;
           text-align: center;
           font-size: 2rem;
+          position: relative;
+          z-index: 10;
         }
         &:hover {
           transform: translateY(-0.2rem);

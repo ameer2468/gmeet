@@ -35,6 +35,7 @@ export interface editProject {
 export interface project {
     project_id: string;
     name: string;
+    image: string;
     description: string;
     owner: string;
     role: string;

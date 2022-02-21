@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {ChangeEvent, useRef} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faGlobe, faEdit, faPencilAlt,faCheck, faUser} from "@fortawesome/free-solid-svg-icons";
 import Card from "./card";
@@ -29,8 +29,9 @@ const User = ({data}: props) => {
         uploadRef.current?.click();
     }
 
-    const handleFileInput = (e: any) => {
-       const file = e.target.files[0]
+    const handleFileInput = (e: ChangeEvent) => {
+        const target = e.target as HTMLInputElement;
+        const file: File = (target.files as FileList)[0];
         if (file.size > 810000) {
             return notify('You cannot upload a file larger than 800kb')
         }
@@ -39,7 +40,7 @@ const User = ({data}: props) => {
             dispatch(userImage(reader.result))
             dispatch(authedUser({...authUser, userImage: reader.result}))
         }
-       reader.readAsDataURL(e.target.files[0]);
+       reader.readAsDataURL(file);
        dispatch(fileUpload(file));
     }
 

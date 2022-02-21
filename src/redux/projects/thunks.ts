@@ -1,6 +1,6 @@
 import {
     deleteProject,
-    editProjects,
+    editProjects, getProjectImage,
     getProjects,
     getRequests,
     getUserProjects,
@@ -8,7 +8,7 @@ import {
 } from "./services";
 import {
     deleteLoading,
-    joinLoading, projectDetails, projectDetailsLoading, projectLoading,
+    joinLoading, projectArr, projectDetails, projectDetailsLoading, projectLoading,
     projectRequests,
     requestsLoading, topProjectsHandler, topProjectsLoading,
     userProjects
@@ -19,6 +19,7 @@ import {projectRequest} from "./types";
 import {RootState} from "../store";
 import {getAUserAsset} from "../user/thunk";
 import {authedUser} from "../user/userSlice";
+import axios from "axios";
 
 
 export function deleteProjectThunk(project_id: string) {
@@ -31,7 +32,8 @@ export function deleteProjectThunk(project_id: string) {
                 dispatch(ActiveModal(''))
                 dispatch(userProjects(userProjectsData.filter(project => project.project_id !== project_id)))
             })
-            .catch(() => {
+            .catch((err: any) => {
+                console.log(err)
                 dispatch(deleteLoading(false))
             })
     }
@@ -78,10 +80,15 @@ export function getProjectDetails(name: string) {
 
 export function getUserProjectsThunk(username: string) {
     return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
-        await dispatch(getUserProjects(username)).then((res: any) => {
+        await dispatch(getUserProjects(username)).then(async (res: any) => {
             const {payload} = res;
-            console.log(payload)
-            dispatch(userProjects(payload.data.rows))
+            const updatedProjects = payload.data.rows.map(async (value: any) => {
+                return {...value, image: await dispatch(getProjectImage(value.project_id)).then((res: any) => {
+                        return res.payload.data.imageUrl;
+                    })}
+            })
+            const projects = await axios.all(updatedProjects)
+            dispatch(userProjects(projects as any))
             dispatch(projectLoading(false))
         })
     }
@@ -110,7 +117,15 @@ export function getProjectsThunk(value?: string) {
     return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
         dispatch(projectLoading(true));
         await dispatch(getRequestsThunk());
-        await dispatch(getProjects(value ? value : '')).then(async () => {
+        dispatch(getProjects(value ? value : '')).then( async (res) => {
+            const {payload} = res;
+            const updatedProjects = payload.map(async (value: any) => {
+                return {...value, image: await dispatch(getProjectImage(value.project_id)).then((res: any) => {
+                    return res.payload.data.imageUrl;
+                    })}
+            })
+            const projects = await axios.all(updatedProjects)
+            dispatch(projectArr(projects))
             dispatch(projectLoading(false));
         })
     }

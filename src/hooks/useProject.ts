@@ -8,11 +8,11 @@ import {
     deleteLoading,
     joinLoading,
     requestsLoading,
-    projectRequests, editProjectLoading
+    projectRequests, editProjectLoading, projectArr
 } from "../redux/projects/projectSlice";
 import {
     acceptRequests,
-    createProject,
+    createProject, getProjectImage,
     getProjects,
     rejectJoinRequest, uploadProjectImage
 } from "../redux/projects/services";
@@ -25,6 +25,7 @@ import {acceptRequest, IcreateProject} from "../redux/types";
 import {deleteProjectThunk, editProjectThunk, joinProjectsThunk} from "../redux/projects/thunks";
 import {deleteCommentThunk, deletePostThunk} from "../redux/posts/thunks";
 import {sendNotificationThunk} from "../redux/user/thunk";
+import {projectsArr} from "../fakedata";
 
 
 export const useProject = () => {
@@ -179,11 +180,12 @@ function joinProject() {
           name: projectForm.name,
           description: projectForm.description,
           owner: authUser.username,
+          image: '',
           user_id: authUser.attributes.sub,
           role: 'Founder'
         }
       await dispatch(uploadProjectImage({project_id: data.project_id, file: projectForm.imageFile}))
-      await dispatch(createProject(data)).then((res) => {
+      await dispatch(createProject(data)).then(async (res) => {
           const {data} = res.payload as IcreateProject;
           sendNotification(authUser.attributes.sub, `${authUser.username} has created a new project: ${data.name}`)
           const newProj = {
@@ -195,8 +197,11 @@ function joinProject() {
               role: data.role,
               requests: []
           }
-          notify(`Project ${data.name} added successfully`);
-          dispatch(addProject(newProj))
+          await dispatch(getProjectImage(newProj.project_id)).then((res: any) => {
+              const {imageUrl} = res.payload.data;
+              notify(`Project ${data.name} added successfully`);
+              dispatch(addProject({...newProj, image: imageUrl}))
+          })
           dispatch(createProjectLoading(false))
           dispatch(ActiveModal(''))
           dispatch(projectValues({name: '', description: '', searchterm: ''}))

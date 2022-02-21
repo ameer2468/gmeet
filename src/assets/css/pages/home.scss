@@ -72,6 +72,8 @@
       }
       .buttons {
         margin-top: 4.5rem;
+        position: relative;
+        z-index: 10;
           button {
             margin: 0 0.5rem;
           }
@@ -80,6 +82,8 @@
         color: white;
         text-align: center;
         font-size: 2rem;
+        position: relative;
+        z-index: 10;
       }
       &:hover {
         transform: translateY(-1rem);

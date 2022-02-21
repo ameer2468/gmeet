@@ -50,6 +50,7 @@ const initialState: ProjectState = {
     deleteLoading: false,
     selectedProject: {
         project_id: '',
+        image: '',
         name: '',
         role: '',
         owner: '',
@@ -121,21 +122,21 @@ export const projectSlice = createSlice({
             state.createLoading = action.payload;
         },
     },
-    extraReducers: (builder) => {
-        builder.addCase(getProjects.fulfilled, (state, action) => {
-            state.projects = action.payload;
-            state.loading = false;
-            state.error = false;
-        })
-        builder.addCase(getProjects.pending, (state, action) => {
-            state.loading = true;
-            state.error = false;
-        })
-        builder.addCase(getProjects.rejected, (state, action) => {
-            state.error = true;
-            state.loading = false;
-        })
-    }
+    // extraReducers: (builder) => {
+    //     builder.addCase(getProjects.fulfilled, (state, action) => {
+    //         state.projects = action.payload;
+    //         state.loading = false;
+    //         state.error = false;
+    //     })
+    //     builder.addCase(getProjects.pending, (state, action) => {
+    //         state.loading = true;
+    //         state.error = false;
+    //     })
+    //     builder.addCase(getProjects.rejected, (state, action) => {
+    //         state.error = true;
+    //         state.loading = false;
+    //     })
+    // }
 })
 
 export const {
