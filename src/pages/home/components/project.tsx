@@ -31,11 +31,32 @@ const Project = ({data, remove, noRequest}: props) => {
     const {loading} = projectHook.projects;
     const checkUser = userparams.username === username
 
+    const background = {
+        position: 'absolute' as 'absolute',
+        width: '100%',
+        height: '100%',
+        backgroundSize:'cover',
+        backgroundImage: `url(${data.image})`,
+        zIndex: '-1',
+        opacity: '0.1',
+        left: '0',
+        top: '0'
+    }
+
+    const linearBg = {
+        position: 'absolute' as 'absolute',
+        background: 'linear-gradient(0deg, rgba(31,31,31,1) 0%, rgba(9,9,121,0) 100%)',
+        width: '100%',
+        height: '100%',
+        zIndex: '0',
+        left: '0',
+        top: '0'
+    }
 
     return (
        <>
            {loading || requestsLoading ? '' :
-               <div className='projectCard'>
+               <div style={{position: 'relative'}} className='projectCard'>
                    {!remove ? '' :
                        !checkUser ? '' :
                            <>
@@ -55,6 +76,8 @@ const Project = ({data, remove, noRequest}: props) => {
                            </div>
                            </>
                    }
+                   <div style={linearBg}/>
+                   <div style={background}/>
                    <h2>{data.name}</h2>
                    <p>{shortenText(data.description, 250)}</p>
 

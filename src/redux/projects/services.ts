@@ -77,6 +77,18 @@ export const getProjectDetails = createAsyncThunk('projectDetails/data', async()
     })
 })
 
+export const getProjectImage = createAsyncThunk('project/image', async (project_id: string) => {
+    return axios.get(`${process.env.REACT_APP_API_URL}/project/image`, {
+        headers: {
+            'x-api-key': process.env.REACT_APP_API_KEY,
+            'Content-Type': 'application/json'
+        },
+        params: {
+            project_id: project_id
+        }
+    })
+})
+
 export const getProjects = createAsyncThunk('project/data', async (searchTerm?: string) => {
             return await axios.get(`${process.env.REACT_APP_API_URL}/projects?searchterm=${searchTerm ? searchTerm : ''}`, {
                 headers: {

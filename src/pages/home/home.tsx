@@ -21,9 +21,9 @@ const Home = () => {
     /*Requests to Load App*/
 
     useEffect(() => {
-        const getProjectsData = () => {
+        const getProjectsData = async () => {
            if (value.length > 0 || value.length === 0) {
-               dispatch(getProjectsThunk(value))
+               await dispatch(getProjectsThunk(value))
             }
         }
         getProjectsData();
