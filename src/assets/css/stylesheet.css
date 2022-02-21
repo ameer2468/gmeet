@@ -1467,7 +1467,7 @@ body {
   backdrop-filter: blur(20px);
   border: 1px solid #393939;
   transition: all 0.3s;
-  overflow: scroll;
+  overflow: auto;
   background: #12131f;
 }
 .textarea:focus {

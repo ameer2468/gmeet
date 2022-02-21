@@ -185,12 +185,14 @@ export function getCurrentUserThunk(username: string) {
 export function uploadUserAssetThunk() {
     return async (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
         const {userStore, imageStore} = getState();
+        dispatch(userImageHandler(true));
         const data = {
             file: imageStore.fileUpload,
             username: userStore.authUser.username
         }
         await dispatch(uploadUserAsset(data));
         dispatch(fileUpload(undefined));
+        dispatch(userImageHandler(false));
         notify('Profile picture successfully updated')
     }
 }

@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type {RootState} from "../store";
 import {project, projectRequest, topProjects} from "./types";
-import {getProjects} from "./services";
 
 
 // Define a type for the slice state

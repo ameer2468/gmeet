@@ -8,7 +8,7 @@ import {
     deleteLoading,
     joinLoading,
     requestsLoading,
-    projectRequests, editProjectLoading, projectArr
+    projectRequests, editProjectLoading,
 } from "../redux/projects/projectSlice";
 import {
     acceptRequests,
@@ -25,7 +25,6 @@ import {acceptRequest, IcreateProject} from "../redux/types";
 import {deleteProjectThunk, editProjectThunk, joinProjectsThunk} from "../redux/projects/thunks";
 import {deleteCommentThunk, deletePostThunk} from "../redux/posts/thunks";
 import {sendNotificationThunk} from "../redux/user/thunk";
-import {projectsArr} from "../fakedata";
 
 
 export const useProject = () => {

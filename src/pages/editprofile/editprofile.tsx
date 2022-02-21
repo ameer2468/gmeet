@@ -34,7 +34,7 @@ const EditProfile = () => {
                             useHook={userHook}
                             value={userForm.confirmOldPassword}
                             type={'password'}
-                            name={'confirmOldpassword'}
+                            name={'confirmOldPassword'}
                         />
                         <Input
                             maxWidth={'100%'}
