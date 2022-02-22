@@ -43,7 +43,6 @@ export interface requests {
 }
 
 export interface IcreateProject {
-    data: {
         project_id: string;
         name: string;
         description: string;
@@ -52,5 +51,4 @@ export interface IcreateProject {
         role: string;
         members: string[]
         requests: requests[]
-    }
 }

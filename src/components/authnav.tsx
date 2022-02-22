@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faBell, faCog, faSignOutAlt, faUser} from "@fortawesome/free-solid-svg-icons";
+import {faBell, faCog, faSignOutAlt, faUser, faCaretDown} from "@fortawesome/free-solid-svg-icons";
 import {useAppDispatch, useAppSelector} from "../redux/hooks";
 import {userReducer} from "../redux/user/userSlice";
 import { useDetectClickOutside } from 'react-detect-click-outside';
@@ -83,6 +83,7 @@ const Authnav = () => {
                             }} alt='profile'
                                  src={authUser.userImage} className='userImage'/>}
                         <p>{authUser === undefined ? '' : authUser.username}</p>
+                        <FontAwesomeIcon style={{fontSize: '1.5rem', color: 'white', marginLeft: '1rem'}} icon={faCaretDown}/>
                         {open ? <motion.div initial={'hidden'} animate={'active'}
                                             variants={regularVariants}
                                             className={'dropdown'}>

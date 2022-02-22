@@ -3,6 +3,7 @@ import Modal from "../components/modal";
 import Input from "../components/global/input";
 import TextArea from "../components/global/textarea";
 import {useProject} from "../hooks/useProject";
+import {DropZone} from "../components/DropZone";
 
 
 const EditProject = () => {
@@ -20,11 +21,13 @@ const EditProject = () => {
             buttonText={'Confirm'}
             disabled={projectForm.name === selectedProject.name
             &&
-            projectForm.description === selectedProject.description
+            projectForm.description === selectedProject.description &&
+                Object.entries(projectForm.imageFile).length === 0
             }
         >
             <form className='generalForm'>
                 <Input value={projectForm.name} useHook={projectHook} name={'name'} maxWidth={'100%'} placeholder={'Project name'}/>
+                <DropZone/>
                 <TextArea maxLength={2000}
                           value={projectForm.description}
                           useHook={projectHook}

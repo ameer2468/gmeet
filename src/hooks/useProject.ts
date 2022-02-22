@@ -3,7 +3,6 @@ import {
     projectValues,
     projectReducer,
     createProjectLoading,
-    addProject,
     selectedProject,
     deleteLoading,
     joinLoading,
@@ -12,7 +11,6 @@ import {
 } from "../redux/projects/projectSlice";
 import {
     acceptRequests,
-    createProject, getProjectImage,
     getProjects,
     rejectJoinRequest, uploadProjectImage
 } from "../redux/projects/services";
@@ -21,8 +19,14 @@ import {ActiveModal} from "../redux/modals/modalSlice";
 import {project} from "../redux/projects/types";
 import {v4 as uuidv4} from "uuid";
 import {notify} from "../helpers/notify";
-import {acceptRequest, IcreateProject} from "../redux/types";
-import {deleteProjectThunk, editProjectThunk, joinProjectsThunk} from "../redux/projects/thunks";
+import {acceptRequest} from "../redux/types";
+import {
+    createProjectThunk,
+    deleteProjectThunk,
+    editProjectThunk,
+    getProjectsThunk, getUserProjectsThunk,
+    joinProjectsThunk
+} from "../redux/projects/thunks";
 import {deleteCommentThunk, deletePostThunk} from "../redux/posts/thunks";
 import {sendNotificationThunk} from "../redux/user/thunk";
 
@@ -33,7 +37,7 @@ export const useProject = () => {
     const {projectForm} = projects;
     const dispatch = useAppDispatch();
     const userHook = useUser();
-    const {authUser} = userHook;
+    const {authUser, userInfo} = userHook;
 
 
     function onChange(key: string, value: string) {
@@ -73,8 +77,12 @@ export const useProject = () => {
    async function editProject() {
         dispatch(editProjectLoading(true))
        await dispatch(editProjectThunk());
+       await dispatch(getUserProjectsThunk(userInfo.username)).catch(() => {
+           notify('An error has occurred')
+       })
        notify('Project edited successfully')
        dispatch(ActiveModal(''));
+       dispatch(projectValues({...projectForm, imageFile: {}, imageSrc: ''}))
        dispatch(editProjectLoading(false))
     }
 
@@ -180,30 +188,28 @@ function joinProject() {
           description: projectForm.description,
           owner: authUser.username,
           image: '',
+          members: [],
+          requests: [],
           user_id: authUser.attributes.sub,
           role: 'Founder'
         }
       await dispatch(uploadProjectImage({project_id: data.project_id, file: projectForm.imageFile}))
-      await dispatch(createProject(data)).then(async (res) => {
-          const {data} = res.payload as IcreateProject;
-          sendNotification(authUser.attributes.sub, `${authUser.username} has created a new project: ${data.name}`)
-          const newProj = {
-              project_id: data.project_id,
-              name: data.name,
-              description: data.description,
-              owner: data.owner,
-              user_id: data.user_id,
-              role: data.role,
-              requests: []
-          }
-          await dispatch(getProjectImage(newProj.project_id)).then((res: any) => {
-              const {imageUrl} = res.payload.data;
-              notify(`Project ${data.name} added successfully`);
-              dispatch(addProject({...newProj, image: imageUrl}))
+          .catch((err) => {
+              notify(err)
           })
+      await dispatch(createProjectThunk(data)).then(() => {
+          sendNotification(authUser.attributes.sub, `${authUser.username} has created a new project: ${data.name}`)
+          dispatch(getProjectsThunk(''));
+          notify(`Project ${data.name} added successfully`);
           dispatch(createProjectLoading(false))
           dispatch(ActiveModal(''))
-          dispatch(projectValues({name: '', description: '', searchterm: ''}))
+          dispatch(projectValues({...projectForm, name: '', description: '', searchterm: '', imageFile: {}, imageSrc: ''}))
+         // dispatch(getProjectImage(data.project_id)).then((res: any) => {
+         //      const {imageUrl} = res.payload.data;
+         //      notify(`Project ${data.name} added successfully`);
+         //      const updateProject = {...data, image: imageUrl}
+         //      dispatch(addProject(updateProject))
+         //  })
       }).catch((err) => {
           notify(err)
           dispatch(createProjectLoading(false))

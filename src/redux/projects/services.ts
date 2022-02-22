@@ -1,6 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
-import {editProject, project, projectRequest} from "./types";
+import {editProject, IcreateProject, projectRequest} from "./types";
 import {acceptRequest} from "../types";
 
 const URL = process.env.REACT_APP_API_URL;
@@ -162,7 +162,7 @@ export const editProjects = createAsyncThunk('project/editproject', async (data:
 })
 
 
-export const createProject = createAsyncThunk('projects/createproject', async (data: project) => {
+export const createProject = createAsyncThunk('projects/createproject', async (data: IcreateProject) => {
     return await axios.post(`${URL}/projects`, {
         project_id: data.project_id,
         name: data.name,
@@ -170,6 +170,8 @@ export const createProject = createAsyncThunk('projects/createproject', async (d
         owner: data.owner,
         user_id: data.user_id,
         role: data.role,
+        members: data.members,
+        requests: data.requests,
     },{
         headers: {
             'x-api-key': process.env.REACT_APP_API_KEY,

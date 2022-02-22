@@ -1,10 +1,11 @@
 import {
+    createProject,
     deleteProject,
     editProjects, getProjectImage,
     getProjects,
     getRequests,
     getUserProjects,
-    joinProjectRequest, TopProjects
+    joinProjectRequest, TopProjects, uploadProjectImage
 } from "./services";
 import {
     deleteLoading,
@@ -20,6 +21,8 @@ import {RootState} from "../store";
 import {getAUserAsset} from "../user/thunk";
 import {authedUser} from "../user/userSlice";
 import axios from "axios";
+import {IcreateProject} from "../types";
+import {notify} from "../../helpers/notify";
 
 
 export function deleteProjectThunk(project_id: string) {
@@ -64,6 +67,12 @@ export function getTopProjectsThunk() {
     }
 }
 
+export function createProjectThunk(data: IcreateProject) {
+    return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
+        await dispatch(createProject(data));
+    }
+}
+
 export function getProjectDetails(name: string) {
     return (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
         dispatch(projectDetailsLoading(true));
@@ -80,6 +89,7 @@ export function getProjectDetails(name: string) {
 
 export function getUserProjectsThunk(username: string) {
     return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
+        dispatch(projectLoading(true))
         await dispatch(getUserProjects(username)).then(async (res: any) => {
             const {payload} = res;
             const updatedProjects = payload.data.rows.map(async (value: any) => {
@@ -105,6 +115,10 @@ export function editProjectThunk() {
             description: projectForm.description
         }
         await dispatch(editProjects(data))
+        await dispatch(uploadProjectImage({project_id: data.project_id, file: projectForm.imageFile}))
+            .catch((err) => {
+                notify(err)
+            })
         const updateUserProjects = projectsArr.map((value) => {
             return value.project_id === selectedProject.project_id ?
                 {...value, name: projectForm.name, description: projectForm.description} : value

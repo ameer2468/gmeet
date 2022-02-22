@@ -18,12 +18,14 @@ export interface requests {
 
 
 export interface IcreateProject {
-        project_id: string;
-        name: string;
-        description: string;
-        owner: string;
-        members: string[];
-        requests: requests[]
+    project_id: string;
+    name: string;
+    description: string;
+    owner: string;
+    user_id: string;
+    role: string;
+    members: string[]
+    requests: requests[]
 }
 
 export interface editProject {
