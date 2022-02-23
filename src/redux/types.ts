@@ -5,9 +5,8 @@ export interface acceptRequest {
     user_id: string;
 }
 
-export interface post extends posts {}
 
-export interface posts {
+export interface post {
     post_id: string;
     post: string;
     date: string;

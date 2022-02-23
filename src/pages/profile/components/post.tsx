@@ -17,7 +17,7 @@ interface props {
         post: string;
         post_id: string;
         date: string;
-        comments: any;
+        comments: comment[],
         user: string;
     }
 }

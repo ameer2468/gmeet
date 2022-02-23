@@ -10,9 +10,10 @@ import placeholder from '../../../assets/images/placeholder.png';
 import {notify} from "../../../helpers/notify";
 import {NavLink} from "react-router-dom";
 import {fileUpload, imageReducer, userImage} from "../../../redux/image/imageSlice";
+import {User as UserType} from '../../../redux/user/types';
 
 interface props {
-    data: any;
+    data: UserType;
 }
 
 const User = ({data}: props) => {

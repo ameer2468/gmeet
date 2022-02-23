@@ -5,8 +5,9 @@ export interface User {
     profession: string;
     followers: string[],
     following: string[],
-    notifications: notificationItem[],
+    notifications?: notificationItem[],
 }
+
 
 export interface userForm {
     confirmOldPassword: string;

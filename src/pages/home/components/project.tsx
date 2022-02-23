@@ -8,9 +8,10 @@ import {useUser} from "../../../hooks/useUser";
 import {Link, useParams} from "react-router-dom";
 import {shortenText} from "../../../helpers/substring";
 import {userReducer} from "../../../redux/user/userSlice";
+import {project} from "../../../redux/projects/types";
 
 interface props {
-    data: any;
+    data: project;
     remove?: boolean;
     noRequest?: boolean;
     profile?: boolean;
@@ -99,7 +100,7 @@ const Project = ({data, remove, noRequest}: props) => {
                                </button>
                            :
                             username !== data.owner && requestsLoading ? '' :
-                                !authUser.requests ? '' : authUser.requests.map((value: any) => {
+                                !authUser.requests ? '' : authUser.requests.map((value: {project_id: string}) => {
                                     return value.project_id
                                 }).includes(data.project_id) || data.owner === authUser.username ?
                                     '' :

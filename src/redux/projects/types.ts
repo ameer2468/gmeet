@@ -45,12 +45,18 @@ export interface project {
     requests?: projectRequest[]
 }
 
+export interface projectDetails extends project {
+    userImage: string;
+}
+
 export interface selectedProject {
     project_id: string;
     name: string;
+    image: string;
     description: string;
     owner: string;
-    members: string[]
+    role: string;
+    user_id?: string;
     requests?: projectRequest[]
 }
 

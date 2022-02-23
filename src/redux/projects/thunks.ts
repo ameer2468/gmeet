@@ -81,7 +81,7 @@ export function getProjectDetails(name: string) {
             const projectData = projectReducer.projectStore.projects[0]
             const username =  projectData.owner;
             const userImage = await dispatch(getAUserAsset(username));
-            dispatch(projectDetails({project: projectData, userImage: userImage}))
+            dispatch(projectDetails({...projectData, userImage: userImage}))
             dispatch(projectDetailsLoading(false));
         });
     }
@@ -115,13 +115,19 @@ export function editProjectThunk() {
             description: projectForm.description
         }
         await dispatch(editProjects(data))
-        await dispatch(uploadProjectImage({project_id: data.project_id, file: projectForm.imageFile}))
-            .catch((err) => {
-                notify(err)
-            })
+        if (projectForm.imageSrc.length > 0) {
+            await dispatch(uploadProjectImage({project_id: data.project_id, file: projectForm.imageFile}))
+                .catch((err) => {
+                    notify(err)
+                })
+        }
         const updateUserProjects = projectsArr.map((value) => {
             return value.project_id === selectedProject.project_id ?
-                {...value, name: projectForm.name, description: projectForm.description} : value
+                {...value,
+                    name: projectForm.name,
+                    description: projectForm.description,
+                    image: projectForm.imageSrc.length > 0 ? projectForm.imageSrc : value.image
+                } : value
         })
         dispatch(userProjects(updateUserProjects));
     }

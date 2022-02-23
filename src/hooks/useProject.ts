@@ -24,7 +24,7 @@ import {
     createProjectThunk,
     deleteProjectThunk,
     editProjectThunk,
-    getProjectsThunk, getUserProjectsThunk,
+    getProjectsThunk,
     joinProjectsThunk
 } from "../redux/projects/thunks";
 import {deleteCommentThunk, deletePostThunk} from "../redux/posts/thunks";
@@ -37,7 +37,7 @@ export const useProject = () => {
     const {projectForm} = projects;
     const dispatch = useAppDispatch();
     const userHook = useUser();
-    const {authUser, userInfo} = userHook;
+    const {authUser} = userHook;
 
 
     function onChange(key: string, value: string) {
@@ -77,9 +77,6 @@ export const useProject = () => {
    async function editProject() {
         dispatch(editProjectLoading(true))
        await dispatch(editProjectThunk());
-       await dispatch(getUserProjectsThunk(userInfo.username)).catch(() => {
-           notify('An error has occurred')
-       })
        notify('Project edited successfully')
        dispatch(ActiveModal(''));
        dispatch(projectValues({...projectForm, imageFile: {}, imageSrc: ''}))

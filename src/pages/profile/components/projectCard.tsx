@@ -1,7 +1,11 @@
 import React from 'react';
 
 interface props {
-    data: any;
+    data: {
+        name: string;
+        members: [],
+        description: string
+    }
     noRequest?: boolean;
 }
 
@@ -12,7 +16,7 @@ const ProjectCard = ({data}: props) => {
         <div className='projectCard'>
             <h2>{data.name}</h2>
             <div className="members">
-                {data.members.map((value: any, index: number) => {
+                {data.members.map((value: {image: string}, index: number) => {
                     return (
                         <div key={index.toString()} className="avatar">
                             <img src={value.image} alt="member"/>

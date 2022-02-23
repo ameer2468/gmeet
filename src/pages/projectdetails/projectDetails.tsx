@@ -17,11 +17,10 @@ const ProjectDetails = () => {
     }, [dispatch, params.name])
 
     const {projectDetails, projectDetailsLoading} = projectsState;
-    const {project} = projectDetails;
 
     return (
         <div className="detailsContent">
-            {projectDetailsLoading || project === undefined ?  <div className='center'>
+            {projectDetailsLoading || projectDetails === undefined ?  <div className='center'>
                     <LoadingSpinner height={60} width={60}/>
                 </div>:
                 <div className="detailsContainer">

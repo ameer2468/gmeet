@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type {RootState} from "../store";
-import {post, posts, comment} from "../types";
+import {post, comment} from "../types";
 
 // Define a type for the slice state
 interface PostsState {
@@ -9,9 +9,9 @@ interface PostsState {
         comment: string;
         editpost: string
     },
-    posts: posts[]
+    posts: post[]
     postsLoading: boolean;
-    selectedPost: posts;
+    selectedPost: post;
     addPostLoading: boolean;
     editPost: boolean;
     deletePostLoading: boolean;

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type {RootState} from "../store";
-import {project, projectRequest, topProjects} from "./types";
+import {project, projectDetails as details, projectRequest, topProjects} from "./types";
 
 
 // Define a type for the slice state
@@ -17,7 +17,7 @@ interface ProjectState {
     selectedProject: project;
     deleteLoading: boolean;
     joinLoading: boolean;
-    projectDetails: any;
+    projectDetails: details,
     topProjectsLoading: boolean;
     projectDetailsLoading: boolean;
     projectForm: {
@@ -38,7 +38,15 @@ const initialState: ProjectState = {
     userProjects: [],
     projectRequests: [],
     topProjects: [],
-    projectDetails: {},
+    projectDetails: {
+        project_id: '',
+        userImage: '',
+        image: '',
+        name: '',
+        role: '',
+        owner: '',
+        description: '',
+    },
     loading: false,
     topProjectsLoading: false,
     createLoading: false,
