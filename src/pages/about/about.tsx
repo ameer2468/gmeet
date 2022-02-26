@@ -10,7 +10,7 @@ const About = () => {
     return (
         <div className="infoPage">
             <div className="container">
-             <div style={{width: '45%'}} className="box">
+             <div style={{width: '100%'}} className="box">
              <h1 style={{marginBottom: '1rem'}}>About</h1>
              <p style={textStyle}>The idea of this project is to connect designers and developers together by creating and sharing a project post,
              where people would then request to join that project, thereby building a team at no cost. So you can look at this

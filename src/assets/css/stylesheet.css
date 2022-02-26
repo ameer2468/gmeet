@@ -1823,10 +1823,17 @@ body {
 }
 
 .infoPage .container {
-  padding: 0 1rem;
+  padding: 0 2rem;
   width: 100%;
   max-width: 150rem;
   margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.infoPage .container img {
+  align-self: center;
+  flex: 0 0 15%;
 }
 .infoPage h1 {
   color: white;
