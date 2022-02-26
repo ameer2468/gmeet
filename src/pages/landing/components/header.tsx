@@ -71,6 +71,7 @@ const Header = () => {
                         <p>Our platform offers you ot meet other designers through a public listing. You can filter people through their skillsets so you can find the right people for your project, and message them.</p>
                     </div>
                 </div>
+                <p style={{margin: '5% auto 5rem auto'}}>Built By <a rel="noreferrer" target={'_blank'} style={{color: '#d9ff50'}} href="http://www.aashhab.design">Ameer Ashhab</a></p>
             </div>
         </section>
     );
