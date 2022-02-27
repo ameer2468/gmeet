@@ -74,9 +74,9 @@ export function createProjectThunk(data: IcreateProject) {
 }
 
 export function getProjectDetails(name: string) {
-    return (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
+    return async (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
         dispatch(projectDetailsLoading(true));
-        dispatch(getProjectsThunk(name)).then(async () => {
+        await dispatch(getProjectsThunk(name)).then(async () => {
             const projectReducer = getState();
             const projectData = projectReducer.projectStore.projects[0]
             const username =  projectData.owner;
@@ -137,7 +137,7 @@ export function getProjectsThunk(value?: string) {
     return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
         dispatch(projectLoading(true));
         await dispatch(getRequestsThunk());
-        dispatch(getProjects(value ? value : '')).then( async (res) => {
+        return dispatch(getProjects(value ? value : '')).then( async (res) => {
             const {payload} = res;
             const updatedProjects = payload.map(async (value: any) => {
                 return {...value, image: await dispatch(getProjectImage(value.project_id)).then((res: any) => {

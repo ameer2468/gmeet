@@ -12,15 +12,17 @@ const ProjectDetails = () => {
     const dispatch = useAppDispatch();
     const projectsState = useAppSelector(projectReducer);
 
+
     useEffect(() => {
        dispatch(getProjectDetails(params.name))
     }, [dispatch, params.name])
 
     const {projectDetails, projectDetailsLoading} = projectsState;
 
+
     return (
         <div className="detailsContent">
-            {projectDetailsLoading || projectDetails === undefined ?  <div className='center'>
+            {projectDetailsLoading ?  <div className='center'>
                     <LoadingSpinner height={60} width={60}/>
                 </div>:
                 <div className="detailsContainer">
