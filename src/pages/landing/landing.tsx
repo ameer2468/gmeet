@@ -4,10 +4,10 @@ import Header from "./components/header";
 
 const Landing = () => {
     return (
-        <>
-        <Navbar/>
-        <Header/>
-       </>
+        <div className='landingContainer'>
+            <Navbar/>
+            <Header/>
+        </div>
     );
 };
 

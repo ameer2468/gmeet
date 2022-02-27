@@ -66,22 +66,27 @@ body {
   /* Firefox */
 }
 
+.landingContainer {
+  width: 100vw;
+  height: 100%;
+}
+
 .header {
   width: 98%;
-  height: 50vh;
+  height: auto;
 }
 .header .container {
   width: 100%;
   height: auto;
   max-width: 130rem;
-  margin: 5% auto 0 auto;
+  margin: 3.5% auto 0 auto;
 }
 .header .container h1 {
-  font-size: 6rem;
+  font-size: 5.5rem;
   font-weight: bold;
   color: white;
   width: 100%;
-  line-height: 8rem;
+  line-height: 6rem;
   max-width: 80rem;
   margin: 0 auto;
   text-align: center;
@@ -99,13 +104,13 @@ body {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  margin-top: 8rem;
+  margin-top: 6rem;
 }
 .header .container .cards .card {
   flex: 0 0 30%;
   text-align: center;
   position: relative;
-  padding: 4rem;
+  padding: 3rem 4rem;
   background: rgba(45, 45, 45, 0.3);
   backdrop-filter: blur(20px);
   border: 1px solid #393939;
@@ -2063,11 +2068,11 @@ body {
 
 @media all and (max-width: 1440px) {
   html {
-    font-size: 55%;
+    font-size: 53%;
   }
 
   .header .container h1 {
-    font-size: 6rem;
+    font-size: 5.5rem;
   }
 }
 @media all and (max-width: 1024px) {
