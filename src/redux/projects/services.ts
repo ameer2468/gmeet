@@ -2,13 +2,16 @@ import {createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
 import {editProject, IcreateProject, projectRequest} from "./types";
 import {acceptRequest} from "../types";
+import {loadToken} from "../../services/loadToken";
 
 const URL = process.env.REACT_APP_API_URL;
 
 export const deleteProject = createAsyncThunk('projects/deleteproject', async (id: string) => {
+    const auth = await loadToken();
     return await axios.delete(`${URL}/projects`, {
         headers: {
             'x-api-key': process.env.REACT_APP_API_KEY,
+            Authorization: auth,
         },
         data: {
             project_id: id
@@ -17,17 +20,21 @@ export const deleteProject = createAsyncThunk('projects/deleteproject', async (i
 })
 
 export const TopProjects = createAsyncThunk('projects/topprojects', async () => {
+    const auth = await loadToken();
     return await axios.get(`${URL}/projects/top`, {
         headers: {
             'x-api-key': process.env.REACT_APP_API_KEY,
+            Authorization: auth,
         },
     })
 })
 
 export const rejectJoinRequest = createAsyncThunk('projects/rejectrequest', async(id: string) => {
+    const auth = await loadToken();
     return await axios.delete(`${URL}/requests`, {
         headers: {
             'x-api-key': process.env.REACT_APP_API_KEY,
+            Authorization: auth,
         },
         data: {
             id: id
@@ -37,6 +44,7 @@ export const rejectJoinRequest = createAsyncThunk('projects/rejectrequest', asyn
 
 export const joinProjectRequest =
     createAsyncThunk('project/joinproject', async (data: projectRequest) => {
+        const auth = await loadToken();
     return await axios.post(`${URL}/project`, {
         project_id: data.project_id,
         user: data.user,
@@ -47,11 +55,13 @@ export const joinProjectRequest =
     },{
         headers: {
             'x-api-key': process.env.REACT_APP_API_KEY,
+            Authorization: auth,
         },
     })
 })
 
 export const acceptRequests = createAsyncThunk('requests/accept', async (data: acceptRequest) => {
+    const auth = await loadToken();
     return await axios.post(`${URL}/requests`, {
         project_id: data.project_id,
         id: data.id,
@@ -60,7 +70,8 @@ export const acceptRequests = createAsyncThunk('requests/accept', async (data: a
     }, {
         headers: {
             'x-api-key': process.env.REACT_APP_API_KEY,
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Authorization: auth,
         }
     })
 })
@@ -78,10 +89,12 @@ export const getProjectDetails = createAsyncThunk('projectDetails/data', async()
 })
 
 export const getProjectImage = createAsyncThunk('project/image', async (project_id: string) => {
+    const auth = await loadToken();
     return axios.get(`${process.env.REACT_APP_API_URL}/project/image`, {
         headers: {
             'x-api-key': process.env.REACT_APP_API_KEY,
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Authorization: auth,
         },
         params: {
             project_id: project_id
@@ -90,10 +103,12 @@ export const getProjectImage = createAsyncThunk('project/image', async (project_
 })
 
 export const getProjects = createAsyncThunk('project/data', async (searchTerm?: string) => {
+    const auth = await loadToken();
             return await axios.get(`${process.env.REACT_APP_API_URL}/projects?searchterm=${searchTerm ? searchTerm : ''}`, {
                 headers: {
                     'x-api-key': process.env.REACT_APP_API_KEY,
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    Authorization: auth,
                 }
             })
                 .then((res) => {
@@ -103,10 +118,12 @@ export const getProjects = createAsyncThunk('project/data', async (searchTerm?: 
 })
 
 export const getRequests = createAsyncThunk('requests', async () => {
+    const auth = await loadToken();
     return await axios.get(`${process.env.REACT_APP_API_URL}/requests`, {
         headers: {
             'x-api-key': process.env.REACT_APP_API_KEY,
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Authorization: auth,
         }
     })
         .then((res) => {
@@ -116,21 +133,26 @@ export const getRequests = createAsyncThunk('requests', async () => {
 })
 
 export const getProject = createAsyncThunk('projects/getproject', async (user: string) => {
+    const auth = await loadToken();
     return await axios.get(`${URL}/project/?user=${user}`, {
         headers: {
             'x-api-key': process.env.REACT_APP_API_KEY,
+            Authorization: auth,
         }
     })
 })
 export const getUserProjects = createAsyncThunk('projects/getproject', async (user: string) => {
+    const auth = await loadToken();
     return await axios.get(`${URL}/user/projects/?owner=${user}`, {
         headers: {
             'x-api-key': process.env.REACT_APP_API_KEY,
+            Authorization: auth,
         }
     })
 })
 
 export const uploadProjectImage = createAsyncThunk('project/image', async(data: {project_id: string, file: any}) => {
+    const auth = await loadToken();
     const file = data.file;
     return await axios.post(`${URL}/project/image`, {
         project_id: data.project_id,
@@ -138,6 +160,7 @@ export const uploadProjectImage = createAsyncThunk('project/image', async(data: 
     }, {
         headers: {
             'x-api-key': process.env.REACT_APP_API_KEY,
+            Authorization: auth,
         }
     }).then((res) => {
         const {fileUploadURL, fileType} = res.data;
@@ -163,6 +186,7 @@ export const editProjects = createAsyncThunk('project/editproject', async (data:
 
 
 export const createProject = createAsyncThunk('projects/createproject', async (data: IcreateProject) => {
+    const auth = await loadToken();
     return await axios.post(`${URL}/projects`, {
         project_id: data.project_id,
         name: data.name,
@@ -175,6 +199,7 @@ export const createProject = createAsyncThunk('projects/createproject', async (d
     },{
         headers: {
             'x-api-key': process.env.REACT_APP_API_KEY,
+            Authorization: auth,
         },
     })
 })

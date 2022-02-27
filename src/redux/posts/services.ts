@@ -7,6 +7,7 @@ import {loadToken} from "../../services/loadToken";
 const API_URL = process.env.REACT_APP_API_URL;
 
 export const addPostService = createAsyncThunk('posts/addpost', async(data: post) =>  {
+    const auth = await loadToken();
     return await axios.post(`${API_URL}/posts`,
         {
         post: data.post,
@@ -16,6 +17,7 @@ export const addPostService = createAsyncThunk('posts/addpost', async(data: post
     }, {
         headers: {
             'x-api-key': process.env.REACT_APP_API_KEY,
+            Authorization: auth
         }
     }).catch((err) =>{
         throw new Error(err)
@@ -23,6 +25,7 @@ export const addPostService = createAsyncThunk('posts/addpost', async(data: post
 })
 
 export const addCommentService = createAsyncThunk('comments/addcomment', async(data: comment) =>  {
+    const auth = await loadToken();
     return await axios.post(`${API_URL}/comments`,
         {
             id: data.id,
@@ -33,14 +36,17 @@ export const addCommentService = createAsyncThunk('comments/addcomment', async(d
         }, {
             headers: {
                 'x-api-key': process.env.REACT_APP_API_KEY,
+                Authorization: auth
             }
         })
 })
 
 export const getCommentsService = createAsyncThunk('posts/getcomments', async (user: string) => {
+    const auth = await loadToken();
     return await axios.get(`${API_URL}/comments`, {
         headers: {
             'x-api-key': process.env.REACT_APP_API_KEY,
+            Authorization: auth
         },
         params: {
             user: user
@@ -49,9 +55,11 @@ export const getCommentsService = createAsyncThunk('posts/getcomments', async (u
 })
 
 export const deleteCommentService = createAsyncThunk('posts/deletecomment', async(id: string) => {
+    const auth = await loadToken();
     return await axios.delete(`${API_URL}/comments`, {
         headers: {
             'x-api-key': process.env.REACT_APP_API_KEY,
+            Authorization: auth
         },
         data: {
             post_id: id
@@ -60,9 +68,11 @@ export const deleteCommentService = createAsyncThunk('posts/deletecomment', asyn
 })
 
 export const deletePostService = createAsyncThunk('posts/delete', async(id: string) => {
+    const auth = await loadToken();
     return await axios.delete(`${API_URL}/posts`, {
         headers: {
             'x-api-key': process.env.REACT_APP_API_KEY,
+            Authorization: auth
         },
         data: {
             post_id: id
@@ -71,12 +81,14 @@ export const deletePostService = createAsyncThunk('posts/delete', async(id: stri
 })
 
 export const editPostService = createAsyncThunk('posts/editpost', async(data: {post_id: string, post: string}) => {
+    const auth = await loadToken();
     return await axios.put(`${API_URL}/posts`, {
         post_id: data.post_id,
         post: data.post
     }, {
         headers: {
             'x-api-key': process.env.REACT_APP_API_KEY,
+            Authorization: auth
         }
     })
 })
