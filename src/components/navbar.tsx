@@ -22,7 +22,7 @@ const Navbar = () => {
     return (
         <nav className='homeNav'>
             <div style={{display: 'flex', alignItems: 'center'}} className="side">
-                <NavLink to={'/'}><h1>Gmeet</h1></NavLink>
+                <NavLink to={'/'}><h1>Teamo</h1></NavLink>
                 <li><NavLink className='navLink' to={'/about'}>About</NavLink></li>
             </div>
             <div onClick={() => setToggleHidden(!toggleHidden)} className="toggleHidden">

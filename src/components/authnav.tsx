@@ -48,12 +48,12 @@ const Authnav = () => {
         <nav className="authnav">
             <div className="container">
                 <div className="side">
-                    <NavLink to={'/home'}><h1>Gmeet</h1></NavLink>
+                    <NavLink to={'/home'}><h1>Teamo</h1></NavLink>
                     <nav>
                         <ul className='main-nav'>
                             <li><NavLink to={'/home'}>Home</NavLink></li>
                             <li><NavLink to={'/top'}>Top Projects</NavLink></li>
-                            <li><NavLink to={''}>Discord</NavLink></li>
+                            <li><a rel={'noreferrer'} target={'_blank'} href={'https://discord.gg/vYDBeeRNBP'}>Discord</a></li>
                         </ul>
                     </nav>
                 </div>
