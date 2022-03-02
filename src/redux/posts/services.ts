@@ -5,6 +5,7 @@ import {loadToken} from "../../services/loadToken";
 
 
 const API_URL = process.env.REACT_APP_API_URL;
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 export const addPostService = createAsyncThunk('posts/addpost', async(data: post) =>  {
     const auth = await loadToken();
@@ -16,7 +17,7 @@ export const addPostService = createAsyncThunk('posts/addpost', async(data: post
         user: data.user
     }, {
         headers: {
-            'x-api-key': process.env.REACT_APP_API_KEY,
+            'x-api-key': API_KEY as string,
             Authorization: auth
         }
     }).catch((err) =>{
@@ -35,7 +36,7 @@ export const addCommentService = createAsyncThunk('comments/addcomment', async(d
             posted_by: data.posted_by
         }, {
             headers: {
-                'x-api-key': process.env.REACT_APP_API_KEY,
+                'x-api-key': API_KEY as string,
                 Authorization: auth
             }
         })
@@ -45,7 +46,7 @@ export const getCommentsService = createAsyncThunk('posts/getcomments', async (u
     const auth = await loadToken();
     return await axios.get(`${API_URL}/comments`, {
         headers: {
-            'x-api-key': process.env.REACT_APP_API_KEY,
+            'x-api-key': API_KEY as string,
             Authorization: auth
         },
         params: {
@@ -58,7 +59,7 @@ export const deleteCommentService = createAsyncThunk('posts/deletecomment', asyn
     const auth = await loadToken();
     return await axios.delete(`${API_URL}/comments`, {
         headers: {
-            'x-api-key': process.env.REACT_APP_API_KEY,
+            'x-api-key': API_KEY as string,
             Authorization: auth
         },
         data: {
@@ -71,7 +72,7 @@ export const deletePostService = createAsyncThunk('posts/delete', async(id: stri
     const auth = await loadToken();
     return await axios.delete(`${API_URL}/posts`, {
         headers: {
-            'x-api-key': process.env.REACT_APP_API_KEY,
+            'x-api-key': API_KEY as string,
             Authorization: auth
         },
         data: {
@@ -87,7 +88,7 @@ export const editPostService = createAsyncThunk('posts/editpost', async(data: {p
         post: data.post
     }, {
         headers: {
-            'x-api-key': process.env.REACT_APP_API_KEY,
+            'x-api-key': API_KEY as string,
             Authorization: auth
         }
     })
@@ -97,7 +98,7 @@ export const getPostsService = createAsyncThunk('posts/getposts', async (user: s
     const token = await loadToken();
     return await axios.get(`${API_URL}/posts`, {
         headers: {
-            'x-api-key': process.env.REACT_APP_API_KEY,
+            'x-api-key': API_KEY as string,
             Authorization: token
         },
         params: {

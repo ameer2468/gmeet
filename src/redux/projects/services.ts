@@ -3,14 +3,16 @@ import axios from "axios";
 import {editProject, IcreateProject, projectRequest} from "./types";
 import {acceptRequest} from "../types";
 import {loadToken} from "../../services/loadToken";
+import {getService} from "../../services/callTypes";
 
 const URL = process.env.REACT_APP_API_URL;
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 export const deleteProject = createAsyncThunk('projects/deleteproject', async (id: string) => {
     const auth = await loadToken();
     return await axios.delete(`${URL}/projects`, {
         headers: {
-            'x-api-key': process.env.REACT_APP_API_KEY,
+            'x-api-key': API_KEY as string,
             Authorization: auth,
         },
         data: {
@@ -23,7 +25,7 @@ export const TopProjects = createAsyncThunk('projects/topprojects', async () => 
     const auth = await loadToken();
     return await axios.get(`${URL}/projects/top`, {
         headers: {
-            'x-api-key': process.env.REACT_APP_API_KEY,
+            'x-api-key': API_KEY as string,
             Authorization: auth,
         },
     })
@@ -33,7 +35,7 @@ export const rejectJoinRequest = createAsyncThunk('projects/rejectrequest', asyn
     const auth = await loadToken();
     return await axios.delete(`${URL}/requests`, {
         headers: {
-            'x-api-key': process.env.REACT_APP_API_KEY,
+            'x-api-key': API_KEY as string,
             Authorization: auth,
         },
         data: {
@@ -54,7 +56,7 @@ export const joinProjectRequest =
         id: data.id
     },{
         headers: {
-            'x-api-key': process.env.REACT_APP_API_KEY,
+            'x-api-key': API_KEY as string,
             Authorization: auth,
         },
     })
@@ -69,7 +71,7 @@ export const acceptRequests = createAsyncThunk('requests/accept', async (data: a
         role: data.role
     }, {
         headers: {
-            'x-api-key': process.env.REACT_APP_API_KEY,
+            'x-api-key': API_KEY as string,
             'Content-Type': 'application/json',
             Authorization: auth,
         }
@@ -79,7 +81,7 @@ export const acceptRequests = createAsyncThunk('requests/accept', async (data: a
 export const getProjectDetails = createAsyncThunk('projectDetails/data', async() => {
     return await axios.get(`${process.env.REACT_APP_API_URL}/projectdetails`, {
         headers: {
-            'x-api-key': process.env.REACT_APP_API_KEY,
+            'x-api-key': API_KEY as string,
             'Content-Type': 'application/json'
         }
     })
@@ -89,65 +91,32 @@ export const getProjectDetails = createAsyncThunk('projectDetails/data', async()
 })
 
 export const getProjectImage = createAsyncThunk('project/image', async (project_id: string) => {
-    const auth = await loadToken();
-    return axios.get(`${process.env.REACT_APP_API_URL}/project/image`, {
-        headers: {
-            'x-api-key': process.env.REACT_APP_API_KEY,
-            'Content-Type': 'application/json',
-            Authorization: auth,
-        },
-        params: {
-            project_id: project_id
-        }
+    return await getService(`project/image`, {project_id: project_id}).then((res) => {
+        return res.data;
     })
 })
 
 export const getProjects = createAsyncThunk('project/data', async (searchTerm?: string) => {
-    const auth = await loadToken();
-            return await axios.get(`${process.env.REACT_APP_API_URL}/projects?searchterm=${searchTerm ? searchTerm : ''}`, {
-                headers: {
-                    'x-api-key': process.env.REACT_APP_API_KEY,
-                    'Content-Type': 'application/json',
-                    Authorization: auth,
-                }
-            })
-                .then((res) => {
-                    return res.data.rows;
-                });
-
+    return await getService(`projects?searchterm=${searchTerm ? searchTerm : ''}`).then((res) => {
+        return res.data.rows;
+    })
 })
 
 export const getRequests = createAsyncThunk('requests', async () => {
-    const auth = await loadToken();
-    return await axios.get(`${process.env.REACT_APP_API_URL}/requests`, {
-        headers: {
-            'x-api-key': process.env.REACT_APP_API_KEY,
-            'Content-Type': 'application/json',
-            Authorization: auth,
-        }
+    return await getService(`requests`).then((res) => {
+        return res.data.rows;
     })
-        .then((res) => {
-            return res.data.rows;
-        });
-
 })
 
 export const getProject = createAsyncThunk('projects/getproject', async (user: string) => {
-    const auth = await loadToken();
-    return await axios.get(`${URL}/project/?user=${user}`, {
-        headers: {
-            'x-api-key': process.env.REACT_APP_API_KEY,
-            Authorization: auth,
-        }
+    return await getService(`projects?user=${user}`).then((res) => {
+        return res.data.rows;
     })
 })
+
 export const getUserProjects = createAsyncThunk('projects/getproject', async (user: string) => {
-    const auth = await loadToken();
-    return await axios.get(`${URL}/user/projects/?owner=${user}`, {
-        headers: {
-            'x-api-key': process.env.REACT_APP_API_KEY,
-            Authorization: auth,
-        }
+    return await getService(`user/projects?owner=${user}`).then((res) => {
+        return res.data.rows;
     })
 })
 
@@ -159,7 +128,7 @@ export const uploadProjectImage = createAsyncThunk('project/image', async(data: 
         fileType: file.type
     }, {
         headers: {
-            'x-api-key': process.env.REACT_APP_API_KEY,
+            'x-api-key': API_KEY as string,
             Authorization: auth,
         }
     }).then((res) => {
@@ -179,7 +148,7 @@ export const editProjects = createAsyncThunk('project/editproject', async (data:
         description: data.description,
     },{
         headers: {
-            'x-api-key': process.env.REACT_APP_API_KEY,
+            'x-api-key': API_KEY as string,
         },
     })
 })
@@ -198,7 +167,7 @@ export const createProject = createAsyncThunk('projects/createproject', async (d
         requests: data.requests,
     },{
         headers: {
-            'x-api-key': process.env.REACT_APP_API_KEY,
+            'x-api-key': API_KEY as string,
             Authorization: auth,
         },
     })

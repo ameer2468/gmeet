@@ -92,7 +92,7 @@ export function getUserProjectsThunk(username: string) {
         dispatch(projectLoading(true))
         await dispatch(getUserProjects(username)).then(async (res: any) => {
             const {payload} = res;
-            const updatedProjects = payload.data.rows.map(async (value: any) => {
+            const updatedProjects = payload.map(async (value: any) => {
                 return {...value, image: await dispatch(getProjectImage(value.project_id)).then((res: any) => {
                         return res.payload.data.imageUrl;
                     })}
@@ -137,11 +137,11 @@ export function getProjectsThunk(value?: string) {
     return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
         dispatch(projectLoading(true));
         await dispatch(getRequestsThunk());
-        return dispatch(getProjects(value ? value : '')).then( async (res) => {
+        return dispatch(getProjects(value ? value : '')).then( async (res: any) => {
             const {payload} = res;
             const updatedProjects = payload.map(async (value: any) => {
                 return {...value, image: await dispatch(getProjectImage(value.project_id)).then((res: any) => {
-                    return res.payload.data.imageUrl;
+                    return res.payload.imageUrl;
                     })}
             })
             const projects = await axios.all(updatedProjects)

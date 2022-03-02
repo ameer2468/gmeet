@@ -1,44 +1,29 @@
 import axios from 'axios';
-import {useAppDispatch} from "../redux/hooks";
-
-const dispatch = useAppDispatch();
-
-export type requestOptions = {
-    get: 'get',
-    post: 'post',
-    delete: 'delete'
-}
+import {loadToken} from "./loadToken";
 
 const URL = process.env.REACT_APP_API_URL;
-const apikey = process.env.REACT_APP_API_KEY;
+const API_KEY = process.env.REACT_APP_API_KEY;
 
-export async function apiCall(type: keyof requestOptions, action: (arg: any) => any) {
-    switch(type) {
-        case "get":
-            return await axios.get(`${URL}/projects`, {
-                headers: {
-                    'x-api-key': `${apikey}`,
-                    'Content-Type': 'application/json'
-                }
-            }).then((res) => {
-                return dispatch(action(res.data));
-            }).catch((err) => {
-                console.log(err)
-            })
-        case "post" :
-            return await axios.post(`${URL}/projects`, {
-                headers: {
-                    'x-api-key': `${apikey}`,
-                    'Content-Type': 'application/json'
-                }
-            })
-        case "delete":
-            return await axios.delete(`${URL}/projects`, {
-                headers: {
-                    'x-api-key': `${apikey}`,
-                    'Content-Type': 'application/json'
-                }
-            })
-    }
+export async function postService(urlPath: string, data: {}) {
+    const authToken = await loadToken();
+    return axios.post(`${URL}/${urlPath}`, {
+        ...data,
+        headers: {
+            'x-api-key': API_KEY as string,
+            'Authorization': authToken
+        },
+    });
+}
 
+export async function getService(urlPath: string, params?: {}) {
+const authToken = await loadToken();
+    return axios.get(`${URL}/${urlPath}`, {
+        headers: {
+            'x-api-key': API_KEY as string,
+            'Authorization': authToken
+        },
+        params: {
+            ...params
+        }
+    });
 }
