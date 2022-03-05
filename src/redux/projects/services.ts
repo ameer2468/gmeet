@@ -3,7 +3,7 @@ import axios from "axios";
 import {editProject, IcreateProject, projectRequest} from "./types";
 import {acceptRequest} from "../types";
 import {loadToken} from "../../services/loadToken";
-import {getService} from "../../services/callTypes";
+import {fileService, getService, postService, putService} from "../../services/callTypes";
 
 const URL = process.env.REACT_APP_API_URL;
 const API_KEY = process.env.REACT_APP_API_KEY;
@@ -21,13 +21,9 @@ export const deleteProject = createAsyncThunk('projects/deleteproject', async (i
     })
 })
 
-export const TopProjects = createAsyncThunk('projects/topprojects', async () => {
-    const auth = await loadToken();
-    return await axios.get(`${URL}/projects/top`, {
-        headers: {
-            'x-api-key': API_KEY as string,
-            Authorization: auth,
-        },
+export const TopProjects = createAsyncThunk('topprojects', async () => {
+    return await getService('projects/top').then((res) => {
+        return res.data.rows;
     })
 })
 
@@ -63,18 +59,13 @@ export const joinProjectRequest =
 })
 
 export const acceptRequests = createAsyncThunk('requests/accept', async (data: acceptRequest) => {
-    const auth = await loadToken();
-    return await axios.post(`${URL}/requests`, {
+    return await postService('requests', {
         project_id: data.project_id,
         id: data.id,
         user_id: data.user_id,
         role: data.role
-    }, {
-        headers: {
-            'x-api-key': API_KEY as string,
-            'Content-Type': 'application/json',
-            Authorization: auth,
-        }
+    }).then((res) => {
+        return res.data.rows;
     })
 })
 
@@ -121,42 +112,27 @@ export const getUserProjects = createAsyncThunk('projects/getproject', async (us
 })
 
 export const uploadProjectImage = createAsyncThunk('project/image', async(data: {project_id: string, file: any}) => {
-    const auth = await loadToken();
     const file = data.file;
-    return await axios.post(`${URL}/project/image`, {
+    return await postService('project/image', {
         project_id: data.project_id,
-        fileType: file.type
-    }, {
-        headers: {
-            'x-api-key': API_KEY as string,
-            Authorization: auth,
-        }
+        fileType: file.type,
     }).then((res) => {
         const {fileUploadURL, fileType} = res.data;
-        axios.put(`${fileUploadURL}`, file, {
-            headers: {
-                'Content-Type': fileType,
-            }
-        })
+        fileService(fileUploadURL,file, fileType)
     })
 })
 
 export const editProjects = createAsyncThunk('project/editproject', async (data: editProject) => {
-    return await axios.put(`${URL}/project`, {
+    return await putService('project', {
         project_id: data.project_id,
         name: data.name,
         description: data.description,
-    },{
-        headers: {
-            'x-api-key': API_KEY as string,
-        },
     })
 })
 
 
 export const createProject = createAsyncThunk('projects/createproject', async (data: IcreateProject) => {
-    const auth = await loadToken();
-    return await axios.post(`${URL}/projects`, {
+    return postService('projects', {
         project_id: data.project_id,
         name: data.name,
         description: data.description,
@@ -165,10 +141,7 @@ export const createProject = createAsyncThunk('projects/createproject', async (d
         role: data.role,
         members: data.members,
         requests: data.requests,
-    },{
-        headers: {
-            'x-api-key': API_KEY as string,
-            Authorization: auth,
-        },
+    }).then((res) => {
+        return res.data.rows;
     })
 })

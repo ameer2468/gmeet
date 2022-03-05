@@ -29,6 +29,7 @@ const Home = () => {
         getProjectsData();
     }, [dispatch, value]);
 
+
     return (
         <div className='HomeContent'>
             <div className="homeContainer">

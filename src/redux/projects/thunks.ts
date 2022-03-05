@@ -60,8 +60,8 @@ export function getTopProjectsThunk() {
     return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
         dispatch(topProjectsLoading(true))
         await dispatch(TopProjects()).then((res: any) => {
-            const {rows} = res.payload.data;
-            dispatch(topProjectsHandler(rows))
+            const {payload} = res;
+            dispatch(topProjectsHandler(payload))
             dispatch(topProjectsLoading(false))
         })
     }
@@ -94,7 +94,7 @@ export function getUserProjectsThunk(username: string) {
             const {payload} = res;
             const updatedProjects = payload.map(async (value: any) => {
                 return {...value, image: await dispatch(getProjectImage(value.project_id)).then((res: any) => {
-                        return res.payload.data.imageUrl;
+                        return res.payload.imageUrl;
                     })}
             })
             const projects = await axios.all(updatedProjects)
