@@ -165,11 +165,8 @@ function joinProject() {
             role: projectForm.role,
             id: uuidv4()
         }
-    dispatch(joinProjectsThunk(data)).then(() => {
-           sendNotification(authUser.attributes.sub, `${authUser.username} has requested to join your project ${projects.selectedProject.name}`)
-    })
-    notify('Request submitted successfully')
-    }
+    dispatch(joinProjectsThunk(data));
+   }
 
     async function createProjectHandler() {
         if (projectForm.name.length === 0 || projectForm.description.length === 0) {
@@ -194,19 +191,13 @@ function joinProject() {
           .catch((err) => {
               notify(err)
           })
-      await dispatch(createProjectThunk(data)).then(() => {
+      dispatch(createProjectThunk(data)).then(() => {
           sendNotification(authUser.attributes.sub, `${authUser.username} has created a new project: ${data.name}`)
           dispatch(getProjectsThunk(''));
           notify(`Project ${data.name} added successfully`);
           dispatch(createProjectLoading(false))
           dispatch(ActiveModal(''))
           dispatch(projectValues({...projectForm, name: '', description: '', searchterm: '', imageFile: {}, imageSrc: ''}))
-         // dispatch(getProjectImage(data.project_id)).then((res: any) => {
-         //      const {imageUrl} = res.payload.data;
-         //      notify(`Project ${data.name} added successfully`);
-         //      const updateProject = {...data, image: imageUrl}
-         //      dispatch(addProject(updateProject))
-         //  })
       }).catch((err) => {
           notify(err)
           dispatch(createProjectLoading(false))

@@ -1,11 +1,10 @@
 import {
     createProject,
-    deleteProject,
     editProjects, getProjectImage,
     getProjects,
     getRequests,
     getUserProjects,
-    joinProjectRequest, TopProjects, uploadProjectImage
+    TopProjects, uploadProjectImage
 } from "./services";
 import {
     deleteLoading,
@@ -18,25 +17,33 @@ import {Action, ThunkDispatch} from "@reduxjs/toolkit";
 import {ActiveModal} from "../modals/modalSlice";
 import {projectRequest} from "./types";
 import {RootState} from "../store";
-import {getAUserAsset} from "../user/thunk";
+import {getAUserAsset, sendNotificationThunk} from "../user/thunk";
 import {authedUser} from "../user/userSlice";
 import axios from "axios";
 import {IcreateProject} from "../types";
 import {notify} from "../../helpers/notify";
+import {deleteService, postService} from "../../services/callTypes";
 
+
+export function sendNotification(user_id: string, text: string) {
+    return (dispatch: ThunkDispatch<RootState, any, Action>) => {
+      return dispatch(sendNotificationThunk(user_id, text))
+    }
+}
 
 export function deleteProjectThunk(project_id: string) {
-    return (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
+    return async (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
         const projectsReducer = getState();
         const userProjectsData = projectsReducer.projectStore.userProjects;
-        dispatch(deleteProject(project_id))
-            .then(() => {
-                dispatch(deleteLoading(false))
-                dispatch(ActiveModal(''))
-                dispatch(userProjects(userProjectsData.filter(project => project.project_id !== project_id)))
-            })
-            .catch((err: any) => {
-                console.log(err)
+        return await deleteService('projects', {
+            project_id: project_id
+        }).then(() => {
+            dispatch(deleteLoading(false))
+            dispatch(ActiveModal(''))
+            dispatch(userProjects(userProjectsData.filter(project => project.project_id !== project_id)))
+        })
+          .catch(() => {
+               notify('An error has occurred')
                 dispatch(deleteLoading(false))
             })
     }
@@ -44,15 +51,23 @@ export function deleteProjectThunk(project_id: string) {
 
 export function joinProjectsThunk(data: projectRequest) {
     return async (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
-        const userReducer = getState();
-        const {userStore} = userReducer;
-        dispatch(joinProjectRequest(data)).then( async() => {
+        const {userStore, projectStore} = getState();
+        const {authUser} = userStore;
+        const {selectedProject} = projectStore;
+        return await postService('projects', {
+         ...data
+        }).then(async () => {
             dispatch(joinLoading(false))
             dispatch(ActiveModal(''))
-            dispatch(authedUser({...userStore.authUser, requests: [
-                    ...userStore.authUser.requests, {...data}
+            dispatch(authedUser({...authUser, requests: [
+                    ...authUser.requests, {...data}
                 ]}))
-         })
+            notify('Request submitted successfully')
+            await sendNotification(authUser.attributes.sub, `${authUser.username} has requested to join your project ${selectedProject.name}`)
+        }).catch(() => {
+            dispatch(joinLoading(false))
+            return notify('An error has occurred')
+        })
     }
 }
 

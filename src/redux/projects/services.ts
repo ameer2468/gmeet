@@ -2,22 +2,15 @@ import {createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
 import {editProject, IcreateProject, projectRequest} from "./types";
 import {acceptRequest} from "../types";
-import {loadToken} from "../../services/loadToken";
-import {fileService, getService, postService, putService} from "../../services/callTypes";
+import {deleteService, fileService, getService, postService, putService} from "../../services/callTypes";
 
-const URL = process.env.REACT_APP_API_URL;
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 export const deleteProject = createAsyncThunk('projects/deleteproject', async (id: string) => {
-    const auth = await loadToken();
-    return await axios.delete(`${URL}/projects`, {
-        headers: {
-            'x-api-key': API_KEY as string,
-            Authorization: auth,
-        },
-        data: {
-            project_id: id
-        },
+    return await deleteService('projects', {
+        project_id: id
+    }).then((res) => {
+        return res.data.rows;
     })
 })
 
@@ -28,34 +21,22 @@ export const TopProjects = createAsyncThunk('topprojects', async () => {
 })
 
 export const rejectJoinRequest = createAsyncThunk('projects/rejectrequest', async(id: string) => {
-    const auth = await loadToken();
-    return await axios.delete(`${URL}/requests`, {
-        headers: {
-            'x-api-key': API_KEY as string,
-            Authorization: auth,
-        },
-        data: {
-            id: id
-        }
+    return await deleteService(`requests`, {
+        id: id
+    }).then((res) => {
+        return res.data.rows;
     })
 })
 
-export const joinProjectRequest =
-    createAsyncThunk('project/joinproject', async (data: projectRequest) => {
-        const auth = await loadToken();
-    return await axios.post(`${URL}/project`, {
-        project_id: data.project_id,
-        user: data.user,
-        user_id: data.user_id,
-        why: data.why,
-        role: data.role,
-        id: data.id
-    },{
-        headers: {
-            'x-api-key': API_KEY as string,
-            Authorization: auth,
-        },
-    })
+export const joinProjectRequest = createAsyncThunk('project/joinproject', async (data: projectRequest) => {
+        return await postService('project', {
+            project_id: data.project_id,
+            user: data.user,
+            user_id: data.user_id,
+            why: data.why,
+            role: data.role,
+            id: data.id
+        });
 })
 
 export const acceptRequests = createAsyncThunk('requests/accept', async (data: acceptRequest) => {

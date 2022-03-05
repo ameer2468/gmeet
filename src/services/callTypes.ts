@@ -39,6 +39,19 @@ export async function putService(urlPath: string, data: {}, custom?: boolean, he
         });
 }
 
+export async function deleteService(urlPath: string, params?: {}) {
+    const authToken = await loadToken();
+    return axios.delete(`${URL}/${urlPath}`, {
+        headers: {
+            'x-api-key': API_KEY as string,
+            'Authorization': authToken
+        },
+        data: {
+            ...params
+        }
+    })
+}
+
 export async function getService(urlPath: string, params?: {}) {
 const authToken = await loadToken();
     return axios.get(`${URL}/${urlPath}`, {

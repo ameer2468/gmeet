@@ -66,7 +66,7 @@ const Join = () => {
                     onChange={onChange}
                     styles={{
                         list: {backgroundColor: '#12131f', boxShadow: 'none', border: 0},
-                        header: {backgroundColor: 'rgba(#2d2d2d, 0.3);', border: 0, padding: '0.5rem 0'},
+                        header: {backgroundColor: 'rgba(#2d2d2d, 0.3)', border: 0, padding: '0.5rem 0'},
                         wrapper: {border: 0, width: '100%', marginBottom: '1rem', color: 'white', fontSize: '1.5rem'},
                         listItem: {color: 'white', fontSize: '1.5rem', fontWeight: 'normal', padding: '1rem 0 1rem 1.5rem'}
                     }}
