@@ -14,12 +14,6 @@ export const deleteProject = createAsyncThunk('projects/deleteproject', async (i
     })
 })
 
-export const TopProjects = createAsyncThunk('topprojects', async () => {
-    return await getService('projects/top').then((res) => {
-        return res.data.rows;
-    })
-})
-
 export const rejectJoinRequest = createAsyncThunk('projects/rejectrequest', async(id: string) => {
     return await deleteService(`requests`, {
         id: id

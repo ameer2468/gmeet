@@ -1,15 +1,12 @@
 import {
-    createProject,
-    editProjects, getProjectImage,
-    getProjects,
-    getRequests,
-    getUserProjects,
-    TopProjects, uploadProjectImage
+    getProjectImage,
+    uploadProjectImage
 } from "./services";
 import {
+    createProjectLoading,
     deleteLoading,
     joinLoading, projectArr, projectDetails, projectDetailsLoading, projectLoading,
-    projectRequests,
+    projectRequests, projectValues,
     requestsLoading, topProjectsHandler, topProjectsLoading,
     userProjects
 } from "./projectSlice";
@@ -22,7 +19,7 @@ import {authedUser} from "../user/userSlice";
 import axios from "axios";
 import {IcreateProject} from "../types";
 import {notify} from "../../helpers/notify";
-import {deleteService, postService} from "../../services/callTypes";
+import {deleteService, getService, postService, putService} from "../../services/callTypes";
 
 
 export function sendNotification(user_id: string, text: string) {
@@ -40,7 +37,9 @@ export function deleteProjectThunk(project_id: string) {
         }).then(() => {
             dispatch(deleteLoading(false))
             dispatch(ActiveModal(''))
-            dispatch(userProjects(userProjectsData.filter(project => project.project_id !== project_id)))
+            if (userProjectsData) {
+                dispatch(userProjects(userProjectsData.filter(project => project.project_id !== project_id)))
+            }
         })
           .catch(() => {
                notify('An error has occurred')
@@ -74,17 +73,36 @@ export function joinProjectsThunk(data: projectRequest) {
 export function getTopProjectsThunk() {
     return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
         dispatch(topProjectsLoading(true))
-        await dispatch(TopProjects()).then((res: any) => {
-            const {payload} = res;
-            dispatch(topProjectsHandler(payload))
+        return await getService('projects/top').then((res) => {
+            return res.data.rows;
+        }).then((res: []) => {
+            dispatch(topProjectsHandler(res))
             dispatch(topProjectsLoading(false))
+        }).catch(() => {
+            dispatch(topProjectsLoading(false))
+            return notify('An error has occurred')
         })
     }
 }
 
 export function createProjectThunk(data: IcreateProject) {
-    return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
-        await dispatch(createProject(data));
+    return async (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
+        const {userStore, projectStore} = getState();
+        const {authUser} = userStore;
+        const {projectForm} = projectStore;
+        return await postService('projects', {
+         ...data
+        }).then(async (res) => {
+            dispatch(ActiveModal(''))
+            dispatch(createProjectLoading(false))
+            dispatch(projectValues({...projectForm, name: '', description: '', searchterm: '', imageFile: {}, imageSrc: ''}))
+            notify(`Project ${data.name} added successfully`);
+            await dispatch(getProjectsThunk(''));
+            await sendNotification(authUser.attributes.sub, `${authUser.username} has created a new project: ${data.name}`)
+            return res.data.rows;
+        }).catch(() => {
+            return notify('An error has occurred')
+        })
     }
 }
 
@@ -105,9 +123,10 @@ export function getProjectDetails(name: string) {
 export function getUserProjectsThunk(username: string) {
     return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
         dispatch(projectLoading(true))
-        await dispatch(getUserProjects(username)).then(async (res: any) => {
-            const {payload} = res;
-            const updatedProjects = payload.map(async (value: any) => {
+        return await getService(`user/projects?owner=${username}`).then((res) => {
+            return res.data.rows;
+        }).then(async (res: []) => {
+            const updatedProjects = res.map(async (value: any) => {
                 return {...value, image: await dispatch(getProjectImage(value.project_id)).then((res: any) => {
                         return res.payload.imageUrl;
                     })}
@@ -129,22 +148,29 @@ export function editProjectThunk() {
             name: projectForm.name,
             description: projectForm.description
         }
-        await dispatch(editProjects(data))
-        if (projectForm.imageSrc.length > 0) {
-            await dispatch(uploadProjectImage({project_id: data.project_id, file: projectForm.imageFile}))
-                .catch((err) => {
-                    notify(err)
-                })
-        }
-        const updateUserProjects = projectsArr.map((value) => {
-            return value.project_id === selectedProject.project_id ?
-                {...value,
-                    name: projectForm.name,
-                    description: projectForm.description,
-                    image: projectForm.imageSrc.length > 0 ? projectForm.imageSrc : value.image
-                } : value
+        return await putService('project', {
+            project_id: data.project_id,
+            name: data.name,
+            description: data.description,
+        }).then(async () => {
+            const updateUserProjects = projectsArr?.map((value) => {
+                return value.project_id === selectedProject.project_id ?
+                    {...value,
+                        name: projectForm.name,
+                        description: projectForm.description,
+                        image: projectForm.imageSrc.length > 0 ? projectForm.imageSrc : value.image
+                    } : value
+            })
+            if (updateUserProjects) {
+                dispatch(userProjects(updateUserProjects));
+            }
+            if (projectForm.imageSrc.length > 0) {
+                await dispatch(uploadProjectImage({project_id: data.project_id, file: projectForm.imageFile}))
+                    .catch((err) => {
+                        notify(err)
+                    })
+            }
         })
-        dispatch(userProjects(updateUserProjects));
     }
 }
 
@@ -152,11 +178,12 @@ export function getProjectsThunk(value?: string) {
     return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
         dispatch(projectLoading(true));
         await dispatch(getRequestsThunk());
-        return dispatch(getProjects(value ? value : '')).then( async (res: any) => {
-            const {payload} = res;
-            const updatedProjects = payload.map(async (value: any) => {
+        return await getService(`projects?searchterm=${value ? value : ''}`).then(async (res) => {
+            return res.data.rows;
+        }).then(async (res) => {
+            const updatedProjects = res.map(async (value: any) => {
                 return {...value, image: await dispatch(getProjectImage(value.project_id)).then((res: any) => {
-                    return res.payload.imageUrl;
+                        return res.payload.imageUrl;
                     })}
             })
             const projects = await axios.all(updatedProjects)
@@ -167,20 +194,21 @@ export function getProjectsThunk(value?: string) {
 }
 
 export function getRequestsThunk() {
-    return (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
+    return async (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
         const userReducer = getState();
         const {authUser} = userReducer.userStore;
         dispatch(requestsLoading(true));
-        dispatch(getRequests()).then((res: { payload: any; }) => {
-            const {payload} = res;
-            const userRequests = payload.filter((value: any) => {
+        return await getService(`requests`).then((res) => {
+            return res.data.rows;
+        }).then((res) => {
+            const userRequests = res.filter((value: any) => {
                 return value.user === authUser.username;
             })
             dispatch(authedUser({...authUser, requests: userRequests}))
-            dispatch(projectRequests(payload))
+            dispatch(projectRequests(res))
             dispatch(requestsLoading(false))
         }).catch((err) => {
-            console.log(err)
+            return notify(err);
         })
     }
 }

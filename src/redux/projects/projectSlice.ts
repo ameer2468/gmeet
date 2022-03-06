@@ -6,7 +6,7 @@ import {project, projectDetails as details, projectRequest, topProjects} from ".
 // Define a type for the slice state
 interface ProjectState {
     projects: project[],
-    userProjects: project[],
+    userProjects: project[] | null,
     projectRequests: projectRequest[]
     topProjects: topProjects[]
     loading: boolean;
@@ -35,7 +35,7 @@ interface ProjectState {
 // Define the initial state using that type
 const initialState: ProjectState = {
     projects: [],
-    userProjects: [],
+    userProjects: null,
     projectRequests: [],
     topProjects: [],
     projectDetails: {

@@ -24,11 +24,9 @@ import {
     createProjectThunk,
     deleteProjectThunk,
     editProjectThunk,
-    getProjectsThunk,
     joinProjectsThunk
 } from "../redux/projects/thunks";
 import {deleteCommentThunk, deletePostThunk} from "../redux/posts/thunks";
-import {sendNotificationThunk} from "../redux/user/thunk";
 
 
 export const useProject = () => {
@@ -140,19 +138,12 @@ export const useProject = () => {
         })
     }
 
-    function sendNotification(user_id: string, text: string) {
-        dispatch(sendNotificationThunk(user_id, text))
-    }
-
-
     function deleteProjectHandler() {
         dispatch(deleteLoading(true))
         dispatch(deleteProjectThunk(projects.selectedProject.project_id))
     }
 
-
-
-function joinProject() {
+    function joinProject() {
         if (projectForm.role.length === 0 || projectForm.why.length === 0) {
             return notify('Speciality and a reason to join are required')
         }
@@ -191,17 +182,7 @@ function joinProject() {
           .catch((err) => {
               notify(err)
           })
-      dispatch(createProjectThunk(data)).then(() => {
-          sendNotification(authUser.attributes.sub, `${authUser.username} has created a new project: ${data.name}`)
-          dispatch(getProjectsThunk(''));
-          notify(`Project ${data.name} added successfully`);
-          dispatch(createProjectLoading(false))
-          dispatch(ActiveModal(''))
-          dispatch(projectValues({...projectForm, name: '', description: '', searchterm: '', imageFile: {}, imageSrc: ''}))
-      }).catch((err) => {
-          notify(err)
-          dispatch(createProjectLoading(false))
-      })
+      dispatch(createProjectThunk(data));
     }
 
     return {

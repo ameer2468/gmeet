@@ -19,7 +19,7 @@ const Projects = () => {
             <div className="container">
                 <h1>Project Listings</h1>
                 {
-                    loading ?
+                    loading || userProjects === null ?
                     <div style={{
                         position: 'absolute',
                         left: 0,
