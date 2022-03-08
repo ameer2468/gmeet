@@ -1,6 +1,6 @@
 import {
     getProjectImage,
-    uploadProjectImage
+    // uploadProjectImage
 } from "./services";
 import {
     createProjectLoading,
@@ -164,12 +164,6 @@ export function editProjectThunk() {
             if (updateUserProjects) {
                 dispatch(userProjects(updateUserProjects));
             }
-            if (projectForm.imageSrc.length > 0) {
-                await dispatch(uploadProjectImage({project_id: data.project_id, file: projectForm.imageFile}))
-                    .catch((err) => {
-                        notify(err)
-                    })
-            }
         })
     }
 }
@@ -177,8 +171,8 @@ export function editProjectThunk() {
 export function getProjectsThunk(value?: string) {
     return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
         dispatch(projectLoading(true));
-        await dispatch(getRequestsThunk());
-        return await getService(`projects?searchterm=${value ? value : ''}`).then(async (res) => {
+        const getAllRequests = await dispatch(getRequestsThunk());
+        const getAllProjects = await getService(`projects?searchterm=${value ? value : ''}`).then(async (res) => {
             return res.data.rows;
         }).then(async (res) => {
             const updatedProjects = res.map(async (value: any) => {
@@ -188,7 +182,12 @@ export function getProjectsThunk(value?: string) {
             })
             const projects = await axios.all(updatedProjects)
             dispatch(projectArr(projects))
+        })
+        Promise.all([getAllRequests, getAllProjects]).then(() => {
             dispatch(projectLoading(false));
+        }).catch((err) => {
+            dispatch(projectLoading(false));
+            notify(err);
         })
     }
 }

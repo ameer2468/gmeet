@@ -49,19 +49,15 @@ export function getAssetThunk(user?: string) {
         const {authUser} = userReducer.userStore;
         const {username} = authUser;
         dispatch(userImageHandler(true));
-        await dispatch(getUser(user ? user : username)).then(() => {
-            const {userStore} = getState();
-            const {authUser} = userStore;
-            dispatch(getUserImage(user ? user : username)).then((res: any) => {
-                const imageUrl = res.payload.data.imageUrl;
-                const authObjectUpdate = {...authUser, userImage: imageUrl}
-                dispatch(authedUser(authObjectUpdate))
-                dispatch(userImageHandler(false));
-                dispatch(loading(false))
-            })
-        }).catch(() => {
-            notify('An error has occurred')
+        const userInfo = await dispatch(getUser(user ? user : username))
+        const getUserAsset = await dispatch(getUserImage(user ? user : username)).then((res: any) => {
+            const imageUrl = res.payload.data.imageUrl;
+            const authObjectUpdate = {...authUser, userImage: imageUrl}
+            dispatch(authedUser(authObjectUpdate))
+            dispatch(userImageHandler(false));
+            dispatch(loading(false))
         })
+        await Promise.all([getUserAsset, userInfo]);
     }
 }
 
@@ -92,7 +88,7 @@ export function markAsReadThunk(user_id: string, timestamp: string) {
             })
         }
         dispatch(authedUser(updateNotifications));
-        dispatch(markAsReadService({user_id, timestamp}))
+       await dispatch(markAsReadService({user_id, timestamp}))
             .catch((err) => {
             console.log(err)
         })
@@ -106,7 +102,7 @@ export function getNotifications(id: string) {
         dispatch(notificationLoading(true));
         await dispatch(getNotificationsService(id)).then(async (res: any) => {
             const {rows} = res.payload.data;
-            await dispatch(authedUser({...authUser, notifications: rows}))
+            dispatch(authedUser({...authUser, notifications: rows}))
             dispatch(notificationLoading(false));
         });
     }
@@ -199,19 +195,19 @@ export function uploadUserAssetThunk() {
 
 export function getAllUserData(username: string) {
     return async (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
-        const userReducer = getState();
-        const {id} = userReducer.userStore.userInfo;
+        // const userReducer = getState();
+        // const {id} = userReducer.userStore.userInfo;
         dispatch(projectLoading(true));
         dispatch(postsLoadingHandler(true))
         dispatch(commentPostLoading(true));
-        await dispatch(getCurrentUserThunk(username));
-        dispatch(getUserProjectsThunk(username))
-        dispatch(getRequestsThunk());
-        dispatch(getUserFollowersThunk(id));
-        dispatch(getPostsThunk(username)).then(() => {
-           dispatch(getCommentsThunk(username)).then(() => {
-               dispatch(postsLoadingHandler(false))
-           });
-       })
+        await Promise.all([
+            dispatch(getCurrentUserThunk(username)),
+            dispatch(getUserProjectsThunk(username)),
+            dispatch(getRequestsThunk),
+            dispatch(getUserFollowersThunk(username)),
+            dispatch(getPostsThunk(username)),
+            dispatch(getCommentsThunk(username))
+        ]);
+         dispatch(postsLoadingHandler(false))
     }
 }
