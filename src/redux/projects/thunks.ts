@@ -171,19 +171,18 @@ export function editProjectThunk() {
 export function getProjectsThunk(value?: string) {
     return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
         dispatch(projectLoading(true));
-        const getAllRequests = await dispatch(getRequestsThunk());
-        const getAllProjects = await getService(`projects?searchterm=${value ? value : ''}`).then(async (res) => {
-            return res.data.rows;
-        }).then(async (res) => {
-            const updatedProjects = res.map(async (value: any) => {
+        await Promise.all([
+            dispatch(getRequestsThunk()),
+            getService(`projects?searchterm=${value ? value : ''}`)
+        ]).then(async (res) => {
+            const allProjects = res[1].data.rows;
+            const updatedProjects = allProjects.map(async (value: any) => {
                 return {...value, image: await dispatch(getProjectImage(value.project_id)).then((res: any) => {
                         return res.payload.imageUrl;
                     })}
             })
-            const projects = await axios.all(updatedProjects)
+            const projects = await Promise.all(updatedProjects)
             dispatch(projectArr(projects))
-        })
-        Promise.all([getAllRequests, getAllProjects]).then(() => {
             dispatch(projectLoading(false));
         }).catch((err) => {
             dispatch(projectLoading(false));

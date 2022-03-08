@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faComments, faEllipsisH, faPencilAlt, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
 import {useUser} from "../../../hooks/useUser";
@@ -43,11 +43,6 @@ const Post = ({data}: props) => {
             icon: faTrashAlt , name: 'Delete Post',
             onClick: () => postHook.deletePostHandler(data.post_id)}
     ]
-
-
-    useEffect(() => {
-    }, [data])
-
 
     return (
         <div className={'post'}>

@@ -25,7 +25,7 @@ import {
 } from "./userSlice";
 import {fileUpload, userImage} from '../image/imageSlice';
 import {getRequestsThunk, getUserProjectsThunk} from "../projects/thunks";
-import {getCommentsThunk, getPostsThunk} from "../posts/thunks";
+import {getPostsThunk} from "../posts/thunks";
 import {notify} from "../../helpers/notify";
 import {projectLoading} from "../projects/projectSlice";
 import {commentPostLoading, postsLoadingHandler} from "../posts/postsSlice";
@@ -203,10 +203,9 @@ export function getAllUserData(username: string) {
         await Promise.all([
             dispatch(getCurrentUserThunk(username)),
             dispatch(getUserProjectsThunk(username)),
-            dispatch(getRequestsThunk),
+            dispatch(getRequestsThunk()),
             dispatch(getUserFollowersThunk(username)),
             dispatch(getPostsThunk(username)),
-            dispatch(getCommentsThunk(username))
         ]);
          dispatch(postsLoadingHandler(false))
     }

@@ -41,9 +41,9 @@ export const usePosts = () => {
         dispatch(editPostLoading(false))
     }
 
-    function submitComment(post_id: string) {
+    async function submitComment(post_id: string) {
         dispatch(commentPostLoading(true))
-        dispatch(addCommentThunk({
+        await dispatch(addCommentThunk({
             id: uuidv4(),
             post_id: post_id,
             posted_by: username,

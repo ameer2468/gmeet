@@ -35,10 +35,10 @@ export function addPostThunk(data: post) {
 }
 
 export function editPostThunk(post_id: string) {
-    return (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
+    return async (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
         const {postsStore} = getState();
         const post = postsStore.postForm.editpost;
-        dispatch(editPostService({post_id, post}))
+       await dispatch(editPostService({post_id, post}))
             .then(() => {
                 const newArr = postsStore.posts.map((value) => {
                     return value.post_id === post_id ? {...value, post: post} : value
@@ -70,16 +70,16 @@ export function getCommentsThunk(user: string) {
 }
 
 export function addCommentThunk(data: comment)  {
-    return (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
+    return async (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
         const {postsStore} = getState();
         const originalPosts = postsStore.posts;
-        dispatch(addCommentService(data)).then(() => {
+        await dispatch(addCommentService(data)).then(() => {
             const newComment = {
                ...data
             }
             const updateArr = originalPosts.map((value) => {
                 return value.post_id === data.post_id ?
-                    {...value, comments: [...value.comments, newComment ]} : value;
+                    {...value, comments: !value.comments ? [newComment] : [...value.comments, newComment] } : value;
             })
             dispatch(postsArr(updateArr))
             dispatch(commentPostLoading(false))
@@ -90,8 +90,8 @@ export function addCommentThunk(data: comment)  {
  }
 
 export function deleteCommentThunk(id: string, username: string) {
-    return (dispatch: ThunkDispatch<RootState, any, Action>) => {
-        dispatch(deleteCommentService(id)).then(() => {
+    return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
+        await dispatch(deleteCommentService(id)).then(() => {
                 dispatch(getCommentsThunk(username))
         }).catch(() => {
             return notify('An error has occurred')
@@ -111,9 +111,10 @@ export function deletePostThunk(id: string) {
 
 export function getPostsThunk(user: string) {
 return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
-   await dispatch(getPostsService(user)).then((res: any) => {
+    await dispatch(getPostsService(user)).then((res: any) => {
         const {rows} = res.payload.data;
         dispatch(postsArr(rows))
+        dispatch(getCommentsThunk(user))
     }).catch(() => {
         return notify('An error has occurred')
     });
