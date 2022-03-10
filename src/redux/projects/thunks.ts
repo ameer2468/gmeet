@@ -173,7 +173,7 @@ export function editProjectThunk() {
 }
 
 export function getProjectsThunk(value?: string) {
-    return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
+    return async (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
         dispatch(projectLoading(true));
         await Promise.all([
             dispatch(getRequestsThunk()),

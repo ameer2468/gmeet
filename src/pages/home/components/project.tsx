@@ -2,7 +2,7 @@ import React from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrash, faPencilAlt} from "@fortawesome/free-solid-svg-icons";
 import {useProject} from "../../../hooks/useProject";
-import {selectedProject} from "../../../redux/projects/projectSlice";
+import {projectReducer, projectValues, selectedProject} from "../../../redux/projects/projectSlice";
 import {useAppDispatch, useAppSelector} from "../../../redux/hooks";
 import {useUser} from "../../../hooks/useUser";
 import {Link, useParams} from "react-router-dom";
@@ -24,6 +24,7 @@ const Project = ({data, remove, noRequest}: props) => {
     const {projects} = projectHook;
     const {requestsLoading} = projects;
     const dispatch = useAppDispatch();
+    const projectStore= useAppSelector(projectReducer);
     const userHook = useUser();
     const userStore = useAppSelector(userReducer);
     const {username} = userHook.authUser === undefined ? '' : userHook.authUser;
@@ -85,7 +86,9 @@ const Project = ({data, remove, noRequest}: props) => {
 
                    <div className={'buttons'}>
                        <Link to={`/project/${data.name}/${data.owner}`}>
-                           <button className='btn btn--green'>Project Details</button>
+                           <button onClick={() => {
+                               dispatch(projectValues({...projectStore.projectForm, searchterm: ''}))}
+                           } className='btn btn--green'>Project Details</button>
                        </Link>
                        {noRequest ?
                            !checkUser ? '' :

@@ -11,13 +11,13 @@ const Search = () => {
 
     return (
         <div className="search">
-            <h1>Search Projects: {length}</h1>
+            <h1>Projects: {projectHook.projects.loading ? '' : length}</h1>
             <form onSubmit={(e) => {
                 e.preventDefault()
                 projectHook.getSearchProjects(value)
             }
             }>
-                <Input name={'searchterm'} useHook={projectHook} placeholder={'Search project by name'} maxWidth={'40rem'}/>
+                <Input name={'searchterm'} value={projectForm.searchterm} useHook={projectHook} placeholder={'Search project by name'} maxWidth={'40rem'}/>
             </form>
         </div>
     );
