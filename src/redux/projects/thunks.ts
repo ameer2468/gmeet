@@ -1,5 +1,5 @@
 import {
-    getProjectImage,
+    getProjectImage, uploadProjectImage,
     // uploadProjectImage
 } from "./services";
 import {
@@ -149,23 +149,26 @@ export function editProjectThunk() {
             name: projectForm.name,
             description: projectForm.description
         }
-        return await putService('project', {
+        const updateImage = dispatch(uploadProjectImage({project_id: data.project_id, file: projectForm.imageFile}))
+        const updateProject = putService('project', {
             project_id: data.project_id,
             name: data.name,
             description: data.description,
-        }).then(async () => {
-            const updateUserProjects = projectsArr?.map((value) => {
-                return value.project_id === selectedProject.project_id ?
-                    {...value,
-                        name: projectForm.name,
-                        description: projectForm.description,
-                        image: projectForm.imageSrc.length > 0 ? projectForm.imageSrc : value.image
-                    } : value
-            })
-            if (updateUserProjects) {
-                dispatch(userProjects(updateUserProjects));
-            }
         })
+        await Promise.all([updateProject, updateImage])
+            .then(() => {
+                const updateUserProjects = projectsArr?.map((value) => {
+                    return value.project_id === selectedProject.project_id ?
+                        {...value,
+                            name: projectForm.name,
+                            description: projectForm.description,
+                            image: projectForm.imageSrc.length > 0 ? projectForm.imageSrc : value.image
+                        } : value
+                })
+                if (updateUserProjects) {
+                    dispatch(userProjects(updateUserProjects));
+                }
+            })
     }
 }
 
