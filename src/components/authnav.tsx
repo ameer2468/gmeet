@@ -29,7 +29,7 @@ const Authnav = () => {
     const closeNotification = () => {
         setOpenNotifications(false);
     }
-    const checkRead = !authUser.notifications ? '' : authUser.notifications.filter((value: any) => {
+    const checkRead = !authUser.notifications ? '' : authUser.notifications.filter((value: {read_at: string}) => {
         return value.read_at === null;
     })
     const ref = useDetectClickOutside({ onTriggered: closeDrop});

@@ -8,14 +8,14 @@ import PostInfo from "./components/postInfo";
 
 const ProjectDetails = () => {
 
-    const params: {name: string} = useParams();
+    const params: {name: string, owner: string} = useParams();
     const dispatch = useAppDispatch();
     const projectsState = useAppSelector(projectReducer);
 
 
     useEffect(() => {
-       dispatch(getProjectDetails(params.name))
-    }, [dispatch, params.name])
+       dispatch(getProjectDetails(params.name, params.owner))
+    }, [dispatch, params.name, params.owner])
 
     const {projectDetails, projectDetailsLoading} = projectsState;
 

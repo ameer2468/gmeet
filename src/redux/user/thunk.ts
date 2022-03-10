@@ -49,8 +49,8 @@ export function getAssetThunk(user?: string) {
         const {authUser} = userReducer.userStore;
         const {username} = authUser;
         dispatch(userImageHandler(true));
-        const userInfo = await dispatch(getUser(user ? user : username))
-        const getUserAsset = await dispatch(getUserImage(user ? user : username)).then((res: any) => {
+        const userInfo = dispatch(getUser(user ? user : username))
+        const getUserAsset = dispatch(getUserImage(user ? user : username)).then((res: any) => {
             const imageUrl = res.payload.data.imageUrl;
             const authObjectUpdate = {...authUser, userImage: imageUrl}
             dispatch(authedUser(authObjectUpdate))
@@ -195,8 +195,6 @@ export function uploadUserAssetThunk() {
 
 export function getAllUserData(username: string) {
     return async (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
-        // const userReducer = getState();
-        // const {id} = userReducer.userStore.userInfo;
         dispatch(projectLoading(true));
         dispatch(postsLoadingHandler(true))
         dispatch(commentPostLoading(true));

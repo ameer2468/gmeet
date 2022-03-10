@@ -84,7 +84,7 @@ const Project = ({data, remove, noRequest}: props) => {
                    <p>{shortenText(data.description, 250)}</p>
 
                    <div className={'buttons'}>
-                       <Link to={`/project/${data.name}`}>
+                       <Link to={`/project/${data.name}/${data.owner}`}>
                            <button className='btn btn--green'>Project Details</button>
                        </Link>
                        {noRequest ?

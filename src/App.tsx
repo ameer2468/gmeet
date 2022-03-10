@@ -37,7 +37,7 @@ const App = () => {
         {path: '/', component: Landing},
         {path: '/home', component: Home},
         {path: '/top', component: Top},
-        {path: '/project/:name', component: ProjectDetails},
+        {path: '/project/:name/:owner', component: ProjectDetails},
         {path: '/profile/:username', component: Profile},
         {path: '/editprofile', component: EditProfile}
     ]
