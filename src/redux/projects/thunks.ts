@@ -1,5 +1,5 @@
 import {
-    getProjectImage,
+    getProjectImage, uploadProjectImage,
     // uploadProjectImage
 } from "./services";
 import {
@@ -106,15 +106,16 @@ export function createProjectThunk(data: IcreateProject) {
     }
 }
 
-export function getProjectDetails(name: string) {
+export function getProjectDetails(name: string, username: string) {
     return async (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
         dispatch(projectDetailsLoading(true));
-        await dispatch(getProjectsThunk(name)).then(async () => {
+        await Promise.all([
+            dispatch(getProjectsThunk(name)),
+            dispatch(getAUserAsset(username))
+        ]).then((res) => {
             const projectReducer = getState();
             const projectData = projectReducer.projectStore.projects[0]
-            const username =  projectData.owner;
-            const userImage = await dispatch(getAUserAsset(username));
-            dispatch(projectDetails({...projectData, userImage: userImage}))
+            dispatch(projectDetails({...projectData, userImage: res[1]}))
             dispatch(projectDetailsLoading(false));
         });
     }
@@ -148,28 +149,31 @@ export function editProjectThunk() {
             name: projectForm.name,
             description: projectForm.description
         }
-        return await putService('project', {
+        const updateImage = dispatch(uploadProjectImage({project_id: data.project_id, file: projectForm.imageFile}))
+        const updateProject = putService('project', {
             project_id: data.project_id,
             name: data.name,
             description: data.description,
-        }).then(async () => {
-            const updateUserProjects = projectsArr?.map((value) => {
-                return value.project_id === selectedProject.project_id ?
-                    {...value,
-                        name: projectForm.name,
-                        description: projectForm.description,
-                        image: projectForm.imageSrc.length > 0 ? projectForm.imageSrc : value.image
-                    } : value
-            })
-            if (updateUserProjects) {
-                dispatch(userProjects(updateUserProjects));
-            }
         })
+        await Promise.all([updateProject, updateImage])
+            .then(() => {
+                const updateUserProjects = projectsArr?.map((value) => {
+                    return value.project_id === selectedProject.project_id ?
+                        {...value,
+                            name: projectForm.name,
+                            description: projectForm.description,
+                            image: projectForm.imageSrc.length > 0 ? projectForm.imageSrc : value.image
+                        } : value
+                })
+                if (updateUserProjects) {
+                    dispatch(userProjects(updateUserProjects));
+                }
+            })
     }
 }
 
 export function getProjectsThunk(value?: string) {
-    return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
+    return async (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
         dispatch(projectLoading(true));
         await Promise.all([
             dispatch(getRequestsThunk()),

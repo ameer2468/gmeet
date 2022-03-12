@@ -6,6 +6,7 @@ import {useAppDispatch} from "../redux/hooks";
 import {useHistory} from "react-router-dom";
 import {getAssetThunk, getNotifications} from "../redux/user/thunk";
 import {getUserFollowers} from "../redux/user/services";
+import {notify} from "../helpers/notify";
 
 export function useLogin() {
     const dispatch = useAppDispatch();
@@ -33,16 +34,21 @@ export function useLogin() {
                 })
                 await Auth.currentUserInfo().then(async (data) => {
                     dispatch(authedUser({...data}))
-                    await dispatch(getUserFollowers(data.attributes.sub)).then(async (res: any) => {
-                        const {following, followers} = res.payload.data;
+                    await Promise.all([
+                        dispatch(getUserFollowers(data.attributes.sub)),
+                        dispatch(getNotifications(data.attributes.sub)),
+                    ]).then(async (res) => {
+                        const followersData: any = res[0];
+                        const {following, followers} = followersData.payload.data;
                         dispatch(authedUser({...data, following: following, followers: followers}))
+                        await dispatch(getAssetThunk(data.username))
+                        dispatch(status(true))
+                        history.push('/home')
+                    }).catch(() => {
+                        notify('An error has occurred')
                     })
-                    await dispatch(getNotifications(data.attributes.sub))
                 });
-                dispatch(getAssetThunk(inputValues.username));
-                dispatch(status(true))
                 dispatch(loading(false))
-                history.push('/home')
             }).catch((err) => {
                 if (err.code === 'UserNotFoundException' || err.code === 'NotAuthorizedException') {
                     setError('Invalid username or password')

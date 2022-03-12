@@ -70,8 +70,22 @@ const LoginBox = () => {
                             <h1>welcome user!</h1>
                         </div>
                         <form onSubmit={loginHook.loginHandler}>
-                            <input autoComplete={'off'} name='username' onChange={inputHandler} value={loginHook.inputValues.username} placeholder='username' type="text"/>
-                            <input autoComplete={'off'} name='password' onChange={inputHandler} value={loginHook.inputValues.password} placeholder='password' type="password"/>
+                            <input
+                                autoComplete={'off'}
+                                name='username'
+                                onChange={inputHandler}
+                                disabled={Loading}
+                                value={loginHook.inputValues.username}
+                                placeholder='username'
+                                type="text"/>
+                            <input
+                                autoComplete={'off'}
+                                name='password'
+                                disabled={Loading}
+                                onChange={inputHandler}
+                                value={loginHook.inputValues.password}
+                                placeholder='password'
+                                type="password"/>
                             {errorLength === 0 ? '' : <p className='error'>{loginHook.error.toString()}</p>}
                             <div className="links">
                                 <Link to={'/forgot-password'}><p>Forgot password?</p></Link>

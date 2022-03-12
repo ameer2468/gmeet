@@ -17,7 +17,6 @@ const Home = () => {
     const {projectForm} = projectHook.projects;
     const [value] = useDebounce(projectForm.searchterm, 500);
 
-
     /*Requests to Load App*/
 
     useEffect(() => {
