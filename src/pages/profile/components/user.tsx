@@ -44,6 +44,7 @@ const User = ({data}: props) => {
        dispatch(fileUpload(file));
     }
 
+
     return (
                 <Card height={'50rem'} flex={'0 0 40%'} customClass={'user'}>
                     <div className="info">

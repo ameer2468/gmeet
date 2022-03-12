@@ -186,14 +186,14 @@ export function uploadUserAssetThunk() {
             username: userStore.authUser.username
         }
         await dispatch(uploadUserAsset(data));
-        dispatch(fileUpload(undefined));
+        dispatch(fileUpload(''));
         dispatch(userImageHandler(false));
         notify('Profile picture successfully updated')
     }
 }
 
 export function getAllUserData(username: string) {
-    return async (dispatch: ThunkDispatch<RootState, any, Action>, getState: () => RootState) => {
+    return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
         dispatch(projectLoading(true));
         dispatch(postsLoadingHandler(true))
         dispatch(commentPostLoading(true));
