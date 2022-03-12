@@ -2,24 +2,18 @@ import axios from "axios";
 import {comment, post} from "../types";
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {loadToken} from "../../services/loadToken";
+import {postService} from "../../services/callTypes";
 
 
 const API_URL = process.env.REACT_APP_API_URL;
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 export const addPostService = createAsyncThunk('posts/addpost', async(data: post) =>  {
-    const auth = await loadToken();
-    return await axios.post(`${API_URL}/posts`,
-        {
+    return await postService('posts', {
         post: data.post,
         post_id: data.post_id,
         date: data.date,
         user: data.user
-    }, {
-        headers: {
-            'x-api-key': API_KEY as string,
-            Authorization: auth
-        }
     }).catch((err) =>{
         throw new Error(err)
     })
