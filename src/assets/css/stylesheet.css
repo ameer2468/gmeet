@@ -772,6 +772,23 @@ body {
   right: 0;
   top: 8rem;
 }
+.profileContent .profileContainer .user .info .userImage .actions .cancel {
+  background: #ff6060;
+  border: 0;
+  color: white;
+  position: relative;
+  left: 10rem;
+  bottom: 4rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 5rem;
+  transition: all 0.3s;
+}
+.profileContent .profileContainer .user .info .userImage .actions .cancel:hover {
+  transition: all 0.3s;
+  background: #ff2d2d;
+  cursor: pointer;
+}
 .profileContent .profileContainer .user .info .userImage .actions .confirm {
   background: #4a5dc7;
   border: 0;
@@ -792,6 +809,7 @@ body {
   color: #2d2d2d;
   width: 3rem;
   height: 3rem;
+  position: relative;
   border: 0;
   border-radius: 5rem;
   transition: all 0.3s;

@@ -12,10 +12,12 @@ import placeholder from '../assets/images/placeholder.png'
 import LoadingSpinner from "./global/LoadingSpinner";
 import Notifications from "./global/notifications";
 import {getAssetThunk, getNotifications} from "../redux/user/thunk";
+import {imageReducer} from "../redux/image/imageSlice";
 
 const Authnav = () => {
 
-    const userStore = useAppSelector(userReducer)
+    const userStore = useAppSelector(userReducer);
+    const imageStore = useAppSelector(imageReducer);
     const {userImageLoading, notificationLoading} = userStore;
     const authUser = userStore.authUser === undefined ? '' : userStore.authUser;
     const [open, setOpen] = useState(false);
@@ -77,11 +79,18 @@ const Authnav = () => {
                     <div ref={ref} onClick={() => setOpen(!open)} className="profile">
                         {userImageLoading ? <div style={{marginRight: 15, marginTop: 5}}>
                             <LoadingSpinner height={25} width={25}/></div> :
-                            <img style={{width: '3.5rem', height: '3.5rem'}} key={authUser.userImage} onError={(e) => {
-                                    dispatch(getAssetThunk(authUser.username))
-                                    e.currentTarget.src = placeholder
-                            }} alt='profile'
-                                 src={authUser.userImage} className='userImage'/>}
+                            <>
+                                {imageStore.userImage !== '' ?
+                                    <img style={{width: '3rem', height: '3rem', marginRight: 10, borderRadius: 100}} src={imageStore.userImage} alt={'profile'}/>
+                                    :
+                                    <img style={{width: '3.5rem', height: '3.5rem'}} key={authUser.userImage} onError={(e) => {
+                                        dispatch(getAssetThunk(authUser.username))
+                                        e.currentTarget.src = placeholder
+                                    }} alt='profile'
+                                         src={authUser.userImage} className='userImage'/>
+                                }
+                            </>
+                            }
                         <p>{authUser === undefined ? '' : authUser.username}</p>
                         <FontAwesomeIcon style={{fontSize: '1.5rem', color: 'white', marginLeft: '1rem'}} icon={faCaretDown}/>
                         {open ? <motion.div initial={'hidden'} animate={'active'}

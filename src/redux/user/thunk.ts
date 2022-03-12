@@ -23,7 +23,7 @@ import {
     userFormHandler,
     userImageHandler,
 } from "./userSlice";
-import {fileUpload, userImage} from '../image/imageSlice';
+import {fileUpload} from '../image/imageSlice';
 import {getRequestsThunk, getUserProjectsThunk} from "../projects/thunks";
 import {getPostsThunk} from "../posts/thunks";
 import {notify} from "../../helpers/notify";
@@ -166,8 +166,7 @@ export function getCurrentUserThunk(username: string) {
             const {rows} = res.payload.data;
             await dispatch(getUserImage(username)).then((res: any) => {
                 const imageUrl = res.payload.data.imageUrl;
-                const updatedObject = {...rows[0]}
-                dispatch(userImage(imageUrl))
+                const updatedObject = {...rows[0], userImage: imageUrl}
                 dispatch(userDetails(updatedObject))
                 dispatch(userImageHandler(false));
                 dispatch(loading(false))

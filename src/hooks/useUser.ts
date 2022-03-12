@@ -1,7 +1,7 @@
 import {useAppDispatch, useAppSelector} from "../redux/hooks";
 import {changePasswordLoading, userFormHandler, userReducer} from "../redux/user/userSlice";
 import {
-    followUserThunk, markAsReadThunk,
+    followUserThunk, getAssetThunk, markAsReadThunk,
     sendGlobalMessageThunk,
     sendNotificationThunk,
     unFollowUserThunk,
@@ -96,7 +96,12 @@ export function useUser() {
     }
 
    async function uploadUserImage() {
-        await dispatch(uploadUserAssetThunk())
+        await Promise.all([
+            await dispatch(uploadUserAssetThunk()),
+            await dispatch(getAssetThunk(authUser.username))
+        ]).catch((err) => {
+            notify(err.message);
+        });
     }
 
 

@@ -2,6 +2,7 @@ export interface User {
     id: string;
     username: string;
     website: string;
+    userImage: string;
     profession: string;
     followers: string[],
     following: string[],

@@ -1,10 +1,10 @@
 import React, {ChangeEvent, useRef} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faGlobe, faEdit, faPencilAlt,faCheck, faUser} from "@fortawesome/free-solid-svg-icons";
+import {faGlobe, faEdit, faPencilAlt,faCheck, faUser, faWindowClose} from "@fortawesome/free-solid-svg-icons";
 import Card from "./card";
 import LoadingSpinner from "../../../components/global/LoadingSpinner";
 import {useAppDispatch, useAppSelector} from "../../../redux/hooks";
-import {authedUser, userReducer} from "../../../redux/user/userSlice";
+import {userReducer} from "../../../redux/user/userSlice";
 import {useUser} from "../../../hooks/useUser";
 import placeholder from '../../../assets/images/placeholder.png';
 import {notify} from "../../../helpers/notify";
@@ -39,7 +39,6 @@ const User = ({data}: props) => {
        const reader: FileReader = new FileReader();
         reader.onload = () => {
             dispatch(userImage(reader.result))
-            dispatch(authedUser({...authUser, userImage: reader.result}))
         }
        reader.readAsDataURL(file);
        dispatch(fileUpload(file));
@@ -64,16 +63,24 @@ const User = ({data}: props) => {
                                     <div className="userImage">
                                         {authUser.username === data.username ?
                                             <div className="actions">
-                                                <button onClick={handleUploadClick} className="uploadImage">
+                                                <button style={{position: 'relative', right: imageStore.fileUpload === '' ? '' : '-3rem' }} onClick={handleUploadClick} className="uploadImage">
                                                     <FontAwesomeIcon icon={faPencilAlt}/>
                                                 </button>
                                                 {imageStore.fileUpload === undefined || imageStore.fileUpload === '' ?
                                                     '' :
+                                                    <>
+                                                        <button className='cancel' onClick={() => {
+                                                            dispatch(userImage(''))
+                                                            dispatch(fileUpload(''))
+                                                        }}>
+                                                            <FontAwesomeIcon icon={faWindowClose}/>
+                                                        </button>
                                                     <button className='confirm' onClick={() => {
                                                         userHook.uploadUserImage();
                                                     }}>
                                                         <FontAwesomeIcon icon={faCheck}/>
                                                     </button>
+                                                    </>
                                                 }
                                             </div>
                                             :
@@ -81,9 +88,15 @@ const User = ({data}: props) => {
                                         }
                                         {
                                             userImageLoading ? '' :
-                                            <img style={{width: '100%', height: '100%'}} key={imageStore.userImage} onError={e => {
-                                                e.currentTarget.src = placeholder
-                                            }} src={imageStore.userImage} alt="profile"/>
+                                             <>
+                                             {imageStore.fileUpload !== '' ?
+                                                 <img style={{width: '100%', height: '100%'}} key={imageStore.userImage} src={imageStore.userImage} alt=""/>
+                                                 :
+                                                 <img src={data.userImage} style={{width: '100%', height: '100%'}} key={data.userImage} onError={e => {
+                                                     e.currentTarget.src = placeholder
+                                                 }} alt="profile"/>
+                                             }
+                                            </>
                                         }
                                     </div>
                                 }
