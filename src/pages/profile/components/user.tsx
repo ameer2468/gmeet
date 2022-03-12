@@ -4,7 +4,7 @@ import {faGlobe, faEdit, faPencilAlt,faCheck, faUser, faWindowClose} from "@fort
 import Card from "./card";
 import LoadingSpinner from "../../../components/global/LoadingSpinner";
 import {useAppDispatch, useAppSelector} from "../../../redux/hooks";
-import {userReducer} from "../../../redux/user/userSlice";
+import {userDetails, userReducer} from "../../../redux/user/userSlice";
 import {useUser} from "../../../hooks/useUser";
 import placeholder from '../../../assets/images/placeholder.png';
 import {notify} from "../../../helpers/notify";
@@ -22,7 +22,7 @@ const User = ({data}: props) => {
     const imageStore = useAppSelector(imageReducer);
     const userHook = useUser();
     const {userImageLoading} = userHook.user;
-    const {authUser} = userHook;
+    const {authUser, userInfo} = userHook;
     const uploadRef = useRef<any>(null);
     const dispatch = useAppDispatch();
 
@@ -78,6 +78,7 @@ const User = ({data}: props) => {
                                                         </button>
                                                     <button className='confirm' onClick={() => {
                                                         userHook.uploadUserImage();
+                                                        dispatch(userDetails({...userInfo, userImage: imageStore.userImage}))
                                                     }}>
                                                         <FontAwesomeIcon icon={faCheck}/>
                                                     </button>
