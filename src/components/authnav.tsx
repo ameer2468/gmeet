@@ -11,7 +11,7 @@ import {NavLink} from "react-router-dom";
 import placeholder from '../assets/images/placeholder.png'
 import LoadingSpinner from "./global/LoadingSpinner";
 import Notifications from "./global/notifications";
-import {getNotifications} from "../redux/user/thunk";
+import {getAssetThunk, getNotifications} from "../redux/user/thunk";
 import {imageReducer} from "../redux/image/imageSlice";
 
 const Authnav = () => {
@@ -81,17 +81,18 @@ const Authnav = () => {
                             <LoadingSpinner height={25} width={25}/></div> :
                             <>
                                 {imageStore.userImage !== '' ?
-                                    <img style={{width: '3rem', height: '3rem', marginRight: 10, borderRadius: 100}} src={imageStore.userImage} alt={'profile'}/>
+                                    <img style={{width: '2.5rem', height: '2.5rem', marginRight: 10, borderRadius: 100}} src={imageStore.userImage} alt={'profile'}/>
                                     :
-                                    <img style={{width: '3rem', height: '3rem'}} key={authUser.userImage} onError={(e) => {
-                                        // dispatch(getAssetThunk(authUser.username))
-                                        e.currentTarget.src = placeholder
+                                    <img style={{width: '2.5rem', height: '2.5rem'}} key={authUser.userImage} onError={(e) => {
+                                        dispatch(getAssetThunk(authUser.username)).catch(() => {
+                                            e.currentTarget.src = placeholder
+                                        })
                                     }} alt='profile'
                                          src={authUser.userImage} className='userImage'/>
                                 }
                             </>
                             }
-                        <p>{authUser === undefined ? '' : authUser.username.substring(0, 4) + '...'}</p>
+                        <p>{authUser === undefined ? '' : authUser.username.length <= 5 ? authUser.username.substring(0, 5) : authUser.username.substring(0, 5) + '...'}</p>
                         <FontAwesomeIcon style={{fontSize: '1.5rem', color: 'white', marginLeft: '1rem'}} icon={faCaretDown}/>
                         {open ? <motion.div initial={'hidden'} animate={'active'}
                                             variants={regularVariants}
