@@ -39,7 +39,7 @@ export const acceptRequests = createAsyncThunk('requests/accept', async (data: a
         id: data.id,
         user_id: data.user_id,
         role: data.role
-    }).then((res) => {
+    }).then((res: any) => {
         return res.data.rows;
     })
 })
@@ -91,7 +91,7 @@ export const uploadProjectImage = createAsyncThunk('project/image', async(data: 
     return await postService('project/image', {
         project_id: data.project_id,
         fileType: file.type,
-    }).then((res) => {
+    }).then((res: any) => {
         const {fileUploadURL, fileType} = res.data;
         fileService(fileUploadURL,file, fileType)
     })
@@ -116,7 +116,7 @@ export const createProject = createAsyncThunk('projects/createproject', async (d
         role: data.role,
         members: data.members,
         requests: data.requests,
-    }).then((res) => {
+    }).then((res: any) => {
         return res.data.rows;
     })
 })

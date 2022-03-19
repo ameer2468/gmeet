@@ -38,7 +38,7 @@ export function useRegister() {
         e.preventDefault();
         if (inputValues.confirmpass !== inputValues.password) {
             return setError('Password does not match confirm password')
-        } else {
+        }
            dispatch(loading(true))
             await Auth.signUp({
                 username: inputValues.username,
@@ -48,13 +48,10 @@ export function useRegister() {
                     'custom:profession': inputValues.profession
                 }
             })
-                .then((res) => {
-                    setStep(prevState => prevState + 1);
-                    setError('')
-                    dispatch(loading(false))
-                    dispatch(createUserThunk({
+                .then(async (res: any) => {
+                  return dispatch(createUserThunk({
                         id: res.userSub,
-                        username: inputValues.username.toLowerCase(),
+                        username: res.user.username,
                         profession: inputValues.profession,
                         userImage: '',
                         followers: [],
@@ -63,15 +60,19 @@ export function useRegister() {
                         website: ''
                     }))
                 })
+                .then(() => {
+                    setStep(prevState => prevState + 1);
+                    setError('')
+                    dispatch(loading(false))
+                })
                 .catch(err => {
+                    dispatch(loading(false))
                     if (err.code === 'UsernameExistsException'){
                         setError('The username entered is taken')
                     } else {
                         setError(err.message)
-                        dispatch(loading(false))
                     }
                 })
-        }
     }
 
     return {

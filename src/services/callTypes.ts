@@ -6,7 +6,7 @@ const API_KEY = process.env.REACT_APP_API_KEY;
 
 export async function postService(urlPath: string, data: {}) {
     const authToken = await loadToken();
-    return axios.post(`${URL}/${urlPath}`, {
+   return await axios.post(`${URL}/${urlPath}`, {
         ...data
         }, {
         headers: {

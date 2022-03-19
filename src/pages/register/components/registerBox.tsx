@@ -70,7 +70,7 @@ const RegisterBox = () => {
                     <motion.div variants={variants} initial={"hidden"} animate="active">
                    <div className="welcome">
                        {registerHook.step < 1 && <h1>Hello,</h1>}
-                       <h1>{registerHook.step === 0 ? 'welcome to registeration!' : registerHook.step === 1 ? 'Enter verification code' : registerHook.step === 2 && 'Registeration successful'}</h1>
+                       <h1>{registerHook.step === 0 ? 'welcome to registeration!' : registerHook.step === 1 ? 'Check Email for verification code' : registerHook.step === 2 && 'Registeration successful'}</h1>
                    </div>
                     {registerHook.step === 0 ? <form onSubmit={registerHook.registerHandler}>
                         <input autoComplete={'none'} required onChange={inputHandler} name='email' value={registerHook.inputValues.email} placeholder='Email' type="email"/>

@@ -92,7 +92,7 @@ export function createProjectThunk(data: IcreateProject) {
         const {projectForm} = projectStore;
         return await postService('projects', {
          ...data
-        }).then(async (res) => {
+        }).then(async (res: any) => {
             dispatch(ActiveModal(''))
             dispatch(createProjectLoading(false))
             dispatch(projectValues({...projectForm, name: '', description: '', searchterm: '', imageFile: {}, imageSrc: ''}))

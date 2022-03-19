@@ -21,10 +21,11 @@ const Profile = () => {
             getData();
     }, [dispatch, username])
 
+
     return (
         <div className="profileContent">
             <div className="profileContainer">
-                {!Loading && !userStore.userInfo.username ?
+                {!Loading && !userStore.userInfo ?
                     <div style={{width: '100%', textAlign: 'center', marginTop: '30rem'}}>
                         <h1 style={{fontSize: '10rem'}}>User Not Found</h1>
                     </div>

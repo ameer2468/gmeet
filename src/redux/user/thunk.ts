@@ -31,8 +31,10 @@ import {projectLoading} from "../projects/projectSlice";
 import {commentPostLoading, postsLoadingHandler} from "../posts/postsSlice";
 
 export function createUserThunk(data: User) {
-    return (dispatch: ThunkDispatch<RootState, any, Action>) => {
-        dispatch(createUser(data));
+    return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
+       await dispatch(createUser(data)).catch(error => {
+            console.log(error)
+        });
     }
 }
 
@@ -57,7 +59,10 @@ export function getAssetThunk(user?: string) {
             dispatch(userImageHandler(false));
             dispatch(loading(false))
         })
-        await Promise.all([getUserAsset, userInfo]);
+        return await Promise.all([getUserAsset, userInfo]).catch(() => {
+            dispatch(loading(false))
+            dispatch(userImageHandler(false));
+        });
     }
 }
 
@@ -163,6 +168,7 @@ export function getCurrentUserThunk(username: string) {
     return async (dispatch: ThunkDispatch<RootState, any, Action>) => {
         dispatch(loading(true));
         await dispatch(getUser(username)).then(async (res: any) => {
+            console.log(res)
             const {rows} = res.payload.data;
             await dispatch(getUserImage(username)).then((res: any) => {
                 const imageUrl = res.payload.data.imageUrl;

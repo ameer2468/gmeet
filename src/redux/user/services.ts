@@ -7,13 +7,18 @@ import {deleteService, getService, postService, putService} from "../../services
 const URL = process.env.REACT_APP_API_URL;
 const API_KEY = process.env.REACT_APP_API_KEY;
 
-export const createUser = createAsyncThunk('user/create', async (data: User) => {
-    return await postService('user', {
+export const createUser = createAsyncThunk('createUser', async (data: User) => {
+    return await axios.post(`${URL}/user`, {
         id: data.id,
         username: data.username,
         profession: data.profession,
         website: data.website,
-    })
+    }, {
+        headers: {
+            'Content-Type': 'application/json',
+            'x-api-key': API_KEY as string
+        }
+    });
 })
 
 export const postGlobalMessage = createAsyncThunk('post/global', async (data: {username: string, message: string, time: string}) => {
