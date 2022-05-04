@@ -1,4 +1,4 @@
-**This is a personal project that I am working on and is work in progress.**
+**This is a personal project that I used to work on.**
 
 Techstack:
 - PostgreSQL
